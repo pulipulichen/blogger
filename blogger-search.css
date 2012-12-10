@@ -1,0 +1,13 @@
+#sidebar-wrapper #sidebar #HTML1	/* 最新回應 */
+{
+	display: none;
+}
+
+#Followers1,
+#HTML8,
+#PopularPosts1,
+#HTML2,
+#HTML1,
+#Stats1 {
+	display: none;
+}

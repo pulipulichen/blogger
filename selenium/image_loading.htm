@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Image Loading</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+</head>
+
+<body>
+
+<img width="200" height="226" id="test_img" border="0" src="http://lh3.ggpht.com/-Z1QiA5aS7lg/Tgg8FgAA-AI/AAAAAAAAIXk/NB9iocwyvrc/image_thumb%25255B17%25255D.png" alt="image" title="image" style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" original="http://lh4.ggpht.com/-5mLPmsIKCjg/Tgg8GgkpTRI/AAAAAAAAIXs/KvLaA-PL8Gc/image_thumb%25255B18%25255D.png"/>
+
+<script type="text/javascript">
+$(function () {
+	setTimeout(function () {
+		var _test_img = $("#test_img");
+		_test_img.attr("src", _test_img.attr("original"));
+	}, 2000);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSONP use POST example</title>
+</head>
+<body>
+
+<script src='http://www.google.com/jsapi' type='text/javascript'></script>
+<script type='text/javascript'>google.load("jquery","1.2.6");</script>
+<script src="client.js" type="text/javascript"></script>
+<form id="form" method="post" action="server.php" enctype="multipart/form-data">
+    <input type="hidden" name="max_file_size" value="1048576">
+    <label>File: <input type="file" name="file" /> * Max File Size: 1MB</label>
+    <br />
+    <label>Description: <input type="text" name="description" value="The description of this file."></label>
+    <br />    
+    <button type="submit">UPLOAD</button>
+</form>
+<div id="output"></div>
+
+</body>
+</html>

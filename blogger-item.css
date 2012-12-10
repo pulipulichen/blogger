@@ -1,0 +1,12 @@
+div#content-wrapper div#sidebar-wrapper {
+	display:none;
+	width: 0%;
+}
+
+div#content-wrapper div#main {
+	width: 97%;
+}
+
+#Followers1 {
+	display: none;
+}

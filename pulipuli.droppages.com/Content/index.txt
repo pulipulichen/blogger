@@ -1,0 +1,19 @@
+Sample page
+===========
+
+Styles included for:
+
+
+* Lists
+* of items
+
+or
+
+1. numbered lists
+2. as such
+
+> Blockquotes
+> Like these
+
+
+etc.

@@ -1,0 +1,7 @@
+# IDE, don't track them
+aptana/
+nbproject/
+.settings/
+
+/system/cache/
+/system/logs/

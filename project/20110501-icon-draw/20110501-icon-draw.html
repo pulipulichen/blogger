@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src='http://www.google.com/jsapi' type='text/javascript'></script> 
+<script type='text/javascript'>google.load("jquery","1.2.6");</script> 
+</head>
+<body>
+
+
+
+<table width="400" border="1" id="20110501_image_base64">
+  <tr>
+    <th align="right" valign="top" scope="row">圖片Base64編碼</th>
+    <td valign="top"><textarea style="width: 90%;height: 10em;" class="image">data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAQAMAAAAAAAAAAAAAAAAAAAAAAAA6Ojo6Ojo6Ojo6Ojo6OjpHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///////////9HjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///9AfrdumsRHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///9AfrdHjsxHjsxHjsxHjswPHixHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///////9HjsxHjsxHjswPHiw+ebEPHixHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///////9HjsxHjsxHjswPHiwPHiwPHixHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///9HjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///////9HjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///////9HjswPHixHjsxHjsxHjsxHjsxHjsxHjswPHixHjsxHjsxHjsxHjsw6Ojr///////9HjsxHjswPHixHjsxHjsxHjsxHjswPHixHjsxHjsxHjsxHjsxHjsw6Ojr///8+ebH///9HjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///8+ebH///9HjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///8+ebE+ebH///9HjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsxHjsw6Ojr///8+ebE+ebE+ebH///////9HjsxHjsxHjsxHjsxHjsxHjsxHjsz///////86Ojr///////////////////////////////////////////////////////86Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6OjoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</textarea>
+      <ul>
+        <li>推薦PNG格式</li>
+        <li><a href="http://pulipuli.blogspot.com/2011/05/mimebase64.html">將圖片轉換成Base64編碼的作法請參考此網頁。</a></li>
+    </ul></td>
+  </tr>
+  <tr>
+    <th align="right" valign="top" scope="row">背景顏色</th>
+    <td valign="top"><input type="text" class="fill-color" value="#BCDB93" /></td>
+  </tr>
+  <tr>
+    <th align="right" valign="top" scope="row">框線顏色</th>
+    <td valign="top"><input type="text" class="stroke-color" value="#95BF52" /></td>
+  </tr>
+  <tr>
+    <th align="right" valign="top" scope="row">字體顏色</th>
+    <td valign="top"><input type="text" class="font-color" value="#3B3B46" /></td>
+  </tr>
+  <tr>
+    <th align="right" valign="top" scope="row">數字</th>
+    <td valign="top"><p>
+      <input type="text" class="number" value="" />
+    </p>
+      <ul>
+        <li>僅能輸入數字</li>
+        <li>超過1000以上，會顯示成「1k+」</li>
+    </ul></td>
+	
+  </tr>
+  <tr>
+    <th align="right" valign="top" scope="row">圖片顯示</th>
+    <td valign="top" class="output">&nbsp;</td>
+  </tr>
+</table>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+    var _filter_color_encode = function(_color)
+    {
+        _color = $.trim(_color);
+        if (_color.length == 0)
+            return false;
+        else if (_color.substr(0, 1) != '#')
+            _color = '#' + _color;
+        return _color;
+    };
+    
+    var _get_config = function () {
+        
+    	var _config = $("#20110501_image_base64");
+           
+        var _image = _config.find('.image:first').val();
+        var _fill_color = _config.find('.fill-color:first').val();
+            _fill_color = _filter_color_encode(_fill_color);
+        var _stroke_color = _config.find('.stroke-color:first').val();
+            _stroke_color = _filter_color_encode(_stroke_color);
+        var _font_color = _config.find('.font-color:first').val();
+            _font_color = _filter_color_encode(_font_color);
+        var _number = _config.find('.number:first').val();
+        
+        return {
+            image: _image,
+            color: {
+                fill: _fill_color,
+                stroke: _stroke_color,
+                font: _font_color
+            },
+            number: _number
+        };
+    };
+    
+    //--------------------
+    
+	
+});
+
+</script>
+</body>
+
+</html>

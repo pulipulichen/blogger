@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>日文歌詞注音網頁轉換器</title>
+</head>
+
+<body>
+
+<table width="100%"  border="0" id="lyric_table_20070211" cellpadding="5">
+<style type="text/css">
+#lyric_table_20070211,
+#lyric_table_20070211 td,
+#lyric_table_20070211 th {
+ border-width: 0;
+}
+
+#lyric_table_20070211 {
+ /*padding: 5px;*/
+ border-bottom: 1px solid gray;
+ margin-bottom: 30px;
+}
+#lyric_table_20070211 td {
+ vertical-align:top;
+}
+#lyric_table_20070211 textarea {
+ width: 90%;
+ height: 10em;
+ /*overflow:visible;*/
+}
+</style>
+  <tr>
+    <th scope="col" width="50%">歌詞</th>
+    <th scope="col" width="50%">程式碼</th>
+  </tr>
+  <tr>
+    <td align="center"><textarea id="lyric" style="height: 12em; "></textarea><br />
+ <input type="button" value="轉換" onClick="lyric_to_table()">
+ <input type="button" value="清空" onClick="document.getElementById('lyric').value = '';">
+ <input type="button" value="全選" onClick="document.getElementById('lyric').select();">
+    </td>
+    <td align="center">
+ <form action="lyric_create.php" method="post">
+ <label for="table_name">歌名 <input type="text" id="table_name" style="width: 75% "></label>
+ <textarea id="table_code" name="lyric"></textarea><br>
+ <input type="button" onClick="open_window(false)" value="存成網頁">
+ <input type="button" onClick="open_window(true)" value="手機畫面檢視">
+ <script type="text/javascript">
+ <!--
+ function open_window(mobile)
+ {
+   //window.close("win");
+   
+   if (mobile)
+     win = window.open("", "win", "width=195px, height=175px; menubar=yes, scrollbars=yes");
+   else
+     win = window.open("", "win");
+   
+   var result = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"';
+   result = result + '"http://www.w3.org/TR/html4/loose.dtd">';
+   result = result + '<html>';
+   result = result + '<head>';
+   result = result + '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
+   result = result + '<meta name="viewport" content="width=device-width">';
+   result = result + '<title>' + document.getElementById("table_name").value+ '</title>';
+   result = result + '</head>';
+   result = result + '<body>';
+   result = result + document.getElementById("table_code").value;
+   result = result + '</body>';
+   result = result + '</html>';
+   
+   win.document.write(result);
+ }
+ -->
+ </script>
+ <input type="button" value="全選" onClick="document.getElementById('table_code').select();">
+ </form>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="border-top: 1px solid gray " >
+   <div><strong>goo日文詞典查詢</strong></div>
+   <a href="http://dictionary.goo.ne.jp/" target="_blank">
+   <img src="http://bp3.blogger.com/_yr4MQB4zDus/Rc4i9xGs07I/AAAAAAAAALY/PiqI4ZFNdlM/s400/goo_1.gif" style="border-width:0 "><img src="http://bp1.blogger.com/_yr4MQB4zDus/Rc4i9RGs05I/AAAAAAAAALI/_fExqYmAvOc/s400/goo_2.gif" style="border-width:0 "><img src="http://bp2.blogger.com/_yr4MQB4zDus/Rc4i9hGs06I/AAAAAAAAALQ/sOxKdTvHSQ4/s400/goo_3.gif" style="border-width:0 "></a>
+   <form action="http://dictionary.goo.ne.jp/search.php" method="get" style="display:inline " target="_blank">
+     <input name="MT" type="text">
+  <input name="mode" type="hidden" value="1">
+  <input type="submit"> (在非Shift-JIS編碼下，會產生亂碼)
+   </form>
+ </td>
+  </tr>
+  <tr>
+   <td style="border-top: 1px solid gray; ">
+     寬度：
+     <button type="button" onclick="document.getElementById('table_show').style.width='240px';">240px</button>
+     <button type="button" onclick="document.getElementById('table_show').style.width='320px';">320px</button>
+     <button type="button" onclick="document.getElementById('table_show').style.width='640px';">640px</button>
+     <button type="button" onclick="document.getElementById('table_show').style.width='auto'">auto</button>
+    <div colspan="2" style="max-height: 12em;overflow:auto;overflow-x: hidden;width: 320px;border: 1px solid #CCCCCC; margin: 1em;" id="table_show"></div></td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+<!--
+ 
+function lyric_to_table()
+{
+  //if (trim(document.getElementById("lyric").innerHTML) == "")
+  //  return;
+  
+  document.getElementById("table_name").value = "";
+  
+  //var all_lyric = document.getElementById("lyric").innerHTML.split("\n");    // cannot use innerHTML for Textarea 20110706 by PuddingChen
+  var all_lyric = document.getElementById("lyric").value.split("\n");
+  
+  var result = '';
+  var result2 = '';
+  
+  for (var i = 0; i < all_lyric.length; i++)
+  {
+ if (document.getElementById("table_name").value == ""
+ 	&& trim(all_lyric[i]) != "")
+    document.getElementById("table_name").value = trim(all_lyric[i]);
+ 
+ //if (i < all_lyric.length - 1 && window.appName == "Internet Explorer")
+ //  var line_ly = trim(all_lyric[i].substr(0, (all_lyric[i].length-1))).split("");
+ //else
+   var line_ly = trim(all_lyric[i]).split("");
+ ly = new Array;
+    var code_ly = "";
+ var code_p = "";
+ 
+ var is_last = false;
+ var counter = 0;
+ for (var y = 0; y < line_ly.length; y++)
+ {
+   var single = line_ly[y];
+   //t(single+ "\n" + (single == "(")+ "\n" + y);
+   
+   if (y == line_ly.length - 1)
+     is_last = true;
+   
+   if (single == ")")
+   {
+     continue;//do nothing;
+   }
+   
+   
+   if (single != "(" && !is_last && !is_kanji(single))
+   {
+     ly[counter] = single;
+     //t(ly[counter] + "1");
+   }
+   else if (is_kanji(single))
+   {
+
+		ly[counter] = single;
+		  while (!is_last && is_kanji(line_ly[eval(y+1)]))
+		  {
+		    ly[counter] = ly[counter] + line_ly[eval(y+1)];
+		    
+		    y++;
+		    if (y == line_ly.length - 1)
+		         is_last = true;
+		  }
+   }
+   else if (is_eng(single))
+   {
+      ly[counter] = single;
+  
+	  while (!is_last && is_eng(line_ly[eval(y+1)]))
+	  {
+	    ly[counter] = ly[counter] + line_ly[eval(y+1)];
+	    
+	    y++;
+	    if (y == line_ly.length - 1)
+	         is_last = true;
+	  }
+   }
+   else if (single == "(")
+   {
+		counter--;
+		ly[counter] = ly[counter] + "\t";
+
+	  while (!is_last && line_ly[eval(y+1)] != ")")
+	  {
+	    ly[counter] = ly[counter] + line_ly[eval(y+1)];
+	    
+	    y++;
+	    if (y == line_ly.length - 1)
+	         is_last = true;
+	  }
+   }
+   else
+     ly[counter] = single;
+   
+   //t(ly[counter] + "\n" +counter)
+   counter++;
+ } //end for (var y = 0; y < line_ly.length; y++)
+ 
+ for (var y = 0; y < ly.length; y++)
+ {
+    var word = ly[y];
+    //t(word + "\n" + y);
+    
+    myRE = new RegExp("\t");
+    if (myRE.test(word))
+    {
+       temp = word.split("\t",2);
+	   var word = temp[0];
+	   var pinyin = temp[1];
+    }
+    else
+      var pinyin = "";
+ 
+    if (word == "　")
+      width = "width: 1.5em;";
+    else if (word == " ")
+      width = "width: 0.3em;";
+    else
+      width = "";
+    
+    var code_ly = code_ly + "    <td align='center' style='padding:0;margin:0;border-width:0;'>"+ word +"</td>\n";
+    var code_p = code_p + '    <th style="font-size: 60%;font-weight:normal;padding:0;margin:0;'+width+';border-width:0;text-align:center;">'+ pinyin +"</th>\n";
+ }	//for (var y = 0; y < ly.length; y++)
+ 
+ //t(code_ly + "\n|\n" + code_ly.length);
+ if (code_ly != "" && code_ly.length > 57)
+ {
+   var line_result = "<table cellpadding='0' cellspacing='0' style='font-size:150%;border-width: 0;'>\n";
+   var line_result = line_result + "  <tr>\n";
+   var line_result = line_result + code_p;
+   var line_result = line_result + "  </tr>\n";
+   var line_result = line_result + "  <tr>\n";
+   var line_result = line_result + code_ly;
+   var line_result = line_result + "  </tr>\n";
+   var line_result = line_result + "</table>\n";
+   
+   var line_result2 = "<table cellpadding='0' cellspacing='0'>\n";
+   var line_result2 = line_result2 + "  <tr>\n";
+   var line_result2 = line_result2 + code_p;
+   var line_result2 = line_result2 + "  </tr>\n";
+   var line_result2 = line_result2 + "  <tr>\n";
+   var line_result2 = line_result2 + code_ly;
+   var line_result2 = line_result2 + "  </tr>\n";
+   var line_result2 = line_result2 + "</table>\n";
+   
+   result = result + line_result + "\n";
+   result2 = result2 + line_result2 + "\n";
+ }
+ else
+ {
+   result = result + "<br style='margin: 20px;' />" + "\n";
+   result2 = result2 + "<br style='margin: 20px;' />" + "\n";
+ }
+  }
+  
+  //var result2 = result2 + '<!--' + document.getElementById("lyric").innerHTML + '-->' //cannot use innerHTML for textarea 20110706 by Pudding Chen
+  var result2 = result2 + '<!--' + document.getElementById("lyric").value+ '-->'
+
+  document.getElementById("table_code").value = result2;
+  document.getElementById("table_show").innerHTML = result;
+}
+
+unicode_tool = {
+	unescape: function (str) {
+		return unicode_tool.unescapeFromNumRef(str, 10);
+	},
+	convertNumRefToUnicodeCodePoints: function(str, base) {
+	  var num_refs = str.split(";");
+	  num_refs.pop();  // Trim the last element.
+	  var unicode_codes = [];
+	  for (var i = 0; i < num_refs.length; ++i) {
+	    var decimal_str = num_refs[i].replace(/^&#x?/, "");
+	    var unicode_code = parseInt(decimal_str, base);
+	    unicode_codes.push(unicode_code);
+	  }
+	  return unicode_codes;
+	},
+	unescapeFromNumRef: function (str, base) {
+	  var unicode_codes = unicode_tool.convertNumRefToUnicodeCodePoints(str, base);
+	  return unicode_tool.convertUnicodeCodePointsToString(unicode_codes);
+	},
+	convertUnicodeCodePointsToString: function (unicode_codes) {
+	  var utf16_codes = unicode_tool.convertUnicodeCodePointsToUtf16Codes(unicode_codes);
+	  return unicode_tool.convertUtf16CodesToString(utf16_codes);
+	},
+	convertUnicodeCodePointsToUtf16Codes: function (unicode_codes) {
+	  var utf16_codes = [];
+	  for (var i = 0; i < unicode_codes.length; ++i) {
+	    var unicode_code = unicode_codes[i];
+	    if (unicode_code < (1 << 16)) {
+	      utf16_codes.push(unicode_code);
+	    } else {
+	      var first = ((unicode_code - (1 << 16)) / (1 << 10)) + 0xD800;
+	      var second = (unicode_code % (1 << 10)) + 0xDC00;
+	      utf16_codes.push(first)
+	      utf16_codes.push(second)
+	    }
+	  }
+	  return utf16_codes;
+	},
+	convertUtf16CodesToString: function(utf16_codes) {
+	  var unescaped = '';
+	  for (var i = 0; i < utf16_codes.length; ++i) {
+	    unescaped += String.fromCharCode(utf16_codes[i]);
+	  }
+	  return unescaped;
+	}
+};
+
+function is_kanji(ly)
+{
+  myRE = new RegExp("[" + ly + "]", "i");
+  
+  var test_str = "…っャぁぃピパピョバビブベボプペポブぅバガペッギグゲコザジズゼゾがぎぐげござじずプぜぞんンわワらラやヤまマはハなナたタさサかカあアエゐヌりリみミひヒにニちチしシきキいイヴるルゆユむムふフぬヌつツすスくクうウヶれレめメへヘねネてテせセけケえーをヲろよヨもモほホのノとトそソこコおオだぢロづでどダジヅデドばびぶべぼぱぴぷぺぽゃゅぇょゎァィュェォゥ";
+
+  var _unicode_list = ["　", "…", "！","＠","＃","＄","％","＾","＆","＊","（","）","＿","＋","？","＞","＜","：","”","｛","｝","｜","～","‘","－","＝","￥","」","「","「","」","；","’","・","。","、","↑","↓","←","→","☆","★","“","”","･","▽"];
+  
+  for (var _i in _unicode_list)
+  {
+    var _char = _unicode_list[_i];
+    if (_char.substr(0, 2) == "&#")
+  		test_str = test_str + unicode_tool.unescape(_unicode_list[_i]);
+    else
+        test_str = test_str + _char;
+  }
+  
+  test_str  = test_str + " ~1234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+|}{\":?><QWERTYUIOPASDFGHJKLZXCVBNM";
+  var flag = myRE.test(test_str);
+  //alert(flag);
+  return !(flag);
+}
+ 
+//alert(unicode_tool.unescapeFromNumRef("&#8220;", 10));
+
+function is_eng(ly)
+{
+  myRE = new RegExp("[" + ly + "]", "i");  
+  test_str  = " ~･1▽234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+|}{\":?><QWERTYUIOPASDFGHJKLZXCVBNM";
+  var flag = myRE.test(test_str);
+  //alert(flag);
+  return !(flag);
+}
+
+function trim(word)
+{
+  myRE = /^ |^　|\n| $|　$|^\t|\t$/g;
+  //alert(myRE.test(word));
+  while (myRE.test(word))
+  {
+    var word = word.replace(myRE, "");
+  }
+  return word;
+}
+
+//t(trim(document.getElementById("test").innerHTML));
+
+function t(v)
+{
+   alert("["+v+"]");
+}
+
+
+if (document.getElementById("lyric").value != "")
+  lyric_to_table();
+
+-->
+</script>
+<div>
+<h4>範例</h4>
+<div>
+私(わたし)は<br>
+  ↓<br>
+<table border="0" cellspacing="0" style="border-width: 0; ">
+  <tr>
+    <th scope="col" style="font-size:0.6em;font-weight:normal;text-align:center;border-width: 0; ">わたし</th>
+    <th style="text-align:center;border-width: 0; " scope="col">&nbsp;</th>
+  </tr>
+  <tr>
+    <td style="text-align:center;border-width: 0; font-size: 1em;">私</td>
+    <td style="text-align:center;border-width: 0; font-size: 1em;">は</td>
+  </tr>
+</table>
+</div>
+</div>
+<h4>說明</h4>
+<ul>
+  <li>本程式是編譯日文歌詞網頁專用，編譯而成的網頁能夠完整實現漢字注音的效果，而且不受瀏覽器種類的影響。特別是可以在手機瀏覽器上閱讀。</li>
+<li>使用步驟：
+  <ol>
+    <li>在歌詞那邊輸入歌詞</li>
+  <li>按下轉換</li>
+  <li>檢查歌詞與注音是否正確，修改後再按下轉換</li>
+  <li>檢查通過後，按下手機畫面檢視</li>
+  <li>檢查手機畫面檢視是否超過範圍，預設是以240px*320px解析度的手機 (因為沒用過其他手機的瀏覽器，所以也不知道該怎麼設比較好) <br>
+    ※預覽的畫面與實際在手機的畫面會有差別
+  </li>
+  <li>儲存網頁(僅HTML源始碼)，此網頁即可在手機的網頁瀏覽器瀏覽。</li>
+  </ol>
+</li>
+</ul>
+
+</body>
+</html>

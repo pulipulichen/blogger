@@ -5,6 +5,56 @@
  * Last Update: 20120720
  */
 
+if (PULI_UTILS === undefined) {
+	var PULI_UTILS = {
+		log: function (_title, _message) {
+			if (_message === undefined) {
+				_message = _title;
+				_title = null;
+			}
+			
+			if (_title !== null) {
+				_message = "[" + _title + "] " + _message;
+			}
+			
+			_message = "[PULIPULI] " + _message;
+			console.log(_message);
+		},
+		/**
+		 * 確認Blogger是否是全文網頁
+		 * @return {boolean}
+		 */
+		is_blogger_fullpage: function()
+		{
+		  var href_array = location.href.split("/");
+		  //var href_array2 = location.href.split("\\");
+		  var _is_fulllpage = (href_array.length > 5 && href_array[4] != "label");
+		  var _is_file = href_array[0] != "file:";
+		  var _is_localhost = (href_array[2] == 'localhost');
+		  var _is_localhost_fullpage = (href_array[href_array.length-1] == 'fullpage.html');
+		  
+		  if (_is_localhost) {
+		  	if (_is_localhost_fullpage) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		  }
+		  
+		  if (_is_fulllpage 
+		  		&& _is_file) {
+		  	//console.log('is_blogger_fullpage: true');
+		  	return true;
+		  }
+		  else {
+		  	//console.log('is_blogger_fullpage: false');
+		  	return false;
+		  }
+		}
+	};
+}
+
 //for LinkWithin
 var linkwithin_site_id = 226251;
 
@@ -108,17 +158,6 @@ function sidebar_control(mode)
   }
 }
 
-function is_blogger_fullpage()
-{
-  var href_array = location.href.split("/");
-  //var href_array2 = location.href.split("\\");
-  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:") {
-  	return true;
-  }
-  else {
-  	return false;
-  }
-}
 
 function is_blogger_search()
 {
@@ -140,7 +179,7 @@ function is_blogger_archive()
 
 function generateBreadcrumbs(outputSlt) 
 {
-	if (is_blogger_fullpage() === false) {
+	if (PULI_UTILS.is_blogger_fullpage() === false) {
 		return "";
 	}
 		
@@ -666,6 +705,10 @@ function blogAjax()
 
 	this.ajaxFunction = []; // new Array();
 	
+	/**
+	 * 過濾Google Docs等iframe視窗
+	 * @param {function} callback
+	 */
 	this.ajaxFunction.push(function (callback) {
 		var iframes, imgs;
 		
@@ -714,7 +757,7 @@ function blogAjax()
 			}
 		};
 		
-		if (is_blogger_fullpage() === false)
+		if (PULI_UTILS.is_blogger_fullpage() === false)
 		{
 			var entries = jQuery("div.blog-posts div.post .entry-content-text");
 		
@@ -771,7 +814,7 @@ function blogAjax()
 	
 	this.ajaxFunction.push(function (callback) {
 		
-		if (is_blogger_fullpage() === false)
+		if (PULI_UTILS.is_blogger_fullpage() === false)
 		{
 			$('#main-wrapper .main.section:first').infinitescroll({
 			 
@@ -799,6 +842,17 @@ function blogAjax()
 		doCallback(callback);
 	});
 	
+	/**
+	 * 設置QR Code
+	 */
+	this.ajaxFunction.push(function (_callback) {
+		if (PULI_UTILS.is_blogger_fullpage() === true) {
+			PULI_UTILS.log('ajaxFunction', '設置QR Code');
+			PULI_UTILS.qrcode.setup();	
+		}
+		setTimeout(_callback, 1000);
+	});
+	
 	this.ajaxFunction.push(function (callback) {
 		//自動摘要
 		//alert("自動摘要");
@@ -809,12 +863,8 @@ function blogAjax()
 			doCallback(callback);
 			return;
 		}
-		else if (is_blogger_fullpage() === false) {	
+		else if (PULI_UTILS.is_blogger_fullpage() === false) {	
 			//alert("is blogger fullpage");
-			
-			//jQuery.getScript("http://sites.google.com/site/puddingchen35/Home/puliBloggerDigest.js", function() {
-			//getScript("http://pulipuli.hostse.com/puliBloggerDigest.js", function() {
-			//getScript("http://140.119.61.174/puliBloggerDigest.js", function() {
 			
 				pBD = puliBloggerDigest();
 				pBD.delayTime = 500; //執行延遲時間，單位是「毫秒」(1000毫秒=1秒)
@@ -825,7 +875,6 @@ function blogAjax()
 				pBD.langContiReadAll = "繼續閱讀"; //連結按鈕
 				pBD.langShowDigest = "顯示摘要"; //連結按鈕
 				pBD.doDigest();
-			//});
 			
 			setTimeout(function () {
 				doCallback(callback);
@@ -843,7 +892,7 @@ function blogAjax()
 		//網頁目錄
 		//alert("網頁目錄");
 		
-		if (is_blogger_fullpage()) {
+		if (PULI_UTILS.is_blogger_fullpage()) {
 			$.puliPostCatalog();
 		}
 		
@@ -914,7 +963,7 @@ function blogAjax()
 		//加入日期導覽
 		//alert("加入日期導覽");
 		
-		if (is_blogger_fullpage() === true)
+		if (PULI_UTILS.is_blogger_fullpage() === true)
 		{
 			var breadcrumbs = generateBreadcrumbs();
 			//alert([breadcrumbs, jQuery("h2.data-header:first").length]);
@@ -1056,7 +1105,7 @@ function blogAjax()
 		//最新文章與最新回應
 		//alert("最新文章與最新回應");
 		
-		if (is_blogger_fullpage() === false)
+		if (PULI_UTILS.is_blogger_fullpage() === false)
 		{
 			getScript("http://pulipuli.blogspot.com/feeds/posts/summary/?alt=json-in-script&callback=handlePostspulipuli"
 				, function () {
@@ -1083,8 +1132,13 @@ function blogAjax()
 	});
 	
 	
-	
+	/**
+	 * show plurk
+	 * @param {function} callback
+	 */
 	this.ajaxFunction.push(function (callback) {
+		PULI_UTILS.log('ajaxFunction', 'show plurk');
+		
 		//show plurk
 		//alert("show plurk");
 		
@@ -1105,7 +1159,7 @@ function blogAjax()
 				.slideDown();
 		};
 		
-		if (is_blogger_fullpage() === true) {
+		if (PULI_UTILS.is_blogger_fullpage() === true) {
 			setTimeout(showPlurk, 10 * 1000);
 		}
 		else {
@@ -1115,12 +1169,17 @@ function blogAjax()
 		doCallback(callback);
 	});
 	
-	
+	/**
+	 * show linkwithin
+	 * @param {function} callback
+	 */
 	this.ajaxFunction.push(function (callback) {
+		PULI_UTILS.log('ajaxFunction', 'show linkwithin');
+		
 		//show linkwithin
 		//alert("show linkwithin");
 		
-		if (is_blogger_fullpage())
+		if (PULI_UTILS.is_blogger_fullpage())
 		{
 			
 		//alert([jQuery(".linkwithin_outer").length, is_blogger_fullpage()]);

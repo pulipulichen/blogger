@@ -9,7 +9,7 @@
  * 如果要停止功能，請加入<span class="disable-post-catalog"></span>
  */
 
-if (typeof(is_blogger_fullpage) != 'function') {
+if (typeof(PULI_UTILS.is_blogger_fullpage) != 'function') {
 	is_blogger_fullpage = function () {
 	  var href_array = location.href.split("/");
 	  //var href_array2 = location.href.split("\\");
@@ -31,7 +31,7 @@ if (typeof($.create_id) != 'function') {
 $.puliPostCatalog = function (cata_container, heading) {
 	var i, top;
 	
-	if (is_blogger_fullpage() === false) {
+	if (PULI_UTILS.is_blogger_fullpage() === false) {
 		return;
 	}
 	

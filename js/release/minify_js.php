@@ -7,6 +7,9 @@ $files = array(
     , "blogger.js"
     , "puliPostCatalog.js"
     , "puliBloggerDigest.js"
+    , "jquery.qrcode.js"
+    , "qrcode.js"
+    , "puliQRCode.js"
 );
 
 $file_name_list = '';

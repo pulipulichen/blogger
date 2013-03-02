@@ -54,9 +54,14 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		pBD.doDigest(callback);
 	};
 	
+	/**
+	 * 開始進行摘要
+	 * @param {function} callback
+	 */
 	pBD.doDigest = function(callback)
 	{
-		if (pBD.is_blogger_fullpage() === true)
+		//PULI_UTILS.log('doDigest', is_blogger_fullpage());
+		if (PULI_UTILS.is_blogger_fullpage() === true)
 		{
 			if (typeof(callback) == "function") {
 				callback();
@@ -86,17 +91,32 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			postBody = jQuery("div.post-body");
 		}
 		
+		//PULI_UTILS.log('doDigest', 2);
 		var postTitleURL = jQuery("div.post").find("a[title='permanent link']");
 		if (postTitleURL.length === 0) {
 			postTitleURL = jQuery("div.post").find("a.comment-link:last");
+			if (postTitleURL.length === 0) {
+				postTitleURL = null;
+			}
 		}
 		
-		postBody.hide();
+		/**
+		 * 修正莫名其妙hide post-body的問題
+		 * 
+		 * @version 20130302 Pulipuli Chen
+		 */
+		if (postBody.find("textarea.entry-content-text:first").length > 0) {
+			postBody.hide();
+		}
 		
 		var loop = function(pb, i) {
 			var pbObj = postBody.eq(i);
-			var url = postTitleURL.eq(i).attr("href");
-			url = url.replace("#links", "");
+			var url = '';
+			if (postTitleURL !== null
+				&& postTitleURL.eq(i).hasAttr("href")) {
+				url = postTitleURL.eq(i).attr("href");
+				url = url.replace("#links", "");
+			}
 			
 			pBD.digest_blogbody(pbObj, url, i, function () {
 				i++;
@@ -115,7 +135,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			});
 		};
 		
-		
+		//PULI_UTILS.log('doDigest', 3);
 		loop(postBody, 0);
 		/*
 		for (var i = 0; i < postBody.length; i++)
@@ -149,7 +169,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 
 		//count = location.href.split("/");
 		//if ((count.length > 5 || count[4] == "label")&& count[0] != "file:")
-		if (is_blogger_fullpage())
+		if (PULI_UTILS.is_blogger_fullpage())
 		{
 			returnCallback();
 			return;
@@ -157,11 +177,14 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	  //blogitembody = document.getElementById(id).innerHTML;
 	  
 		var textarea = pbObj.find("textarea.entry-content-text:first");
-		if (textarea.length == 1)
+		if (textarea.length === 1)
 		{
 			var text = textarea.text();
 			textarea.remove();
 			pbObj.html(text);
+		}
+		else if (textarea.length === 0) {
+			return;
 		}
 		blogitembody = pbObj.html();
 	 
@@ -545,8 +568,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	};	//pBD.doDigest = function(callback)
 	//function digest_blogbody----------------------------------------------------
 	
-	pBD.digest_show = function(id)
-	{
+	pBD.digest_show = function(id) {
 	
 	  if (document.getElementById(id+"-show").style.display === ""
 		 || document.getElementById(id+"-show").style.display == "block")
@@ -554,8 +576,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		 jQuery("#"+id+"-show").hide();
 		 var hidden = jQuery("#"+id+"-hidden");
 		 var textarea = hidden.children("textarea.post_hidden.text");
-		 if (textarea.length == 1)
-		 {
+		 if (textarea.length == 1) {
 		 	var text = textarea.text();
 		 	textarea.remove();
 		 	hidden.prepend(jQuery("<div>" + text + "</div>"));
@@ -575,6 +596,11 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	
 	pBD.is_blogger_fullpage = function()
 	{
+		//console.log('pBD.is_blogger_fullpage: ' + typeof is_blogger_fullpage);
+		//if (typeof is_blogger_fullpage == "function") {
+		//	return is_blogger_fullpage();
+		//}
+		
 	  var href_array = location.href.split("/");
 	  //var href_array2 = location.href.split("\\");
 	  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:") {

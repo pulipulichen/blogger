@@ -1,8 +1,10 @@
 <?php
 
-header("Content-type: text/css");
-
-$files = array("blogger-template.css");
+$compressed = 'blogger-template.min.css';
+$files = array(
+    "blogger-template.css",
+	"puli-qrcode.css"
+);
 
 $file_name_list = '';
 
@@ -22,29 +24,67 @@ if ($file_name_list != '') {
     }
 }
 
+$compressed_file_content = '';
+
 //顯示開頭註解
-echo "/**
+$doc_block = "/**
  * blogger-template.min.css
  * 
  * CSS for http://pulipuli.blogspot.tw
 $file_name_list
  */
 ";
+$compressed_file_content = $compressed_file_content . $doc_block;
 
 require_once '../../min/lib/CSSmin.php';
-
 $cssmin = new CSSmin();
 
-$compressed_file_name = '.min.js';
+$compressed_file_name_footer = '.min.css';
 
 //顯示壓縮內容
 foreach ($files as $file_name) {
-    $file_content = file_get_contents($file_name);
+    $file_content = file_get_contents("../".$file_name);
     
     //壓縮
-    if (substr($file_name, 0-(strlen($compressed_file_name)) !== $compressed_file_name)) {
+    if (substr($file_name, 0-(strlen($compressed_file_name_footer)) !== $compressed_file_name_footer)) {
         $file_content = $cssmin->run($file_content);
     }
     
-    echo $file_content;
+    $compressed_file_content = $compressed_file_content . $file_content;
+}
+
+//file_put_contents($compressed, $compressed_file_content);
+//echo $compressed_file_content;
+
+if (isset($_GET['type']) === FALSE) {
+    ?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test minify CSS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div id="loading">讀取中。如果沒有出現下載連結，請修改程式之後<a href="?">重新整理這個網頁</a>。</div>
+        <link href='?type=display' rel='stylesheet' type='text/css'/>
+        <script type="text/javascript">
+            document.write('<a href="?type=compress">確定沒有錯誤，開始壓縮</a>');
+            document.getElementById('loading').style.display = 'none';
+        </script>
+    </body>
+</html>
+    <?php
+}
+else if ($_GET['type'] === 'display') {
+    header("Content-type: text/css");
+    echo $compressed_file_content;
+}
+else if ($_GET['type'] === 'compress') {
+    header("Content-type: text/css");
+    file_put_contents($compressed, $compressed_file_content);
+    echo $compressed_file_content;
 }

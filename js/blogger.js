@@ -11,7 +11,7 @@ var linkwithin_site_id = 226251;
 function digest_show(id)
 {
 
-  if (document.getElementById(id+"-show").style.display == ""
+  if (document.getElementById(id+"-show").style.display === ""
 	 || document.getElementById(id+"-show").style.display == "block")
   {
 	 //document.getElementById(id+"-show").style.display = "none";
@@ -40,18 +40,24 @@ function sidebar_control(mode)
   if (jQuery("#main").css("display") != "none"
 	&& jQuery("#sidebar-wrapper").css("display") != "none")
   {
-	if (mode == 0) mode = "max";
-	else if (mode == 1) mode = "hidden";
+	if (mode === 0) {
+		mode = "max";
+	}
+	else if (mode == 1) {
+		mode = "hidden";
+	} 	
   }
-  else if (mode == 0 
-	&& jQuery("#main").css("display") != "none")
-  		mode = "normal";
+  else if (mode === 0 
+	&& jQuery("#main").css("display") != "none") {
+		mode = "normal";
+	}	
   else if (mode == 1 
-	&& jQuery("#sidebar-wrapper").css("display") != "none")
-  		mode = "normal";
-  else
+	&& jQuery("#sidebar-wrapper").css("display") != "none") {
+		mode = "normal";
+	}	
+  else {
   	return;
-  
+  }
   
   var normal_left = "65%";
   var normal_right = "30%";
@@ -106,10 +112,12 @@ function is_blogger_fullpage()
 {
   var href_array = location.href.split("/");
   //var href_array2 = location.href.split("\\");
-  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:")
-    return true;
-  else
-    return false;
+  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:") {
+  	return true;
+  }
+  else {
+  	return false;
+  }
 }
 
 function is_blogger_search()
@@ -132,21 +140,23 @@ function is_blogger_archive()
 
 function generateBreadcrumbs(outputSlt) 
 {
-	if (is_blogger_fullpage() == false)
+	if (is_blogger_fullpage() === false) {
 		return "";
+	}
 		
 	  var strHref = location.href.toLowerCase();
 	  var intWhereAt = strHref.lastIndexOf('/', strHref.indexOf('.html'));
-	  var intYear = parseInt(strHref.substr(intWhereAt - 7, 4));
+	  var intYear = parseInt(strHref.substr(intWhereAt - 7, 4), 10);
 	  var homepage = '<a href="'+jQuery("h1.title a").attr("href")+'">首頁</a>';
 	  var strCrumbOutput = homepage + ' &gt; <a href="/search?updated-min=' + intYear;
 	  strCrumbOutput += '-01-01T00%3A00%3A00-08%3A00&updated-max=' + (intYear + 1);
 	  strCrumbOutput += '-01-01T00%3A00%3A00-08%3A00">' + intYear + '年</a>';
 	  
 	  var intMonth = strHref.substr(intWhereAt - 2, 2);
-	  if (intMonth.substr(0, 1) == '0')
+	  if (intMonth.substr(0, 1) == '0') {
 	  	  intMonth = intMonth.substr(1, 1);
-	  intMonth = parseInt(intMonth);
+	  }
+	  intMonth = parseInt(intMonth, 10);
 	  var intNextMonthYear = intYear;
 	  var intNextMonth = intMonth + 1;
 	  if (intNextMonth > 11) {
@@ -154,9 +164,13 @@ function generateBreadcrumbs(outputSlt)
 		intNextMonthYear += 1;
 	  }
 	  var strMonth = intMonth;
-	  if (intMonth < 10) strMonth = "0" + intMonth;
+	  if (intMonth < 10) {
+	  	strMonth = "0" + intMonth;
+	  }
 	  var strNextMonth = intNextMonth;
-	  if (intNextMonth < 10) strNextMonth = "0" + intNextMonth;
+	  if (intNextMonth < 10) {
+	  	strNextMonth = "0" + intNextMonth;
+	  }
 	  strCrumbOutput += ' &gt; <a href="/search?updated-min=' + intYear;
 	  strCrumbOutput += '-' + strMonth + '-01T00%3A00%3A00-08%3A00&updated-max=' + intNextMonthYear;
 	  strCrumbOutput += '-' + strNextMonth + '-01T00%3A00%3A00-08%3A00">' + strMonth + '月</a>';
@@ -171,11 +185,13 @@ function generateBreadcrumbs(outputSlt)
 function postCatalog(cataSlt, heading)
 {
 	count = location.href.split('/');
-	if ((count.length != 1 &&!(count.length > 5 && count[4] != "label")) || count[0] == "file:")
-    	return;
+	if ((count.length != 1 && !(count.length > 5 && count[4] != "label")) || count[0] == "file:") {
+		return;
+	}
 	
-	if (typeof(heading) == "undefined")
+	if (typeof(heading) == "undefined") {
 		heading = "h4";
+	}
 	
 	//get cataSlt ID
 	var cata = jQuery(cataSlt);
@@ -216,14 +232,14 @@ function postCatalog(cataSlt, heading)
 		{
 			var lastHd = ulObj.find('li:last');
 			
-			if (lastHd.length == 0)
+			if (lastHd.length === 0)
 			{
 				lastHd = $('<li></li>').appendTo(ulObj);
 			}
 			
 			var lastUl = lastHd.find("ul:last");
 			
-			if (lastUl.length == 0)
+			if (lastUl.length === 0)
 			{
 				lastUl = $('<ul></ul>').appendTo(lastHd);
 			}
@@ -233,7 +249,7 @@ function postCatalog(cataSlt, heading)
 		
 		hdObj.append(goCata.clone());
 	}
-	if (headingAry.length != 0)
+	if (headingAry.length !== 0)
 	{
 		
 		postBody.prepend("<hr width='75%' />");	
@@ -248,15 +264,17 @@ function RemoveDuplicatedPosts(PostUrl)
 {
   function contains(a, e) 
   {
-  	for(var j = 0; j < a.length; j++)
-	  if (a[j]==e)
+  	for (var j = 0; j < a.length; j++) {
+		if (a[j] == e) {
 			return true;
+		}
+	}
 	return false;
   }
 
-  var tmpUrls = new Array(0);
-  var tmpTitles = new Array(0);
-  var tmpDates = new Array(0);
+  var tmpUrls = []; // new Array(0);
+  var tmpTitles = []; // new Array(0);
+  var tmpDates = []; // new Array(0);
   for(var i = 0; i < relatedUrls.length; i++) {
 	if(!contains(tmpUrls, relatedUrls[i]) && PostUrl != relatedUrls[i]) {
 	  tmpUrls.length += 1;
@@ -274,8 +292,9 @@ function RemoveDuplicatedPosts(PostUrl)
 
 function RelatedLabels(json)
 {
-	if (typeof(json.feed.entry) == "undefined" || json.feed.entry == null)
+	if (typeof(json.feed.entry) == "undefined" || json.feed.entry === null) {
 		return;
+	}
 	
 	for (var i = 0; i < json.feed.entry.length; i++) 
 	{
@@ -305,10 +324,12 @@ function ShowRelatedPosts(PostUrl) {
 		while (i < relatedTitles.length && i < 5) 
 		{
 			output = output + '<li><a href="' + relatedUrls[r] + '">' + relatedTitles[r] + '</a> - ' + relatedDates[r] + '</li>';
-			if (r < relatedTitles.length - 1)
+			if (r < relatedTitles.length - 1) {
 				r++;
-			else
+			}
+			else {
 				r = 0;
+			}
 			i++;
 		}
 		output = output + '</ul></div>';
@@ -330,12 +351,14 @@ function compareentry(a,b){
  */
 function handlePostspulipuli(json) {
 
-	if (document.getElementById("newpostspulipuli") == null)
+	if (document.getElementById("newpostspulipuli") === null) {
 		return;
+	}
 
     var title = '<h2></h2>';
-	if (title == '<h2></h2>')
-	  title = '';
+	if (title == '<h2></h2>') {
+		title = '';
+	}
 	var temp = title + '<ul id="Feed001_feedItemListDisplay">';
     var postshow=10;
 	var titlelen = '';
@@ -344,19 +367,27 @@ function handlePostspulipuli(json) {
 	{
     	var sortentry=json.feed.entry.sort(compareentry);
     }
-    catch (e) {}
-    for (var i=0, post; post = sortentry[i]; i++) 
-    {
-        if(i >= postshow) break;
-        var title=post.title.$t;
-		if (titlelen != "" && title.length > titlelen)
-		  title = title.substr(0, titlelen) + "...";
+    catch (e) {
+		
+	}
+	
+    for (var i=0, post; i < postshow; i++) {
+		
+		post = sortentry[i];
+		
+        if (i >= postshow) {
+			break;
+		}
+        title = post.title.$t;
+		if (titlelen !== "" && title.length > titlelen) {
+			title = title.substr(0, titlelen) + "...";
+		} 
         var link=post.link[4].href;
 		var summary = post.summary.$t;
 			var tmp = summary.split('"'); summary = tmp.join('&quot;');
-			var tmp = summary.split('<br />'); summary = tmp.join('&nbsp;');
-			var tmp = summary.split('<'); summary = tmp.join('&lt;');
-			var tmp = summary.split('>'); summary = tmp.join('&gt;');
+			tmp = summary.split('<br />'); summary = tmp.join('&nbsp;');
+			tmp = summary.split('<'); summary = tmp.join('&lt;');
+			tmp = summary.split('>'); summary = tmp.join('&gt;');
 			
 		var title_link = '<a href="'+link+'" title="'+summary+'">'+ title +'</a>';
 		var authorname=post.author[0].name.$t;
@@ -375,8 +406,9 @@ function handlePostspulipuli(json) {
  * 最新回應
  */
 function handleCommentspulipuli(json) {
-	if (document.getElementById("newcommentspulipuli") == null)
+	if (document.getElementById("newcommentspulipuli") === null) {
 		return;
+	}
 	
 	var temp = '<ul id="Feedpulipuli_feedItemListDisplay">';
 	var postshow= 10 ;
@@ -387,10 +419,12 @@ function handleCommentspulipuli(json) {
 		var sortentry=json.feed.entry.sort(compareentry);
 	}
 	catch (e) { }
-	for (var i=0, post; post = sortentry[i]; i++) 
+	for (var i=0, post; i < postshow; i++) 
 	{
-		if (i >= postshow) 
+		post = sortentry[i];
+		if (i >= postshow) {
 			break;
+		}
 			var fulltitle = post.content.$t;
 			fulltitle = fulltitle.replace("\u003CBR/\u003E", "\n");
 			var tmp = fulltitle.split('<br />'); fulltitle = tmp.join('&nbsp;\n');
@@ -402,22 +436,24 @@ function handleCommentspulipuli(json) {
 			
 		var title=fulltitle;
 		tmp = title.split('&nbsp;'); title = tmp.join(' ');
-		if (titlelen != "" && title.length > titlelen)
-		  title = title.substr(0, titlelen) + "...";
+		if (titlelen !== "" && title.length > titlelen) {
+			title = title.substr(0, titlelen) + "...";
+		}
 		
 		var title_temp = "";
 		for (var j = 0; j < title.length; j++)
 		{
 			var temp_char = title.substr(j, 1);
-			if (temp_char == "<")
-			{
+			if (temp_char == "<") {
 				var temp_j = title.indexOf(">", j);
-				if (temp_j != -1)
+				if (temp_j != -1) {
 					j = temp_j;
+				}
 				continue;
 			}
-			else
+			else {
 				title_temp = title_temp + temp_char;
+			}
 		}
 		title = title_temp;
 		var link=post.link[2].href;
@@ -439,8 +475,9 @@ function handleCommentspulipuli(json) {
 }
 
 function handleGuestbookPulipuli(json) {
-	if (document.getElementById("pulipuli_guestbook") == null)
+	if (document.getElementById("pulipuli_guestbook") === null) {
 		return;
+	}
 	
 	document.getElementById("pulipuli_guestbook").innerHTML = '';
 	
@@ -448,18 +485,20 @@ function handleGuestbookPulipuli(json) {
 	var postshow= 20 ;
 	var titlelen = '20';
 	var layout = "<span class='date'>%Y%-%M%-%D%</span> <strong>%authorname%</strong>: %comment%";
-	try
-	{
+	try	{
 		var sortentry=json.feed.entry.sort(compareentry);
 	}
 	catch (e) { }
 	var firstPost = null;
-	for (var i=0, post; post = sortentry[i]; i++) 
+	for (var i=0, post; i < postshow; i++) 
 	{
-		if (i == 0)
+		post = sortentry[i];
+		if (i === 0) {
 			firstPost = post;
-		if (i >= postshow) 
+		}
+		if (i >= postshow) {
 			break;
+		}
 		var title=post.content.$t;
 			var fulltitle = title.replace("\u003CBR/\u003E", "<br />\n");
 			//var tmp = fulltitle.split('<br />'); fulltitle = tmp.join('&nbsp;\n');
@@ -472,34 +511,35 @@ function handleGuestbookPulipuli(json) {
 		for (var j = 0; j < title.length; j++)
 		{
 			var temp_char = title.substr(j, 1);
-			if (temp_char == "<")
-			{
+			if (temp_char == "<") {
 				var temp_j = title.indexOf(">", j);
-				if (temp_j != -1)
+				if (temp_j != -1) {
 					j = temp_j;
+				}
 				continue;
 			}
-			else
+			else {
 				title_temp = title_temp + temp_char;
+			}
 		}
 		title = title_temp;
 		var link="";
-		if (typeof(post.link[2]) != "undefined")
-			link=post.link[2].href;
+		if (typeof(post.link[2]) != "undefined") {
+			link = post.link[2].href;
+		}
 		var title_link = fulltitle;
 		var authorname=post.author[0].name.$t;
-		if (authorname == 'Anonymous')
+		if (authorname == 'Anonymous') {
 			authorname = '匿名';
+		}
 		
-		if (authorname == '布丁布丁吃布丁')
-		{
+		if (authorname == '布丁布丁吃布丁') {
 			authorname = '<img src="http://1.bp.blogspot.com/_yr4MQB4zDus/SZ4Mb30N0aI/AAAAAAAAFUg/3OGhwhzBUOg/S45/" style="float:left;margin-right: 5px;width:20px; height: 20px;display:block;" border="0" /> ' 
 				+ authorname;
 		}
 			
 		var uri = '';
-		if (typeof(post.author[0].uri) != 'undefined')
-		{
+		if (typeof(post.author[0].uri) != 'undefined') {
 			uri = post.author[0].uri.$t;
 			authorname = '<a href="'+uri+'" target="_blank">'+authorname+'</a>';
 		}
@@ -512,15 +552,16 @@ function handleGuestbookPulipuli(json) {
 		var layout_replace = layout.replace("%comment%",title_link).replace("%Y%",y).replace("%M%",m).replace("%D%",d).replace("%authorname%",authorname);
 		
 		var odd = 0;
-		if (i % 2 == 1)
+		if (i % 2 == 1) {
 			odd = 1;
+		}
 		temp += '<li class="guest-book-li guest-book-li-'+odd+'"><span class="item-title">'+layout_replace+'</span></li>';
 	  }
 	
 	var add_link = '';
 	var rss_link = '';
 	var reload_cmd = '';
-	if (firstPost != null)
+	if (firstPost !== null)
 	{
 		link = firstPost.link[0].href;
 		//http://www.blogger.com/feeds/16607461/1187506547871300947/comments/default/5372166020783852457
@@ -539,7 +580,7 @@ function handleGuestbookPulipuli(json) {
 		//$.getScript('http://pulipuli.blogspot.com/feeds/1187506547871300947/comments/full?alt=json-in-script&callback=handleGuestbookPulipuli');
 	}
 	  
-	  if (post = sortentry[i])
+	  if (post == sortentry[i])
 	  {
 	  	link=add_link;
 		
@@ -564,8 +605,9 @@ function handleGuestbookPulipuli(json) {
 function openIframeDiv(thisObj)
 {
 	var div = jQuery(thisObj);
-	if (div.hasClass("iframe-div") == false)
+	if (div.hasClass("iframe-div") === false) {
 		div = div.parents(".iframe-div:first");
+	}
 	
 	var src = div.find(".src").attr("value");
 	var frameborder = div.find(".frameborder").attr("value");
@@ -617,13 +659,16 @@ function blogAjax()
 	//jQuery("#main-wrapper").append(jQuery("#sidebar-wrapper"));
 	
 	var doCallback = function (callback) {
-		if (typeof(callback) == "function")
+		if (typeof(callback) == "function") {
 			callback();
+		}
 	};
 
-	this.ajaxFunction = new Array;
+	this.ajaxFunction = []; // new Array();
 	
 	this.ajaxFunction.push(function (callback) {
+		var iframes, imgs;
+		
 		//過濾Google Docs
 		
 		var filterIframe = function (iframe) 
@@ -657,26 +702,26 @@ function blogAjax()
 			{
 				var img = imgs.eq(i);
 				var src = img.attr("src");
-				if (typeof(src) == "undefined")
+				if (typeof(src) == "undefined") {
 					continue;
+				}
 				
 				var len = src.length;
-				if (src.substring(len - needle.length, len) == needle)
-				{
+				if (src.substring(len - needle.length, len) == needle) {
 					src = src.substring(0, len - needle.length);
 					img.attr("src", src);
 				}
 			}
 		};
 		
-		if (is_blogger_fullpage() == false)
+		if (is_blogger_fullpage() === false)
 		{
 			var entries = jQuery("div.blog-posts div.post .entry-content-text");
 		
 			for (var e = 0; e < entries.length; e++)
 			{
 				var element = jQuery("<div></div>").html(entries.eq(e).text());
-				var iframes = element.find("iframe");
+				iframes = element.find("iframe");
 				
 				for (var i = 0; i < iframes.length; i++)
 				{
@@ -684,7 +729,7 @@ function blogAjax()
 					filterIframe(iframe);
 				}
 				
-				var imgs = element.find("img");
+				imgs = element.find("img");
 				filterImg(imgs);
 				
 				entries.eq(e).text(element.html());
@@ -692,21 +737,22 @@ function blogAjax()
 		}
 		else
 		{
-			var iframes = jQuery("div.post-body iframe");
-			for (var i = 0; i < iframes.length; i++)
+			iframes = jQuery("div.post-body iframe");
+			for (i = 0; i < iframes.length; i++)
 			{
-				var iframe = iframes.eq(i);
+				iframe = iframes.eq(i);
 				
 				var src = iframe.attr("src");
-				var needle = "http://www.facebook.com/plugins/like.php";
+				needle = "http://www.facebook.com/plugins/like.php";
 				//alert([src, needle]);
-				if (src.substr(0, needle.length) == needle)
+				if (src.substr(0, needle.length) === needle) {
 					continue;
+				}
 				
 				filterIframe(iframe);
 			}
 			
-			var imgs = jQuery("div.post-body img");
+			imgs = jQuery("div.post-body img");
 			filterImg(imgs);
 		}
 		
@@ -725,7 +771,7 @@ function blogAjax()
 	
 	this.ajaxFunction.push(function (callback) {
 		
-		if (is_blogger_fullpage() == false)
+		if (is_blogger_fullpage() === false)
 		{
 			$('#main-wrapper .main.section:first').infinitescroll({
 			 
@@ -739,7 +785,7 @@ function blogAjax()
 			}, function (arrayOfNewElems) {
 				var elems = $(arrayOfNewElems);
 				
-				if (elems.find("a.blog-pager-older-link").length == 0)
+				if (elems.find("a.blog-pager-older-link").length === 0)
 				{
 					$(window).unbind('.infscr');
 					elems.find(".blog-pager").hide();
@@ -757,15 +803,13 @@ function blogAjax()
 		//自動摘要
 		//alert("自動摘要");
 		
-		if (is_blogger_search() == true 
-			|| is_blogger_label() == true)
-		{
+		if (is_blogger_search() === true 
+			|| is_blogger_label() === true)	{
 			//alert("search or label: " + is_blogger_search() + "; " + is_blogger_label());
 			doCallback(callback);
 			return;
 		}
-		else if (is_blogger_fullpage() == false)
-		{	
+		else if (is_blogger_fullpage() === false) {	
 			//alert("is blogger fullpage");
 			
 			//jQuery.getScript("http://sites.google.com/site/puddingchen35/Home/puliBloggerDigest.js", function() {
@@ -788,8 +832,7 @@ function blogAjax()
 			}, 500);
 			return;
 		}
-		else
-		{
+		else {
 			//jQuery("div.post-body").show();
 			doCallback(callback);
 			return;
@@ -800,8 +843,9 @@ function blogAjax()
 		//網頁目錄
 		//alert("網頁目錄");
 		
-		if (is_blogger_fullpage())
+		if (is_blogger_fullpage()) {
 			$.puliPostCatalog();
+		}
 		
 		doCallback(callback);
 	});
@@ -870,11 +914,11 @@ function blogAjax()
 		//加入日期導覽
 		//alert("加入日期導覽");
 		
-		if (is_blogger_fullpage() == true)
+		if (is_blogger_fullpage() === true)
 		{
 			var breadcrumbs = generateBreadcrumbs();
 			//alert([breadcrumbs, jQuery("h2.data-header:first").length]);
-			if (breadcrumbs != "")
+			if (breadcrumbs !== "")
 			{
 				jQuery("h2.date-header:first").append(jQuery(breadcrumbs));	
 			}
@@ -938,8 +982,9 @@ function blogAjax()
 			h2.addClass("toggle-setup");
 			
 			var _content_is_show = (h2.nextAll(".widget-content").css("display") == "none");
-			if (_content_is_show)
+			if (_content_is_show) {
 				b.click();
+			}
 			
 			/*
 			var _matchRemove = (jQuery.inArray(_title, removeWidgets) != -1);
@@ -967,48 +1012,51 @@ function blogAjax()
 		//推到噗浪等
 		//alert("推到噗浪等");
 		
-		if (is_blogger_search() == true 
-			|| is_blogger_label() == true
-			|| is_blogger_archive() == true)
+		if (is_blogger_search() === true 
+			|| is_blogger_label() === true
+			|| is_blogger_archive() === true)
 		{
 			doCallback(callback);
 			return;
 		}
 		
-		getScript("http://s7.addthis.com/js/250/addthis_widget.js#username=pulipuli", function () {
-		
-			addthis_config =
-			{
-			   services_compact: 'plurk,twitter,facebook,hemidemi,funp,delicious,digg,blogger,readitlater,evernote,googlebuzz,googlereader,igoogle,messenger,email,print'
-			};
-			var titles = jQuery("div#main h3.entry-title a");
-			for (var i = 0; i < titles.length; i++)
-			{
-				var url = titles.eq(i).attr("href");
-				var title = titles.eq(i).html();
-				
-				var share = jQuery("<div></div>")
-					.addClass("share-buttons")
-					.insertBefore(titles.eq(i).parents("div.post:first").find("div.post-header-line-1"));
-				
-				var addThis = jQuery('<div class="add-this">'
-					+ '<a addthis:title="'+title+'" addthis:url="'+url+'" class="addthis_button">'
-					+ '<img src="http://s7.addthis.com/static/btn/sm-share-en.gif" alt="分享並加入書籤" style="border:0"/></a></div>')
-					.appendTo(share);
-				
-				// 20110502 停止使用Facebook的like，改以Send按鈕安裝 http://goo.gl/LLwuW
-				//var facebook = jQuery('<iframe src="http://www.facebook.com/plugins/like.php?href='+url+'&layout=standard&show_faces=true&width=450&action=like&font=verdana&colorscheme=light" scrolling="no" frameborder="0" class="fackbook-like" height="30"></iframe>')
-				//	.appendTo(share);
-			}
+		var titles = jQuery("div#main h3.entry-title a");
+		if (titles.length > 0) {
+			getScript("http://s7.addthis.com/js/250/addthis_widget.js#username=pulipuli", function () {
+			
+				addthis_config = {
+				   services_compact: 'plurk,twitter,facebook,hemidemi,funp,delicious,digg,blogger,readitlater,evernote,googlebuzz,googlereader,igoogle,messenger,email,print'
+				};
+				for (var i = 0; i < titles.length; i++) {
+					var url = titles.eq(i).attr("href");
+					var title = titles.eq(i).html();
+					
+					var share = jQuery("<div></div>")
+						.addClass("share-buttons")
+						.insertBefore(titles.eq(i).parents("div.post:first").find("div.post-header-line-1"));
+					
+					var addThis = jQuery('<div class="add-this">'
+						+ '<a addthis:title="'+title+'" addthis:url="'+url+'" class="addthis_button">'
+						+ '<img src="http://s7.addthis.com/static/btn/sm-share-en.gif" alt="分享並加入書籤" style="border:0"/></a></div>')
+						.appendTo(share);
+					
+					// 20110502 停止使用Facebook的like，改以Send按鈕安裝 http://goo.gl/LLwuW
+					//var facebook = jQuery('<iframe src="http://www.facebook.com/plugins/like.php?href='+url+'&layout=standard&show_faces=true&width=450&action=like&font=verdana&colorscheme=light" scrolling="no" frameborder="0" class="fackbook-like" height="30"></iframe>')
+					//	.appendTo(share);
+				}
+				doCallback(callback);
+			});
+		}	//end of if (title.length > 0) {
+		else {
 			doCallback(callback);
-		});
+		}	
 	});
 	
 	this.ajaxFunction.push(function (callback) {
 		//最新文章與最新回應
 		//alert("最新文章與最新回應");
 		
-		if (is_blogger_fullpage() == false)
+		if (is_blogger_fullpage() === false)
 		{
 			getScript("http://pulipuli.blogspot.com/feeds/posts/summary/?alt=json-in-script&callback=handlePostspulipuli"
 				, function () {
@@ -1040,9 +1088,9 @@ function blogAjax()
 		//show plurk
 		//alert("show plurk");
 		
-		if (is_blogger_search() == true 
-			|| is_blogger_label() == true
-			|| is_blogger_archive() == true)
+		if (is_blogger_search() === true 
+			|| is_blogger_label() === true
+			|| is_blogger_archive() === true)
 		{
 			doCallback(callback);
 			return;
@@ -1057,12 +1105,12 @@ function blogAjax()
 				.slideDown();
 		};
 		
-		if (is_blogger_fullpage() == true)
-		{
-			setTimeout(showPlurk, 10*1000);
+		if (is_blogger_fullpage() === true) {
+			setTimeout(showPlurk, 10 * 1000);
 		}
-		else
+		else {
 			showPlurk();
+		}
 		
 		doCallback(callback);
 	});
@@ -1125,8 +1173,9 @@ function blogAjax()
 
 	var blogAjaxExec = function (func, i)
 	{
-		if (func.length == 0)
+		if (func.length === 0) {
 			return;
+		}
 		this.func = func.pop();
 		//Check which function is Error:
 			//alert(this.ajaxFunction.length);

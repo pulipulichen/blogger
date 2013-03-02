@@ -9,72 +9,71 @@
  * 如果要停止功能，請加入<span class="disable-post-catalog"></span>
  */
 
-if (typeof(is_blogger_fullpage) != 'function')
-{
-	is_blogger_fullpage = function ()
-	{
+if (typeof(is_blogger_fullpage) != 'function') {
+	is_blogger_fullpage = function () {
 	  var href_array = location.href.split("/");
 	  //var href_array2 = location.href.split("\\");
-	  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:")
-	    return true;
-	  else
-	    return false;
+	  if (href_array.length > 5 && href_array[4] !== "label" && href_array[0] !== "file:") {
+	  	return true;
+	  }
+	  else {
+	  	return false;
+	  }
 	};
 }
 
-if (typeof($.create_id) != 'function')
-{
+if (typeof($.create_id) != 'function') {
 	$.create_id = function () {
 	    return (new Date()).getTime() + '';
 	};
 }
 
 $.puliPostCatalog = function (cata_container, heading) {
+	var i, top;
 	
-	if (is_blogger_fullpage() == false)
+	if (is_blogger_fullpage() === false) {
 		return;
+	}
 	
 	$(function () {	//頁面讀取完之後，再進行讀取
 
-	if (heading == null)
+	if (heading === null) {
 		heading = "h4";
+	}
 	
-	if (cata_container == null)
-	{
-		if ($('div.post-body .disable-post-catalog').length > 0)
-		{
+	if (cata_container === null) {
+		if ($('div.post-body .disable-post-catalog').length > 0) {
 			return;
 		}
 		
 		var firstHeading = $('div.post-body:first > '+heading+':first');
 		
-		if (firstHeading.length == 0)
-		{
+		if (firstHeading.length === 0) {
 			return;
 		}
 		
 		//如果firstHeading之前有<font size="3"></font>，則移除之
 		var font = firstHeading.prev().filter('font');
-		if (font.length > 0)
+		if (font.length > 0) {
 			font.remove();
+		}
 		
 		//如果firstHeading之前有hr，則移除之
 		var hr = firstHeading.prev().filter('hr');
-		if (hr.length > 0)
+		if (hr.length > 0) {
 			hr.remove();
-		else
-		{
+		}
+		else {
 			var div = firstHeading.prevAll("div:first");
 			hr = div.children(':last').filter('hr');
-			if (hr.length > 0)
+			if (hr.length > 0) {
 				hr.remove();
+			}
 		}
 		
 		cata_container = $('<span></span>')
 			.insertBefore(firstHeading);
 		cata_container.attr('id', 'postcata'+$.create_id());
-		
-		
 	}
 	
 	//get cataSlt ID
@@ -85,17 +84,17 @@ $.puliPostCatalog = function (cata_container, heading) {
 	var postBody = jQuery(cata_container).parents("div.post-body:first");
 	//postBody.css("border", "1px solid red");
 	
-	if (postBody.find('.cate-title').length > 0)
+	if (postBody.find('.cate-title').length > 0) {
 		return;
+	}
 	
 	
 	var headingAry = postBody.find("h4,h5");
 	var headingTop = [];
 	var topId = {};
-	for (var i = 0; i < headingAry.length; i++)
-	{
-		var heading = headingAry.eq(i);
-		var top = heading.offset().top;
+	for (i = 0; i < headingAry.length; i++)	{
+		heading = headingAry.eq(i);
+		top = heading.offset().top;
 		topId[top] = heading;
 		headingTop.push(top);
 	}
@@ -105,10 +104,9 @@ $.puliPostCatalog = function (cata_container, heading) {
 	
 	//重新輸入headingAry
 	headingAry = [];
-	for (var i = 0; i < headingTop.length; i++)
-	{
-		var top = headingTop[i];
-		var heading = topId[top];
+	for (i = 0; i < headingTop.length; i++)	{
+		top = headingTop[i];
+		heading = topId[top];
 		headingAry.push(heading);
 	}
 	
@@ -123,8 +121,7 @@ $.puliPostCatalog = function (cata_container, heading) {
 
 	var ulObj = jQuery("<ul></ul>");
 	//在每個Heading後面加入錨點
-	for (var i = 0; i < headingAry.length; i++)
-	{
+	for (i = 0; i < headingAry.length; i++) {
 		var hdObj = headingAry[i];
 		
 		var title = hdObj.text();
@@ -139,23 +136,19 @@ $.puliPostCatalog = function (cata_container, heading) {
 		
 		var hd = jQuery("<li><a href='#"+anchorID+"'>"+title+"</a></li>");
 		
-		if (tagName == 'h4')
-		{
+		if (tagName == 'h4') {
 			ulObj.append(hd);
 		}
-		else
-		{
+		else {
 			var lastHd = ulObj.children('li:last');
 			
-			if (lastHd.length == 0)
-			{
+			if (lastHd.length === 0) {
 				lastHd = $('<li></li>').appendTo(ulObj);
 			}
 			
 			var lastUl = lastHd.children("ul:last");
 			
-			if (lastUl.length == 0)
-			{
+			if (lastUl.length === 0) {
 				lastUl = $('<ul></ul>').appendTo(lastHd);
 			}
 			
@@ -164,8 +157,7 @@ $.puliPostCatalog = function (cata_container, heading) {
 		
 	}
 	
-	if (headingAry.length != 0)
-	{
+	if (headingAry.length !== 0) {
 		
 		cata_container.append(cataTitle)
 			.append(ulObj);

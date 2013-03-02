@@ -14,10 +14,12 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	
 	pBD.setDefaultValue = function(v, defaultValue)
 	{
-		if (typeof(v) == "undefined")
+		if (typeof(v) == "undefined") {
 			return defaultValue;
-		else
+		}
+		else {
 			return v;
+		}
 	};
 	
 	pBD.wordMin = pBD.setDefaultValue(wordMin, 100);
@@ -30,18 +32,18 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	
 	pBD.delayTime = pBD.setDefaultValue(delayTime, 0);
 	
-	pBD.stop_tag = new Array;
+	pBD.stop_tag = []; // new Array();
 	pBD.stop_tag[0] = "img";
 	pBD.stop_tag[1] = "br";
 	
-	pBD.stop_chr = new Array;
+	pBD.stop_chr = []; // new Array();
 	pBD.stop_chr[0] = " ";
 	pBD.stop_chr[1] = "\n";
 	pBD.stop_chr[2] = "\t";
 	pBD.stop_chr[3] = ">";
 	pBD.stop_chr[4] = "<";
 	
-	pBD.skip_tag = new Array;
+	pBD.skip_tag = []; // new Array();
 	pBD.skip_tag[0] = "script";
 	pBD.skip_tag[1] = "style";
 	
@@ -54,28 +56,29 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	
 	pBD.doDigest = function(callback)
 	{
-		if (pBD.is_blogger_fullpage() == true)
+		if (pBD.is_blogger_fullpage() === true)
 		{
-			if (typeof(callback) == "function")
+			if (typeof(callback) == "function") {
 				callback();
+			}
 			return;
 		}
 		
 		var postBody = jQuery("div.post-body");
 		//防止找不到div.post-body
-		if (postBody.length == 0)
+		if (postBody.length === 0)
 		{
 			postBody = jQuery("div.post div.entry");
 		}
 		
-		if (postBody.length == 0)
+		if (postBody.length === 0)
 		{
 			var divPost = jQuery("div.post");
 			for (var i = 0; i < divPost.length; i++)
 			{
 				var post = divPost.eq(i).children(":not(a:first, h3.post-title:first, p.post-footer, :first):first");
 				post.css("border", "1px solid red");
-				var postBody = jQuery('<div class="post-body"></div>')
+				postBody = jQuery('<div class="post-body"></div>')
 					.append(post);
 				
 				divPost.eq(i).children("h3.post-title:first").after(postBody);
@@ -84,8 +87,9 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		}
 		
 		var postTitleURL = jQuery("div.post").find("a[title='permanent link']");
-		if (postTitleURL.length == 0)
+		if (postTitleURL.length === 0) {
 			postTitleURL = jQuery("div.post").find("a.comment-link:last");
+		}
 		
 		postBody.hide();
 		
@@ -104,8 +108,9 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 				}
 				else
 				{
-					if (typeof(callback) == "function")
+					if (typeof(callback) == "function") {
 						callback();
+					}
 				}
 			});
 		};
@@ -131,8 +136,9 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	{
 		var returnCallback = function () {
 			pbObj.slideDown("fast", function () {
-				if (typeof(callback) == "function")
+				if (typeof(callback) == "function") {
 					callback();
+				}
 				return;
 			});
 		};
@@ -174,7 +180,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	  {
 		 digest_point = blogitembody.indexOf("<!--Hidden All-->", 0);
 		if (digest_point != -1
-			 || pbObj.find("span.digest-mode.hidden-all").length != 0)
+			 || pbObj.find("span.digest-mode.hidden-all").length !== 0)
 		 {
 		   digest_point = 0;
 		   digest_mode = "hidden_all";
@@ -186,7 +192,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		 digest_point = blogitembody.indexOf("<!--Show All-->", 0);
 	
 		 if (digest_point != -1
-			 || pbObj.find("span.digest-mode.show-all").length != 0)
+			 || pbObj.find("span.digest-mode.show-all").length !== 0)
 		 {
 		   digest_point = blogitembody.length;
 		   digest_mode = "show_all";
@@ -229,26 +235,29 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		//alert(blogitembody);
 		//if (digest_mode == "hidden_all")
 		//digest_point = 0;
-	   
-		if (blogitembody.toLowerCase().substr(blogitembody.length-56, 56) == '<div style="clear:both; padding-bottom: 0.25em;"></div>')
-			var body_len = blogitembody.length - 56;
-		else
-			var body_len = blogitembody.length;
+	    var body_len;
+		if (blogitembody.toLowerCase().substr(blogitembody.length - 56, 56) == '<div style="clear:both; padding-bottom: 0.25em;"></div>') {
+			body_len = blogitembody.length - 56;
+		}
+		else {
+			body_len = blogitembody.length;
+		}
 	 	
 //alert(blogitembody.toLowerCase().substr(blogitembody.length-56, 56) + " -- " + body_len + " -- " + digest_point);
 	   //alert(body_len);
 	 
 		if (digest_point < body_len && digest_point != -1)
 		{
-			if (digest_mode != "hidden_all" || digest_mode != "digest")
+			if (digest_mode != "hidden_all" || digest_mode != "digest") {
 				continue_reading1 = "……";
-			else
+			}
+			else {
 				continue_reading1 = "";
+			}
 	  
 			//continue_reading2 = '<a href="'+url+'" title="post link" class="link_fullpost">(繼續閱讀)</a>'; 
 
-			if (digest_mode == "hidden_all")
-			{
+			if (digest_mode == "hidden_all") {
 				continue_reading2 = this.contiReading("show all", pBD.langReadAll);
 			}
 			else if  (digest_mode == "digest")
@@ -274,7 +283,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		var end_tag = "";
 		if (digest_mode == "digest")
 		{
-			var text = blogitembody.substr(0, digest_point);
+			text = blogitembody.substr(0, digest_point);
 			each_tag = text.split("<");
 			
 			 //end_tags = new Array;
@@ -282,16 +291,19 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 		 
 			for (var i = 1; i < each_tag.length; i++)
 			{
-				if (each_tag[i].substr(0, 1) == "/"
-					|| each_tag[i].substr(0, 1) == "!")
+				if (each_tag[i].substr(0, 1) == "/" ||
+				each_tag[i].substr(0, 1) == "!") {
 					continue;
+				}
 			
 				temp = each_tag[i].split(" ", 2);
 				temp2 = each_tag[i].split(">", 2);
-				if (temp[0].length < temp2[0].length)
+				if (temp[0].length < temp2[0].length) {
 					tag = temp[0];
-				else
+				}
+				else {
 					tag = temp2[0];
+				}
 				end_tag = "</" + tag + ">" + end_tag;
 		 	}	//for (
 		}	//if (digest_mode == "digest")
@@ -324,7 +336,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	}
 	var word_num = 0; //字數
 	var words = ""; //待顯示的文字與標籤
-	var tags = new Array; //儲存每個tag，以方便還原
+	var tags = []; //new Array; //儲存每個tag，以方便還原
 	tag_i = 0;
 	var dp = 0; //現在判斷的位置
 	
@@ -367,12 +379,12 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			is_skip_tag = "false";
 			for (sk_i = 0; sk_i < skip_tag.length; sk_i++)
 			{
-				temp_str = blogitembody.substr(eval(i+1), skip_tag[sk_i].length);
+				temp_str = blogitembody.substr(parseInt(i+1, 10), skip_tag[sk_i].length);
 				if (temp_str == skip_tag[sk_i])
 				{
 					//跳躍到同樣的標籤結束為止
 					i = blogitembody.indexOf("</"+skip_tag[sk_i]+">", i);
-					i = eval(i) + skip_tag[sk_i].length + 3;
+					i = parseInt(i, 10) + skip_tag[sk_i].length + 3;
 					//word_num--;
 					is_skip_tag = "true";
 					break;
@@ -389,12 +401,13 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			//檢查標籤是否要儲存
 			tagname_point1 = blogitembody.indexOf(" ", i);
 			tagname_point2 = blogitembody.indexOf(">", i);
-			if (tagname_point2 < tagname_point1 || tagname_point1 == -1)
+			if (tagname_point2 < tagname_point1 || tagname_point1 == -1) {
 				tagname_point = tagname_point2;
-			else
+			}
+			else {
 				tagname_point = tagname_point1;
-	   
-			tagname = blogitembody.substr(eval(i+1), tagname_point - eval(i+1));
+			}
+			tagname = blogitembody.substr(parseInt(i+1, 10), tagname_point - parseInt(i+1, 10));
 			no_save = "false";
 			for (st_i = 0; st_i < stop_tag; st_i++)
 			{
@@ -412,7 +425,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			}
 	   
 			//跳躍到標籤結束為止
-			i = blogitembody.indexOf(">", eval(i));
+			i = blogitembody.indexOf(">", parseInt(i, 10));
 			
 			//continue;
 			i++;
@@ -454,35 +467,36 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	
 	var ending = function (i, tags) 
 	{
-		digest_point = eval(i+1);
+		digest_point = parseInt(i+1, 10);
 
 		//檢查是否有結尾標籤
 		var temp_dp = blogitembody.indexOf("</" , digest_point);
-		if (temp_dp - digest_point < word_min && temp_dp != -1)
+		if (temp_dp - digest_point < word_min && temp_dp != -1) {
 			digest_point = temp_dp;
+		}
 		  
 		//標籤還原
 		end_tag = "";
 		//alert(tag_i);
 		  
-		for (var i = (tag_i-1) ; i > -1; i--)
-		{
+		for (i = (tag_i-1) ; i > -1; i--) {
 			//alert("</"+ tags[i] + ">");
-			if (typeof(tags[i]) != 'undefined'
-				&& tags[i].substr(0,1) != "/")
-				end_tag = end_tag + '</'+ tags[i] + '>';
+			if (typeof(tags[i]) != 'undefined' &&
+			tags[i].substr(0, 1) != "/") {
+				end_tag = end_tag + '</' + tags[i] + '>';
+			}
 		}
 
 		//alert(end_tag);
 
 		//alert(blogitembody.substr(0, digest_point)); 
-
-		if (blogitembody.toLowerCase().substr(blogitembody.length-56, 56) == '<div style="clear:both; padding-bottom: 0.25em;"></div>')
-		{
-			var body_len = blogitembody.length - (tag_i * 5) - 56;
+		var body_len;
+		if (blogitembody.toLowerCase().substr(blogitembody.length - 56, 56) == '<div style="clear:both; padding-bottom: 0.25em;"></div>') {
+				body_len = blogitembody.length - (tag_i * 5) - 56;
 		}
-		else
-			var body_len = blogitembody.length - (tag_i * 5);
+		else {
+			body_len = blogitembody.length - (tag_i * 5);
+		}
 		
 		//alert(blogitembody.toLowerCase().substr(blogitembody.length-56, 56) + " -- " + body_len + " -- " + digest_point);
 
@@ -517,7 +531,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			postShow.find("script").remove();
 			
 			pbObj.html(postShow);
-			if (!(blogitembody_digest_ohter == "" || typeof(blogitembody_digest_ohter) == "undefined"))
+			if (!(blogitembody_digest_ohter === "" || typeof(blogitembody_digest_ohter) == "undefined"))
 			{
 	  			var postHidden = jQuery(blogitembody_digest_ohter);
 				pbObj.append(postHidden);
@@ -534,7 +548,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	pBD.digest_show = function(id)
 	{
 	
-	  if (document.getElementById(id+"-show").style.display == ""
+	  if (document.getElementById(id+"-show").style.display === ""
 		 || document.getElementById(id+"-show").style.display == "block")
 	  {		
 		 jQuery("#"+id+"-show").hide();
@@ -563,10 +577,12 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 	{
 	  var href_array = location.href.split("/");
 	  //var href_array2 = location.href.split("\\");
-	  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:")
-		return true;
-	  else
-		return false;
+	  if (href_array.length > 5 && href_array[4] != "label" && href_array[0] != "file:") {
+	  	return true;
+	  }
+	  else {
+	  	return false;
+	  }
 	};
 	return pBD;
 }

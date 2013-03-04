@@ -1,15 +1,20 @@
 <?php
 
+//$debug = true;
+
 $compressed = 'pulipuli.blogspot.com.min.js';
 $files = array(
     "jquery.lazyload.min.js"
     , "jquery.blogger.infinitescroll.min.js"
+    , "puli.post.iframelazyload.js"
+    , "puli.utils.js"
     , "blogger.js"
-    , "puliPostCatalog.js"
+    //, "puliPostCatalog.js"
+    , "puli.post.toc.js"
     , "puliBloggerDigest.js"
     , "jquery.qrcode.js"
     , "qrcode.js"
-    , "puliQRCode.js"
+    , "puli.qrcode.js"
 );
 
 $file_name_list = '';
@@ -53,7 +58,10 @@ foreach ($files as $file_name) {
     
     //壓縮
     if (substr($file_name, 0-(strlen($compressed_file_name_footer)) !== $compressed_file_name_footer)) {
-        $file_content = JSMinPlus::minify($file_content);
+    
+    	if (isset($debug) === false) {
+    		$file_content = JSMinPlus::minify($file_content);
+    	}
     }
     
     $compressed_file_content = $compressed_file_content . $file_content . ';';

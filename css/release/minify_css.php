@@ -3,7 +3,8 @@
 $compressed = 'blogger-template.min.css';
 $files = array(
     "blogger-template.css",
-	"puli-qrcode.css"
+	"puli-qrcode.css",
+	"puli.post.iframelazyload.css"
 );
 
 $file_name_list = '';

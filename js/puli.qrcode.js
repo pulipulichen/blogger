@@ -1,3 +1,6 @@
+ /**
+  * 檢查PULI_UTILS是否存在
+  */
  if (typeof PULI_UTILS == "undefined") {
  	PULI_UTILS = {};
  }

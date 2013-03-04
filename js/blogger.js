@@ -5,56 +5,6 @@
  * Last Update: 20120720
  */
 
-if (PULI_UTILS === undefined) {
-	var PULI_UTILS = {
-		log: function (_title, _message) {
-			if (_message === undefined) {
-				_message = _title;
-				_title = null;
-			}
-			
-			if (_title !== null) {
-				_message = "[" + _title + "] " + _message;
-			}
-			
-			_message = "[PULIPULI] " + _message;
-			console.log(_message);
-		},
-		/**
-		 * 確認Blogger是否是全文網頁
-		 * @return {boolean}
-		 */
-		is_blogger_fullpage: function()
-		{
-		  var href_array = location.href.split("/");
-		  //var href_array2 = location.href.split("\\");
-		  var _is_fulllpage = (href_array.length > 5 && href_array[4] != "label");
-		  var _is_file = href_array[0] != "file:";
-		  var _is_localhost = (href_array[2] == 'localhost');
-		  var _is_localhost_fullpage = (href_array[href_array.length-1] == 'fullpage.html');
-		  
-		  if (_is_localhost) {
-		  	if (_is_localhost_fullpage) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		  }
-		  
-		  if (_is_fulllpage 
-		  		&& _is_file) {
-		  	//console.log('is_blogger_fullpage: true');
-		  	return true;
-		  }
-		  else {
-		  	//console.log('is_blogger_fullpage: false');
-		  	return false;
-		  }
-		}
-	};
-}
-
 //for LinkWithin
 var linkwithin_site_id = 226251;
 
@@ -217,86 +167,6 @@ function generateBreadcrumbs(outputSlt)
 	  
 	  //jQuery(outputSlt).html(strCrumbOutput);
 	  return "<span class='breadcrumbs'>" + strCrumbOutput + "</span>";
-}
-
-
-//20090302 Create
-function postCatalog(cataSlt, heading)
-{
-	count = location.href.split('/');
-	if ((count.length != 1 && !(count.length > 5 && count[4] != "label")) || count[0] == "file:") {
-		return;
-	}
-	
-	if (typeof(heading) == "undefined") {
-		heading = "h4";
-	}
-	
-	//get cataSlt ID
-	var cata = jQuery(cataSlt);
-	var prefix = cata.attr("id");
-	
-	//取得divID所在的所有的heading
-	var postBody = jQuery(cataSlt).parents("div.post-body:first");
-	//postBody.css("border", "1px solid red");
-	var headingAry = postBody.find("h4,h5");
-	//headingAry.css("border", "1px solid red");
-
-	var cataTitleID = prefix+"cataTitle";
-	var cataTitle = jQuery("<div class='cata-title' style='width: 75%'>目錄<a name='"+cataTitleID+"' id='"+cataTitleID+"' /></div>");
-		
-	var goCata = jQuery('<a style="margin:0;padding:0;text-decoration:none;font-size:smaller;font-weight:normal;" href="#'+cataTitleID+'"><sup>&lt;^&gt;</sup></a>');
-
-
-	var ulObj = jQuery("<ul></ul>");
-	//在每個Heading後面加入錨點
-	for (var i = 0; i < headingAry.length; i++)
-	{
-		var hdObj = headingAry.eq(i);
-		
-		var title = hdObj.text();
-		var anchorID = prefix + "_anchor" + i;
-		
-		var anc = jQuery("<a id='"+anchorID+"' name='"+anchorID+"' />");
-		hdObj.append(anc);
-		
-		var tagName = hdObj.attr('tagName').toLowerCase();
-		
-		var hd = jQuery("<li><a href='#"+anchorID+"'>"+title+"</a></li>");
-		if (tagName == 'h4')
-		{
-			ulObj.append(hd);
-		}
-		else
-		{
-			var lastHd = ulObj.find('li:last');
-			
-			if (lastHd.length === 0)
-			{
-				lastHd = $('<li></li>').appendTo(ulObj);
-			}
-			
-			var lastUl = lastHd.find("ul:last");
-			
-			if (lastUl.length === 0)
-			{
-				lastUl = $('<ul></ul>').appendTo(lastHd);
-			}
-			
-			lastUl.append(hd);
-		}
-		
-		hdObj.append(goCata.clone());
-	}
-	if (headingAry.length !== 0)
-	{
-		
-		postBody.prepend("<hr width='75%' />");	
-		postBody.prepend(ulObj);
-		postBody.prepend(cataTitle);
-		
-	}
-	
 }
 
 function RemoveDuplicatedPosts(PostUrl)
@@ -641,28 +511,6 @@ function handleGuestbookPulipuli(json) {
 	document.getElementById("pulipuli_guestbook").innerHTML = temp;
 }	//function handleGuestbookPulipuli(json) {
 
-function openIframeDiv(thisObj)
-{
-	var div = jQuery(thisObj);
-	if (div.hasClass("iframe-div") === false) {
-		div = div.parents(".iframe-div:first");
-	}
-	
-	var src = div.find(".src").attr("value");
-	var frameborder = div.find(".frameborder").attr("value");
-	var width = div.find(".width").attr("value");
-	var height = div.find(".height").attr("value");
-	
-	var iframe = jQuery("<iframe></iframe>")
-		.insertAfter(div);
-	div.remove();
-	
-	iframe.attr("src", src)
-		.attr("frameborder", frameborder)
-		.attr("width", width)
-		.attr("height", height);
-}
-
 function getScript(url, callback)
 {
 	/*
@@ -710,94 +558,9 @@ function blogAjax()
 	 * @param {function} callback
 	 */
 	this.ajaxFunction.push(function (callback) {
-		var iframes, imgs;
 		
-		//過濾Google Docs
-		
-		var filterIframe = function (iframe) 
-		{
-			var src = iframe.attr("src");
-				var width = iframe.attr("width");
-				var height = iframe.attr("height");
-				var frameborder = iframe.attr("frameborder");
-				
-				var link = src;
-				if (link.length > 50)
-				{
-					link = link.substr(0, 50) + "...";
-				}
-				
-				var iframeDiv = jQuery("<div><table onclick='openIframeDiv(this)'><tbody><tr><td valign='top'><img src='http://3.bp.blogspot.com/_yr4MQB4zDus/TA_RfdTE-TI/AAAAAAAAGw4/T1ewljZ9sSU/s320/stock_insert-floating-frame.png' /></td><td>請點此開啟內嵌網頁" + link + "</td></tr></tbody></table></div>")
-					.addClass("iframe-div")
-					.append("<input type='hidden' class='width' value='"+width+"' />")
-					.append("<input type='hidden' class='height' value='"+height+"' />")
-					.append("<input type='hidden' class='src' value='"+src+"' />")
-					.append("<input type='hidden' class='frameborder' value='"+frameborder+"' />")
-					.attr("onclick", "openIframeDiv(this)")
-					.insertAfter(iframe);
-				iframe.remove();
-		};
-		
-		var needle = "?imgmax=800";
-		var filterImg = function (imgs)
-		{
-			for (var i = 0; i < imgs.length; i++)
-			{
-				var img = imgs.eq(i);
-				var src = img.attr("src");
-				if (typeof(src) == "undefined") {
-					continue;
-				}
-				
-				var len = src.length;
-				if (src.substring(len - needle.length, len) == needle) {
-					src = src.substring(0, len - needle.length);
-					img.attr("src", src);
-				}
-			}
-		};
-		
-		if (PULI_UTILS.is_blogger_fullpage() === false)
-		{
-			var entries = jQuery("div.blog-posts div.post .entry-content-text");
-		
-			for (var e = 0; e < entries.length; e++)
-			{
-				var element = jQuery("<div></div>").html(entries.eq(e).text());
-				iframes = element.find("iframe");
-				
-				for (var i = 0; i < iframes.length; i++)
-				{
-					var iframe = iframes.eq(i);
-					filterIframe(iframe);
-				}
-				
-				imgs = element.find("img");
-				filterImg(imgs);
-				
-				entries.eq(e).text(element.html());
-			}	//for (var e = 0; e < entries.length; e++)
-		}
-		else
-		{
-			iframes = jQuery("div.post-body iframe");
-			for (i = 0; i < iframes.length; i++)
-			{
-				iframe = iframes.eq(i);
-				
-				var src = iframe.attr("src");
-				needle = "http://www.facebook.com/plugins/like.php";
-				//alert([src, needle]);
-				if (src.substr(0, needle.length) === needle) {
-					continue;
-				}
-				
-				filterIframe(iframe);
-			}
-			
-			imgs = jQuery("div.post-body img");
-			filterImg(imgs);
-		}
+		PULI_UTILS.log('ajaxFunction', '過濾Google Docs等iframe視窗');
+		PULI_UTILS.post.iframelazyload.init();
 		
 		doCallback(callback);
 	});
@@ -865,6 +628,10 @@ function blogAjax()
 		}
 		else if (PULI_UTILS.is_blogger_fullpage() === false) {	
 			//alert("is blogger fullpage");
+			/**
+			 * 記錄現在狀態
+			 */
+			PULI_UTILS.log('ajaxFunction', '自動摘要');
 			
 				pBD = puliBloggerDigest();
 				pBD.delayTime = 500; //執行延遲時間，單位是「毫秒」(1000毫秒=1秒)
@@ -891,11 +658,14 @@ function blogAjax()
 	this.ajaxFunction.push(function (callback) {
 		//網頁目錄
 		//alert("網頁目錄");
-		
-		if (PULI_UTILS.is_blogger_fullpage()) {
-			$.puliPostCatalog();
+		if (PULI_UTILS.is_blogger_fullpage()) { 
+			/**
+			 * 記錄現在狀態
+			 */
+			PULI_UTILS.log('ajaxFunction', '網頁目錄');
+			
+			PULI_UTILS.post.toc();
 		}
-		
 		doCallback(callback);
 	});
 	

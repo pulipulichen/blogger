@@ -1,52 +1,50 @@
 /**
- * puliPostCatalog.js
- * 布丁式自動標題產生器
- *
- * Last Update: 201201207
+ * 檢查PULI_UTILS是否存在
  */
+if (typeof PULI_UTILS == "undefined") {
+	PULI_UTILS = {};
+}
+ 
+if (typeof PULI_UTILS.post == "undefined") {
+	PULI_UTILS.post = {};
+}
 
 /**
+ * Table of Content
+ * for Pulipuli.blogspot.tw
+ * 布丁式自動標題產生器
+ * 
  * 如果要停止功能，請加入<span class="disable-post-catalog"></span>
+ * @author Pulipuli Chen
+ * @version 20130304
  */
-
-if (typeof(PULI_UTILS.is_blogger_fullpage) != 'function') {
-	is_blogger_fullpage = function () {
-	  var href_array = location.href.split("/");
-	  //var href_array2 = location.href.split("\\");
-	  if (href_array.length > 5 && href_array[4] !== "label" && href_array[0] !== "file:") {
-	  	return true;
-	  }
-	  else {
-	  	return false;
-	  }
-	};
-}
-
-if (typeof($.create_id) != 'function') {
-	$.create_id = function () {
-	    return (new Date()).getTime() + '';
-	};
-}
-
-$.puliPostCatalog = function (cata_container, heading) {
+PULI_UTILS.post.toc = function (cata_container, heading) {
 	var i, top;
 	
-	if (PULI_UTILS.is_blogger_fullpage() === false) {
-		return;
-	}
+	//if (PULI_UTILS.is_blogger_fullpage() === false) {
+	//	return;
+	//}
+	
+	//PULI_UTILS.log('post.toc', '1');
 	
 	$(function () {	//頁面讀取完之後，再進行讀取
 
-	if (heading === null) {
+	if (typeof heading === "undefined") {
 		heading = "h4";
 	}
 	
-	if (cata_container === null) {
+	//PULI_UTILS.log('post.toc', '2');
+	
+	if (typeof cata_container == "undefined") {
+		
+		//先檢查是否有取消目錄的功能
 		if ($('div.post-body .disable-post-catalog').length > 0) {
 			return;
 		}
 		
 		var firstHeading = $('div.post-body:first > '+heading+':first');
+		
+		//PULI_UTILS.log('post.toc 2-1 firstHeading.length:', firstHeading.length );
 		
 		if (firstHeading.length === 0) {
 			return;
@@ -72,8 +70,9 @@ $.puliPostCatalog = function (cata_container, heading) {
 		}
 		
 		cata_container = $('<span></span>')
+			.hide()
 			.insertBefore(firstHeading);
-		cata_container.attr('id', 'postcata'+$.create_id());
+		cata_container.attr('id', 'postcata'+PULI_UTILS.create_id());
 	}
 	
 	//get cataSlt ID
@@ -88,6 +87,7 @@ $.puliPostCatalog = function (cata_container, heading) {
 		return;
 	}
 	
+	//PULI_UTILS.log('post.toc', '3');
 	
 	var headingAry = postBody.find("h4,h5");
 	var headingTop = [];
@@ -109,6 +109,8 @@ $.puliPostCatalog = function (cata_container, heading) {
 		heading = topId[top];
 		headingAry.push(heading);
 	}
+	
+	//PULI_UTILS.log('post.toc', '4');
 	
 	//headingAry.css("border", "1px solid red");
 
@@ -157,18 +159,23 @@ $.puliPostCatalog = function (cata_container, heading) {
 		
 	}
 	
+	//PULI_UTILS.log('post.toc', '5');
+	
+	/**
+	 * 顯示目錄
+	 */
 	if (headingAry.length !== 0) {
 		
 		cata_container.append(cataTitle)
-			.append(ulObj);
+			.append(ulObj)
+			.slideDown();
 		
-		//postBody.prepend("<hr width='75%' />");
 		cata_container.prepend("<hr width='75%' />");
 		cata_container.append("<hr width='75%' />");
-		//postBody.prepend(ulObj);
-		//postBody.prepend(cataTitle);
 	}
 	
 	});	//$(function () {
+	
+	//PULI_UTILS.log('post.toc', '6');
 	
 };

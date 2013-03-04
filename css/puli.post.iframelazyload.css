@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+/**
+ * iframe-div 內嵌
+ */
+div.blog-posts div.post div.iframe-div {
+	padding: 10px;
+	border: 1px solid #724C25;
+	font-weight: bold;
+	cursor: pointer;
+	/*background-image: url(http://sites.google.com/site/puddingchen35/Home/stock_insert-floating-frame.png);
+	background-color: transparent;
+	background-position: left top;
+	background-repeat: no-repeat;*/
+	/*padding-left: 30px;*/
+	max-width: 400px;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	background-color: #724C25;
+	color: #F7F0E9;
+}
+div.blog-posts div.post div.iframe-div a { color: #F7F0E9; }
+
+div.blog-posts div.post div.iframe-div table, 
+div.blog-posts div.post div.iframe-div td,
+div.blog-posts div.post div.iframe-div th { 
+	border-width: 0; 
+}
+
+div.blog-posts div.post div.iframe-div td {
+	text-indent: 0 !important;
+	line-height: normal;
+	vertical-align: top;
+	padding-left: 30px;
+	background-image: url(http://3.bp.blogspot.com/_yr4MQB4zDus/TA_RfdTE-TI/AAAAAAAAGw4/T1ewljZ9sSU/s320/stock_insert-floating-frame.png);
+	background-repeat: no-repeat;
+}

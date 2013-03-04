@@ -113,6 +113,7 @@ function puliBloggerDigest(delayTime, wordMin, wordMax, langBlogURL, langReadAll
 			var pbObj = postBody.eq(i);
 			var url = '';
 			if (postTitleURL !== null
+				&& typeof postTitleURL.eq(i).hasAttr == 'function'
 				&& postTitleURL.eq(i).hasAttr("href")) {
 				url = postTitleURL.eq(i).attr("href");
 				url = url.replace("#links", "");

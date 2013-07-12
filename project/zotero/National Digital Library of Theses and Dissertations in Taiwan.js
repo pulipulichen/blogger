@@ -91,7 +91,7 @@ FW.Scraper({ itemType         : 'thesis',
   FW.MultiScraper({ itemType  : "multiple",
 			 	  detect    : FW.Xpath('//*[@id="tablefmt1"]'),
 			 	  choices : {
-				 	titles    : FW.Xpath('//*[@id="tablefmt1"]/tbody/tr/td[3]/div/div[1]/table/tbody/tr[1]/td/a/span').text(),
+				 	title    : FW.Xpath('//*[@id="tablefmt1"]/tbody/tr/td[3]/div/div[1]/table/tbody/tr[1]/td/a/span').text(),
 				 	//  //*[@id="tablefmt1"]/tbody/tr[2]/td[3]/div/div[1]/table/tbody/tr[1]/td/a/span
 				 	//  //*[@id="tablefmt1"]/tbody/tr[2]
 			 	  	urls    : FW.Xpath('//*[@id="tablefmt1"]/tbody/tr/td[3]/div/div[1]/table/tbody/tr[1]/td/a').key('href').text()

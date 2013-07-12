@@ -128,9 +128,9 @@ FW.Scraper({ itemType         : 'journalArticle',
   FW.MultiScraper({ itemType  : "multiple",
 			 	  detect    : FW.Xpath('//*[@id="uarticlelistdv1"]'),
 			 	  choices : {
-				 	titles    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a').text(),
+				 	title    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a').text(),
 				 	//  //*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a
 				 	//  //*[@id="tablefmt1"]/tbody/tr[2]
 			 	  	urls    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a').key('href').text()
 			 	  }
-});
+} );

@@ -23,8 +23,8 @@ FW.Scraper({ itemType         : 'thesis',
 			 detect           : FW.Xpath('//*[@id="format0_disparea"]'),
 			 //title            : FW.Xpath('//*[@id="format0_disparea"]/tbody/tr[3]/td').text().trim(),
 			 //  //*[text()[contains(.,'ABC')]]
-			 title            : FW.Xpath('//*[text()[contains(.,"論文名稱:")]]/following-sibling::td[1]').text().trim(),
-			 creators         : FW.Xpath('//*[text()[contains(.,"研究生:")]]/following-sibling::td[1]').text().trim().split(/,/).cleanAuthor("author"),
+			 title            : FW.Xpath('//*[text()[contains(.,"論文名稱:")]]/following-sibling::td[1] | //*[text()[contains(.,"論文名稱(外文):")]]/following-sibling::td[1]').text().trim(),
+			 creators         : FW.Xpath('//*[text()[contains(.,"研究生:")]]/following-sibling::td[1] | //*[text()[contains(.,"研究生(外文):")]]/following-sibling::td[1]').text().trim().split(/,/).cleanAuthor("author"),
 			 abstractNote     : FW.Xpath('//*[@name="description"]/@content').text().trim()
 			 	.addFilter(function (_s) { 
 			 		if (_s.substr(0,2) == "提要" || _s.substr(0,2) == "摘要") {

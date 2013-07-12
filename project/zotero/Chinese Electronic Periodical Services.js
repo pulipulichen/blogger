@@ -68,7 +68,7 @@ FW.Scraper({ itemType         : 'journalArticle',
 			 		var _header = "卷";
 			 		var _header_pos = _s.indexOf(_header)+1;
 			 		var _footer = "期";
-			 		var _footer_pos = _s.lastIndexOf(_footer)-2;
+			 		var _footer_pos = _s.lastIndexOf(_footer)-3;
 			 		return _s.substr(_header_pos, _footer_pos);
 			 	}),	
 			 	
@@ -123,14 +123,15 @@ FW.Scraper({ itemType         : 'journalArticle',
  					title:  FW.Xpath('//*[text()[contains(.,"篇　名")]]/parent::*/parent::*/following-sibling::td[1]').text().trim().append(" Snapshot"),
  					type: "text/html" }
 			  ]
-  });
+});
   
-  FW.MultiScraper({ itemType  : "multiple",
-			 	  detect    : FW.Xpath('//*[@id="uarticlelistdv1"]'),
-			 	  choices : {
-				 	title    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a').text(),
-				 	//  //*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a
-				 	//  //*[@id="tablefmt1"]/tbody/tr[2]
-			 	  	urls    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a').key('href').text()
-			 	  }
+FW.MultiScraper({ itemType  : "multiple",
+		 	  detect    : FW.Xpath('//*[@id="uarticlelistdv1"]'),
+		 	  choices : {
+			 	titles    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[3]/font/a[@text="篇名"]').text(),
+			 	//  //*[@id="uarticlelistdv1"]/tbody/tr/td[4]/font/a
+			 	//  //*[@id="tablefmt1"]/tbody/tr[2]
+		 	  	urls    : FW.Xpath('//*[@id="uarticlelistdv1"]/tbody/tr/td[3]/font/a[@text="篇名"]').key('href').text()
+		 	  }
 } );
+

@@ -53,15 +53,15 @@ if [ -d $ct_dir ]; then
         fi
     done
 
-    read -p "Please enter template version (ex: 5.6-1, 10.04-4): [5.6-1] " version
+    read -p "Please enter template version (ex: 5.6-1, 10.04-4): [1.0-0] " version
     if [ -z $version ]; then
-      version=5.6-1
+      version=1.0-0
     fi
     until [[ "$version" == *"."*"-"* ]]; do
         echo "Template version should include '.' and '-', ex: 5.6-1, 10.04-4."
-        read -p "Please enter template version again : [5.6-1] " version
+        read -p "Please enter template version again : [1.0-0] " version
         if [ -z $version ]; then
-          version=5.6-1
+          version=1.0-0
         fi
     done
 

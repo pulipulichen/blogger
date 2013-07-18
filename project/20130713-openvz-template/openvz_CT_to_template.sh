@@ -30,7 +30,7 @@ fi
 echo "You want to package container VMID $vmid to template"
 
 # 宣告虛擬機器的目錄
-ct_dir=$container_dir/$vmid
+ct_dir=$container_dir$vmid
 
 # 檢查該VMID的虛擬機器是否存在
 if [ -d $ct_dir ]; then
@@ -106,9 +106,12 @@ if [ -d $ct_dir ]; then
     vzctl stop $vmid
 
     # 開始進行轉換
-    echo "Start to package VMID $vmid to template $template_tar ..."
+    echo "Change to directory $ct_dir"
     cd $ct_dir
-    tar -czvf --overwrite ${template_path} ./ 
+
+    echo "Start to package VMID $vmid to template $template_tar"
+    echo "Command: tar --overwrite -czvf ${template_path} ./" 
+    tar --overwrite -czvf ${template_path} ./
 
     # 完成訊息
     echo "Package complete!"

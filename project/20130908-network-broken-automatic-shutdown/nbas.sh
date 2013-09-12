@@ -67,6 +67,17 @@ fi
 
 NBAS_LOCK="${NBAS_PATH}/nbas.lock"
 
+# Script excute before shutdown
+if [ -z "$NBAS_BEFORE_SHUTDOWN_SCRIPT" ]; then
+    NBAS_BEFORE_SHUTDOWN_SCRIPT=""
+fi
+
+# Script excute time after network broken. Unit is minute. (default 3)
+if [ -z "$NBAS_BEFORE_SHUTDOWN_SCRIPT_DELAY" ]; then
+    NBAS_BEFORE_SHUTDOWN_SCRIPT_DELAY=3
+fi
+NBAS_BEFORE_SHUTDOWN_SCRIPT_DELAY_MIN=$[$NBAS_BEFORE_SHUTDOWN_SCRIPT_DELAY*60]
+
 # 判斷是否有關機鎖，並嘗試取得鎖中的時間資訊
 LOCK_EXIST=`test -f $NBAS_LOCK && echo "t" || echo "f"`
 
@@ -119,6 +130,19 @@ if [ "$NETWORK_BROKEN" == "t" ]; then
     # 進行關機並發出通知
     /sbin/shutdown -h +$NBAS_SHUTDOWN_DELAY $NBAS_ALERT_SHUTDOWN & 2> /dev/null
     echo $NBAS_ALERT_SHUTDOWN | /usr/bin/wall 2> /dev/null
+
+    #/usr/bin/ssh root@10.0.0.1 "/root/scripts/shutdown-other-nodes.sh"
+    
+    # 先睡個指定DELAY的時間
+    sleep $NBAS_BEFORE_SHUTDOWN_SCRIPT_DELAY_MIN
+
+    # 看看網路是否還是斷線
+    NETWORK_STATUS=`cat /sys/class/net/$NBAS_DEVICE/carrier`
+    if [ $NETWORK_STATUS == 0 ]; then
+        
+        # 如果還是斷線，那就執行指令
+        $NBAS_BEFORE_SHUTDOWN_SCRIPT
+    fi
 
     # 完成斷線時動作
 

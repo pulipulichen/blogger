@@ -81,12 +81,12 @@ if [ "$FOUNDED" == "t" ]; then
 
     done  
 
-    echo "============"
-    echo "  Complete"
-    echo "============"
+    echo "===================="
+    echo "  Command Complete"
+    echo "===================="
 else
     echo "Other node not found"
-    echo "============"
-    echo "  Canceled"
-    echo "============"
+    echo "===================="
+    echo "  Command Canceled"
+    echo "===================="
 fi

@@ -86,4 +86,7 @@ if [ "$FOUNDED" == "t" ]; then
     echo "============"
 else
     echo "Other node not found"
+    echo "============"
+    echo "  Canceled"
+    echo "============"
 fi

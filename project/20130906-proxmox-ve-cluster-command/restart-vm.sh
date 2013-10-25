@@ -27,7 +27,7 @@ CMD="vzctl restart $VMID --wait; qm reset $VMID"
 echo "Command: $CMD"
 
 # 傳送群集指令
-./pvecm-script.sh "$CMD"
+/root/scripts/pvecm-script.sh "$CMD"
 
 # 自己執行指令
 vzctl restart $VMID --wait

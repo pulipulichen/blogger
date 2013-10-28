@@ -1,10 +1,211 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>URL Checker</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular-sanitize.min.js"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        
+        <!--
+        reference
+        ==================
+        - http://docs.angularjs.org/api/
+        
+        
+        -->
+        <script>
+            // AngularJS Script
+            var URLCheckerCtrlApp = angular.module('URLCheckerCtrlApp', ['ngSanitize']);
+            
+            URLCheckerCtrlApp.controller("URLCheckerCtrl", function URLCheckerCtrl($scope, $templateCache, $sce) {
+                $scope.urlText = "http://www.google.com.tw";
+                $scope.textLine = 3; 
+                
+                $scope.urlArray = [
+                    {
+                        url: "http://www.nccu.com.tw/",
+                        state: "queue"
+                    },
+                    {
+                        url: "http://www.google.com.tw/",
+                        state: "queue"
+                    },
+                    {
+                        url: "http://www.edu.tw/",
+                        state: "queue"
+                    }
+                ];
+                
+                $scope.urlTextToArray = function () {
+                    var _text = $scope.urlText;
+                    var _lineArray = _text.split("\n");
+                    //$scope.urlArray = [];
+                    var _result = [];
+                    for (var _line in _lineArray) {
+                        var _url = _lineArray[_line];
+                        if (_url.substr(0, 4) != "http") {
+                            continue;
+                        }
+                        _result.push({
+                            url: _lineArray[_line],
+                            state: "queue"
+                        });
+                    }
+                    $scope.urlArray = _result;
+                };
+                
+                $scope.setTextareaHeight = function () {
+                    var _text = $scope.urlText;
+                    var _lineArray = _text.split("\n");
+                    
+                    var _height = _lineArray.length + 2;
+                    if (_height < 3) {
+                        _height = 3;
+                    }
+                    $scope.textLine = _height;
+                };
+                
+                $scope.startCheck = function () {
+                    var _index = 0;
+                    $scope.checkUrlArray(_index);
+                };
+                
+                $scope.checkUrlArray = function (_index) {
+                    var _url = $scope.urlArray[_index].url;
+                    
+                     $scope.setURLChecking(_index);
+                            $scope.setIframeURL(_index);
+                     
+                    if (_index % 2 == 1) {
+                        $scope.setURLDead(_index);
+                    }
+                    else {
+                        $scope.setURLAlive(_index);
+                    }
+                    
+                    $scope.checkComplete(_index);
+                   /*
+                   try {
+                    $.ajax({
+                        url: _url,
+                        beforeSend: function () {
+                            $scope.setURLChecking(_index);
+                            $scope.setIframeURL(_index);
+                        },
+                        dataType: "text",
+                        crossDomain: true,
+                        processData: false,
+                        jsonp: false,
+                        timeout: 3000,
+                        error: function () {
+                            $scope.setURLDead(_index);
+                        },
+                        success: function() {
+                            $scope.setURLAlive(_index);
+                        },
+                        comeplete: function () {
+                            $scope.checkComplete(_index);
+                        }
+                    });
+                       
+                   }
+                   catch (e) {
+                       $scope.checkComplete(_index);
+                   }
+                   */
+                  /*
+                    $.get(_url, function () {
+                        $scope.checkComplete(_index);
+                    });
+                    */
+                   
+                    /*
+                        .done(function () {
+                            $scope.setURLAlive(_index);
+                        })
+                        .fail(function () {
+                            $scope.setURLDead(_index);
+                        })
+                        .always(function () {
+                            $scope.checkComplete(_index);
+                        });
+                        */
+                };
+                
+                $scope.setURLChecking = function (_index) {
+                    $scope.urlArray[_index].state = "checking";
+                };
+                
+                $scope.setURLDead = function (_index) {
+                    $scope.urlArray[_index].state = "dead";
+                };
+                
+                $scope.setURLAlive = function (_index) {
+                    $scope.urlArray[_index].state = "alive";
+                    $scope.urlArray[_index].preview = false;
+                };
+                
+                $scope.setIframeURL = function (_index) {
+                    var _id = 'iframe' + _index;
+                    $scope.urlArray[_index].iframeHTML = $sce.trustAsHtml("<iframe src='"+$scope.urlArray[_index].url+"' id='"+_id+"'></iframe>");
+                    
+                    $("#"+_id).load(function () {
+                        var _title = $(this).contents().find("title").text();
+                        alert(_title);
+                    });
+                };
+                
+                $scope.checkComplete = function (_index) {
+                    _index++;
+                    if (_index < $scope.urlArray.length) {
+                        //setTimeout(function () {}, 300);
+                        //setTimeout(function () {
+                            $scope.checkUrlArray(_index);
+                        //}, 300);
+                    }
+                };
+            });
+        </script>
+        <div ng-app="URLCheckerCtrlApp" ng-controller="URLCheckerCtrl" class="url-checker-20131026">
+            <textarea placeholder="Enter URLs here" 
+                ng-model="urlText"
+                ng-change="urlTextToArray()" 
+                ng-keypress="setTextareaHeight()"
+                style="height: {{textLine}}em"></textarea>
+            <button ng-click="startCheck()">開始檢查</button>
+            <ul>
+                <li ng-repeat="url in urlArray">
+                    <a href="{{url.url}}" target="_blank" class="state-{{url.state}}">{{url.url}}</a>
+                    <button ng-show="url.state == 'alive' && url.preview == false" ng-click="url.preview = true">開啟檢查網頁視窗</button>
+                    <button ng-show="url.state == 'alive' && url.preview == true" ng-click="url.preview = false">關閉檢查網頁視窗</button>
+                    <p ng-show="url.preview" ng-bind-html="url.iframeHTML"></p>
+                </li>
+            </ul>
+        </div>
+        <style type="text/css">
+            .url-checker-20131026 textarea {
+                width: 100%;
+            }
+            .url-checker-20131026 .state-queue {
+                color: black;
+            }
+            .url-checker-20131026 .state-checking {
+                color: blue;
+            }
+            .url-checker-20131026 .state-alive {
+                color: green;
+            }
+            .url-checker-20131026 .state-dead {
+                color: red;
+            }
+            .url-checker-20131026 iframe {
+                width: 100%;
+                height: 10em;
+            }
+        </style>
     </body>
 </html>

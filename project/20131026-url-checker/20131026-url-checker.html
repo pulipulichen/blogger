@@ -4,9 +4,6 @@
         <title>URL Checker</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-        
-        <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
-        <script src="http://code.angularjs.org/1.2.0-rc.3/angular-sanitize.min.js"></script>
     </head>
     <body>
         
@@ -17,15 +14,22 @@
         
         
         -->
+        
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular-sanitize.min.js"></script>
         <script>
             // AngularJS Script
             var URLCheckerCtrlApp = angular.module('URLCheckerCtrlApp', ['ngSanitize']);
             
-            URLCheckerCtrlApp.controller("URLCheckerCtrl", function URLCheckerCtrl($scope, $templateCache, $sce) {
-                $scope.urlText = "http://www.google.com.tw";
+            URLCheckerCtrlApp.controller("URLCheckerCtrl", function URLCheckerCtrl($scope, $templateCache, $sce, $timeout) {
+                //$scope.urlText = "http://www.nccu.com.tw";
+                $scope.urlText = "";
                 $scope.textLine = 3; 
                 $scope.timer = null;
+                $scope.iframeHeight = 480;
                 
+                $scope.urlArray = [];
+                /*
                 $scope.urlArray = [
                     {
                         url: "http://www.nccu.com.tw/",
@@ -40,6 +44,7 @@
                         state: "queue"
                     }
                 ];
+                */
                 
                 $scope.urlTextToArray = function () {
                     var _text = $scope.urlText;
@@ -58,10 +63,12 @@
                     }
                     $scope.urlArray = _result;
                     
-                    clearTimeout($scope.timer);
-                    $scope.timer = setTimeout(function () {
-                        $scope.startCheck();
-                    }, 3000);
+                    var _scope = $scope;
+                    //clearTimeout($scope.timer);
+                    $timeout(function () {
+                        console.log("a");
+                        _scope.checkUrlArray(0);
+                    }, 300);
                 };
                 
                 $scope.setTextareaHeight = function () {
@@ -73,74 +80,26 @@
                         _height = 3;
                     }
                     $scope.textLine = _height;
+                    
+                    //clearTimeout($scope.timer);
+                    var _scope = $scope;
+                    $timeout(function () {
+                        
+                        console.log("b");
+                        _scope.checkUrlArray(0);
+                    }, 300);
                 };
                 
                 $scope.startCheck = function () {
                     var _index = 0;
+                    console.log(_index);
                     $scope.checkUrlArray(_index);
                 };
                 
                 $scope.checkUrlArray = function (_index) {
-                    var _url = $scope.urlArray[_index].url;
-                    
-                     //$scope.setURLChecking(_index);
-                    //$scope.setIframeURL(_index);
-                            
-                     /*
-                    if (_index % 2 == 1) {
-                        $scope.setURLDead(_index);
-                    }
-                    else {
-                        $scope.setURLAlive(_index);
-                    }
-                    */
+                    console.log("$scope.checkUrlArray : " + _index);
+                    $scope.setIframeURL(_index);
                     $scope.checkComplete(_index);
-                   /*
-                   try {
-                    $.ajax({
-                        url: _url,
-                        beforeSend: function () {
-                            $scope.setURLChecking(_index);
-                            $scope.setIframeURL(_index);
-                        },
-                        dataType: "text",
-                        crossDomain: true,
-                        processData: false,
-                        jsonp: false,
-                        timeout: 3000,
-                        error: function () {
-                            $scope.setURLDead(_index);
-                        },
-                        success: function() {
-                            $scope.setURLAlive(_index);
-                        },
-                        comeplete: function () {
-                            $scope.checkComplete(_index);
-                        }
-                    });
-                       
-                   }
-                   catch (e) {
-                       $scope.checkComplete(_index);
-                   }
-                   */
-                  /*
-                    $.get(_url, function () {
-                        $scope.checkComplete(_index);
-                    });
-                    */
-                   
-                    /*
-                        .done(function () {
-                            $scope.setURLAlive(_index);
-                        })
-                        .fail(function () {
-                            $scope.setURLDead(_index);
-                        })
-                        .always(function () {
-                            $scope.checkComplete(_index);
-                        });
-                        */
                 };
                 
                 $scope.setURLChecking = function (_index) {
@@ -158,34 +117,58 @@
                 
                 $scope.setIframeURL = function (_index) {
                     var _id = 'iframe' + _index;
-                    $("#"+_id).remove();
+                    //$("#"+_id).remove();
+                    console.log("$scope.setIframeURL: " + _id);
+                    console.log("<iframe src='"+$scope.urlArray[_index].url+"' id='"+_id+"'></iframe>");
+                    /*$scope.urlArray[_index].iframeHTML = $sce.trustAsHtml("<iframe src='"+$scope.urlArray[_index].url+"' id='"+_id+"'></iframe>");*/
+                    //$("#iframe"+ _index).html("<iframe src='"+$scope.urlArray[_index].url+"' id='"+_id+"'></iframe>");
+                    $("#iframe"+ _index).attr("src",$scope.urlArray[_index].url)
+                        .css("display", "block");
                     
-                    $scope.urlArray[_index].iframeHTML = $sce.trustAsHtml("<iframe src='"+$scope.urlArray[_index].url+"' id='"+_id+"'></iframe>");
                     
+                    /*
                     $("#"+_id).load(function () {
                         var _title = $(this).contents().find("title").text();
-                        alert(_title);
+                        //alert(_title);
                     });
+                    */
                 };
                 
                 $scope.checkComplete = function (_index) {
                     _index++;
                     if (_index < $scope.urlArray.length) {
                         //setTimeout(function () {}, 300);
-                        //setTimeout(function () {
+                        $timeout(function () {
                             $scope.checkUrlArray(_index);
-                        //}, 300);
+                        }, 3);
                     }
+                };
+                
+                $scope.example = function () {
+                    $scope.urlText = "http://www.nccu.edu.tw\nhttp://www.ntu.edu.tw\nhttp://www.ntnu.edu.tw";
+                    //$scope.urlTextToArray();
+                    $timeout(function () {
+                        $scope.urlTextToArray();
+                    }, 300);
                 };
             });
         </script>
         <div ng-app="URLCheckerCtrlApp" ng-controller="URLCheckerCtrl" class="url-checker-20131026">
-            <textarea placeholder="Enter URLs here" 
-                ng-model="urlText"
-                ng-change="urlTextToArray()" 
-                ng-keypress="setTextareaHeight()"
-                style="height: {{textLine}}em"></textarea>
-            <button ng-click="startCheck()">開始檢查</button>
+            <h4>批次開啟網頁 / Batch of Webpages Opener </h4>
+            <label>
+                請輸入網址，用分行區隔多個網址 (Please enter the URLs of webpages. Changing new line to split URLs)
+                <button type="button" ng-click="example()">範例 EXAMPLE</button>
+                <textarea placeholder="Enter URLs here" 
+                    ng-model="urlText"
+                    ng-change="urlTextToArray()" 
+                    ng-keypress="setTextareaHeight()"
+                    style="height: {{textLine}}em"></textarea>
+            </label>
+                
+            <!-- <button ng-click="startCheck()">開始檢查</button> -->
+            <label>頁框高度 / Preview window's height：<input type="text" ng-model="iframeHeight" size="5">px</label>
+            <hr />
+            <h5>網頁顯示 / Webpage preview</h5>
             <ul>
                 <li ng-repeat="url in urlArray">
                     <a href="{{url.url}}" target="_blank" class="state-{{url.state}}">{{url.url}}</a>
@@ -193,10 +176,10 @@
                     <button ng-show="url.state == 'alive' && url.preview == false" ng-click="url.preview = true">開啟檢查網頁視窗</button>
                     <button ng-show="url.state == 'alive' && url.preview == true" ng-click="url.preview = false">關閉檢查網頁視窗</button>
                     -->
-                    <p ng-bind-html="url.iframeHTML"></p>
+                    <iframe id="iframe{{$index}}" height="{{iframeHeight}}"></iframe>
                 </li>
             </ul>
-        </div>
+            
         <style type="text/css">
             .url-checker-20131026 textarea {
                 width: 100%;
@@ -215,8 +198,10 @@
             }
             .url-checker-20131026 iframe {
                 width: 100%;
-                height: 10em;
+                display: none;
+                
             }
-        </style>
+             </style>
+        </div>
     </body>
 </html>

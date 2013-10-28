@@ -24,6 +24,7 @@
             URLCheckerCtrlApp.controller("URLCheckerCtrl", function URLCheckerCtrl($scope, $templateCache, $sce) {
                 $scope.urlText = "http://www.google.com.tw";
                 $scope.textLine = 3; 
+                $scope.timer = null;
                 
                 $scope.urlArray = [
                     {
@@ -56,6 +57,11 @@
                         });
                     }
                     $scope.urlArray = _result;
+                    
+                    clearTimeout($scope.timer);
+                    $scope.timer = setTimeout(function () {
+                        $scope.startCheck();
+                    }, 3000);
                 };
                 
                 $scope.setTextareaHeight = function () {
@@ -77,16 +83,17 @@
                 $scope.checkUrlArray = function (_index) {
                     var _url = $scope.urlArray[_index].url;
                     
-                     $scope.setURLChecking(_index);
-                            $scope.setIframeURL(_index);
-                     
+                     //$scope.setURLChecking(_index);
+                    //$scope.setIframeURL(_index);
+                            
+                     /*
                     if (_index % 2 == 1) {
                         $scope.setURLDead(_index);
                     }
                     else {
                         $scope.setURLAlive(_index);
                     }
-                    
+                    */
                     $scope.checkComplete(_index);
                    /*
                    try {
@@ -151,6 +158,8 @@
                 
                 $scope.setIframeURL = function (_index) {
                     var _id = 'iframe' + _index;
+                    $("#"+_id).remove();
+                    
                     $scope.urlArray[_index].iframeHTML = $sce.trustAsHtml("<iframe src='"+$scope.urlArray[_index].url+"' id='"+_id+"'></iframe>");
                     
                     $("#"+_id).load(function () {
@@ -180,9 +189,11 @@
             <ul>
                 <li ng-repeat="url in urlArray">
                     <a href="{{url.url}}" target="_blank" class="state-{{url.state}}">{{url.url}}</a>
+                    <!--
                     <button ng-show="url.state == 'alive' && url.preview == false" ng-click="url.preview = true">開啟檢查網頁視窗</button>
                     <button ng-show="url.state == 'alive' && url.preview == true" ng-click="url.preview = false">關閉檢查網頁視窗</button>
-                    <p ng-show="url.preview" ng-bind-html="url.iframeHTML"></p>
+                    -->
+                    <p ng-bind-html="url.iframeHTML"></p>
                 </li>
             </ul>
         </div>

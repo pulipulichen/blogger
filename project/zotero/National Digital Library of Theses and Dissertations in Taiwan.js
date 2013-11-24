@@ -24,7 +24,15 @@ FW.Scraper({ itemType         : 'thesis',
 			 //title            : FW.Xpath('//*[@id="format0_disparea"]/tbody/tr[3]/td').text().trim(),
 			 //  //*[text()[contains(.,'ABC')]]
 			 title            : FW.Xpath('//*[text()[contains(.,"論文名稱:")]]/following-sibling::td[1] | //*[text()[contains(.,"論文名稱(外文):")]]/following-sibling::td[1]').text().trim(),
-			 creators         : FW.Xpath('//*[text()[contains(.,"研究生:")]]/following-sibling::td[1] | //*[text()[contains(.,"研究生(外文):")]]/following-sibling::td[1]').text().trim().split(/,/).cleanAuthor("author"),
+			 
+			 /**
+			  * 研究生欄位現在只取用「研究生:」，不包括外文。
+			  *
+			  * 因為國圖修改了欄位，一次取得兩個欄位有點困難，所以我做了調整
+			  * 
+			  * //creators         : FW.Xpath('//*[text()[contains(.,"研究生:")]]/following-sibling::td[1] | //*[text()[contains(.,"研究生(外文):")]]/following-sibling::td[1]').text().trim().split(/,/).cleanAuthor("author"),
+			  */
+			 creators         : FW.Xpath('//*[text()[contains(.,"研究生:")]]/following-sibling::td[1]').text().trim().split(/,/).cleanAuthor("author"),
 			 abstractNote     : FW.Xpath('//*[@name="description"]/@content').text().trim()
 			 	.addFilter(function (_s) { 
 			 		if (_s.substr(0,2) == "提要" || _s.substr(0,2) == "摘要") {
@@ -58,7 +66,15 @@ FW.Scraper({ itemType         : 'thesis',
 				 		return _s;
 				 	}
 			 	}),
-			 date             : FW.Xpath('//*[text()[contains(.,"論文出版年:")]]/following-sibling::td[1]').text().trim(),
+			 //date             : FW.Xpath('//*[text()[contains(.,"論文出版年:")]]/following-sibling::td[1]').text().trim(),
+			 date             : FW.Xpath('//*[text()[contains(.,"畢業學年度:")]]/following-sibling::td[1]').text().trim()
+			 	.addFilter(function (_s) {
+			 		_s = parseInt(_s, 10);
+			 		if (_s < 1000) {
+			 			_s = _s + 1911;	// 101+1911=2012
+			 		}
+			 		return _s;
+			 	}),
 			 numPages         : FW.Xpath('//*[text()[contains(.,"論文頁數:")]]/following-sibling::td[1]').text().trim(),
 			 university       : FW.Xpath('concat(//*[text()[contains(.,"校院名稱:")]]/following-sibling::td[1], //*[text()[contains(.,"系所名稱:")]]/following-sibling::td[1]  )').trim(),
 			 	//FW.Xpath('//*[@id="format0_disparea"]/tbody/tr[8]/td/a').text().trim()],

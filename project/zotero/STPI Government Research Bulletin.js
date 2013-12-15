@@ -50,6 +50,7 @@ FW.Scraper({ itemType         : 'report',
 				}),
 			 reportNumber     : FW.Xpath('//*[@id="table1"]/tbody/tr[4]/td[2]').text().trim(),
 			 institution      : FW.Xpath('//*[@id="table1"]/tbody/tr[6]/td[2]').text().trim(),
+			 language      : "zh-tw",
 			 attachments : [
 			 /*
 			 // 無法正常運作，因為GRB沒辦法透過網址直接抓檔案

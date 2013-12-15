@@ -46,29 +46,32 @@ FW.Scraper({ itemType         : 'thesis',
 			 	.addFilter(function (_s) {
 			 		
 			 		if (_s == "相關次數:") {
-			 			return "en_US";
+			 			return "en-us";
 			 		}
 			 		
 				 	if (_s == "中文") {
-				 		return "zh_TW";
+				 		return "zh-tw";
+				 	}
+				 	else if (_s == "繁體中文") {
+				 		return "zh-tw";
 				 	}
 				 	else if (_s == "英文") {
-				 		return "en_US";
+				 		return "en-us";
 				 	}
 				 	else if (_s == "日文") {
-				 		return "ja_JP";
+				 		return "ja-jp";
 				 	}
 				 	else if (_s == "韓文") {
-				 		return "ko_KR";
+				 		return "ko-kr";
 				 	}
 				 	else if (_s == "法文") {
-				 		return "fr_FR";
+				 		return "fr-fr";
 				 	}
 				 	else if (_s == "德文") {
-				 		return "de_DE";
+				 		return "de-de";
 				 	}
 				 	else {
-				 		return "en_US";
+				 		return "en-us";
 				 	}
 			 	}),
 			 //date             : FW.Xpath('//*[text()[contains(.,"論文出版年:")]]/following-sibling::td[1]').text().trim(),
@@ -87,10 +90,10 @@ FW.Scraper({ itemType         : 'thesis',
 			 thesisType       : FW.Xpath('//*[text()[contains(.,"學位類別:")]]/following-sibling::td[1]').text().trim()
 			 	.addFilter(function (_s) {
 				 	if (_s == "碩士") {
-				 		return "未出版之碩士論文";
+				 		return "碩士論文";
 				 	}
 				 	else if (_s == "博士") {
-				 		return "未出版之博士論文";
+				 		return "博士論文";
 				 	}
 				 	else {
 				 		return _s;

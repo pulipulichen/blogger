@@ -32,28 +32,28 @@ FW.Scraper({ itemType         : 'thesis',
 			 language         : FW.Xpath('//*[@class="booksInformation"]/div[@class="detail"]/p[4]').text().trim()
 			 	.addFilter(function (_s) {
 			 		if (_s == "中文") {
-				 		return "zh_TW";
+				 		return "zh-tw";
 				 	}
 				 	else if (_s == "繁體中文") {
-				 		return "zh_TW";
+				 		return "zh-tw";
 				 	}
 				 	else if (_s == "英文") {
-				 		return "en_US";
+				 		return "en-us";
 				 	}
 				 	else if (_s == "日文") {
-				 		return "ja_JP";
+				 		return "ja-jp";
 				 	}
 				 	else if (_s == "韓文") {
-				 		return "ko_KR";
+				 		return "ko-kr";
 				 	}
 				 	else if (_s == "法文") {
-				 		return "fr_FR";
+				 		return "fr-fr";
 				 	}
 				 	else if (_s == "德文") {
-				 		return "de_DE";
+				 		return "de-de";
 				 	}
 				 	else {
-				 		return "en_US";
+				 		return "en-us";
 				 	}
 			 	}),
 			 tags             : [FW.Xpath('//*[@class="booksInformation"]/div[@class="detail"]/p[5]/a[@class="blue"]').text().trim()],
@@ -105,10 +105,10 @@ FW.Scraper({ itemType         : 'thesis',
 			 thesisType       : FW.Xpath('//*[@class="learnedJournal"]/li[1]/a[contains(.,"學位論文")]').text().trim()
 			 	.addFilter(function (_s) {
 				 	if (_s.indexOf("博士") > -1) {
-				 		return "未出版之博士論文";
+				 		return "博士論文";
 				 	}
 				 	else {
-				 		return "未出版之碩士論文";
+				 		return "碩士論文";
 				 	}
 			 	}),
 			 place            : FW.Xpath('//*[@class="learnedJournal"]/li[1]/a[contains(.,"學位論文")]').text().trim()

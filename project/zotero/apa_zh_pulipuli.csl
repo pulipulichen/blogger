@@ -960,13 +960,6 @@
     <!-- 中文的格式 -->
     <!-- TODO: prefix="（" 會被預設的="("覆蓋 -->
     <layout locale="zh-tw" prefix="（" suffix="）" delimiter="；">
-        <group delimiter="，" prefix="（">
-          <text macro="author-short-zh"/>
-          <text macro="issued-year-zh"/>
-          <text macro="citation-locator-zh"/>
-        </group>
-    </layout>
-    <layout locale="zh-cn" prefix="（" suffix="）" delimiter="；">
         <group delimiter="，">
           <text macro="author-short-zh"/>
           <text macro="issued-year-zh"/>
@@ -976,8 +969,8 @@
     <!-- /中文的格式 -->
 
     <!-- 英文的格式 -->
-    <layout suffix=")"  delimiter="; ">
-        <group delimiter=", " prefix="(">
+    <layout prefix="(" suffix=")"  delimiter="; ">
+        <group delimiter=", ">
           <text macro="author-short"/>
           <text macro="issued-year"/>
           <text macro="citation-locator"/>

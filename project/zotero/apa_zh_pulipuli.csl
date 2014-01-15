@@ -880,53 +880,12 @@
   </macro>
 
   <!---->
-  
-  <citation et-al-min="6" 
-            et-al-use-first="1" 
-            et-al-subsequent-min="3" 
-            et-al-subsequent-use-first="1" 
-            disambiguate-add-year-suffix="true" disambiguate-add-names="true" 
-            disambiguate-add-givenname="true" collapse="year" 
-            givenname-disambiguation-rule="primary-name">
-      
-    <sort>
-      <key macro="author"/>
-      <key macro="issued-sort"/>
-    </sort>
+
+  <macro name="chinese-bibliography">
     
-    <layout locale="zh-tw" prefix="（" suffix="）" delimiter="；">
-        <group delimiter="，">
-          <text macro="author-short-zh"/>
-          <text macro="issued-year-zh"/>
-          <text macro="citation-locator-zh"/>
-        </group>
-    </layout>
-    <layout prefix="(" suffix=")" delimiter="; ">
-      <group delimiter=", ">
-        <text macro="author-short"/>
-        <text macro="issued-year"/>
-        <text macro="citation-locator"/>
-      </group>
-    </layout>
-  </citation>
-  
-  <!---->
-  
-  <bibliography hanging-indent="true" 
-                et-al-min="8" 
-                et-al-use-first="6" 
-                et-al-use-last="true" 
-                entry-spacing="0" 
-                line-spacing="2">
-    <sort>
-      <key macro="author"/>
-      <key macro="issued-sort" sort="ascending"/>
-      <key macro="title"/>
-    </sort>
-    
-    <!-- 中文的格式 -->
-    <layout locale="zh-tw">
-      <text macro="author-zh" suffix=""/>
+    <!-- <text macro="chinese-sort" /> -->
+
+    <text macro="author-zh" suffix=""/>
       <text macro="issued-zh" suffix=""/>
       <group delimiter="。">
           <text macro="title-zh"/>
@@ -948,8 +907,128 @@
         <text macro="publisher-zh"/>
       </group>
       <text macro="access-zh"/>
+
+  </macro>
+
+  <!---->
+
+  <macro name="chinese-sort">
+    <choose>
+      <else-if locale="en-us en English english Anglais" match="any">
+        <text value="2"/>
+      </else-if>
+      <else-if locale="zh-tw zh-cn Chinese chi chinese zh-Hant zh_TW 中文 繁體中文 簡體中文" match="any">
+        <text value="1"/>
+      </else-if>
+      <else-if variable="language" match="none">
+        <text value="2"/>
+      </else-if>
+      <else>
+        <text value="2"/>
+      </else>
+    </choose>
+
+    <!-- <text value=" | "/> -->
+  </macro>
+
+  <!---->
+  
+  <citation et-al-min="6" 
+            et-al-use-first="1" 
+            et-al-subsequent-min="3" 
+            et-al-subsequent-use-first="1" 
+            disambiguate-add-year-suffix="true" disambiguate-add-names="true" 
+            disambiguate-add-givenname="true" collapse="year" 
+            givenname-disambiguation-rule="primary-name">
+      
+    <sort>
+      <key macro="chinese-sort" sort="ascending"/>
+      <key macro="author"/>
+      <key macro="issued-sort"/>
+    </sort>
+    
+    <layout locale="zh-tw" prefix="（" suffix="）" delimiter="；">
+        <group delimiter="，">
+          <text macro="author-short-zh"/>
+          <text macro="issued-year-zh"/>
+          <text macro="citation-locator-zh"/>
+        </group>
     </layout>
+    <layout locale="zh-cn" prefix="（" suffix="）" delimiter="；">
+        <group delimiter="，">
+          <text macro="author-short-zh"/>
+          <text macro="issued-year-zh"/>
+          <text macro="citation-locator-zh"/>
+        </group>
+    </layout>
+    <layout locale="Chinese" prefix="（" suffix="）" delimiter="；">
+        <group delimiter="，">
+          <text macro="author-short-zh"/>
+          <text macro="issued-year-zh"/>
+          <text macro="citation-locator-zh"/>
+        </group>
+    </layout>
+    <layout locale="zh-Hant" prefix="（" suffix="）" delimiter="；">
+        <group delimiter="，">
+          <text macro="author-short-zh"/>
+          <text macro="issued-year-zh"/>
+          <text macro="citation-locator-zh"/>
+        </group>
+    </layout>
+    <layout locale="chi" prefix="（" suffix="）" delimiter="；">
+        <group delimiter="，">
+          <text macro="author-short-zh"/>
+          <text macro="issued-year-zh"/>
+          <text macro="citation-locator-zh"/>
+        </group>
+    </layout>
+
+    <!---->
+
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="author-short"/>
+        <text macro="issued-year"/>
+        <text macro="citation-locator"/>
+      </group>
+    </layout>
+  </citation>
+
+  <!---->
+  
+  <bibliography hanging-indent="true" 
+                et-al-min="8" 
+                et-al-use-first="6" 
+                et-al-use-last="true" 
+                entry-spacing="0" 
+                line-spacing="1.5">
+    <sort>
+      <key macro="chinese-sort" sort="ascending"/>
+      <!-- <key variable="language" sort="descending"/> -->
+      <key macro="author"/>
+      <key macro="issued-sort" sort="ascending"/>
+      <key macro="title"/>
+    </sort>
+    
+    <!-- 中文的格式 -->
+    <layout locale="zh-tw">
+      <text macro="chinese-bibliography"/>
+    </layout>
+    <layout locale="zh-cn">
+      <text macro="chinese-bibliography"/>
+    </layout>
+    <layout locale="zh-Hant">
+      <text macro="chinese-bibliography"/>
+    </layout>
+    <layout locale="Chinese">
+      <text macro="chinese-bibliography"/>
+    </layout>
+    <layout locale="chi">
+      <text macro="chinese-bibliography"/>
+    </layout>
+
     <layout>
+      <!-- <text macro="chinese-sort" /> -->
       <group suffix=".">
         <group delimiter=". ">
           <text macro="author"/>
@@ -969,4 +1048,4 @@
   
   <!-- 完成 -->
   
-</style>
+</style> 

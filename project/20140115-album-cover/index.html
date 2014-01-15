@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>G+背景設定器</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript" src="angular.min.js"></script>
+        <script type="text/javascript">
+            function Album_cover($scope) {
+                $scope.year = new Date().getFullYear();
+                //$scope.subject = "上學期寒假";
+            }
+        </script>
+        <style type="text/css">
+            .album-cover {
+                width: 190px;
+                height: 130px;
+                background-image: url(cover-background.jpg);
+            }
+            .album-cover .year {
+                position: relative;
+                top: 20px;
+                left: 12px;
+                font-family: impact;
+                font-size: 26px;
+            }
+            .album-cover .subject {
+                position: relative;
+                top: 20px;
+                left: 12px;
+                width: 50px;
+                font-family: 微軟正黑體;
+                font-size: 16px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body ng-app ng-controller="Album_cover">
+        
+        <div class="album-cover">
+            <div class="year">{{year}}</div>
+            <div class="subject">{{subject}}</div>
+        </div>
+        
+        <input type="text" ng-model="year"  placeholder="請輸入起始西元年份" /> (4位數字)
+        <br />
+        <input type="text" ng-model="subject" placeholder="請輸入標題，9字內" /> (最多9個字)
+        <hr />
+        參考
+        <ul>
+            <li><a href="https://www.evernote.com/shard/s4/view/notebook/06ea7ac0-27a7-49e7-a0f3-2c3f2a8851a4?locale=zh_TW#b=c9f42600-663b-467a-8316-49ce1824dfe2&st=p&n=06ea7ac0-27a7-49e7-a0f3-2c3f2a8851a4" target="_blank">時期資料夾參考頁面</a></li>
+            <li><a href="http://angularjs.org/" target="_blank">Angular.JS開發首頁</a></li>
+        </ul>
+    </body>
+</html>
+

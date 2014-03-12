@@ -813,3 +813,11 @@ div.post-body table th {
 	text-indent: 0em  !important;
 	text-align:center;
 }
+
+/**
+ * Code
+ */
+
+.post-body code {
+    overflow: auto; cursor: text; font-size: 8pt; border-top: silver 1px solid; font-family: 'Courier New', courier, monospace; border-right: silver 1px solid; border-bottom: silver 1px solid; padding-bottom: 4px; direction: ltr; text-align: left; padding-top: 4px; padding-left: 4px; margin: 20px 0px 10px; border-left: silver 1px solid; line-height: 12pt; padding-right: 4px; max-height: 200px; width: 97.5%; background-color: white;display: block;
+}

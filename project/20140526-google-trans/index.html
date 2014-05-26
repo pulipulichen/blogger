@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>PDF to Google 翻譯</title>
+        <meta charset="UTF-8">
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+    </head>
+    <body>
+
+<!-- ----------------------------------------
+  -- HTML
+  -- ----------------------------------------
+  -->
+        
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<script src='jquery.autosize.min.js'></script>
+
+<script src="trans.js"></script>
+
+<style type="text/css">
+.panel textarea {
+        border:2px solid #ccc;
+        padding: 10px;
+        vertical-align: top;
+        width: 25%;
+}
+
+.panel .animated {
+        -webkit-transition: height 0.2s;
+        -moz-transition: height 0.2s;
+        transition: height 0.2s;
+}
+.panel {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+.panel .togglable {
+    cursor: pointer;
+}
+.panel .iframe {
+    width: 100%;
+}
+</style>
+<!-- ----------------------------------------
+  -- HTML
+  -- ----------------------------------------
+  -->
+  <div id="20140526_google_trans">
+<div class="page-header">
+    <h4 style="text-align:center">PDF to Google 翻譯</h4>
+</div>
+
+<div class="panel panel-primary">
+    
+    <div class="panel-heading togglable" onclick="_googleTransUtils.toggle_panel(this);">
+            <span class="panel-title">要翻譯的文字</span>
+        </div>
+        <div class="panel-body">
+            <form onsubmit="return _submitToGoogleTrans(this);" id="20140526_google_trans" method="post">
+                <!--
+                <label>
+                    標題: <input type="text" name="subject" />
+                </label>
+                -->
+        <div>
+            <textarea name="source" class="animated source" style="width: 100%;">This challenge is twofold: digital librarians and archivists must (1) ad-
+dress issues of usefulness for patrons, and (2) ensure ease of use, frequently
+referred to as usability. Prior to designing usable interfaces, it is necessary
+to first define the target audiences and develop a deep understanding of
+their goals, environment, and technical skill level. Borgman states, “design
+must be driven by questions of who will use your content, how and why.” 2</textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon">
+                來源語系：
+                <select name="source_lang">
+                    <option value="en">English</option>
+                </select>
+            </label>
+
+            <label class="input-group-addon">
+                翻譯語系：
+                <select name="target_lang">
+                    <option value="zh-TW">正體中文</option>
+                </select>
+            </label>
+        </div>
+        <!--
+        <div>
+            <label>
+                <input type="radio" name="trim_style" value="enable_trim_nl"/> 只接合分行
+            </label>
+            <label>
+                <input type="radio" name="trim_style" value="enable_trim_nl_with_blank"/> 只接合分行，並加上空白
+            </label>
+            <label>
+                <input type="radio" name="trim_style" value="enable_trim_dash"/> 接合破折號「-」
+            </label>
+            <label>
+                <input type="radio" name="trim_style" value="enable_trim_nl_dash" checked="true"/> 接合分行與破折號「-」
+            </label>
+            <label>
+                <input type="radio" name="trim_style" value="disable"/> 不接合分行
+            </label>
+        </div>
+        -->
+        <div class="input-group">
+            <label class="input-group-addon">
+                <input type="checkbox" name="replace_fulltype" value="true" checked="true"/> 替換全型
+            </label>
+            <label class="input-group-addon">
+                <input type="checkbox" name="trim_dash" value="true" checked="true"/> 接合破折號「-」
+            </label class="input-group-addon">
+            <label class="input-group-addon">
+                <input type="checkbox" name="trim_nl" value="true" checked="true"/> 接合換行
+            </label>
+
+            <label class="input-group-addon">
+                <input type="checkbox" name="sentence_nl" value="true" checked="true"/> 換句加大隔行
+            </label>
+            <label class="input-group-addon">
+                <input type="checkbox" name="trim_citation" value="true" checked="true"/> 刪除引言
+            </label>
+
+
+
+            <label class="input-group-addon">
+                <input type="checkbox" name="test_output" value="true" /> 測試輸出
+            </label>
+        </div>
+        <div style="text-align:center;margin-top: 0.5em;">
+            <input type="submit" name="遞交" class="btn btn-lg btn-default"/> 
+        </div>
+        <div style="text-align:center">    
+            <!--
+            <label>
+                <input type="radio" name="output_style" value="iframe" checked="true" /> 結果輸出在下方
+            </label>
+            -->
+            <label>
+                <input type="radio" name="output_style" value="blank" checked="true" /> 結果輸出在開新視窗
+            </label>
+        </div>
+            </form>
+        </div>
+</div>            
+
+
+        <div class="output">
+        </div>
+    </div>  
+    </body>
+</html>

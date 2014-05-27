@@ -210,5 +210,7 @@ var _googleTransUtils = {
 };
 
 $(function(){
-    $('textarea').autosize();
+    $('textarea').autosize()
+            .focus();
+    
 });

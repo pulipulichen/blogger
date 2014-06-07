@@ -4,11 +4,11 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html manifest="trans.manifest">
     <head>
         <title>PDF to Google 翻譯</title>
         <meta charset="UTF-8">
-        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js'></script>
+        <script src='jquery.min.js'></script>
     </head>
     <body>
 
@@ -31,14 +31,14 @@ and open the template in the editor.
 <script src="trans.js"></script>
 
 <style type="text/css">
-.panel textarea {
+textarea {
         border:2px solid #ccc;
         padding: 10px;
         vertical-align: top;
         width: 25%;
 }
 
-.panel .animated {
+.animated {
         -webkit-transition: height 0.2s;
         -moz-transition: height 0.2s;
         transition: height 0.2s;
@@ -51,6 +51,9 @@ and open the template in the editor.
     cursor: pointer;
 }
 .panel .iframe {
+    width: 100%;
+}
+textarea.test-output {
     width: 100%;
 }
 </style>
@@ -114,7 +117,7 @@ and open the template in the editor.
 
 
             <label class="input-group-addon">
-                <input type="checkbox" name="test_output" value="true" /> 測試輸出
+                <input type="checkbox" name="test_output" value="true" checked="true" /> 測試輸出
             </label>
         </div>
         <div style="text-align:center;margin-top: 0.5em;">

@@ -1,3 +1,4 @@
+
 var _submitToGoogleTrans = function (_form) {
 
     try {
@@ -30,7 +31,7 @@ var _submitToGoogleTrans = function (_form) {
         //for (var _i = 1; _i < 10; _i++) {
         //    _source = _googleTransUtils.str_replace(" (" + _i + ")", " \n\n(" + _i + ")", _source);
         //}
-        
+        _source = _googleTransUtils.str_replace("\n ", "\n", _source);
     }
     
     if (_form.trim_citation.checked) {
@@ -38,7 +39,9 @@ var _submitToGoogleTrans = function (_form) {
         _source = _source.replace(/\n\d+ /g, "\n");
     }
     
-    
+    while (_source.indexOf("  ") > -1) {
+        _source = _googleTransUtils.str_replace("  ", " ", _source);
+    }
     _source = $.trim(_source);
 
     /*
@@ -73,7 +76,13 @@ var _submitToGoogleTrans = function (_form) {
     //alert([_output_style, _url]);
 
     if (_form.test_output.checked) {
-        $("<pre></pre>").html(_ori_source).prependTo("#20140526_google_trans .output");
+        $("<textarea class='test-output animated source'></textarea>")
+                .val(_ori_source)
+                .click(function () {
+                    this.select();
+                })
+                .autosize()
+                .prependTo("#20140526_google_trans .output");
     }
     else {
         //_source = encodeURIComponent(_source);

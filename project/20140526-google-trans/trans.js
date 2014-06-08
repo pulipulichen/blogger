@@ -102,7 +102,8 @@ var _submitToGoogleTrans = function (_form) {
         $("<div class='animated panel-heading togglable'></div>")
                 .html('<span class="glyphicon glyphicon-resize-full" style="float:right"></span>'
                     + '<span class="glyphicon glyphicon-resize-small" style="float:right"></span>' 
-                    + "<div class='heading-text'><strong>" + _h + ":" + _m + ":" + _s + "</strong> " + _preview + "</div> ")
+                    + "<div class='heading-text'>" 
+                        + "<strong>" + _h + ":" + _m + ":" + _s + "</strong> " + _preview + "</div> ")
                 .click(function () {
                     _googleTransUtils.toggle_panel(this);
                 })

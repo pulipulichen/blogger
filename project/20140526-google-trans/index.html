@@ -4,82 +4,62 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html manifest="trans.manifest">
+<html>
+<!-- <html manifest="trans.manifest"> -->
     <head>
         <title>PDF to Google 翻譯</title>
         <meta charset="UTF-8">
         <script src='jquery.min.js'></script>
+ 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+
+<link rel="stylesheet" href="trans.css" />
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src='jquery.autosize.min.js'></script>
+
+<script type="text/javascript" src="trans.js"></script>
+
     </head>
+    
+  
     <body>
 
 <!-- ----------------------------------------
   -- HTML
   -- ----------------------------------------
   -->
-        
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<script src='jquery.autosize.min.js'></script>
-
-<script src="trans.js"></script>
-
-<style type="text/css">
-textarea {
-        border:2px solid #ccc;
-        padding: 10px;
-        vertical-align: top;
-        width: 25%;
-}
-
-.animated {
-        -webkit-transition: height 0.2s;
-        -moz-transition: height 0.2s;
-        transition: height 0.2s;
-}
-.panel {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-}
-.panel .togglable {
-    cursor: pointer;
-}
-.panel .iframe {
-    width: 100%;
-}
-textarea.test-output {
-    width: 100%;
-}
-</style>
-<!-- ----------------------------------------
-  -- HTML
-  -- ----------------------------------------
-  -->
-  <div id="20140526_google_trans">
+  <div id="google_trans_20140526" class="google_trans_20140526">
 <div class="page-header">
     <h4 style="text-align:center">PDF to Google 翻譯</h4>
 </div>
 
-<div class="panel panel-primary">
-    
+<div class="panel panel-primary input-div">
+    <!--
+    Bootstrap 樣板
+    http://getbootstrap.com/components/#panels
+    -->
     <div class="panel-heading togglable" onclick="_googleTransUtils.toggle_panel(this);">
-            <span class="panel-title">要翻譯的文字</span>
-        </div>
+        <span class="glyphicon glyphicon-resize-full" style="float:right"></span>
+        <span class="glyphicon glyphicon-resize-small" style="float:right"></span>
+        <span class="panel-title">要翻譯的文字</span>
+    </div>
         <div class="panel-body">
-            <form onsubmit="return _submitToGoogleTrans(this);" id="20140526_google_trans" method="post">
+            <form onsubmit="return _submitToGoogleTrans(this);" method="post">
                 <!--
                 <label>
                     標題: <input type="text" name="subject" />
                 </label>
                 -->
+                
         <div>
-            <textarea name="source" class="animated source" style="width: 100%;" placeholder="請輸入要翻譯的文字..."></textarea>
+            <textarea name="source" class="animated source input-textarea" style="width: 100%;" placeholder="請輸入要翻譯的文字..."></textarea>
         </div>
         <div class="input-group">
             <label class="input-group-addon">
@@ -98,30 +78,30 @@ textarea.test-output {
         </div>
         <div class="input-group">
             <label class="input-group-addon">
-                <input type="checkbox" name="replace_fulltype" value="true" checked="true"/> 替換全型
+                <input type="checkbox" name="replace_fulltype" value="true" checked="checked"/> 替換全型
             </label>
             <label class="input-group-addon">
-                <input type="checkbox" name="trim_dash" value="true" checked="true"/> 接合破折號「-」
+                <input type="checkbox" name="trim_dash" value="true" checked="checked"/> 接合破折號「-」
             </label class="input-group-addon">
             <label class="input-group-addon">
-                <input type="checkbox" name="trim_nl" value="true" checked="true"/> 接合換行
+                <input type="checkbox" name="trim_nl" value="true" checked="checked"/> 接合換行
             </label>
 
             <label class="input-group-addon">
-                <input type="checkbox" name="sentence_nl" value="true" checked="true"/> 換句加大隔行
+                <input type="checkbox" name="sentence_nl" value="true" checked="checked"/> 換句加大隔行
             </label>
             <label class="input-group-addon">
-                <input type="checkbox" name="trim_citation" value="true" checked="true"/> 刪除引言
+                <input type="checkbox" name="trim_citation" value="true" checked="checked"/> 刪除引言
             </label>
 
 
 
             <label class="input-group-addon">
-                <input type="checkbox" name="test_output" value="true" checked="true" /> 測試輸出
+                <input type="checkbox" name="test_output" value="true" checked="checked" /> 測試輸出
             </label>
         </div>
         <div style="text-align:center;margin-top: 0.5em;">
-            <input type="submit" name="遞交" class="btn btn-lg btn-default"/> 
+            <input type="submit" name="遞交" class="btn btn-lg btn-default" style="width: 100%"/> 
         </div>
         <div style="text-align:center">    
             <!--
@@ -130,7 +110,7 @@ textarea.test-output {
             </label>
             -->
             <label>
-                <input type="radio" name="output_style" value="blank" checked="true" /> 結果輸出在開新視窗
+                <input type="radio" name="output_style" value="blank" checked="checked" /> 結果輸出在開新視窗
             </label>
         </div>
             </form>
@@ -138,8 +118,9 @@ textarea.test-output {
 </div>            
 
 
-        <div class="output">
+        <div class="test-output">
         </div>
     </div>  
     </body>
 </html>
+ 

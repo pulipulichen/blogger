@@ -6,6 +6,10 @@ var _submitToGoogleTrans = function (_form) {
     //var _source = $("#source").val();
     var _source = _form.source.value;
     _source = $.trim(_source);
+    
+    if (_source === "") {
+        return false;
+    }
 
     if (_form.replace_fulltype.checked) {
         _source = _googleTransUtils.str_replace("’", "'", _source);
@@ -76,13 +80,52 @@ var _submitToGoogleTrans = function (_form) {
     //alert([_output_style, _url]);
 
     if (_form.test_output.checked) {
-        $("<textarea class='test-output animated source'></textarea>")
+        //$(".google_trans_20140526 .test-output .test-div textarea").slideUp();
+        
+        
+        var _test_output = $(".google_trans_20140526 .test-output").show();
+        var _test_div = $("<div class='test-div panel panel-success'></div>").prependTo(_test_output);
+        
+        
+        //-----------
+        var _d = new Date();
+        var _h = _d.getHours();
+        var _m = _d.getMinutes();
+        var _s = _d.getSeconds();
+        
+        //<span class="glyphicon glyphicon-resize-full" style="float:right"></span>
+        //<span class="glyphicon glyphicon-resize-small" style="float:right"></span>
+
+        var _preview = _ori_source;
+        _preview = _googleTransUtils.str_replace("\n", " ", _preview);
+        
+        $("<div class='animated panel-heading togglable'></div>")
+                .html('<span class="glyphicon glyphicon-resize-full" style="float:right"></span>'
+                    + '<span class="glyphicon glyphicon-resize-small" style="float:right"></span>' 
+                    + "<div class='heading-text'><strong>" + _h + ":" + _m + ":" + _s + "</strong> " + _preview + "</div> ")
+                .click(function () {
+                    _googleTransUtils.toggle_panel(this);
+                })
+                .appendTo(_test_div);
+        
+        
+        _googleTransUtils.toggle_panel($(".google_trans_20140526 .input-div .panel-heading.togglable"));
+        
+        //-----------
+        
+        var _textarea = $("<textarea class='animated source panel-body'></textarea>")
                 .val(_ori_source)
                 .click(function () {
                     this.select();
                 })
-                .autosize()
-                .prependTo("#20140526_google_trans .output");
+                .appendTo(_test_div);
+        
+        $(function () {
+            _textarea.autosize();
+            _textarea.focus();
+            _textarea.click();
+        });
+        
     }
     else {
         //_source = encodeURIComponent(_source);
@@ -97,7 +140,7 @@ var _submitToGoogleTrans = function (_form) {
             _heading = _time + " " + _heading;
             
             var _iframe = _googleTransUtils.create_iframe(_url, _heading);
-            _iframe.prependTo("#20140526_google_trans .output");
+            _iframe.prependTo(".google_trans_20140526 .output");
         }
     }
 
@@ -113,6 +156,8 @@ var _submitToGoogleTrans = function (_form) {
         window.open(_url, "_blank");
     }
     */
+   
+    $(_form.source).val("");
 
     return false;
 };
@@ -180,13 +225,19 @@ var _googleTransUtils = {
         return this.str_replace("-\n", "", _str);
     },
     toggle_panel: function (_heading) {
-        var _body = $(_heading).next();
-
+        _heading = $(_heading);
+        var _body = _heading.next();
+        
+        var _hidden_classname = "heading_hidden";
         if (_body.filter(":visible").length > 0) {
-            _body.slideUp();
+            _body.slideUp(function () {
+                _heading.addClass(_hidden_classname);
+            });
         }
         else {
-            _body.slideDown();
+            _body.slideDown(function () {
+                _heading.removeClass(_hidden_classname);
+            });
         }
         //_body.toggle(500);
     },
@@ -219,7 +270,26 @@ var _googleTransUtils = {
 };
 
 $(function(){
-    $('textarea').autosize()
+    var _input_textarea = $('.input-textarea')
+            //.autosize()
             .focus();
     
+    var _resize_textarea = function () {
+        var _height = window.innerHeight;
+        _height = _height - 300;
+        if (_height < 30) {
+            _height = 30;
+        }
+        //alert(_height);
+        
+        _input_textarea.height(_height);
+    };
+    
+    _resize_textarea();
+    $(window).resize(function () {
+         _resize_textarea();
+    });
+    
+    // autosize用法：
+    // http://www.jacklmoore.com/autosize/
 });

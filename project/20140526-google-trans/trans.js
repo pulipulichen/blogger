@@ -10,7 +10,12 @@ var _submitToGoogleTrans = function (_form) {
     if (_source === "") {
         return false;
     }
+    
+    // 正規表示法
+    // http://programmermagazine.github.io/201307/htm/article2.html
 
+    _source = _googleTransUtils.str_replace("\t", " ", _source);
+    
     if (_form.replace_fulltype.checked) {
         _source = _googleTransUtils.str_replace("’", "'", _source);
         _source = _googleTransUtils.str_replace("”", '"', _source);
@@ -43,16 +48,16 @@ var _submitToGoogleTrans = function (_form) {
         _source = _source.replace(/\n\d+ /g, "\n");
     }
     
-    while (_source.indexOf("\t") > -1) {
-        _source = _googleTransUtils.str_replace("\t", " ", _source);
-    }
-    
     while (_source.indexOf("  ") > -1) {
         _source = _googleTransUtils.str_replace("  ", " ", _source);
     }
     
     while (_source.indexOf("\n ") > -1) {
         _source = _googleTransUtils.str_replace("\n ", "\n", _source);
+    }
+    
+    while (_source.indexOf(". \n\n.") > -1) {
+        _source = _googleTransUtils.str_replace(". \n\n.", "..", _source);
     }
     
     // 替換名字縮寫的問題 例如Pudding C. 不換行
@@ -324,6 +329,14 @@ $(function(){
     $(window).blur(function () {
         var _heading = $('.input-div .panel-heading.togglable');
         _googleTransUtils.toggle_panel(_heading, false);
+        
+        var _source = $('.input-div [name="source"]');
+        var _source_value = _source.val();
+        //alert([_source_value, _source_value.substr(_source_value.length - 1, 1) !== "\n"]);
+        if (_source_value !== "" 
+                && _source_value.substr(_source_value.length - 1, 1) !== "\n") {
+            _source.val(_source_value + "\n");
+        }
     });
 
     // autosize用法：

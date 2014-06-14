@@ -97,13 +97,15 @@ and open the template in the editor.
 
 
             <label class="input-group-addon">
-                <input type="checkbox" name="test_output" value="true" checked="checked" /> 測試輸出
+                <input type="checkbox" name="test_output" value="true" /> 測試輸出
             </label>
         </div>
         <div style="text-align:center;margin-top: 0.5em;">
-            <input type="submit" name="遞交" class="btn btn-lg btn-default" style="width: 100%"/> 
+            <button type="submit" class="btn btn-lg btn-default" style="width: 100%">
+                遞交 (Ctrl + Enter)
+            </button>
         </div>
-        <div style="text-align:center">    
+        <div style="text-align:center;display:none;">    
             <!--
             <label>
                 <input type="radio" name="output_style" value="iframe" checked="true" /> 結果輸出在下方

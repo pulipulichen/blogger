@@ -43,9 +43,24 @@ var _submitToGoogleTrans = function (_form) {
         _source = _source.replace(/\n\d+ /g, "\n");
     }
     
+    while (_source.indexOf("\t") > -1) {
+        _source = _googleTransUtils.str_replace("\t", " ", _source);
+    }
+    
     while (_source.indexOf("  ") > -1) {
         _source = _googleTransUtils.str_replace("  ", " ", _source);
     }
+    
+    while (_source.indexOf("\n ") > -1) {
+        _source = _googleTransUtils.str_replace("\n ", "\n", _source);
+    }
+    
+    // 替換名字縮寫的問題 例如Pudding C. 不換行
+    _source = _source.replace(/[A-Z]\. \n\n/g, function (_word) {
+        //alert(_word);
+        return _googleTransUtils.str_replace("\n", "", _word);
+    });
+    
     _source = $.trim(_source);
 
     /*
@@ -225,12 +240,17 @@ var _googleTransUtils = {
     trim_nl_dash: function (_str) {
         return this.str_replace("-\n", "", _str);
     },
-    toggle_panel: function (_heading) {
+    toggle_panel: function (_heading, _is_close) {
         _heading = $(_heading);
         var _body = _heading.next();
         
         var _hidden_classname = "heading_hidden";
-        if (_body.filter(":visible").length > 0) {
+
+        if (_is_close === undefined) {
+            _is_close = (_body.filter(":visible").length > 0);
+        }
+
+        if (_is_close) {
             _body.slideUp(function () {
                 _heading.addClass(_hidden_classname);
             });
@@ -291,6 +311,21 @@ $(function(){
          _resize_textarea();
     });
     
+    _input_textarea.keydown(function (_e) {
+        console.log(_e);
+        if (_e.ctrlKey && _e.keyCode == 13) {
+            // Ctrl-Enter pressed
+            $(".google_trans_20140526 form").submit();
+          }
+    });
+
+
+    
+    $(window).blur(function () {
+        var _heading = $('.input-div .panel-heading.togglable');
+        _googleTransUtils.toggle_panel(_heading, false);
+    });
+
     // autosize用法：
     // http://www.jacklmoore.com/autosize/
 });

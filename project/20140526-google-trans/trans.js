@@ -1,4 +1,7 @@
-
+/**
+ * Bootstrap 樣板
+ * http://getbootstrap.com/components/#panels
+ */
 var _submitToGoogleTrans = function (_form) {
 
     try {
@@ -91,11 +94,12 @@ var _submitToGoogleTrans = function (_form) {
     
     var _ori_source = _source;
     _source = encodeURIComponent(_source);
-    var _url = "https://translate.google.com.tw/#"
+    var _base_url = "https://translate.google.com.tw/#"
         + _form.source_lang.value
         + "/"
         + _form.target_lang.value
-        + "/"
+        + "/";
+    var _url = _base_url
         + _source;
 
 
@@ -137,12 +141,27 @@ var _submitToGoogleTrans = function (_form) {
         
         //-----------
         
+        var _trans_btn = $("<button type='button'></button>")
+                .html("翻譯")
+                .attr("pulipuli_base_url", _base_url)
+                .click(function () {
+                    var _base_url = $(this).attr("pulipuli_base_url");
+                    var _url = _base_url
+                        + $(this).next().val();
+                    //alert(_url);
+                    window.open(_url, "_blank");
+                })
+                //.css("float", "left")
+                .appendTo(_test_div);
+        
         var _textarea = $("<textarea class='animated source panel-body'></textarea>")
                 .val(_ori_source)
+                .css("width", "calc(100% - 50px)")
                 .click(function () {
                     this.select();
                 })
                 .appendTo(_test_div);
+        
         
         $(function () {
             _textarea.autosize();
@@ -330,6 +349,7 @@ $(function(){
 
     
     $(window).blur(function () {
+        //return;
         var _heading = $('.input-div .panel-heading.togglable');
         _googleTransUtils.toggle_panel(_heading, false);
         

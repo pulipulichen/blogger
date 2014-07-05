@@ -30,15 +30,21 @@ and open the template in the editor.
     
   
     <body>
+        
 <!-- ----------------------------------------
   -- HTML
   -- ----------------------------------------
   -->
-  <div id="google_trans_20140526" class="google_trans_20140526">
+<div id="google_trans_20140526" class="google_trans_20140526">
+    <div class="output-container">
 <div class="page-header">
     <h4 style="text-align:center">PDF to Google 翻譯</h4>
 </div>
-
+<div class="test-output">
+</div>
+    </div>
+  
+      
 <div class="panel panel-primary input-div">
     <!--
     Bootstrap 樣板
@@ -97,7 +103,7 @@ and open the template in the editor.
 
 
             <label class="input-group-addon">
-                <input type="checkbox" name="test_output" value="true" /> 測試輸出
+                <input type="checkbox" name="test_output" value="true" checked="checked" /> 文字重整
             </label>
         </div>
         <div style="text-align:center;margin-top: 0.5em;">
@@ -120,9 +126,8 @@ and open the template in the editor.
 </div>            
 
 
-        <div class="test-output">
-        </div>
-    </div>  
+        
+    </div>
     </body>
 </html>
  

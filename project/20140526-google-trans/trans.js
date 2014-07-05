@@ -24,6 +24,9 @@ var _submitToGoogleTrans = function (_form) {
     }
 
     if (_form.trim_dash.checked) {
+        while (_source.indexOf(" \n") > -1) {
+            _source = _googleTransUtils.str_replace(" \n", "\n", _source);
+        }
         _source = _googleTransUtils.str_replace("-\n", "", _source);
     }
 
@@ -318,7 +321,7 @@ $(function(){
     
     _input_textarea.keydown(function (_e) {
         console.log(_e);
-        if (_e.ctrlKey && _e.keyCode == 13) {
+        if (_e.ctrlKey && _e.keyCode === 13) {
             // Ctrl-Enter pressed
             $(".google_trans_20140526 form").submit();
           }
@@ -337,6 +340,11 @@ $(function(){
                 && _source_value.substr(_source_value.length - 1, 1) !== "\n") {
             _source.val(_source_value + "\n");
         }
+    });
+    
+    $(".output-container .page-header").click(function () {
+        var _heading = $('.input-div .panel-heading.togglable');
+        _heading.click();
     });
 
     // autosize用法：

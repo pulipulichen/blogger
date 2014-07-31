@@ -18,6 +18,9 @@ var _submitToGoogleTrans = function (_form) {
     // http://programmermagazine.github.io/201307/htm/article2.html
 
     _source = _googleTransUtils.str_replace("\t", " ", _source);
+    while (_source.indexOf("  ") > -1) {
+        _source = _googleTransUtils.str_replace("  ", " ", _source);
+    }
     
     if (_form.replace_fulltype.checked) {
         _source = _googleTransUtils.str_replace("’", "'", _source);
@@ -34,15 +37,56 @@ var _submitToGoogleTrans = function (_form) {
     }
 
     if (_form.trim_nl.checked) {
+        // 解決中文換行問題
+        _source = _source.replace(/\n[\u4e00-\u9fa5]/g, function (_word) {
+            //alert(_word);
+            return _googleTransUtils.str_replace("\n", "", _word);
+        });
+        
         _source = _googleTransUtils.str_replace("\n", " ", _source);
     }
+    
 
     if (_form.sentence_nl.checked) {
         _source = _googleTransUtils.str_replace(". ", ". \n\n", _source);
+            _source = _source.replace(/p\. \n\n\d/g, function (_word) {
+                //alert(_word);
+                return _googleTransUtils.str_replace("\n", "", _word);
+            });
+            var _strip_nl = function (_word) {
+                return _googleTransUtils.str_replace("\n", "", _word);
+            };
+            
+            //_source = _googleTransUtils.str_replace("e.g. \n\n", "e.g. ", _source); //舉例
+            _source = _source.replace(/e\.g\. \n\n[^A-Z]/g, _strip_nl);
+            
+            //_source = _googleTransUtils.str_replace("i.e. \n\n", "i.e. ", _source); //即
+            _source = _source.replace(/i\.e\. \n\n[^A-Z]/g, _strip_nl);
+            
+            //_source = _googleTransUtils.str_replace("et al. \n\n", "et al. ", _source); //等
+            _source = _source.replace(/et al\. \n\n[^A-Z]/g, _strip_nl);
+            //_source = _googleTransUtils.str_replace("etc. \n\n", "etc. ", _source); //等
+            _source = _source.replace(/etc\. \n\n[^A-Z]/g, _strip_nl);
+        
+        _source = _googleTransUtils.str_replace("。", "。 \n\n", _source);
         _source = _googleTransUtils.str_replace(".\" ", ".\" \n\n", _source);
+            _source = _googleTransUtils.str_replace(".\" \n\n(", ".\" (", _source); //等
+        _source = _googleTransUtils.str_replace("。」 ", "。」 \n\n", _source);
         _source = _googleTransUtils.str_replace(".\' ", ".\' \n\n", _source);
         //_source = _googleTransUtils.str_replace(": ", ": \n\n\n", _source);
         _source = _googleTransUtils.str_replace("; ", "; \n\n", _source);
+            _source = _source.replace(/\d\; \n\n/g, function (_word) {
+                //alert(_word);
+                return _googleTransUtils.str_replace("\n", "", _word);
+            });
+        _source = _googleTransUtils.str_replace("； ", "； \n\n", _source);
+        _source = _googleTransUtils.str_replace("；", "；\n\n", _source);
+        
+        _source = _googleTransUtils.str_replace("（ ", " (", _source);
+        _source = _googleTransUtils.str_replace("  ( ", " (", _source);
+        _source = _googleTransUtils.str_replace(" ）", ") ", _source);
+        _source = _googleTransUtils.str_replace(")  ", ") ", _source);
+        
         //for (var _i = 1; _i < 10; _i++) {
         //    _source = _googleTransUtils.str_replace(" (" + _i + ")", " \n\n(" + _i + ")", _source);
         //}
@@ -64,6 +108,10 @@ var _submitToGoogleTrans = function (_form) {
     
     while (_source.indexOf(". \n\n.") > -1) {
         _source = _googleTransUtils.str_replace(". \n\n.", "..", _source);
+    }
+    
+    while (_source.indexOf("\n\n\n\n") > -1) {
+        _source = _googleTransUtils.str_replace("\n\n\n\n", "\n\n", _source);
     }
     
     // 替換名字縮寫的問題 例如Pudding C. 不換行
@@ -162,11 +210,16 @@ var _submitToGoogleTrans = function (_form) {
                 })
                 .appendTo(_test_div);
         
-        
+        var _hide_input_div = function () {
+            var _body = $('.input-div .panel-body').slideUp();
+        };
+
         $(function () {
             _textarea.autosize();
             _textarea.focus();
             _textarea.click();
+            _textarea.click(_hide_input_div);
+            $(".google-trans-title").hide();
         });
         
     }
@@ -362,10 +415,12 @@ $(function(){
         }
     });
     
-    $(".output-container .page-header").click(function () {
+    var _hide_input_div = function () {
         var _heading = $('.input-div .panel-heading.togglable');
-        _heading.click();
-    });
+            _heading.click();
+    };
+    
+    $(".output-container .page-header").click(_hide_input_div);
 
     // autosize用法：
     // http://www.jacklmoore.com/autosize/

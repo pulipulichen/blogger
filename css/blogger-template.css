@@ -45,6 +45,7 @@ hr {
   background-image: url(http://sites.google.com/site/puddingchen35/blogger-image/bg_header_footer.png);
   background-position: 0px -18px;
   background-repeat: repeat-x;
+  height: 80px;
 }
 
 #content-wrapper {

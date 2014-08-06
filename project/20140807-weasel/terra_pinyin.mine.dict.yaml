@@ -1,0 +1,31 @@
+# Rime dictionary
+# encoding: utf-8
+
+---
+name: terra_pinyin.mine
+version: "2014.08.04"
+sort: by_weight
+# 萌典：https://www.moedict.tw/
+# 發問區：http://code.google.com/p/rimeime/wiki/Downloads
+# 導入預設詞彙
+use_preset_vocabulary: true
+# 從 terra_pinyin.dict.yaml 導入包含單字註音的碼表
+import_tables:
+  - terra_pinyin
+...
+
+# 自定義的字詞
+什	shen3
+什麼	shen3 me5
+什麼	shen3 mo
+是什麼	shi4 shen3 mo
+是什麼	shi4 shen2 mo
+是什麼	shi4 she2 mo
+夾	jia2
+期	qi2
+熟悉	shou2 xi1
+…	ou ou ou
+──	er er
+法	fa4
+遍	pian4
+普遍	pu3 pian4

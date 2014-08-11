@@ -33,6 +33,7 @@ $doc_block = "/**
  * 
  * CSS for http://pulipuli.blogspot.tw
 $file_name_list
+ * Minify CSS: http://localhost/blogger/css/release/minify_css.php
  */
 ";
 $compressed_file_content = $compressed_file_content . $doc_block;

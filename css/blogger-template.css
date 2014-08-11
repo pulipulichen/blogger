@@ -464,6 +464,14 @@ div.post-header-line-1	{text-align:right;width: 100%;padding-bottom: 1em;}
 	text-indent:0 !important;
 }
 
+.post-body code p {
+    font-size: 8pt !important
+}
+
+.post-body p > code {
+    text-indent:0 !important;
+}
+    
 .post-body p,
 .post-body div.post_show p,
 .post-body div.post_hidden p {

@@ -43,6 +43,7 @@ $doc_block = "/**
  * 
  * JavaScript for http://pulipuli.blogspot.tw
 $file_name_list
+ * * Minify JavaScript: http://localhost/blogger/js/release/minify_js.php
  */
 ";
 $compressed_file_content = $compressed_file_content . $doc_block;

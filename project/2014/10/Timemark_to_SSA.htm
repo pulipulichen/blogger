@@ -1,0 +1,4447 @@
+
+<!-- saved from url=(0034)http://kfn.myweb.hinet.net/SSA.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head><style type="text/css">embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"]{	display: none !important;}</style><body id="body">﻿
+<!-- saved from url=(0066)http://140.136.152.127/oped/upload/%5b%a4u%a8%e3%5d/tts_ver3.1.htm -->
+<!-- saved from url=(0058)http://140.136.152.123/~pudding/fjuacg/timemark_to_ssa.htm --><!-- saved from url=(0044)http://pudding.hopto.org/oped/transform.html --><title>Timemark to SSA</title>
+
+<script type="text/javascript">
+<!--
+/*========名辭講解========
+
+BP: [Break Point!]的簡稱，是影響時間點與歌詞位置的重要判定
+TM: Timemark簡稱
+HTM: Head TimeMark
+FTM: Foot TimeMark
+TMO: TimeMark Out
+LY: Lyric，歌詞紀錄的單位，但不一定有歌詞，也可能是BP
+SP: Shift Point 偏移點
+SA: Shift Amount 偏移量	
+
+*/
+//拼音資料庫
+function get_search_database()
+{
+	var p = new Array;
+	var i = 0;
+	
+	p[i++] = "見 み";
+	p[i++] = "巡 めぐ";
+	p[i++] = "合 あ";
+	p[i++] = "天使 てんし";
+	p[i++] = "気 き";
+	p[i++] = "道 みち";
+	p[i++] = "吹 ふ";
+	p[i++] = "砂風 すなかぜ";
+	p[i++] = "砂 すな";
+	p[i++] = "風 かぜ";
+	p[i++] = "心 こころ";
+	p[i++] = "逸 はや";
+	p[i++] = "切 き";
+	p[i++] = "慣 な";
+	p[i++] = "涙 なみだ";
+	p[i++] = "止 と";
+	p[i++] = "何故 な　ぜ";
+	p[i++] = "曖昧 あいまい";
+	p[i++] = "季節 きせつ";
+	p[i++] = "手触 てざわ";
+	p[i++] = "感 かん";
+	p[i++] = "限 かぎ";
+	p[i++] = "時 とき";
+	p[i++] = "時間 と　き";
+	p[i++] = "生 い";
+	p[i++] = "翼 つばさ";
+	p[i++] = "今 いま";
+	p[i++] = "広 ひろ";
+	p[i++] = "虹 にじ";
+	p[i++] = "壊 こわ";
+	p[i++] = "空 そら";
+	p[i++] = "待 ま";
+	p[i++] = "散歩道 さんぽみち";
+	p[i++] = "散歩 さんぽ";
+	p[i++] = "何 なに";
+	p[i++] = "無理 む　り";
+	p[i++] = "頑張 がんば";
+	p[i++] = "花 はな";
+	p[i++] = "意味 い　み";
+	p[i++] = "有 あ";
+	p[i++] = "無 な";
+	p[i++] = "決 き";
+	p[i++] = "方 かた";
+	p[i++] = "教 おし";
+	p[i++] = "飲 の";
+	p[i++] = "窮屈 きゅうくつ";
+	p[i++] = "身 み";
+	p[i++] = "誰 だれ";
+	p[i++] = "天井 てんじょう";
+	p[i++] = "僕 ぼく";
+	p[i++] = "込 こ";
+	p[i++] = "君 きみ";
+	p[i++] = "同 おな";
+	p[i++] = "弾 ひ";
+	p[i++] = "冷 つめ";
+	p[i++] = "寄 よ";
+	p[i++] = "添 そ";
+	p[i++] = "強 つよ";
+	p[i++] = "悲 かな";
+	p[i++] = "負 ま";
+	p[i++] = "憎 にく";
+	p[i++] = "眠 ねむ";
+	p[i++] = "雨 あめ";
+	p[i++] = "元 もと";
+	p[i++] = "降 ふ";
+	p[i++] = "注 そそ";
+	p[i++] = "閉 と";
+	p[i++] = "流線 りゅうせん";
+	p[i++] = "再 ふたた";
+	p[i++] = "罪 つみ";
+	p[i++] = "浮 ふ";
+	p[i++] = "月 つき";
+	p[i++] = "現 あらわ";
+	p[i++] = "命 いのち";
+	p[i++] = "叫 さけ";
+	p[i++] = "荒 あら";
+	p[i++] = "谷間 たにあい";
+	p[i++] = "間 ま";
+	p[i++] = "魂 たましい";
+	p[i++] = "慟哭 どうこく";
+	p[i++] = "響 ひび";
+	p[i++] = "開 あ";
+	p[i++] = "放 はな";
+	p[i++] = "逢 あ";
+	p[i++] = "歌詞 かし";
+	p[i++] = "機動 きどう";
+	p[i++] = "戦士 せんし";
+	p[i++] = "光 ひかり";
+	p[i++] = "中 なか";
+	p[i++] = "歌 うた";
+	p[i++] = "唄 うた";
+	p[i++] = "唱 うた";
+	p[i++] = "詩 うた";
+	p[i++] = "唯 ゆい";
+	p[i++] = "里 さと";
+	p[i++] = "原 はら";
+	p[i++] = "洋子 ようこ";
+	p[i++] = "子 こ";
+	p[i++] = "街 まち";
+	p[i++] = "色 いろ";
+	p[i++] = "雪 ゆき";
+	p[i++] = "闇 やみ";
+	p[i++] = "明日 あした";
+	p[i++] = "探 さが";
+	p[i++] = "瞳 ひとみ";
+	p[i++] = "見知 みし";
+	p[i++] = "力 ちから";
+	p[i++] = "流 なが";
+	p[i++] = "奥 おく";
+	p[i++] = "鼓動 こどう";
+	p[i++] = "聞 き";
+	p[i++] = "声 こえ";
+	p[i++] = "輝 かがや";	
+	p[i++] = "信 しん";
+	p[i++] = "青 あお";
+	p[i++] = "水平線 すいへいせん";
+	p[i++] = "帰 かえ";	
+	p[i++] = "暖 あたた";
+	p[i++] = "思 おも";
+	p[i++] = "出 だ";
+	p[i++] = "傷 きず";
+	p[i++] = "物 もの";	
+	p[i++] = "変 か";
+	p[i++] = "痛 いた";
+	p[i++] = "奇跡 きせき";
+	p[i++] = "幾億 いくおく";
+	p[i++] = "星 ほし";	
+	p[i++] = "宇宙 うちゅう";
+	p[i++] = "本当 ほんとう";
+	p[i++] = "大事 だいじ";
+	p[i++] = "人 ひと";
+	p[i++] = "胸 むね";	
+	p[i++] = "言 い";
+	p[i++] = "日 ひ";
+	p[i++] = "熱 あつ";
+	p[i++] = "調 しら";
+	p[i++] = "曲 きょく";	
+	p[i++] = "戻 もど";
+	p[i++] = "夢 ゆめ";
+	p[i++] = "向 む";
+	p[i++] = "走 はし";
+	p[i++] = "行 ゆ";
+	p[i++] = "悩 なや";
+	p[i++] = "昨日 きのう";
+	p[i++] = "笑 わら";
+	p[i++] = "前見 まえみ";
+	p[i++] = "未来 みらい";
+	p[i++] = "続 つづ";
+	p[i++] = "起 お";
+	p[i++] = "笑顔 えがお";
+	p[i++] = "半分 はんぶん";
+	p[i++] = "一気 いっき";
+	p[i++] = "２倍 にばい";
+	p[i++] = "満 み";
+	p[i++] = "頃 ころ";
+	p[i++] = "目 め";
+	p[i++] = "聴 き";
+	p[i++] = "駆 か";
+	p[i++] = "街角 まちかど";
+	p[i++] = "息 いき";
+	p[i++] = "照 て";
+	p[i++] = "影 かげ";
+	p[i++] = "不意 ふ　い";
+	p[i++] = "重 かさ";
+	p[i++] = "立 た";
+	p[i++] = "永遠 えいえん";
+	p[i++] = "長 なが";
+	p[i++] = "一瞬 いっしゅん";
+	p[i++] = "隣 となり";
+	p[i++] = "私 わたし";
+	p[i++] = "消 き";
+	p[i++] = "場所 ばしょ";
+	p[i++] = "越 こ";
+	p[i++] = "夜空 よぞら";
+	p[i++] = "月明 つきあ";
+	p[i++] = "嘆 なげ";
+	p[i++] = "打 う";
+	p[i++] = "暗 くら";
+	p[i++] = "揺 ゆ";
+	p[i++] = "抱 だ";
+	p[i++] = "想 おも";
+	p[i++] = "翳 かげ";
+	p[i++] = "跡 あと";
+	p[i++] = "静 しず";
+	p[i++] = "両手 りょうて";
+	p[i++] = "最後 さいご";
+	p[i++] = "知 し";
+	p[i++] = "目覚 め　ざ";
+	p[i++] = "眩 まぶ";
+	p[i++] = "許 ゆる";
+	p[i++] = "弱 よわ";
+	p[i++] = "二人 ふたり";
+	p[i++] = "恋 こい";
+	p[i++] = "優 やさ";
+	p[i++] = "低 ひく";
+	p[i++] = "雲 くも";
+	p[i++] = "赤 あか";
+	p[i++] = "染 そ";
+	p[i++] = "来 き";
+	p[i++] = "進 すす";
+	p[i++] = "違 ちが";
+	p[i++] = "紛 まぎ";
+	p[i++] = "失 な";
+	p[i++] = "記憶 きおく";
+	p[i++] = "儚 はかな";
+	p[i++] = "日常 にちじょう";
+	p[i++] = "紅霞 こうか";
+	p[i++] = "霞 かす";
+	p[i++] = "紅 あか";
+	p[i++] = "溶 と";
+	p[i++] = "陽 ひ";
+	p[i++] = "世界 せかい";
+	p[i++] = "線 せん";
+	p[i++] = "引 ひ";
+	p[i++] = "髪 かみ";
+	p[i++] = "刺 さ";
+	p[i++] = "振 ふ";
+	p[i++] = "斬 き";
+	p[i++] = "漲 みなぎ";
+	p[i++] = "手 て";
+	p[i++] = "使命 しめい";
+	p[i++] = "果 は";
+	p[i++] = "暮 く";
+	p[i++] = "春 はる";
+	p[i++] = "踊 おど";
+	p[i++] = "夏 なつ";
+	p[i++] = "乾 かわ";
+	p[i++] = "野原 のはら";
+	p[i++] = "始 はじ";
+	p[i++] = "求 もと";
+	p[i++] = "渇 かわ";
+	p[i++] = "愛 あい";
+	p[i++] = "微笑 ほほえ";
+	p[i++] = "刻 きざ";
+	p[i++] = "真実 しんじつ";
+	p[i++] = "背 せ";
+	p[i++] = "嘘 うそ";
+	p[i++] = "術 すべ";
+	p[i++] = "触 ふれ";
+	p[i++] = "大好 だいす";
+	p[i++] = "躊躇 とまど";
+	p[i++] = "頬 ほほ";
+	p[i++] = "会 あ";
+	p[i++] = "無口 むくち";
+	p[i++] = "好 す";
+	p[i++] = "戸惑 とまど";
+	p[i++] = "絵 え";
+	p[i++] = "地図 ち　ず";
+	p[i++] = "上 うえ";
+	p[i++] = "未知 み　ち";
+	p[i++] = "扉 とびら";
+	p[i++] = "大地 だいち";
+	p[i++] = "乗 の";
+	p[i++] = "蒼 あお";
+	p[i++] = "真昼 まひる";
+	p[i++] = "追 お";
+	p[i++] = "抜 ぬ";
+	p[i++] = "町 まち";
+	p[i++] = "扉開 とびらあ";
+	p[i++] = "言葉 ことば";
+	p[i++] = "伝 つた";
+	p[i++] = "零 こぼ";
+	p[i++] = "微熱 びねつ";
+	p[i++] = "高 たか";
+	p[i++] = "鳴 なり";
+	p[i++] = "分 わ";
+	p[i++] = "一度 いちど";
+	p[i++] = "付 つ";
+	p[i++] = "出来 で　き";
+	p[i++] = "出会 で　あ";
+	p[i++] = "偶然 ぐうぜん";
+	p[i++] = "特別 とくべつ";
+	p[i++] = "居 い";
+	p[i++] = "神 かみ";
+	p[i++] = "様 さま";
+	p[i++] = "感謝 かんしゃ";
+	p[i++] = "迷 まよ";
+	p[i++] = "横 よこ";
+	p[i++] = "顔 かお";
+	p[i++] = "眺 なが";
+	p[i++] = "過 す";
+	p[i++] = "真 ま";
+	p[i++] = "白 しろ";
+	p[i++] = "叶 かな";
+	p[i++] = "前 まえ";
+	p[i++] = "話 はな";
+	p[i++] = "耳 みみ";
+	p[i++] = "傾 かたぶ";
+	p[i++] = "少 すこ";
+	p[i++] = "勇気 ゆうき";
+	p[i++] = "体中 からだちゅう";
+	p[i++] = "連 つ";
+	p[i++] = "出逢 で　あ";
+	p[i++] = "大切 たいせつ ";
+	p[i++] = "誇 ほこ";
+	p[i++] = "自分 じぶん";
+	p[i++] = "事 こと";
+	p[i++] = "幸 しあわ";
+	p[i++] = "数 かず";
+	p[i++] = "毎日 まいにち";
+	p[i++] = "先 さき";
+	p[i++] = "最 さい";
+	p[i++] = "塔 とう";
+	p[i++] = "現実 げんじつ";
+	p[i++] = "吐息 といき";
+	p[i++] = "盃 さかずき";
+	p[i++] = "華 はな";
+	p[i++] = "酔 よ";
+	p[i++] = "灼 や";
+	p[i++] = "屍 しかばね";
+	p[i++] = "二 に";
+	p[i++] = "度 ど";
+	p[i++] = "下 した";
+	p[i++] = "焦 じ";
+	p[i++] = "騒 さわ";
+	p[i++] = "瞬 しゅん";
+	p[i++] = "紅蓮 ぐれん";
+	p[i++] = "碑 ひ";
+	p[i++] = "描 えが";
+	p[i++] = "研 と";
+	p[i++] = "澄 す";
+	p[i++] = "生命 いのち";
+	p[i++] = "眸 め";
+	p[i++] = "潜 ひそ";
+	p[i++] = "時空 と　き";
+	p[i++] = "露 つゆ";
+	p[i++] = "消 き";
+	p[i++] = "咲 さ";
+	p[i++] = "欲 ほ";
+	p[i++] = "情熱 じょうねつ";
+	p[i++] = "火 ひ";
+	p[i++] = "程 ほど";
+	p[i++] = "無邪気 むじゃき";
+	p[i++] = "守 まも";
+	p[i++] = "誓 ちか";
+	p[i++] = "腕 うて";
+	p[i++] = "伸 の";
+	p[i++] = "差 ざ";
+	p[i++] = "届 とど";
+	p[i++] = "孤独 こどく";
+	p[i++] = "暗闇 くらやみ";
+	p[i++] = "見失 みうしな";
+	p[i++] = "静寂 せいじゃく";
+	p[i++] = "道標 みちしるべ ";
+	p[i++] = "幻 まぼろし";
+	p[i++] = "掴 つか";
+	p[i++] = "遠 とお";
+	p[i++] = "招 まね";
+	p[i++] = "仰 あお";
+	p[i++] = "幕 まく";
+	p[i++] = "交差 こうさ";
+	p[i++] = "新 しん";
+	p[i++] = "払 はら";
+	p[i++] = "返 かえ";
+	p[i++] = "歩 ある";
+	p[i++] = "散 ち";
+	p[i++] = "願 ねが";
+	p[i++] = "祈 いの";
+	p[i++] = "柩 ひつぎ";
+	p[i++] = "枯 か";
+	p[i++] = "飢 う";
+	p[i++] = "血 ち";
+	p[i++] = "死 し";
+	p[i++] = "匂 にお";
+	p[i++] = "舞 ま";
+	p[i++] = "黒 くろ";
+	p[i++] = "太陽 たいよう";
+	p[i++] = "沈 しず";
+	p[i++] = "黙 だま";
+	p[i++] = "働 はたら";
+	p[i++] = "救 すく";
+	p[i++] = "人形 にんぎょう";
+	p[i++] = "途切 と　ぎ";
+	p[i++] = "仕掛 し　か";
+	p[i++] = "機械 きかい";
+	p[i++] = "我 われ";
+	p[i++] = "絶 たえい";
+	p[i++] = "嵐 あらし";
+	p[i++] = "裸 はだか";
+	p[i++] = "荒野 こうや";
+	p[i++] = "一人 ひとり";
+	p[i++] = "糸 いと";
+	p[i++] = "在 あ";
+	p[i++] = "旅立 たびた";
+	p[i++] = "宛 あ";
+	p[i++] = "標 しる";
+	p[i++] = "女 おんな";
+	p[i++] = "小 ちい";
+	p[i++] = "人気 にんき";
+	p[i++] = "偶然 ぐうぜん";
+	p[i++] = "終 お";
+	p[i++] = "素直 すなお";
+	p[i++] = "恥 は";
+	p[i++] = "今日 きょう";
+	p[i++] = "名 な";
+	p[i++] = "泣 な";
+	p[i++] = "壁 かべ";
+	p[i++] = "動 うご";
+	p[i++] = "囲 かこ";
+	p[i++] = "得意 とくい";
+	p[i++] = "試 ため";
+	p[i++] = "見上 み　あ";
+	p[i++] = "遥 はる";
+	p[i++] = "甘 あま";
+	p[i++] = "深 ふか";
+	p[i++] = "醜 みにく";
+	p[i++] = "翅 はね";
+	p[i++] = "飾 かざ";
+	p[i++] = "汚 よご";
+	p[i++] = "地球 ちきゅう";
+	p[i++] = "者 もの";
+	p[i++] = "鏡 かがみ";
+	p[i++] = "別 べつ";
+	p[i++] = "隠 かく";
+	p[i++] = "躍 おど";
+	p[i++] = "暴 あば";
+	p[i++] = "上手 う　ま";
+	p[i++] = "握 にぎ";
+	p[i++] = "全部 ぜんぶ";
+	p[i++] = "受 う";
+	p[i++] = "忘 わす";
+	p[i++] = "楽園 らくえん";
+	p[i++] = "解 と";
+	p[i++] = "見送 みおく";
+	p[i++] = "毒 どく";
+	p[i++] = "誘 さそ";
+	p[i++] = "犯 おか";
+	p[i++] = "禁断 きんだん";
+	p[i++] = "名前 なまえ";
+	p[i++] = "運命 うんめい";
+	p[i++] = "告 つ";
+	p[i++] = "丸 まる";
+	p[i++] = "秋 あき";
+	p[i++] = "冬 ふゆ";
+	p[i++] = "祝 いわ";
+	p[i++] = "温 あたた";
+	p[i++] = "摘 つ";	//摘み
+	p[i++] = "呼 よ";	//呼び
+	p[i++] = "夜 よる";	//
+	p[i++] = "明 あ";	//
+	p[i++] = "覚 さ";	//
+	p[i++] = "鳥 とり";	//
+	p[i++] = "飛 と";	//
+	p[i++] = "怖 こわ";	//
+	p[i++] = "彼方 かなた";	//
+	p[i++] = "見下 み　お";	//
+	p[i++] = "持 も";	//
+	p[i++] = "希望 きぼう";	//
+	p[i++] = "目指 め　ざ";	//
+	p[i++] = "追憶 ついおく";	//
+	p[i++] = "罰 ばつ";	//
+	p[i++] = "溢 あふ";	//
+	p[i++] = "雫 しずく";	//
+	p[i++] = "映 うつ";	//
+	p[i++] = "安 やす";	//
+	p[i++] = "寂 さび";	//
+	p[i++] = "通 とお";	//通り
+	p[i++] = "渦 うず";	//
+	p[i++] = "凍 こご";	//凍え
+	p[i++] = "茂 しげ";	//茂る
+	p[i++] = "十字架 じゅうじーか";	//
+	p[i++] = "後 あと";	//後ど
+	p[i++] = "浴 あ";	//
+	p[i++] = "代 か";	//
+	p[i++] = "忘却 ぼうきゃく";	//
+	p[i++] = "海 うみ";	//
+	p[i++] = "包 つつ";	//
+	p[i++] = "顏 かお";	//
+	p[i++] = "距離 きょり";	//
+	p[i++] = "貴方 あなた";	//
+	p[i++] = "坂 さか";	//
+	p[i++] = "大 おお";	//
+	p[i++] = "弾 だん";	//
+	p[i++] = "体温 たいおん";	//
+	p[i++] = "膨 ふく";	//膨らむ
+	p[i++] = "望 のぞ";	//
+	p[i++] = "去 さ";	//
+	p[i++] = "制服 せいふく";	//
+	p[i++] = "着 き";	//
+	p[i++] = "互 たが";	//
+	p[i++] = "近 ちか";	//
+	p[i++] = "失敗 しっぱい";	//
+	p[i++] = "門 かど";	//
+	p[i++] = "福 ふく";	//
+	p[i++] = "集 あつ";	//
+	p[i++] = "晴 は";	//
+	p[i++] = "朝 あさ";	//
+	p[i++] = "過去 か　こ";	//
+	p[i++] = "不安 ふあん";	//
+	p[i++] = "勝負 しょうぶ";	//
+	p[i++] = "平 ひら";	//
+	p[i++] = "旅 たび";	//
+	p[i++] = "屋根 や　ね";	//
+	p[i++] = "体 からだ";	//
+	p[i++] = "元気 げんき";	//
+	p[i++] = "途方 とほう";	//
+	p[i++] = "湧 わ";	//
+	p[i++] = "甦 よみがえ";	//
+	p[i++] = "逃 に";	//
+	p[i++] = "断 た";	//
+	p[i++] = "祝福 しゅくふく";	//
+	p[i++] = "怒涛 どとう";	//
+	p[i++] = "天国 てんごく";	//
+	p[i++] = "地獄 じごく";	//
+	p[i++] = "苦 くる";	//
+	p[i++] = "射 ざ";	//
+	p[i++] = "魔法 まほう";	//
+	p[i++] = "使 つか";	//
+	p[i++] = "何気 なにげ";	//
+	p[i++] = "氣持 ち　も";	//
+	p[i++] = "鋭 するど";	//鋭い
+	p[i++] = "棘 とげ";	//
+	p[i++] = "薔薇 バ　ラ";	//
+	p[i++] = "震 ふる";	//震え
+	p[i++] = "壞 こわ";	//
+	p[i++] = "逆 さか";	//
+	p[i++] = "爪 つめ";	//
+	p[i++] = "牙 きば";	//
+	p[i++] = "剥 む";	//剥け
+	p[i++] = "試練 しれん";	//
+	p[i++] = "襲 おそ";	//襲い
+	p[i++] = "作 つく";	//作り
+	p[i++] = "賢 かしこ";	//賢く
+	p[i++] = "右 みぎ";	//
+	p[i++] = "倣 なら";	//倣え
+	p[i++] = "皆 みんな";	//
+	p[i++] = "野生 やせい";	//
+	p[i++] = "宿 やど";	//
+	p[i++] = "鎖 くさり";	//鎖外して
+	p[i++] = "外 がい";	//鎖外して
+	p[i++] = "構 かま";	//構わ
+	p[i++] = "哀 かな";	//
+	p[i++] = "約束 やくそく";	//
+	p[i++] = "砕 くだ";	//砕け
+	p[i++] = "地球儀 ちきゅうーぎ";	//
+	p[i++] = "破片 はへん";	//
+	p[i++] = "繋 つな";	//繋げ
+	p[i++] = "世紀 せいき";	//
+	p[i++] = "築 きず";	//築い
+	p[i++] = "値打 ね　う";	//値打ち
+	p[i++] = "無機質 むきしつ";	//
+	p[i++] = "灯 ひ";	//
+	p[i++] = "口 くち";	//
+	p[i++] = "取 と";	//
+	p[i++] = "脅 おび";	//脅え
+	p[i++] = "背中 せなか";	//
+	p[i++] = "叩 たた";	//叩け
+	p[i++] = "貫 つらぬ";	//貫く
+	p[i++] = "加速 かそく";	//
+	p[i++] = "超 こ";	//
+	p[i++] = "時代 じだい";	//
+	p[i++] = "護 まも";	//
+	p[i++] = "離 はな";	//
+	p[i++] = "薄 うす";	//薄れて
+	p[i++] = "漂 ただよ";	//漂う
+	p[i++] = "増 ま";	//増し
+	p[i++] = "苛立 いらだ";	//苛立ち
+	p[i++] = "燃 も";	//
+	p[i++] = "銀河 ぎんが";	//
+	p[i++] = "奪 うば";	//
+	p[i++] = "少年 しょねん";	//
+	p[i++] = "勇者 ゆうしゃ ";	//
+	p[i++] = "覚悟 かくご";	//
+	p[i++] = "絶望 ぜつぼう";	//
+	p[i++] = "炎 ほのお";	//
+	p[i++] = "剣 けん";	//
+	p[i++] = "羽 はね";	//
+	p[i++] = "片隅 かたすみ";	//
+	p[i++] = "心配 しんぱい";	//
+	p[i++] = "戦 たたか";	//
+	p[i++] = "悪 あく";	//
+	p[i++] = "与 あた";	//与え
+	p[i++] = "仮面 かめん";	//
+	p[i++] = "潤 うる";	//
+	p[i++] = "映 うつ";//映し
+	p[i++] = "世 よ";
+	p[i++] = "幼 おさな";
+	p[i++] = "着 つ";//着く
+	p[i++] = "味 あじ";
+	p[i++] = "並 な";
+	p[i++] = "退屈 たいくつ";
+	p[i++] = "無数 むすう";
+	p[i++] = "星屑 ほしくず";
+	p[i++] = "日々 ひ　び";
+	p[i++] = "握 にぎ";	//握る
+	p[i++] = "受 う";
+	p[i++] = "裂 さい";
+	p[i++] = "溺 おぼ";
+	p[i++] = "吐 は";	//吐き
+	p[i++] = "気配 けはい";
+	p[i++] = "充実 じゅうじつ";
+	p[i++] = "温度 おんど";
+	p[i++] = "大事 だいじ";
+	p[i++] = "泣 な";
+	p[i++] = "揃 そろ";
+	p[i++] = "素直 すなお";
+	p[i++] = "温 あたた";
+	p[i++] = "形 かたち";
+	p[i++] = "近 ちか";
+	p[i++] = "酸 す";
+	p[i++] = "落書 らくが";	//落書き
+	p[i++] = "怒 おこ";
+	p[i++] = "失敗 しっぱい";
+	p[i++] = "完 かん";
+	p[i++] = "最近 さいきん";
+	p[i++] = "占 し"; //占め
+	p[i++] = "仕事 しごと"; //
+	p[i++] = "邪魔 じゃま"; //
+	p[i++] = "人間 にんげん"; //
+	p[i++] = "制覇 せいは"; //
+	p[i++] = "考 かんが"; //
+	p[i++] = "結構 けっこう"; //
+	p[i++] = "更新 こうしん"; //
+	p[i++] = "一所懸命 いっしょーけんめい"; //
+	p[i++] = "一生懸命 いっしょうーけんめい"; //
+	p[i++] = "結局 けっきょく"; //
+	p[i++] = "足 た"; //足り
+	p[i++] = "飛 と"; //
+	p[i++] = "粒 つぶ"; //
+	p[i++] = "鉄 てつ"; //
+	p[i++] = "羽根 は　ね"; //
+	p[i++] = "纏 まと"; //纏った
+	p[i++] = "自由 じゆう"; //
+	p[i++] = "満足 "; //
+	p[i++] = "選 え"; //
+	p[i++] = "速 はや"; //
+	p[i++] = "似 に"; //
+	p[i++] = "歯止 は　ど"; //
+	p[i++] = "怖 こわ"; //
+	p[i++] = "頑張 がんば"; //
+	p[i++] = "休 やす"; //
+	p[i++] = "危険 きけん"; //
+	p[i++] = "奴 やつ"; //
+	p[i++] = "正義 せいぎ"; //
+	p[i++] = "使者 ししゃ"; //
+	p[i++] = "渦巻 うずま"; //渦巻く
+	p[i++] = "氷 こおり"; //
+	p[i++] = "壁 かべ"; //
+	p[i++] = "突 つ"; //突き
+	p[i++] = "破 やぶ"; //破る
+	p[i++] = "六 ろく"; //
+	p[i++] = "一 ひと"; //
+	p[i++] = "深 ふか"; //
+	p[i++] = "覚 おぼ"; //
+	p[i++] = "合体 がったい"; //
+	p[i++] = "地球 ちきゅう"; //
+	p[i++] = "救 すく"; //救え
+	p[i++] = "姿 すがた"; //
+	p[i++] = "王者 おうじゃ"; //
+	p[i++] = "樹 き"; //
+	p[i++] = "残 のこ"; //
+	p[i++] = "彷徨 さまよ"; //
+	p[i++] = "答 こた"; //
+	p[i++] = "琥珀 こはく"; //
+	p[i++] = "殺戮 さつりく"; //
+	p[i++] = "不死 ふ　し"; //
+	p[i++] = "持 も"; //
+	p[i++] = "音楽 おんがく"; //
+	p[i++] = "全開 ぜんかい";	//
+	p[i++] = "究極 きゅうきょく";	//
+	p[i++] = "気分 きぶん";	//
+	p[i++] = "首 くび";	//首ったけ
+	p[i++] = "気楽 きらく";	//お気楽
+	p[i++] = "極楽 ごくらく";	//
+	p[i++] = "信条 しんじょう";	//
+	p[i++] = "落 お";	//落ち
+	p[i++] = "廻 まわ";	//
+	p[i++] = "美味 お　い";	//
+	p[i++] = "無敵 むてき";	//
+	p[i++] = "電話 でんわ";	//
+	p[i++] = "虫 むし";	//
+	p[i++] = "埋 う";	//埋め
+	p[i++] = "尽 つ";	//尽く
+	p[i++] = "絶望 ぜつぼう";	//
+	p[i++] = "捧 ささ";	//
+	p[i++] = "烙印 らくいん";	//
+	p[i++] = "歴史 れきし";	//
+	p[i++] = "美 うつく";	//
+	p[i++] = "語 かた";	//語る
+	p[i++] = "唇 くちびる";	//
+	p[i++] = "過去 か　こ";	//
+	p[i++] = "綺麗 きれい";	//
+	p[i++] = "何処 ど　こ";	//
+	p[i++] = "捨 す";	//
+	p[i++] = "今夜 こんや";	//
+	p[i++] = "迷路 めいろ";	//
+	p[i++] = "出口 でぐち";	//
+	p[i++] = "導 みちび";	//
+	p[i++] = "弾丸 だんがん";	//
+	p[i++] = "険 けわ";	//険しい
+	p[i++] = "修羅 しゅら";	//
+	p[i++] = "見開 みひら";	//
+	p[i++] = "見極 みきわめ";	//
+	p[i++] = "参 さん";	//参ろ
+	p[i++] = "渡 わた";	//渡ろ
+	p[i++] = "場 ば";	//
+	p[i++] = "穏 おだ";	//穏や
+	p[i++] = "服 ふく";	//
+	p[i++] = "着替 き　か";	//
+	p[i++] = "色紙 いろかみ";	//
+	p[i++] = "景色 けしき";	//
+	p[i++] = "委 ゆだ";	//委ね
+	p[i++] = "書 かき";	//書い
+	p[i++] = "条件 じょうけん";	//
+	p[i++] = "憧 あこが";	//憧れ
+	p[i++] = "当 あ";	//
+	p[i++] = "呼吸 こきゅう";	//
+	p[i++] = "繰 く";	//
+	p[i++] = "後悔 こうかい";	//
+	p[i++] = "創 つく";	//
+	p[i++] = "必 かなら";	//必ず
+	p[i++] = "無限 むげん";	//
+	p[i++] = "刃 やいば";	//やいば
+	p[i++] = "波動 はどう";	//
+	p[i++] = "輪郭 りんかく";	//
+	p[i++] = "何度 なんど";	//
+	
+	return p;
+}
+
+
+//預設參數
+function default_ary()
+{
+	var arg = new Array;
+	arg = new Array;
+	arg['ly_number'] = 100;	//歌詞上限
+	arg['shift_time'] = 10;
+	arg['ly_shift'] = arg['shift_time']*0.2;	//偏移參數
+	arg['ly_last_extend'] = arg['shift_time']*0.12;	//最後延長參數
+	arg['fad_shift'] = arg['shift_time']*0.3;
+
+	return arg;
+}
+var arg = new Array;
+arg = default_ary();
+
+//取得參數
+function get_arg()
+{
+	var arg = new Array;
+	
+	arg = default_ary();
+	
+	if (!(document.getElementById('ly_arg_default').checked))
+	{
+		arg['shift_time'] = document.getElementById('shift_time').value;
+		arg['ly_shift'] = document.getElementById('ly_shift').value;	//偏移參數
+		arg['ly_last_extend'] = document.getElementById('ly_last_extend').value;	//最後延長參數
+		arg['fad_shift'] = document.getElementById('fad_shift').value;
+	}	
+
+	return arg;
+}
+
+//字幕格式參數預設值
+function default_style()
+{
+	var lys = new Array;
+	//lys["fontname"] = "Arial Unicode MS";
+	lys["fontname"] = "MS Gothic";
+	lys["fontsize"] = "36";
+	lys["primarycolour"] = "&HFFFFFF";
+	lys["secondarycolour"] = "&H000000";
+	lys["tertiarycolour"] = "&H000000";
+	lys["backcolour"] = "&H000000";
+	lys["bold"] = "1";
+	lys["italic"] = "0";
+	lys["borderstyle"] = "1";
+	lys["outline"] = "3";
+	lys["shadow"] = "0";
+	lys["alignment_c"] = "2";
+	lys["alignment_l"] = "1";
+	lys["alignment_r"] = "0";
+	lys["margin"] = "65";
+	lys["alphalevel"] = "1";
+	lys["encoding"] = "128";
+
+	lys['line_height'] = 1;
+	
+	//lys["width"] = "640";
+	//lys["height"] = "480";
+	
+	return lys;
+}
+var lys = new Array;
+lys = default_style();
+
+function get_style()
+{
+	var lys = new Array;
+	
+	lys = default_style();
+	
+	if (!(document.getElementById('ly_style_default').checked))
+	{
+		if (document.getElementById('fontname[0]').checked)
+			lys["fontname"] = "MS Gothic";
+		else if (document.getElementById('fontname[1]').checked)
+			lys["fontname"] = "DFKai-SB";
+		else if (document.getElementById('fontname[2]').checked)
+			lys["fontname"] = document.getElementById('fontname_custom').value;
+			
+		lys["fontsize"] = document.getElementById('fontsize').value;
+		lys["primarycolour"] = trans_color_back(document.getElementById('primarycolour').value);
+		lys["secondarycolour"] = trans_color_back(document.getElementById('secondarycolour').value);
+		lys["tertiarycolour"] = trans_color_back(document.getElementById('tertiarycolour').value);
+		lys["backcolour"] = trans_color_back(document.getElementById('backcolour').value);
+
+		if (document.getElementById('bold[0]').checked)
+			lys["bold"] = "0";
+		else
+			lys["bold"] = "1";
+
+		if (document.getElementById('italic[0]').checked)
+			lys["italic"] = "0";
+		else
+			lys["italic"] = "1";
+
+		lys["borderstyle"] = document.getElementById('borderstyle').value;
+		lys["outline"] = document.getElementById('outline').value;
+		lys["shadow"] = document.getElementById('shadow').value;
+		lys["alignment_c"] = document.getElementById('alignment_c').value;
+		lys["alignment_l"] = document.getElementById('alignment_l').value;
+		lys["alignment_r"] = document.getElementById('alignment_r').value;
+		lys["margin"] = document.getElementById('margin').value;
+		lys["alphalevel"] = document.getElementById('alphalevel').value;
+		lys["encoding"] = document.getElementById('encoding').value;
+		lys['line_height'] = document.getElementById('line_height').value;
+		
+		//lys["width"] = document.getElementById('width').value;
+		//lys["height"] = document.getElementById('height').value;		
+	}	
+
+	return lys;
+}
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+function make_ly(hint)
+{
+	//檢查是否可以進行運算
+	if (!(source_end_tm($('#source').val()))) {
+	  return;
+	}
+	  
+	hint = hint;
+	
+	prohis_start();
+	prohis_input("分析來源歌詞檔");
+
+	//取得format
+	format = get_format();
+	$("#format_record").val(format);
+	
+	//將編輯模式調回
+	tmedt_to_source();
+	
+	if ($("#source").val() != "")
+	{	
+		setTimeout ('make_ly1()', 1);
+	} //if確認source有資料 end
+	else
+		alert("沒有來源歌詞");
+
+}
+
+function make_ly1()
+{
+		//取得參數
+		arg = new Array;
+		arg = get_arg();
+		
+		//取得資料
+		document.getElementById("source").value = trim(document.getElementById("source").value)+"\n";
+		source = document.getElementById("source").value;	//後面加上換行，以方便Break Point的判定
+		source = source.split("\n");
+		source_length = source.length;
+		
+		//前置作業
+		tm_counter = 0;	//時間點計數器：取得的時間點需要加上Break Point的計算，所以會比原始來源文字還多
+		s_tm = new Array;	//時間點
+		s_ly = new Array;	//歌詞
+
+		for (var i = 0; i < source_length; i++)	//判斷到最後一句為止(因為之前在資料加上了換行，所以最後一筆資料會是空行)
+		{
+			//source[i] = trim(source[i]);	//先將取資料清空，不過似乎沒有用處
+			//source[i] = no_parent(source[i]);
+			if (i == 0)	//假如資料是第一筆
+			{
+				//判定跳躍到有開頭timemark那行為止
+				while (!(is_tm_head(source[i])))
+					i++;
+
+				source_start = i;	//紀錄開始的行數
+
+				//開頭一定是BP
+				s_tm[tm_counter] = get_head_tm(source[i]);
+				s_ly[tm_counter] = "[Break Point!]";
+				tm_counter++;
+				
+				//儲存這行的紀錄
+				s_tm[tm_counter] = get_head_tm(source[i]);
+				s_ly[tm_counter] = get_lyric(source[i]);
+				tm_counter++;
+			}
+			else if (source[i].length == 11 && (get_head_tm(source[i]) == get_foot_tm(source[i])) && s_ly[tm_counter-1] != "[Break Point!]")
+			//假如這行只有[00:00:00]這種timemark的話
+			{
+				//記錄資料
+				s_tm[tm_counter] = get_head_tm(source[i]);
+				s_ly[tm_counter] = "[Break Point!]";	//但是歌詞儲存為BP
+				tm_counter++;
+			} 
+			else if (is_tm_head(source[i]))
+			//假如開頭有TM
+			{
+				if ((i < source_length - 1) || i == source_length)
+				{
+					if ((!(is_tm_head(source[eval(i-1)])) || (!is_tm_head(source[eval(i+1)]) && trim(get_lyric(source[eval(i+1)])).length > 1)) && s_ly[tm_counter-1] != "[Break Point!]")
+					//又，假如上一行沒有HTM
+					//或是出現斷行現象
+					{
+						//則將上一行視為一個LY，TM為這行的TM，作為一個BP
+						s_tm[tm_counter] = get_head_tm(source[i]);
+						s_ly[tm_counter] = "[Break Point!]";
+						tm_counter++;
+					}				
+				}
+
+				//取得這行的資料，注意不可以與上面的取得順序顛倒
+				s_tm[tm_counter] = get_head_tm(source[i]);
+				s_ly[tm_counter] = get_lyric(source[i]);
+				tm_counter++;				
+				
+							
+				//alert(s_ly[tm_counter-1]+" - "+source[i]+" - "+get_lyric(source[i])	);
+			}
+			else if (!is_tm_head(source[i]) && trim(get_lyric(source[i])).length > 1 && is_tm_head(source[i-1]) && s_ly[tm_counter-1] != "[Break Point!]")
+			//假如是沒有開頭時間點、卻有歌詞與結尾時間點的話，表示是上一行enter之後的斷句
+			{
+				s_tm[tm_counter] = s_tm[tm_counter-1];	//TM與上一行相同
+				s_ly[tm_counter] = get_lyric(source[i]);
+				tm_counter++;
+				/***這個是特殊判定***/
+			}
+
+
+			//FTM判定，存在的話，自動視為一個BP
+			if (is_tm_foot(source[i]) && (get_head_tm(source[i]) != get_foot_tm(source[i])) && source[i].length != 11 && s_ly[tm_counter-1] != "[Break Point!]")
+			{
+				s_tm[tm_counter] = get_foot_tm(source[i]);
+				s_ly[tm_counter] = "[Break Point!]";
+				tm_counter++;
+			}
+			
+			//「--」以後的都不算！
+			temp = source[i].split("");
+			if (temp[0]+temp[1] == "--")
+				i = source_length;
+		}
+		
+		//結尾增加一個BP
+		if (s_ly[tm_counter-1] != "[Break Point!]")
+		{
+			s_tm[tm_counter] = get_foot_tm(source[i]);
+			s_ly[tm_counter] = "[Break Point!]";
+			tm_counter++;
+		}
+		
+	setTimeout ('make_ly2()', 1);
+	prohis_input('計算歌詞的時間點');
+
+}	//function make_ly1() end
+				
+function make_ly2()
+{
+		//計算歌詞的時間點，依照輸入的format不同而有不同的結果
+		l_tm_i = new Array;	//顯示在字幕檔的IN時間
+		switch (format)
+		{
+			case 0: //這是雙行左右格式
+			
+				for (var i = 0; i < s_tm.length - 1; i++)
+				{		
+					//取得字幕in的節點
+
+					//自我偏移點：位於這一個TM之前，偏移量是這一個TM與下一個TM的偏移點
+					//[00:00:00]==============(TM)===[00:03:95]======================[00:07:63]
+					//    i-1                  ↑ <------ i                              i+1
+					//                                   |-------------------------------|
+					var next 	= i;
+					while (s_tm[i] == s_tm[next])
+						next++;
+
+					var stm_self = eval(s_tm[i]-(s_tm[next] - s_tm[i])/arg['ly_shift']);
+					
+					var stm_next = eval(s_tm[i] - (s_tm[next] - s_tm[i])/arg['shift_time']);
+					
+					if (i == 0)	//假如是第一個TM
+					{
+						//起始偏移點：位於起始點[00:00:00]與第一個TM之間的偏移點
+						//[00:00:00]===(TM)==============[00:03:95]
+						//   起始點 --> ↑                    i
+						//      |----------------------------|
+						var stm_first = s_tm[i]/arg['ly_shift'];
+							
+						if (stm_first > stm_self && stm_first < s_tm[i] )
+						{
+							l_tm_i[i] = stm_first;
+						}
+						else
+							l_tm_i[i] = stm_self;
+					}
+					else
+					//除了第一個TM之外的判斷
+					{
+						
+						//先前偏移點：位於前一個TM之後，偏移量是上一個TM與這一個TM的偏移點
+						//[00:03:95]===(TM)==============[00:07:63]======================[00:11:81]
+						//    i-1 ----> ↑                    i                              i+1
+						//        |------------------------|
+						var stm_forward = eval(s_tm[i-1] + (s_tm[i]-s_tm[i-1])/arg['ly_shift']);
+
+						//預設值
+						//使用stm_forward的意義
+						//是怕stm_self過長(因為本句歌詞過長)，超過前一句歌詞
+						//所以才以前一句歌詞做基準(其實本來就應該這樣)
+						if (stm_self < stm_forward  && stm_forward < s_tm[i])
+						{
+							l_tm_i[i] = stm_forward;			
+						}
+						else
+							l_tm_i[i] = stm_self;
+						
+						//進入BP判定
+						var sly_forward = space_change(s_ly[i-1]);	//前一句的歌詞。(space_change會將BP消除)
+
+						if (sly_forward == "")
+						{						
+							/*if (stm_self < stm_next)
+								l_tm_i[i] = stm_self;
+							else*/
+								l_tm_i[i] = stm_self;
+						}
+						else if (i > 1)
+						//假如是第二句以後，表示有前面兩句可以作為參考依據
+						{
+							var sly_forward2 = space_change(s_ly[i-2]);	//前一句的歌詞。(space_change會將BP消除)
+							if (sly_forward2 == "")
+							{
+								//先前本體偏移點：位於這一個TM之前，偏移量是上一個TM與這一個TM的偏移點
+								//[00:03:95]===(TM)==============[00:07:63]======================[00:11:81]
+								//    i-1 ------>                    i                              i+1
+								//     |-----------------------------|
+								var stm_forward_self = s_tm[i-1] + (s_tm[eval(i)]-s_tm[i-1])/arg['ly_shift'];
+
+								//避免後一句比開頭還快
+								if (stm_forward_self > l_tm_i[i-1])
+								{
+									l_tm_i[i] = stm_forward_self;
+								}
+								else
+									l_tm_i[i] = l_tm_i[i-1];
+							}
+						}
+					}
+					
+					//斷句判斷
+					var sly_next = space_change(s_ly[eval(i+1)]);
+					
+					if (i > 0 && sly_next == "" && s_tm[eval(i-1)] == s_tm[eval(i)])
+						l_tm_i[i] = l_tm_i[i-1];
+					
+					//斷句判斷
+					//如果是這種情況
+					/*
+					[00:43:90]A
+					
+					[00:46:83]B
+					*/
+					//那麼B的開始時間應該是在自己本身，而A的結束時間應該在B的向前偏移點
+					if (i > 0)
+					{
+						var sly_forward = space_change(s_ly[i-1]);	//前一句的歌詞。(space_change會將BP消除)
+						if (sly_forward == "")
+							l_tm_i[i] = s_tm[i];
+					}
+					
+					if (i == s_tm.length-1) 
+					{
+						//假如是最後一個TM的話，則必須另外創造一個TM，並延長結束時間，表示結尾
+						//l_tm_i[eval(i+1)] = s_tm[i-1] + (s_tm[i]-s_tm[i-1])*arg['ly_last_extend'];
+						l_tm_i[eval(i+1)] = s_tm[i-1] + (s_tm[i]-s_tm[i-1]);
+					}
+					
+					//避免負數出現
+					if (l_tm_i[i] < 0)
+						l_tm_i[i] == 0;
+				}
+			
+
+				break;			
+			case 1: //這是單行置中格式	
+			
+				for (var i = 0; i < s_tm.length; i++)
+					l_tm_i[i] = s_tm[i];
+				
+				break;
+		}
+
+	setTimeout ('make_ly3()', 1);
+	prohis_input("計算OUT點與FAD IN/OUT點");
+
+}	//function make_ly2() end
+
+function make_ly3()
+{
+		//計算OUT點與FAD IN/OUT點
+		l_tm_o = new Array;	//相對應於l_tm[i]的結尾時間
+		l_tm_fi = new Array;	//相對應於l_tm[i]的fad in時間
+		l_tm_fo = new Array;	//相對應於l_tm[i]的fad out時間
+		
+		switch (format)
+		{
+			case 0: //這是雙行左右格式
+				for (var i = 0; i < s_ly.length-1; i++)
+				{				
+					//取得OUT點
+
+					//OUT本體偏移點：位於下一個TM之後，偏移量是下一個TM與這一個TM的偏移點
+					//[00:03:95]=================[00:07:63]==(TMO)====================[00:11:81]
+					//    i                         i+1 -----> ↑                          i+2
+					//    |--------------------------|
+					var next = i;
+					
+					while (s_tm[i] == s_tm[next])
+						next++;
+
+					var out_self = parseInt(s_tm[next] + (s_tm[next]-s_tm[i])/arg['ly_shift']);
+					
+					//假如未超過下一句加上偏移參數之後的數值，則數值改維下一句加上偏移參數之後的數值
+					if (eval(s_tm[next]-s_tm[i]) < arg['shift_time'] * arg['ly_shift'] * 10)
+					{
+						out_self = parseInt(s_tm[eval(i+1)] + arg['shift_time'] * arg['ly_shift'] * 10);
+					}
+
+					//l_tm_o[i] = l_tm_i[eval(i+2)]- arg['shift_time'];	//預設值
+					l_tm_o[i] = out_self;	//預設值
+					//取得下一句的歌詞
+					var sly_next = space_change(s_ly[eval(i+1)]);
+									
+					if (sly_next == "" && i < s_ly.length - 2)
+					{
+						if (s_tm[eval(i-1)] == s_tm[i])
+						{
+							//這情況發生在於特殊狀況：斷句，見下圖
+							//[00:07:63]===============(TMO)=[00:11:81]
+							//  i-1、i                   ↑ <--- i+1
+							//注意到i-1與i都在同一個時間點上，所以TMO會擺在下一句之前
+							//if (space_change(s_ly[eval(i-1)]) != "")
+								//l_tm_o[i] = l_tm_o[i-1];
+						}
+						/***注意！這邊多加了一個else***/
+						else if (out_self < l_tm_i[eval(i+2)]-arg['shift_time'])
+							l_tm_o[i] = out_self;		
+						else
+						{
+							l_tm_o[i] = l_tm_i[eval(i+2)]-arg['shift_time'];
+						}
+					}
+					else if (i < s_ly.length - 2)
+					{
+						//取得下兩句的歌詞
+						var sly_next2 = space_change(s_ly[eval(i+2)]);
+						
+						if (sly_next2 == "")
+						{
+							if (s_tm[eval(i+1)] == s_tm[i])
+							{
+								//這情況發生在於特殊狀況：斷句，見下圖
+								//[00:07:63]===============(TMO)=[00:11:81]
+								//  i、i+1                   ↑ <--- i+2
+								//注意到i與i+1都在同一個時間點上，所以TMO會擺在下兩句之前
+								l_tm_o[i] = s_tm[eval(i+2)] - arg['shift_time'];
+							}
+							else if (s_tm[eval(i+1)]-s_tm[i] < arg['shift_time'])
+							{
+								l_tm_o[i] = s_tm[eval(i+2)] - arg['shift_time'];							
+							}
+							else
+							{
+								l_tm_o[i] = out_self;
+							}
+
+							
+						}
+					} 
+					else if (i == s_ly.length - 2)
+					{
+						l_tm_o[i] = out_self;					
+					}
+
+					if (s_tm[i] == s_tm[i+1])
+					{
+						/***發生於特殊情況***/
+						//OUT後面偏移點：位於下一個TM之後，偏移量是下一個TM與這一個TM的偏移點
+						//[00:03:95]=================[00:07:63]==(TMO)====================[00:11:81]
+						// i、i+1                       i+2 -----> ↑                        i+3
+						//  |--------------------------|
+						var next = eval(i+1);
+						
+						while (s_tm[i] == s_tm[next])
+							next++;
+
+						var out_next = parseInt(s_tm[eval(next)] + (s_tm[eval(next)]-s_tm[i])/arg['ly_shift']);
+
+						if (out_next < l_tm_i[eval(i+3)] - arg['shift_time'] || i == s_ly.length - 3)
+							l_tm_o[i] = out_next;
+						else
+							l_tm_o[i] = l_tm_i[eval(i+3)] - arg['shift_time'];
+					}
+					
+					//假如下一句是BP，則自動延長
+					if (s_ly[eval(i+1)] == "[Break Point!]" && s_tm[eval(i+2)] != s_tm[eval(i+1)])
+					{
+						if (l_tm_o[i] == out_self)
+							l_tm_o[i] = l_tm_i[i] + ((l_tm_o[i] - l_tm_i[i]) * ( arg['ly_shift'] / eval(arg['ly_shift'] + 1))  * arg['ly_last_extend']);			
+					}
+
+					//避免這一句結尾尚未超過下一句開頭
+					if (!(l_tm_o[eval(i)] > s_tm[eval(i+1)]))
+						l_tm_o[eval(i)] = eval(s_tm[eval(i+1)] + arg['shift_time']);
+
+					//為避免這一句的結尾超過後兩句的開頭
+					//alert(s_ly[eval(i+2)]);
+						//取得後兩句的開頭
+						j = eval(i+2);
+						while (s_tm[j] == s_tm[eval(j+1)] && j < s_ly.length-1)
+							j++;
+					if (l_tm_o[eval(i)] > l_tm_i[j] && s_ly[j] != "[Break Point!]")
+					{
+						//var out_next = parseInt(s_tm[eval(next)] + (s_tm[eval(next)]-s_tm[i])/arg['ly_shift']);
+						//l_tm_o[i] = out_next;
+						l_tm_o[i] = l_tm_i[j] - arg['ly_shift'];
+						//alert(1+" - "+l_tm_o[i]+" - "+" - "+l_tm_i[eval(i)]+l_tm_i[eval(i+1)]+" - "+l_tm_i[eval(i+2)]);
+					}
+					
+					//斷句判斷
+					if (l_tm_i[i] == l_tm_i[i-1])
+						l_tm_o[i-1] = l_tm_o[i];
+
+
+					//取得fad in長度
+					l_tm_fi[i] = parseInt((l_tm_o[i]-l_tm_i[i])/arg['fad_shift']);
+					if (i > 0 && space_change(s_ly[eval(i-1)]) > 1)
+					//假如是第二句以後，則將這次的fad out長度與前面的長度取平均
+						l_tm_fi[i] = parseInt((l_tm_fi[i] + l_tm_fi[i-1]) /2);
+
+					if (l_tm_fi[i] < 0)
+						l_tm_fi[i] = 0;
+					
+					//取得fad out長度
+					l_tm_fo[i] = l_tm_fi[i];
+					if (space_change(s_ly[eval(i+1)]).length < 2)
+					{
+						if (i == s_ly.length-2)
+							l_tm_fo[i] = l_tm_fo[i]*arg['fad_shift'];
+						//else if (!(s_tm[eval(i+2)] == s_tm[eval(i+3)] && s_ly[eval(i+2)] != "[Break Point!]" && s_ly[eval(i+3)] != "[Break Point!]"))
+						else if (s_tm[eval(i+2)] != s_tm[eval(i+3)] && s_ly[eval(i+2)] == "[Break Point!]" && s_ly[eval(i+3)] != "[Break Point!]")
+							l_tm_fo[i] = l_tm_fo[i]*arg['fad_shift'];
+					}
+								
+
+					if (l_tm_i[eval(i)] == l_tm_i[eval(i-1)] && l_tm_o[eval(i)] == l_tm_o[eval(i-1)] && s_ly[eval(i-2)] == "[Break Point!]" && s_ly[eval(i+1)] == "[Break Point!]")
+					{
+						if  (i == s_ly.length-2)
+						{
+							l_tm_fo[i-1] = l_tm_fo[i];
+						}
+						else if (s_ly[eval(i+2)] != "[Break Point!]")
+						{
+							l_tm_fi[i] = l_tm_fi[i-1];
+							l_tm_fo[i] = l_tm_fo[i-1];						
+						}
+					}												
+				} //for end
+				break;
+			case 1: //這是單行置中格式	
+				for (var i = 0; i < s_ly.length-1; i++)
+				{
+					//取得OUT點
+					l_tm_o[i] = l_tm_i[eval(i+1)]-arg['shift_time'];	//預設值
+				
+					if (((l_tm_o[i] == l_tm_i[i]) || (l_tm_o[i] < l_tm_i[i]) || (l_tm_o[i] < 1)) && (i < s_ly.length - 2))
+					{
+						//這種情況發生的時刻為特殊狀況：斷行
+						//[00:03:95]=========(TMO)===[00:07:63]=============[00:11:81]
+						//    i-1              ↑ <--- i、i+1                   i+2
+						//會造成這句出現在他的開頭之前
+						//修改之後，結果狀態會是：
+						//[00:03:95]=================[00:07:63]=======(TMO)=[00:11:81]
+						//    i-1                     i、i+1            ↑ <--- i+2
+						l_tm_o[i] = s_tm[eval(i+2)]-arg['shift_time'];					
+					}
+					
+					if (s_ly[eval(i+1)] == "[Break Point!]")
+					{
+						//OUT本體偏移點：位於下一個TM之後，偏移量是下一個TM與這一個TM的偏移點
+						//[00:03:95]=================[00:07:63]==(TMO)====================[00:11:81]
+						//    i                         i+1 -----> ↑                          i+2
+						//    |--------------------------|
+						var out_self = parseInt(s_tm[eval(i+1)] + (s_tm[eval(i+1)]-s_tm[i])/arg['ly_shift']);
+						
+						if (i < s_ly.length-2)
+						{
+							if ((out_self < s_tm[eval(i+2)]))
+								l_tm_o[i] = out_self;
+							else
+								l_tm_o[i] = s_tm[eval(i+2)] - arg['shift_time'];						
+						} else
+						{					
+							l_tm_o[i] = out_self;
+						}
+
+					}
+
+					//假如下一句是BP，則自動延長
+					if (s_ly[eval(i+1)] == "[Break Point!]" && s_tm[i] != s_tm[eval(i+1)])
+					{
+						l_tm_o[i] = s_tm[i] + ((s_tm[eval(i+1)] - s_tm[i]) * arg['ly_last_extend']);
+					}
+					
+					//假如消失點超過下一個歌詞的起始點
+					var next = eval(i+1);
+					while (s_ly[next] == "[Break Point!]" && next < s_ly.length)
+						next++;
+					if (l_tm_o[i] > l_tm_i[next])
+						l_tm_o[i] = l_tm_i[next] - arg['shift_time'];
+
+
+					if (l_tm_i[i] == l_tm_i[i-1] && s_ly[eval(i+1)] == "[Break Point!]" && s_ly[eval(i-2)] == "[Break Point!]" && (s_ly[eval(i+1)] == "[Break Point!]" || i == s_ly.length-2))
+						l_tm_o[i-1] = l_tm_o[i];
+					
+					
+
+					//取得fad in長度
+					l_tm_fi[i] = parseInt((l_tm_o[i]-l_tm_i[i])/arg['fad_shift']) * 2; //多了一個*2
+					if (i > 0 && space_change(s_ly[eval(i-1)]).length < 2)
+					//假如是第二句以後，則將這次的fad out長度與前面的長度取平均
+						l_tm_fi[i] = parseInt((l_tm_fi[i] + l_tm_fi[i-1]) /2)					
+
+					if (l_tm_fi[i] < 0)
+						l_tm_fi[i] = 0;
+					
+					//取得fad out長度
+					l_tm_fo[i] = l_tm_fi[i];
+					if (space_change(s_ly[eval(i+1)]).length < 2)
+					{
+						if (i == s_ly.length-2)
+							l_tm_fo[i] = l_tm_fo[i]*arg['fad_shift'];
+						//else if (!(s_tm[eval(i+2)] == s_tm[eval(i+3)] && s_ly[eval(i+2)] != "[Break Point!]" && s_ly[eval(i+3)] != "[Break Point!]"))
+						else if (s_tm[eval(i+2)] != s_tm[eval(i+3)] && s_ly[eval(i+2)] == "[Break Point!]" && s_ly[eval(i+3)] != "[Break Point!]")
+							l_tm_fo[i] = l_tm_fo[i]*arg['fad_shift'];
+						//else if (l_tm_o[eval(i)])
+					}
+					
+					if (l_tm_i[eval(i)] == l_tm_i[eval(i-1)] && l_tm_o[eval(i)] == l_tm_o[eval(i-1)] && s_ly[eval(i-2)] == "[Break Point!]" && s_ly[eval(i+1)] == "[Break Point!]")
+					{
+						if  (i == s_ly.length-2)
+						{
+							l_tm_fi[i-1] = l_tm_fi[i];
+							l_tm_fo[i-1] = l_tm_fo[i];
+						}
+						else if (s_ly[eval(i+2)] != "[Break Point!]")
+						{
+							l_tm_fi[i] = l_tm_fi[i-1];
+							l_tm_fo[i] = l_tm_fo[i-1];
+						}
+					}				
+
+				} //for end
+				break;				
+		} //switch end
+
+		//寫入的前置作業
+		ly_hidden();	//隱藏所有歌詞
+		//字數超載設定
+		var lys = new Array;
+		lys = get_style();
+		var over_load = parseInt((640 - eval(lys["margin"])*2) / parseInt(eval(lys["fontsize"]) * 0.7));
+		//document.getElementById("make_ly").style.width = eval(over_load)*32 + 120;	//字數超載的寬度
+		document.getElementById("over_load").value = over_load;
+
+	prohis_input("開始寫入歌詞");
+	setTimeout ('make_ly4()', 1);
+}	//function make_ly3() end
+
+function make_ly4()
+{	
+		//開始寫入歌詞
+		switch (format)
+		{
+			case 0: //這是雙行左右格式
+			    total_length = s_ly.length-1;
+				i = 0;
+				setTimeout('make_ly4_format1('+i+')', 1);
+				break;
+				
+			case 1: //這是單行置中格式	
+				total_length = s_ly.length-1;
+				i = 0;
+				setTimeout('make_ly4_format2('+i+')', 1);		
+				break;				
+		} //switch end
+} //function make_ly4() end
+
+function make_ly4_format1(i)
+{
+				if (i != total_length)
+				{
+					document.getElementById("edit_ly").style.display = "block";
+					//A_B歸位
+					if (i == 0 || s_ly[i-1]=="[Break Point!]")
+						A_B = 0;
+
+					ly_s(i).style.display = "block";
+										
+					//預防字數超載
+						//計算字數，英文字數為0.5
+						var over_temp = new Array;
+						over_temp = no_parent(trim(s_ly[i])).split("");
+						
+						over_num = 0;
+						for (var over_i = 0; over_i < over_temp.length; over_i++)
+						{
+							if (is_eng(over_temp[over_i]))
+								over_num = over_num + 0.5;
+							else
+								over_num = over_num + 1;
+						}
+					if (over_num > over_load)
+						ly(i).style.color = "red";
+					else
+						ly(i).style.color = "black";
+
+					//寫入歌詞
+					ly(i).value = no_parent(trim(s_ly[i]));
+					
+					//寫入in/out點
+					ly_in = tm_to_time(l_tm_i[i])["min"]+":"+tm_to_time(l_tm_i[i])["sec"]+":"+tm_to_time(l_tm_i[i])["minsec"];
+					ly_i(i).value = ly_in;
+					ly_out = tm_to_time(l_tm_o[i])["min"]+":"+tm_to_time(l_tm_o[i])["sec"]+":"+tm_to_time(l_tm_o[i])["minsec"];
+					ly_o(i).value = ly_out;
+					
+					//寫入fad in/out
+					ly_fi(i).value = l_tm_fi[i];
+					ly_fo(i).value = l_tm_fo[i];
+					
+					//寫入拼音
+					make_ly_p(i, trim(s_ly[i]));
+					
+					/*
+					//鎖定不能更改拼音欄位
+					var lock = document.getElementById("ly_lock").checked;
+					if (!(lock))
+					{
+						for (var j=0; j< ly(i).value.length; j++)
+							ly_p(i).value = ly_p(i).value+"□□"; 
+					} else
+					{
+						if (trim(block_change(ly_p(i).value)) == "")
+						{
+							ly_p(i).value = "";	
+							
+							for (var j=0; j< ly(i).value.length; j++)
+								ly_p(i).value = ly_p(i).value+"□□"; 											
+						}
+
+					}
+					*/
+					
+					if (A_B%2 == 0)
+					{
+						ly(i).style.textAlign = "left";
+						ly_p(i).style.textAlign = "left";
+						document.getElementById("ly_sv["+i+"][0][0]").checked = true;
+					} else if (A_B%2 == 1)
+					{
+						ly(i).style.textAlign = "right";
+						ly_p(i).style.textAlign = "right";
+						document.getElementById("ly_sv["+i+"][2][2]").checked = true;
+					}
+					
+					//單獨一句則置中的設定
+					if (i == 0 && trim(s_ly[eval(i+1)]) == "[Break Point!]")
+					{
+						ly(i).style.textAlign = "center";
+						ly_p(i).style.textAlign = "center";
+						document.getElementById("ly_sv["+i+"][1][1]").checked = true;					
+					}
+					else if (i > 0)
+					{
+						 if (trim(s_ly[i-1]) == "[Break Point!]" && trim(s_ly[eval(i+1)]) == "[Break Point!]")
+						{
+							ly(i).style.textAlign = "center";
+							ly_p(i).style.textAlign = "center";
+							document.getElementById("ly_sv["+i+"][1][1]").checked = true;
+						}					
+					}
+										
+					A_B++;
+					
+					/***注意：這一段程式碼是隱藏錯誤，可能會造成其他地方錯誤無法發現***/
+					/*if (ly(i).value == "")
+						ly(i).value = "[Break Point!]";*/
+					
+					//假如這一行是BP，則欄位隱藏起來
+					if (ly(i).value == "[Break Point!]" && !document.getElementById("show_bp").checked)
+						ly_s(i).style.display = "none";
+					
+					document.getElementById("edit_ly").style.display = "none";	
+					prohis_input("寫入歌詞中："+parseInt((i/total_length)*100)+"% ("+i+"/"+total_length+")");
+
+					i++;
+
+					setTimeout('make_ly4_format1('+i+')', 1);
+				}
+				else
+				{
+					ly_spare_clean(s_ly.length-1);
+					prohis_input("寫入歌詞完成");
+					setTimeout('make_ly5()', 1);			
+				}
+				
+}	//function make_ly4_format1() end
+
+function make_ly4_format2()
+{
+				if (i != total_length)
+				{	
+					document.getElementById("edit_ly").style.display = "block";
+					
+					//顯示框
+					ly_s(i).style.display = "block";					
+					
+					//預防字數超載
+						//計算字數，英文字數為0.5
+						var over_temp = no_parent(trim(s_ly[i])).split("");
+						over_num = 0;
+						for (var over_i = 0; over_i < over_temp.length; over_i++)
+						{
+							if (is_eng(over_temp[over_i]))
+								over_num = over_num + 0.5;
+							else
+								over_num = over_num + 1;
+						}
+					if (over_num > over_load)
+						ly(i).style.color = "red";
+					else
+						ly(i).style.color = "black";					
+
+					//寫入歌詞
+					ly(i).value = no_parent(trim(s_ly[i]));
+
+					//寫入in/out點
+					var ly_in = tm_to_time(l_tm_i[i])["min"]+":"+tm_to_time(l_tm_i[i])["sec"]+":"+tm_to_time(l_tm_i[i])["minsec"];
+					ly_i(i).value = ly_in;
+					
+					var ly_out = tm_to_time(l_tm_o[i])["min"]+":"+tm_to_time(l_tm_o[i])["sec"]+":"+tm_to_time(l_tm_o[i])["minsec"];
+					ly_o(i).value = ly_out;
+					
+					//寫入fad in/out
+					ly_fi(i).value = l_tm_fi[i];
+					ly_fo(i).value = l_tm_fo[i];
+					
+					make_ly_p(i, trim(s_ly[i]));
+					
+					/*
+					//鎖定不能更改拼音欄位
+					var lock = document.getElementById("ly_lock").checked;
+					if (!(lock))
+					{
+						for (var j=0; j< ly(i).value.length; j++)
+							ly_p(i).value = ly_p(i).value+"□□"; 
+					} else
+					{
+						if (trim(block_change(ly_p(i).value)) == "")
+						{
+							ly_p(i).value = "";	
+							
+							for (var j=0; j< ly(i).value.length; j++)
+								ly_p(i).value = ly_p(i).value+"□□"; 											
+						}
+
+					}
+					*/
+					
+					//設定對齊位置
+					ly(i).style.textAlign = "center";
+					ly_p(i).style.textAlign = "center";
+					document.getElementById("ly_sv["+i+"][1][1]").checked = true;
+					
+					//斷行判定
+					if (l_tm_i[eval(i)] == l_tm_i[eval(i+1)] && l_tm_o[eval(i)] == l_tm_o[eval(i+1)] && s_ly[eval(i-1)] == "[Break Point!]" && s_ly[eval(i+2)] == "[Break Point!]")
+					{
+						ly(i).style.textAlign = "left";
+						ly_p(i).style.textAlign = "left";
+						document.getElementById("ly_sv["+i+"][0][0]").checked = true;
+					} else if (l_tm_i[eval(i)] == l_tm_i[eval(i-1)] && l_tm_o[eval(i)] == l_tm_o[eval(i-1)] && s_ly[eval(i-2)] == "[Break Point!]" && s_ly[eval(i+1)] == "[Break Point!]")
+					{
+						ly(i).style.textAlign = "right";
+						ly_p(i).style.textAlign = "right";
+						document.getElementById("ly_sv["+i+"][2][2]").checked = true;					
+					}
+
+					//假如這一行是BP，則欄位隱藏起來
+					if (ly(i).value == "[Break Point!]" && !document.getElementById("show_bp").checked)
+						ly_s(i).style.display = "none";	
+					prohis_input("寫入歌詞中："+parseInt((i/total_length)*100)+"% ("+i+"/"+total_length+")");
+
+					document.getElementById("edit_ly").style.display = "none";
+
+					i++;
+
+					setTimeout('make_ly4_format2('+i+')', 1);
+				}
+				else
+				{
+					ly_spare_clean(s_ly.length-1);
+					prohis_input("寫入歌詞完成");
+					setTimeout('make_ly5()', 1);			
+				}
+}	//function make_ly4_format2() end
+
+
+
+function make_ly5()
+{		
+		//完成提示！
+		//如果是在輸出狀態的話，為避免雙重提示，這一個提示會略過
+		//alert(typeof(hint));
+		if (typeof(hint) == "undefined" || hint == "")
+		{
+			document.getElementById("edit_ly").style.display = "block";
+			document.getElementById("source_change").value = "false";
+			prohis_input("寫入歌詞完成");
+			alert("done!!");
+			prohis_end();
+		}
+		else
+		{
+			prohis_input("開始分析格式參數");
+			setTimeout('tran2()', 1000);
+			hint = "";
+		}
+}	//funciton make_ly5()
+
+function trans()
+{
+	//取得格式
+	format = get_format();
+
+	prohis_start();
+	prohis_input("開始分析格式參數");	
+
+	setTimeout('trans1()', 1);
+}
+
+function trans1()
+{	
+	if (source_end_tm($("#source").val()))
+	{
+		
+		//原本隱藏的話，那麼轉換之後要再度隱藏
+		if (document.getElementById("edit_ly").style.display != "block")
+			is_hidden = true;
+		else
+			is_hidden = false;	
+		
+		if (document.getElementById("ly[0]").value == "")
+		{
+			//make_ly(eval(format));
+			//alert(1);
+			hint = "no hint";
+			make_ly("no hint");
+		}
+		else if (document.getElementById("format_record").value != format && document.getElementById("ly[0]").value == "[Break Point!]")
+		{
+			//make_ly(eval(format));
+			//alert(2);
+			hint = "no hint";
+			make_ly("no hint");
+		}
+		else if (document.getElementById("source_change").value == "true")
+		{
+			//make_ly(eval(format));
+			//alert(3);
+			hint = "no hint";
+			make_ly("no hint");
+		}
+		else
+		{
+			document.getElementById("edit_ly").style.display == "block"
+			prohis_input("已經有歌詞，開始分析格式參數");
+			setTimeout('tran2()', 1000);
+		}
+	}	//if 來源沒有歌詞 end
+	else
+	{
+		alert("來源歌詞錯誤");	
+		prohis_end();
+	}
+}	//function tran1() end
+
+function tran2()
+{
+		document.getElementById("source_change").value = "false";
+		
+		//將輸出結果還原
+		document.getElementById("target").value = document.getElementById("target").defaultValue;
+	
+		//先將display:none狀態解除
+		ly_show();
+		
+		//判定歌詞格式
+		var lys = new Array;
+		if (document.getElementById("ly_style_default").checked)	//使用預設格式
+			lys = default_style();
+		else
+			lys = get_style();	
+		
+		/*
+		//影像大小修正運算
+			//取得預設長寬
+			des_lys = default_style();
+			
+			//計算修正長寬係數
+			if (des_lys["width"] / lys["width"] < des_lys["height"] / lys["height"])
+				wh_fix = des_lys["width"] / lys["width"];
+			else
+				wh_fix = des_lys["height"] / lys["height"];
+			
+			//計算出修正後的長寬
+			fixed_width = lys["width"] * wh_fix;
+			fixed_height = lys["height"] * wh_fix;
+			
+			//計算左右及下補正差數
+			margin_lr_fix = parseInt((des_lys["width"] - fixed_width) / 2);
+			margin_v_fix = parseInt((des_lys["height"] - fixed_height) / 2);			
+		*/
+		if (document.getElementById("trans_style[2]").checked)
+		{
+		  //上方註解的高度
+		  document.getElementById("target").value = "[以下請擺到[V4 Styles]標籤後面]\n";
+		  var format_fontsize = parseInt(lys["fontsize"] * 0.8);
+		  var format_margin = eval(eval(lys["margin"]) + eval(parseInt(lys["fontsize"] * 2.8)));
+		  var note = "up_";
+		}
+		else if (document.getElementById("trans_style[3]").checked)
+		{
+		  //下方註解的高度
+		  document.getElementById("target").value = "[以下請擺到[V4 Styles]標籤後面]\n";
+		  var format_fontsize = parseInt(lys["fontsize"] * 0.8);
+		  var format_margin = eval(lys["margin"] - parseInt(lys["fontsize"] * 1.8));
+		  var note = "down_";
+		}
+		else
+		{
+		  var format_fontsize = parseInt(lys["fontsize"] * 1);
+		  var format_margin = lys["margin"];
+		  var note = "";
+		}
+
+		var style = new Array;
+		style[0] = "Style:  lystyle_"+note;
+		
+		style[1] = lys["fontname"]+", "+parseInt(format_fontsize)+", "+lys["primarycolour"]+", "+lys["secondarycolour"]+", "+lys["tertiarycolour"]+", "+lys["backcolour"]+", "+lys["bold"]+", "+lys["italic"]+", "+lys["borderstyle"]+", "+lys["outline"]+", "+lys["shadow"]+", ";
+		style[2] = lys["alphalevel"]+", "+lys["encoding"]+"\n";
+	
+		style[3] = lys["fontname"]+", "+parseInt(eval(format_fontsize/2))+", "+lys["primarycolour"]+", "+lys["secondarycolour"]+", "+lys["tertiarycolour"]+", "+lys["backcolour"]+", "+lys["bold"]+", "+lys["italic"]+", "+lys["borderstyle"]+", "+lys["outline"]+", "+lys["shadow"]+", ";
+			
+		//設定左右邊距
+		var margin_lr = parseInt(eval(lys["margin"]/1.45-lys["fontsize"]));
+		var margin_lr4r = parseInt(eval(lys["margin"]/1.45));
+		//var margin_lr = eval(lys["margin"]-lys["fontsize"]-margin_lr_fix);
+
+		if (eval(lys["margin"]) < 0)
+		{
+			margin_lr = 0;
+		}
+		
+		//這是置中的高度
+		var margin = parseInt(eval(format_margin)+eval(format_fontsize)*lys["line_height"]*0.7);
+		//var margin = parseInt(eval(lys["margin"]*1.5) - margin_v_fix);
+		if (margin < 0)
+			margin = 0;
+		var margin_p = parseInt(eval(margin+eval(format_fontsize)*lys["line_height"]));
+		
+		w(style[0]+"1c,  "+style[1]+lys["alignment_c"]+", 0 , 0 , "+margin+", "+style[2]);
+		w(style[0]+"1cp, "+style[3]+lys["alignment_c"]+", 0 , 0 , "+margin_p+", "+style[2]);
+	
+		w(style[0]+"1l,  "+style[1]+lys["alignment_l"]+", "+margin_lr+", 0 , "+margin+", "+style[2]);
+		w(style[0]+"1lp, "+style[3]+lys["alignment_l"]+", "+margin_lr+", 0 , "+margin_p+", "+style[2]);				
+	
+		w(style[0]+"1r,  "+style[1]+lys["alignment_r"]+", 0 , "+margin_lr+", "+margin+", "+style[2]);
+		w(style[0]+"1rp, "+style[3]+lys["alignment_r"]+", 0 , "+margin_lr+", "+margin_p+", "+style[2]);				
+	
+		w("\n");
+		
+		if (!(document.getElementById("trans_style[2]").checked) && !(document.getElementById("trans_style[3]").checked))
+		{
+			//這是下面那排的高度		
+			var marginv1 = parseInt(format_margin);
+			//var marginv1 = parseInt(lys["margin"] - margin_v_fix);
+			if (marginv1 < 0)
+				marginv1 = 0;
+			var marginv1_p = parseInt(eval(eval(marginv1)+eval(format_fontsize)*lys["line_height"]));				
+		
+			w(style[0]+"2c,  "+style[1]+lys["alignment_c"]+", 0 , 0 , "+marginv1+", "+style[2]);
+			w(style[0]+"2cp, "+style[3]+lys["alignment_c"]+", 0 , 0 , "+marginv1_p+", "+style[2]);
+		
+			w(style[0]+"2l,  "+style[1]+lys["alignment_l"]+", "+margin_lr+", 0 , "+marginv1+", "+style[2]);
+			w(style[0]+"2lp, "+style[3]+lys["alignment_l"]+", "+margin_lr+", 0 , "+marginv1_p+", "+style[2]);				
+		
+			w(style[0]+"2r,  "+style[1]+lys["alignment_r"]+", 0 , "+margin_lr+", "+marginv1+", "+style[2]);
+			w(style[0]+"2rp, "+style[3]+lys["alignment_r"]+", 0 , "+margin_lr+", "+marginv1_p+", "+style[2]);				
+			
+			w("\n");
+			
+			//這是上面那排的高度
+			var marginv0 = parseInt(eval(marginv1_p+eval(format_fontsize)*lys["line_height"]*0.7));
+			var marginv0_p = parseInt(eval(eval(marginv0)+eval(format_fontsize)*lys["line_height"]));
+		
+			w(style[0]+"0c,  "+style[1]+lys["alignment_c"]+", 0 , 0 , "+marginv0+", "+style[2]);
+			w(style[0]+"0cp, "+style[3]+lys["alignment_c"]+", 0 , 0 , "+marginv0_p+", "+style[2]);
+		
+			w(style[0]+"0l,  "+style[1]+lys["alignment_l"]+", "+margin_lr+", 0 , "+marginv0+", "+style[2]);
+			w(style[0]+"0lp, "+style[3]+lys["alignment_l"]+", "+margin_lr+", 0 , "+marginv0_p+", "+style[2]);				
+		
+			w(style[0]+"0r,  "+style[1]+lys["alignment_r"]+", 0 , "+margin_lr+", "+marginv0+", "+style[2]);
+			w(style[0]+"0rp, "+style[3]+lys["alignment_r"]+", 0 , "+margin_lr+", "+marginv0_p+", "+style[2]);		
+	
+			
+			w("\n[Events]\n");
+		}
+		else
+		{
+			w("\n[以下請擺到[Events]標後面]\n");		
+		}
+		
+		for (var i = 0; i < arg['ly_number']; i++)
+		{
+			if (space_change(document.getElementById("ly["+i+"]").value) != "")
+			{
+				//取得資料
+				var ly = document.getElementById("ly["+i+"]").value;
+				var ly_p = document.getElementById("ly_p["+i+"]").value;
+				 
+				var ly_i = document.getElementById("ly_i["+i+"]").value;
+				var ly_o = document.getElementById("ly_o["+i+"]").value;
+				
+				var ly_fi = document.getElementById("fad_in["+i+"]").value;
+				var ly_fo = document.getElementById("fad_out["+i+"]").value;
+				
+	
+				//確認歌詞位置
+				if (document.getElementById("ly_sv["+i+"][0][0]").checked)
+				{
+					var ly_al = "l";
+					var ly_sv = 0;
+				}
+				else if (document.getElementById("ly_sv["+i+"][0][1]").checked)
+				{
+					var ly_al = "c";
+					var ly_sv = 0;
+				}
+				else if (document.getElementById("ly_sv["+i+"][0][2]").checked)
+				{
+					var ly_al = "r";
+					var ly_sv = 0;
+				}
+				else if (document.getElementById("ly_sv["+i+"][1][0]").checked)
+				{
+					var ly_al = "l";
+					var ly_sv = 1;
+				}
+				else if (document.getElementById("ly_sv["+i+"][1][1]").checked)
+				{
+					var ly_al = "c";
+					var ly_sv = 1;
+				}
+				else if (document.getElementById("ly_sv["+i+"][1][2]").checked)
+				{
+					var ly_al = "r";
+					var ly_sv = 1;
+				}
+				else if (document.getElementById("ly_sv["+i+"][2][0]").checked)
+				{
+					var ly_al = "l";
+					var ly_sv = 2;
+				}
+				else if (document.getElementById("ly_sv["+i+"][2][1]").checked)
+				{
+					var ly_al = "c";
+					var ly_sv = 2;
+				}
+				else if (document.getElementById("ly_sv["+i+"][2][2]").checked)
+				{
+					var ly_al = "r";
+					var ly_sv = 2;
+				}
+				else
+				{
+					var ly_al = "c";
+					var ly_sv = 1;			
+				}
+	
+					
+				
+				//組成格式碼
+				style_head = "Dialogue:Marked=0,0:"+ly_i+",0:"+ly_o+",lystyle_"+note+ly_sv+ly_al;
+	
+				style_middle = ",,0000,0000,0000,karaoke,";
+				style_foot = "{\\fad("+ly_fi+","+ly_fo+")}";
+				
+				//寫入
+				if (space_change(ly) != "" && space_change(ly) != "[Break Point!]")
+				{
+					w(style_head+style_middle+style_foot+"　"+ly+"　"+"{\\t}\n");
+					if (trim(block_change(ly_p)) != "")
+						//w(style_head+"p"+style_middle+style_foot+"{\\t}"+"　　"+block_change(ly_p)+"　　"+"{\\t}"+"\n");
+						w(style_head+"p"+style_middle+style_foot+"{\\t}"+"　　"+block_change(ly_p)+"　　"+"{\\t}"+"\n");
+				}
+			}	//if end
+			else
+			//假如這一行是BP，則欄位隱藏起來
+				document.getElementById("ly_s["+i+"]").style.display = "none";							
+		}	//for end
+		
+		if (is_hidden)
+			makely_hidden();
+		
+		//完成提示！
+		prohis_input("格式寫入完成");
+		alert("done!!");
+		prohis_end();
+		document.getElementById("target").focus();
+}	//function tran2() end
+
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+function w(str)
+{
+	document.getElementById("target").value = document.getElementById("target").value+str;
+}
+function s(str)
+{
+	document.getElementById("source").value = document.getElementById("source").value+str;
+}
+
+function is_tm_head(source)
+{
+	source = trim(source).split("");
+	if (source[0] == "[" && source[9] == "]" )
+		return true;
+	else
+		return false;
+}
+
+function is_tm_foot(source)
+{
+	var source = trim(source).split("");
+    /*if (source[source.length -1]+source[source.length]=="\n")
+	{
+	  var len = source.length -2; 
+	}
+	else
+	  var len = source.length - 2;*/
+	var len = source.length - 1;
+	
+	//alert("{"+source[len-11]+"-"+source[len-10]+"-"+source[len-9]+"-"+source[len-8]+"-"+source[len-7]+"}");
+	
+	if (source[len-10] == "[")
+	  len = len - 1;
+
+	if (source[len-8] == "[")
+	  len = eval(len) + 1;
+	
+	if (source[len-9] == "[" && source[len-0] == "]")
+		return true;
+	else
+		return false;
+}
+
+function get_lyric(source)
+{
+	var source = trim(source);
+
+	if (is_tm_head(source))
+	  source = source.substr(10, source.length-1);
+
+    if (is_tm_foot(source))
+	  source = source.substr(0, source.length-10);
+	
+	if (source.substr(source.length-1, 1) == "[")
+	  source = source.substr(0, source.length-1);
+	  
+	source = source.replace(/[.]/g, "")
+
+	return source;
+}
+function get_head_tm(source)
+{
+	s = trim(source).split("");
+	var tm = 0;
+	var min = eval(eval(s[1]*10)+s[2]*1.0);
+	tm = eval(tm + min*60*100);
+	var min = eval(eval(s[4]*10)+s[5]*1.0);
+	tm = eval(tm + min*100);
+	var min = eval(eval(s[7]*10)+s[8]*1.0);
+	tm = eval(tm + min);
+	
+	tm = fix_ssa_tm(tm);
+	return tm;
+}
+function get_foot_tm(source)
+{
+	s = trim(source).split("");
+	//len = s.length -2;
+	len = s.length - 1;
+	if (s[len-10] == "[")
+	  len = s.length - 2;
+	
+	var tm = 0;
+	var min = eval(eval(s[len-8]*10)+s[len-7]*1.0);
+	tm = eval(tm + min*60*100);
+	var min = eval(eval(s[len-5]*10)+s[len-4]*1.0);
+	tm = eval(tm + min*100);
+	var min = eval(eval(s[len-2]*10)+s[len-1]*1.0);
+	tm = eval(tm + min);
+	
+	tm = fix_ssa_tm(tm);
+	return tm;
+}
+
+//修正SSA裡面，靠近整秒的時間會被強迫延後的錯誤
+function fix_ssa_tm(tm)
+{
+  if (document.getElementById("tmfix").checked == false)
+  	return tm;
+  
+  if (tm > 100)
+  {
+	var ms = tm % 100;	//時間接近整秒的距離
+	if (ms < 20)
+	{
+	  tm = tm - ms - 1;
+	}
+  }
+  return tm;
+}
+
+
+function trim(str)
+{		
+	//if (typeof(str) == "undefined")
+		//alert(str);
+	
+	while (true)
+	{
+	  if (typeof(str) == "undefined")
+	    break;
+	  else if (str.substr(0, 1) == " ")
+	    str = str.substr(1, str.length);
+	  else if (str.substr(0, 1) == "□")
+	    str = str.substr(1, str.length);
+	  else if (str.substr(0, 1) == "　")
+		str = str.substr(1, str.length);
+	  else if (str.substr(0, 1) == "\n")
+		str = str.substr(1, str.length);
+	  else if (str.substr(0, 1) == "\N")
+		str = str.substr(1, str.length);
+	  else
+	    break;
+	}
+
+	while (true)
+	{
+	  if (typeof(str) == "undefined")
+	    break;
+	  else if (str.substr(str.length-1, 1) == " ")
+		str = str.substr(0, str.length-1);
+	  else if (str.substr(str.length-1, 1) == "□")
+		str = str.substr(0, str.length-1);
+	  else if (str.substr(str.length-1, 1) == "　")
+		str = str.substr(0, str.length-1);
+	  else if (str.substr(str.length-1, 1) == "\n")
+		str = str.substr(0, str.length-1);
+	  else if (str.substr(str.length-1, 1) == "\N")
+		str = str.substr(0, str.length-1);
+	  else
+	    break;
+	}
+	
+	
+	return str;
+}
+
+//歌詞空白，半形轉全形
+function space_change(str)
+{
+	var result = "";
+	if (str != "[Break Point!]" && str != "")
+	{
+		str = str.split("");
+		for (var i=0; i < str.length; i++)
+		{
+			if (str[i] == " ")
+			{
+				if (i > 0)
+				{
+					if (!(is_eng(str[eval(i-1)]) && is_eng(str[eval(i+1)])))
+						str[i] = "　";
+				}
+			} 
+			else if (str[i]+str[eval(i+1)]+str[eval(i+2)] == "..." || str[i]+str[eval(i+1)]+str[eval(i+2)] == "･･･")
+			{
+				i = i+2;
+				str[i] = "…";
+			}
+			else if (str[i] == ".")
+				str[i] = "";
+			result = result+str[i];
+		}
+	}
+	
+	return result;
+}
+function is_eng(str)
+{
+	var check = " “”~･1▽234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+|}{\":?><QWERTYUIOPASDFGHJKLZXCVBNM";
+
+	var check_ary = new Array;
+	check_ary = check.split("");
+	for (var i = 0; i < check_ary.length; i++)
+	{
+		if (str == check_ary[i])
+			return true;
+	}
+
+	return false;
+}
+
+//以下是與拼音相關的程式
+function no_parent(str)
+{
+	str_ary = str.split("");
+	var result = "";
+	for (var i = 0; i < str_ary.length; i++)
+	{
+		if (str_ary[i] != "(" && str_ary[i] != "{")
+			result = result + str_ary[i];
+		else if (str_ary[i] == "(")
+		{
+			while (str_ary[i] != ")" && i < str_ary.length)
+			{
+				//alert(str_ary[i]);
+				i++;
+			}
+			
+			if (i < str_ary.length - 1)
+			{
+				i++;
+				result = result + str_ary[i];			
+			}
+		}
+		else if (str_ary[i] == "{")
+		{
+			while (str_ary[i] != "}" && i < str_ary.length)
+			{
+				//alert(str_ary[i]);
+				i++;
+			}
+
+			if (i < str_ary.length - 1)
+			{
+				i++;
+				result = result + str_ary[i];			
+			}
+		}
+	}
+	return result;
+}
+
+function block_change(str)
+{
+	var result = "";
+	if (str != "[Break Point!]")
+	{
+		str = str.split("");
+		for (var i=0; i < str.length; i++)
+		{
+			if (str[i] == "□" || str[i] == "■")
+				str[i] = "　";
+			else if (str[i] == "|")
+				str[i] = " ";
+			result = result+str[i];
+		}
+	}
+	
+	return result;
+}
+
+function make_ly_p(i, source)
+{
+	if (ly(i).value != "[Break Point!]" && ly(i).value != "")
+	{
+		//鎖定不能更改拼音欄位
+		var lock = document.getElementById("ly_lock").checked;
+	
+		ly_temp = ly(i).value;
+		ly_word = ly_temp.split("");
+		
+		var p_len = 0;
+	
+		if (!(lock) || trim(block_change(ly_p(i).value)) == "")
+		{
+			ly_p(i).value = "";
+			var get_ly = new Array;
+			
+			for (var j=0; j< ly(i).value.length; j++)
+			{
+				
+				get_ly["ly"] = "";
+				get_ly["p"] = "";
+				
+				if (is_chi(ly_word[j]) == true)
+				{
+					ly_p(i).value = ly_p(i).value+"■■"; 
+					p_len = eval(p_len + 2);
+					
+					//取得原歌詞當中，省略該()與{}的位置
+					//source
+					var target_i = eval(j+1);
+					var sour_location = 0;
+					var next_is_chi = true;
+					sour_temp = source.split("");
+					for (sour_i = 0; sour_i < sour_temp.length; sour_i++)
+					{
+						if (sour_location != target_i && (sour_temp[sour_i] == "("))
+						{
+							sour_i++
+							while (sour_temp[sour_i] != ")" && sour_i < sour_temp.length)
+								sour_i++;
+							if (sour_i < sour_temp.length - 1)
+								sour_i++;
+						} else if (sour_location != target_i && (sour_temp[sour_i] == "{"))
+						{
+							sour_i++
+							while (sour_temp[sour_i] != "}" && sour_i < sour_temp.length)
+								sour_i++;
+								
+							if (sour_i < sour_temp.length - 1)
+								sour_i++;
+						}
+						//alert(sour_temp[sour_i]+" - "+source+" - "+sour_location+" - "+target_i+" - "+sour_i);
+						if (sour_location == target_i)
+						{
+							//alert(sour_temp[sour_i]+" - "+source+"\n"+sour_location+" - "+target_i+" - "+sour_i);
+							if (!is_chi(sour_temp[eval(sour_i)]))
+							{
+								next_is_chi = false;
+							}
+							break;
+						}
+						sour_location++;
+					}
+					//alert(sour_temp[sour_i]+" - "+source+"\n"+sour_location+" - "+target_i+" - "+sour_i+" - "+next_is_chi);
+					
+					if ((!next_is_chi || j == ly(i).value.length -1) && document.getElementById("lyp_locate").checked)
+					{
+						get_ly = get_source_ly_p(j, source);
+						//alert(j+" - "+source+" - "+get_ly["ly"]+" - "+get_ly["p"]);
+						//source = get_ly["source"];
+						
+						if (get_ly["p"] != "false")
+						{
+							gap_ly_p = eval(eval(get_ly["ly"].length * 2) - get_ly["p"].length);
+							
+							//先減去歌詞格數的空格
+							len = eval(ly_p(i).value.length - get_ly["ly"].length * 2);
+							if (len < 0)
+								len = 1;
+							ly_p(i).value = ly_p(i).value.substr(0, len);
+							p_len = eval(p_len - 2 * get_ly["ly"].length);
+							if (p_len < 0 || isNaN(p_len))
+								p_len = 0;
+							
+							if (gap_ly_p > 0 || gap_ly_p == 0)
+							{
+								add = eval(gap_ly_p / 2);
+								
+								//增加全形空格
+								for (var a = 0; a < parseInt(add); a++)
+								{
+									ly_p(i).value = ly_p(i).value+"□";							
+									p_len = eval(p_len + 1);
+								}
+	
+	
+								//增加半形空格
+								if (eval(add % 1) == 0.5)
+								{
+									ly_p(i).value = ly_p(i).value+"|";							
+									p_len = eval(p_len + 0.5);
+								}
+	
+								ly_p(i).value = ly_p(i).value+get_ly["p"];
+								p_len = eval(p_len + get_ly["p"].length);
+							}
+							else if (gap_ly_p < 0)
+							{
+								temp = eval(0 - gap_ly_p);
+								des = temp / 2;
+								//alert(get_ly["ly"]+" - "+des);
+								if (p_len > 0)
+								{
+									p_len = ly_p_decrease(p_len, parseInt(des), i);
+									
+									/*//避免減少到兩個半形空白
+									if (ly_p(i).value.substr(ly_p(i).value.length-2, 1) == "||")
+									{
+										len = eval(ly_p(i).value.length - 2);
+										if (len < 0)
+											len = 1;
+										ly_p(i).value = ly_p(i).value.substr(0, len);
+										p_len = eval(p_len - parseInt(des).length);
+										if (p_len < 0 || isNaN(p_len))
+											p_len = 0;
+									}
+					
+									len = eval(ly_p(i).value.length - parseInt(des));
+									if (len < 0)
+										len = 1;
+									ly_p(i).value = ly_p(i).value.substr(0, len);
+									p_len = eval(p_len - parseInt(des));
+									if (p_len < 0 || isNaN(p_len))
+										p_len = 0;*/
+								}
+								
+								//判斷拼音是否會超過歌詞的長度
+								if (eval(p_len + get_ly["p"].length) > (ly(i).value.length*2))
+								{
+									more_des = eval(p_len + get_ly["p"].length) - (ly(i).value.length * 2);
+									/*
+									//避免減少到兩個半形空白
+									if (ly_p(i).value.substr(ly_p(i).value.length-2, 1) == "||")
+									{
+										len = eval(ly_p(i).value.length - 2);
+										if (len < 0)
+											len = 1;
+										ly_p(i).value = ly_p(i).value.substr(0, len);
+										p_len = eval(p_len - parseInt(des).length);
+										if (p_len < 0 || isNaN(p_len))
+											p_len = 0;
+									}
+									
+									len = eval(ly_p(i).value.length - parseInt(more_des) * 2);
+									if (len < 0)
+										len = 1;
+									ly_p(i).value = ly_p(i).value.substr(0, len);
+									p_len = eval(p_len - 2 * parseInt(more_des).length);	
+									if (p_len < 0 || isNaN(p_len))
+										p_len = 0;
+									*/
+									p_len = ly_p_decrease(p_len, more_des, i);
+								} 
+								else if (eval(des % 1) == 0.5 && p_len > 0)
+								{
+									p_len = ly_p_decrease(p_len, 0.5, i);
+									
+									/*
+									//避免減少到兩個半形空白
+									if (ly_p(i).value.substr(ly_p(i).value.length-2, 1) == "||")
+									{
+										len = eval(ly_p(i).value.length - 2);
+										if (len < 0)
+											len = 1;
+										ly_p(i).value = ly_p(i).value.substr(0, len);
+										p_len = eval(p_len - parseInt(des).length);
+										if (p_len < 0 || isNaN(p_len))
+											p_len = 0;
+									}
+	
+									len = eval(ly_p(i).value.length - 1);
+									if (len < 0)
+										len = 1;							
+									ly_p(i).value = ly_p(i).value.substr(0, len);
+									ly_p(i).value = ly_p(i).value + "||";
+									p_len = eval(p_len - 0.5);
+									if (p_len < 0 || isNaN(p_len))
+										p_len = 0.5;
+									*/
+								}
+								
+								ly_p(i).value = ly_p(i).value+get_ly["p"];
+								p_len = eval(p_len + get_ly["p"].length);
+							}
+						}					
+					}
+
+					//alert(get_ly["p"]);
+					/*if (get_ly != false)
+					{
+						//ly = get_source_ly_p(j, source);
+						//alert(ly["ly"]+" - "+ly["p"]);
+						alert(get_ly["p"]);
+					}*/
+				}
+				
+				//else
+				//{
+					//ly_p(i).value = ly_p(i).value+"□□";
+				add_len = add_space(j, p_len, i);
+				p_len = eval(p_len + add_len);
+				//}
+				
+			}
+	
+		}
+		/*else
+		{
+			if ()
+			{
+				ly_p(i).value = "";				
+				for (var j=0; j< ly(i).value.length; j++)
+				{
+					if (is_chi(ly_word[j]) == true)
+					{
+						ly_p(i).value = ly_p(i).value+"■■"; 
+						p_len = eval(p_len + 2);
+					}
+					else
+					{
+						//ly_p(i).value = ly_p(i).value+"□□";
+						add_len = add_space(j, p_len, i);
+						p_len = eval(p_len + add_len);
+					}
+				}									
+			}	
+		}*/	
+	}
+}
+
+function ly_p_decrease(p_len, des_len, i)
+{
+	if (p_len > 0)
+	{
+		if (eval(des_len % 1) == 0.5)
+		{
+			p_len = ly_p_decrease(p_len, 1, i);
+			ly_p(i).value = ly_p(i).value + "|";
+			p_len = eval(p_len + 0.5);
+		}
+	
+		for (var j = 0; j < parseInt(des_len); j++)
+		{
+			if (ly_p(i).value.substr(ly_p(i).value.length-1, 1) != "|")
+			{
+				if (ly_p(i).value.substr(ly_p(i).value.length-1, 1) != "□")
+					alert("歌詞編輯編號第"+i+"句的拼音"+ly_p(i).value.substr(ly_p(i).value.length-1, 1)+"被覆蓋了！");
+				len = eval(ly_p(i).value.length - 1);
+				ly_p(i).value = ly_p(i).value.substr(0, len);
+			}
+			else
+			{
+				len = eval(ly_p(i).value.length - 2);
+				ly_p(i).value = ly_p(i).value.substr(0, len);
+				
+				if (ly_p(i).value.substr(ly_p(i).value.length-1, 1) != "|")
+					len = eval(ly_p(i).value.length - 1);
+				else
+					len = eval(ly_p(i).value.length - 2);
+				ly_p(i).value = ly_p(i).value.substr(0, len);
+				
+				ly_p(i).value = ly_p(i).value + "|";
+			}
+		}
+		p_len = eval(p_len - parseInt(des_len));
+		return p_len;
+	}
+	else
+		return 0;
+}
+
+
+
+function get_source_ly_p(locate, source)
+{
+	//locate的意思是，在「顯示的歌詞」中，的位置，是省略掉()根{}的作法
+	var ly = new Array;
+	ly["ly"] = "";
+	ly["p"] = "";
+	ly["source"] = "";
+
+	var ly_i = 0;
+	
+	sour_ary = source.split("");
+	
+	for (var sour_i = 0; sour_i < sour_ary.length; sour_i++)
+	{
+		/*if (sour_ary[sour_i] == "(")
+		{
+			ly["source"] = ly["source"]+sour_ary[sour_i];
+			sour_i++;
+			while(sour_ary[sour_i] != ")" && sour_i < sour_ary.length)
+			{
+				ly["source"] = ly["source"]+sour_ary[sour_i];
+				sour_i++;
+			}
+			ly["source"] = ly["source"]+sour_ary[sour_i];
+			sour_i++;
+		}
+		if (sour_ary[sour_i] == "{")
+		{
+			ly["source"] = ly["source"]+sour_ary[sour_i];
+			sour_i++;
+			while(sour_ary[sour_i] != "}" && sour_i < sour_ary.length)
+			{
+				ly["source"] = ly["source"]+sour_ary[sour_i];
+				sour_i++;
+			}
+			ly["source"] = ly["source"]+sour_ary[sour_i];
+			sour_i++;
+		}*/
+		if (sour_ary[sour_i] == "(")
+		{
+			sour_i++;
+			while (sour_ary[sour_i] != ")" && sour_i < sour_ary.length)
+				sour_i++;
+			
+			if (sour_i < sour_ary.length -1)
+				sour_i++;
+		}
+		else if (sour_ary[sour_i] == "{")
+		{
+			sour_i++;
+			while (sour_ary[sour_i] != "}" && sour_i < sour_ary.length)
+				sour_i++;
+				
+			if (sour_i < sour_ary.length -1)
+				sour_i++;
+		}
+		
+		if (ly_i == locate)
+		{
+			if (sour_ary[eval(sour_i+1)] == "(" && sour_ary[eval(sour_i+2)] != ")")
+			{
+				var j = eval(sour_i+2);
+				while (sour_ary[j] != ")" && j < sour_ary.length)
+				{
+					ly["p"] = ly["p"] + sour_ary[j];
+					j++;
+				}
+			}
+			else
+				ly["p"] = "false";
+			
+			ly["ly"] = sour_ary[sour_i];
+			var j = eval(sour_i - 1);
+			while(!is_eng(sour_ary[j]) && is_chi(sour_ary[j]) && j > -1)
+			{
+				ly["ly"] = sour_ary[j] + ly["ly"];
+				j--;
+			}
+
+			//搜尋是否有預設拼音
+			if (ly["p"] == "false" && document.getElementById("lyp_auto").checked)
+			{
+				result = search_default_ly_p(ly["ly"]);
+				if (result != "false")
+				{
+					ly["source"] = ly["source"]+"("+result+")";
+					ly["p"] = result;
+				}
+			}
+		}
+		
+		//ly["source"] = ly["source"]+sour_ary[sour_i];
+		ly_i++;
+	}
+	
+	return ly;
+}
+
+function search_default_ly_p(target_ly)
+{
+	var result = "false";
+	
+	var p = new Array;
+	p = get_search_database();
+
+	for (var i = 0; i < p.length; i++)
+	{
+		if (target_ly == p[i].split(" ")[0])
+		{
+			result = p[i].split(" ")[1];
+			break;
+		}
+	}
+
+	return result;
+}
+
+function is_chi(str)
+{
+	var check = " “~･▽1234567890-=\\qwertyuiop[]asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+|}{\":?><QWERTYUIOPASDFGHJKLZXCVBNM";
+	check = check + "　…っャぁぃピパピョバビブベボプペポブぅバガペッギグゲコザジズゼゾがぎぐげござじずプぜぞんンわワらラやヤまマはハなナたタさサかカあアエゐヌりリみミひヒにニちチしシきキいイヴるルゆユむムふフぬヌつツすスくクうウヶれレめメへヘねネてテせセけケえーをヲろよヨもモほホのノとトそソこコおオ！＠＃＄％＾＆＊（）＿＋？＞＜：”｛｝｜～‘－＝￥」「；’・。、だぢロづでどダジヅデドばびぶべぼぱぴぷぺぽゃゅぇょゎァィュェォゥ↑↓←→☆★";
+
+	var check_ary = new Array;
+	check_ary = check.split("");
+	for (var i = 0; i < check_ary.length; i++)
+	{
+		if (str == check_ary[i])
+			return false;
+	}
+
+	return true;
+}
+
+
+function add_space(ly_len, p_len, i)
+{
+	//if (typeof(signal) == "undefined")
+	//	signal = "□";
+	
+	var add_len = 0;
+	
+	//拼音計算應該有的長度
+	var temp = ly(i).value.split("");
+	var should_len = 0;
+
+	for (var j = 0; j < eval(ly_len+1); j++)
+	{
+		if (is_eng(temp[j]))
+		{
+			should_len = eval(should_len + 0.5);
+		}
+		else
+			should_len = eval(should_len + 1);
+	}
+	//alert(ly_len+" - "+ly(i).value+" - "+should_len);
+	
+	var gap = eval(eval(should_len)*2) - p_len;
+	if (!(gap < 0))
+	{
+		temp = gap % 1;
+		if (temp == "0.5")
+		{
+			ly_p(i).value = ly_p(i).value + "|";
+			add_len = eval(add_len + 0.5);		
+		}
+		
+		num = parseInt(gap);
+		for (var j = 0; j < num; j++)
+		{
+			ly_p(i).value = ly_p(i).value+"□";		
+		}
+
+		add_len = eval(add_len + num);
+	}
+	
+	return add_len;
+}
+
+//將毫秒分解，傳回分、秒、毫秒
+function tm_to_time(tm)
+{
+	var ti = new Array;
+	//取得毫秒
+	ti["minsec"] = parseInt((tm%6000)%100);
+	if (ti["minsec"] < 10)
+	{
+		ti["minsec"] = "0"+ti["minsec"];
+	}
+
+	//取得秒
+	//var tm_sec = eval((tm%6000)/100);
+	ti["sec"] = parseInt((tm%6000)/100); // tm_sec.split(".")[0];
+	if (ti["sec"] < 10)
+	{
+		ti["sec"] = "0"+ti["sec"];
+	}
+
+	//取得分鐘
+	//var tm_min = tm/6000;
+	ti["min"] = parseInt(tm/6000); //tm_min.split(".")[0];
+	if (ti["min"] < 10)
+	{
+		ti["min"] = "0"+ti["min"];
+	}
+
+	return ti;
+}
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+
+/***以下是歌詞部分的存取與控制***/
+function ly(no)
+{
+	return document.getElementById("ly["+no+"]");
+}
+
+function ly_p(no)
+{
+	return document.getElementById("ly_p["+no+"]");
+}
+
+function ly_s(no)
+{
+	return document.getElementById("ly_s["+no+"]");
+}
+
+function ly_i(no)
+{
+	return document.getElementById("ly_i["+no+"]");
+}
+
+function ly_o(no)
+{
+	return document.getElementById("ly_o["+no+"]");
+}
+
+function ly_fi(no)
+{
+	return document.getElementById("fad_in["+no+"]");
+}
+	
+function ly_fo(no)
+{
+	return document.getElementById("fad_out["+no+"]");
+}
+
+function ly_hidden()
+{
+	for (var i = 0; i < arg['ly_number']; i++)
+		ly_s(i).style.display = "none";
+}
+function ly_show()
+{
+	for (var i = 0; i < arg['ly_number']; i++)
+	{
+		if (trim(ly(i).value)!="" && ly(i).value != "[Break Point!]")
+			ly_s(i).style.display = "block";
+	}
+}
+function ly_show_all()
+{
+	for (var i = 0; i < arg['ly_number']; i++)
+	{
+		if (ly(i).value != "")
+			ly_s(i).style.display = "block";		
+	}	
+}
+
+function ly_all_clean()
+{
+	var check = confirm("是否確定要清空歌詞？");
+	
+	if (check)
+	{
+	  prohis_start();
+	  prohis_input("清空歌詞中");
+	  setTimeout('ly_all_clean2()', 1);
+	}
+}
+
+function ly_all_clean2()
+{
+		for (var i = 0; i < arg['ly_number']; i++)
+		{
+			ly(i).value = "";
+			ly_p(i).value = "";
+	
+			ly_i(i).value = "";
+			ly_o(i).value = "";
+	
+			ly_fi(i).value = "";
+			ly_fo(i).value = "";
+			
+			/*document.getElementById("ly_sv["+i+"][0][0]").checked = false;
+			document.getElementById("ly_sv["+i+"][0][1]").checked = false;
+			document.getElementById("ly_sv["+i+"][0][2]").checked = false;
+			document.getElementById("ly_sv["+i+"][1][0]").checked = false;
+			document.getElementById("ly_sv["+i+"][1][1]").checked = false;
+			document.getElementById("ly_sv["+i+"][1][2]").checked = false;
+			document.getElementById("ly_sv["+i+"][2][0]").checked = false;
+			document.getElementById("ly_sv["+i+"][2][1]").checked = false;
+			document.getElementById("ly_sv["+i+"][2][2]").checked = false;*/
+			
+			ly_s(i).style.display = "none";
+		}
+		
+		makely_hidden();
+		
+	prohis_end();
+}
+
+function ly_spare_clean(no)
+{
+	for (var i = no; i < arg['ly_number']; i++)
+	{
+		ly(i).value = "";
+		ly_p(i).value = "";
+
+		ly_i(i).value = "";
+		ly_o(i).value = "";
+
+		ly_fi(i).value = "";
+		ly_fo(i).value = "";
+
+		ly_s(i).style.display = "none";
+	}
+}
+function check_overload(id)
+{
+	var over_load = document.getElementById("over_load").value;
+
+	//計算字數，英文字數為0.5
+	var over_temp = no_parent(trim(document.getElementById(id).value)).split("");
+	over_num = 0;
+	for (var over_i = 0; over_i < over_temp.length; over_i++)
+	{
+		if (is_eng(over_temp[over_i]))
+			over_num = over_num + 0.5;
+		else
+			over_num = over_num + 1;
+	}
+
+	if (over_num > over_load)
+		document.getElementById(id).style.color="red";
+	else
+		document.getElementById(id).style.color="black";	
+}
+function check_overload_p(id)
+{
+	var over_load = document.getElementById("over_load").value*2;
+
+	//計算字數，|為0.5
+	var over_temp = no_parent(trim(document.getElementById(id).value)).split("");
+	over_num = 0;
+	for (var over_i = 0; over_i < over_temp.length; over_i++)
+	{
+		if (over_temp[over_i] == "|")
+			over_num = over_num + 0.5;
+		else
+			over_num = over_num + 1;
+	}
+	
+	if (over_num > over_load)
+		document.getElementById(id).style.color="red";
+	else
+		document.getElementById(id).style.color="black";	
+}
+function ly_add()
+{
+	document.getElementById("edit_ly").style.display = "block";
+	
+	var i = 0;
+	while (document.getElementById("ly["+i+"]").value.length > 1)
+		i++;
+	
+	document.getElementById("ly_s["+i+"]").style.display = "block";
+	document.getElementById("ly["+i+"]").focus();
+}
+function get_format()
+{
+	var format = 1;
+	
+	if (document.getElementById("trans_style[0]").checked)
+		format = 0;
+	else if (document.getElementById("trans_style[1]").checked)
+		format = 1;
+	else if (document.getElementById("trans_style[2]").checked)
+		format = 1;
+	else if (document.getElementById("trans_style[3]").checked)
+		format = 1;
+	
+	return format;
+}
+
+function lyal_left(no)
+{
+	ly(no).style.textAlign = "left";
+	ly_p(no).style.textAlign = "left";
+}
+function lyal_right(no)
+{
+	ly(no).style.textAlign = "right";
+	ly_p(no).style.textAlign = "right";
+}
+function lyal_center(no)
+{
+	ly(no).style.textAlign = "center";
+	ly_p(no).style.textAlign = "center";
+}
+function lyal_left_all()
+{
+	for (var i =0; i < arg['ly_number']; i++)
+		lyal_left(i);
+}
+function lyal_right_all()
+{
+	for (var i =0; i < arg['ly_number']; i++)
+		lyal_right(i);
+}
+function lyal_center_all()
+{
+	for (var i =0; i < arg['ly_number']; i++)
+		lyal_center(i);	
+}
+function lyal_control(y, x)
+{
+	if (x == 0)
+		lyal_left_all();
+	else if (x == 1)
+		lyal_center_all();
+	else
+		lyal_right_all();
+	
+	for (var i =0; i < arg['ly_number']; i++)
+	{
+		if (ly_s(i).style.display == "block")
+			document.getElementById("ly_sv["+i+"]["+y+"]["+x+"]").checked = true;
+	}
+}
+/*
+function ly_show_bp()
+{
+	if (document.getElementById("show_bp") && document.getElementById("edit_ly").style.display == "block")
+	{
+		for (var i =0; i < arg['ly_number']; i++)
+		{
+			if (ly(i).value == "[Break Point!]")
+				ly(i).style.display = "block";
+		}
+	}
+}*/
+function makely_hidden()
+{
+	document.getElementById("edit_ly").style.display = "none";
+}
+function makely_show()
+{
+	if (document.getElementById("ly[0]").value != "")
+		document.getElementById("edit_ly").style.display = "block";
+	else
+		alert("歌詞編輯裡面沒有資料");
+}
+function fifo_adjust()
+{
+	if (document.getElementById("fifo_extend").checked)
+		var extime = document.getElementById("fifo_extime").value;
+	else
+		var extime = 1;
+		
+	var fifo_multi = document.getElementById("fifo_multi").value;
+	var fifo_fix = document.getElementById("fifo_fix").value;
+	
+	for (var i = 0; i< arg['ly_number']; i++)
+	{
+		var fi = document.getElementById("fad_in["+i+"]").value;
+		var fo = document.getElementById("fad_out["+i+"]").value;
+		
+		if (ly_s(i).style.display == "block")
+		{
+			if (document.getElementById("fifo[0]").checked)
+				document.getElementById("fad_in["+i+"]").value = fi * fifo_multi;
+			else if (document.getElementById("fifo[1]").checked) 
+				document.getElementById("fad_in["+i+"]").value = fifo_fix;
+
+			if (fi < fo)
+				document.getElementById("fad_out["+i+"]").value = document.getElementById("fad_in["+i+"]").value * extime;
+			else
+				document.getElementById("fad_out["+i+"]").value = document.getElementById("fad_in["+i+"]").value;			
+		}
+	}
+
+}
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+function selec(id)
+{
+	document.getElementById(id).focus();
+	document.getElementById(id).select();
+}
+function clean(id)
+{
+	if (document.getElementById(id).value != "")
+	{
+		if (window.confirm("你確定要清空資料？"))
+		{
+			document.getElementById(id).value = "";
+			document.getElementById(id).focus();	
+		}	
+	}
+	else
+		alert("沒有資料");
+}
+function reset_ly(id)
+{
+	if (window.confirm("你確定要重置資料輸出結果？"))
+		document.getElementById(id).value = document.getElementById(id).defaultValue;
+}
+function focus_next_ly_p(id)
+{
+	while (ly_p(eval(id+1)).style.display != "block")
+		id++;
+	
+	ly_p(eval(id+1)).focus();
+}
+//一些說明的設定
+function show_hidden(id)
+{
+	if (document.getElementById(id).style.display != "none")
+		document.getElementById(id).style.display = "none";
+	else
+		document.getElementById(id).style.display = "block";
+}
+function check_show_hidden(check, target)
+{
+	if (document.getElementById(check).checked)
+		document.getElementById(target).style.display = "none";
+	else
+		document.getElementById(target).style.display = "block";
+}
+
+//顏色預覽
+function style_priview()
+{
+	var lys = new Array;
+	lys = get_style();
+	//alert(lys["fontname"]);
+	
+	document.getElementById("priview").style.fontFamily = lys["fontname"];
+	document.getElementById("priview").style.fontSize = (lys["fontsize"])/2+"px";
+	
+	document.getElementById("priview").style.color = "#"+trans_color(lys["primarycolour"]);
+	document.getElementById("priview").style.backgroundColor = "#"+trans_color(lys["backcolour"]);
+	
+	if (lys["bold"] != 0)
+		document.getElementById("priview").style.fontWeight = "bold";
+	else
+		document.getElementById("priview").style.fontWeight = "normal";
+
+	if (lys["italic"] != 0)
+		document.getElementById("priview").style.fontStyle = "italic";
+	else
+		document.getElementById("priview").style.fontStyle = "normal";
+	
+	document.getElementById("priview").style.borderWidth = (lys["outline"])/2+"pt";
+	document.getElementById("priview").style.padding = (lys["margin"])/2+"px";
+	
+	document.getElementById("priview").style.width = (eval(eval(lys["margin"])*document.getElementById("priview").value.length+eval(lys["fontsize"])))/2+"px";
+}
+function trans_color(color)
+{
+	/*var result = color.substr(6, 2);
+	result = result+color.substr(4, 2);
+	result = result+color.substr(2, 2);*/
+
+	var result = color.substr(6, 2);
+	result = result+color.substr(4, 2);
+	result = result+color.substr(2, 2);
+	
+	return result;
+}
+function trans_color_back(color)
+{
+	var result = "&H"+color.substr(4, 2);
+	result = result+color.substr(2, 2);
+	result = result+color.substr(0, 2);
+	
+	return result;
+}
+
+//輸入範例
+function example()
+{
+	tmedt_to_source();
+	
+	if (document.getElementById("source").value != ""&& document.getElementById("source").value != "請輸入標註有Timemark的歌詞")
+		source_check = confirm("來源文字框內有資料，是否要以範例資料覆蓋？")
+	else
+		source_check = true;
+	
+	if (source_check)
+	{
+		document.getElementById("source").value = "";
+		/*
+		document.getElementById("source").value = document.getElementById("source").value+"[00:03:95]きっと巡(めぐ)り合(あ)わせた"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:07:63]天使(てんし)のほんの気(き)まぐれだよ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:11:81]散歩道(さんぽみち)で吹(ふ)いた砂風(すなかぜ)"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:16:14]心(こころ)が逸(はや)っていく"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+""+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:21:29]切(せつ)なさ　はぐらかすのには"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:25:89]慣(なや)れているのに"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:29:38]こんなときだけ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:31:88]涙(なみだ)が止(と)められないのは"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:35:56]何故(な　ぜ)だろう？"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:37:52]"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:38:27]曖昧(あいまい)な季節(きせつ)だからこそ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:42:15]かすかな手触(てさわ)り　心(こころ)で感(かん)じて"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:46:51]限(かぎ)られた時(とき)を生(い)きるから"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:50:74]たたんだ翼(つばさ)を今(いま)すぐ広(ひろ)げて"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:55:17]たとえ虹(にじ)が壊(こわ)れても"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:59:48]空(そら)は待(ま)っている"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[01:04:28]";
+		*/
+		document.getElementById("source").value = document.getElementById("source").value+"[00:03:95]きっと巡り合わせた"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:07:63]天使のほんの気まぐれだよ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:11:81]散歩()道で吹いた砂風"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:16:14]心が逸っていく[00:21:29]"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+""+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:21:29]切(せつ)なさ　はぐらかすのには"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:25:89]慣れているのに"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:29:38]こんなときだけ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:31:88]涙が止められないのは"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:35:56]何故だろう？"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:37:52]"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:38:27]曖昧な季節だからこそ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:42:15]かすかな手触り　心で感じて"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:46:51]限られた時を生きるから"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:50:74]たたんだ翼を今すぐ広げて"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:55:17]たとえ虹が壊れても"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:59:48]空は待っている"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[01:04:28]";		
+		
+		document.getElementById("source_change").value = "true";
+	}
+}
+
+function example2()
+{
+	tmedt_to_source();
+	
+	if (document.getElementById("source").value != "" && document.getElementById("source").value != "請輸入標註有Timemark的歌詞")
+		source_check = confirm("來源文字框內有資料，是否要以範例資料覆蓋？")
+	else
+		source_check = true;
+	
+	if (source_check)
+	{
+		document.getElementById("source").value = "";
+		/*
+		document.getElementById("source").value = document.getElementById("source").value+"[00:03:95]きっと巡(めぐ)り合(あ)わせた"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:07:63]天使(てんし)のほんの気(き)まぐれだよ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:11:81]散歩道(さんぽみち)で吹(ふ)いた砂風(すなかぜ)"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:16:14]心(こころ)が逸(はや)っていく"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+""+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:21:29]切(せつ)なさ　はぐらかすのには"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:25:89]慣(なや)れているのに"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:29:38]こんなときだけ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:31:88]涙(なみだ)が止(と)められないのは"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:35:56]何故(な　ぜ)だろう？"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:37:52]"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:38:27]曖昧(あいまい)な季節(きせつ)だからこそ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:42:15]かすかな手触(てさわ)り　心(こころ)で感(かん)じて"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:46:51]限(かぎ)られた時(とき)を生(い)きるから"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:50:74]たたんだ翼(つばさ)を今(いま)すぐ広(ひろ)げて"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:55:17]たとえ虹(にじ)が壊(こわ)れても"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:59:48]空(そら)は待(ま)っている"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[01:04:28]";
+		*/
+		document.getElementById("source").value = document.getElementById("source").value+"[00:03:95]きっと巡(めぐ)り合(あ)わせた"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:07:63]天使(てんし)のほんの気(き)まぐれだよ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:11:81]散歩道(さんぽみち)で吹(ふ)いた砂風(すなかぜ)"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:16:14]心(こころ)が逸(はや)っていく[00:21:29]"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+""+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:21:29]切(せつ)なさ　はぐらかすのには"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:25:89]慣(な)れているのに"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:29:38]こんなときだけ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:31:88]涙(なみだ)が止(と)められないのは"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:35:56]何故(な　ぜ)だろう？"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:37:52]"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:38:27]曖昧(あいまい)な季節(きせつ)だからこそ"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:42:15]かすかな手触(てざわ)り　心(こころ)で感(かん)じて"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:46:51]限(かぎ)られた時(とき)を生(い)きるから"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:50:74]たたんだ翼(つばさ)を今(いま)すぐ広(ひろ)げて"+"\n";
+		
+		document.getElementById("source").value = document.getElementById("source").value+"[00:55:17]たとえ虹(にじ)が壊(こわ)れても"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:59:48]空(そら)は待(ま)っている"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[01:04:28]";		
+		
+		document.getElementById("source_change").value = "true";
+	}
+}
+
+-->
+</script>
+
+<style type="text/css">BODY {
+	TEXT-ALIGN: center; marign: auto 5%
+}
+#source {
+	CLEAR: both; DISPLAY: block; MARGIN: 2%; WIDTH: 90%; HEIGHT: 15em
+}
+#target {
+	CLEAR: both; DISPLAY: block; MARGIN: 2%; WIDTH: 90%; HEIGHT: 15em
+}
+#target {
+	HEIGHT: 15em
+}
+#ly_arg {
+	CLEAR: both; MARGIN: auto auto auto 5em; WIDTH: 90%; TEXT-ALIGN: left
+}
+.ly_style {
+	CLEAR: both; MARGIN: auto auto auto 5em; WIDTH: 90%; TEXT-ALIGN: left
+}
+#output {
+	CLEAR: both; MARGIN: auto auto auto 5em; WIDTH: 90%; TEXT-ALIGN: left
+}
+.custom_form {
+	WIDTH: 90%; TEXT-ALIGN: left
+}
+.custom_form DT {
+	FLOAT: left; MARGIN: 0.2em; WIDTH: 9em
+}
+.style_custom1 {
+	FLOAT: left
+}
+.style_custom0 {
+	FONT-SIZE: 0.9em; MARGIN-LEFT: 2%
+}
+.style_custom1 {
+	FONT-SIZE: 0.9em; MARGIN-LEFT: 2%
+}
+HR {
+	CLEAR: both; MARGIN: 1em auto
+}
+#edit_ly {
+	DISPLAY: none
+}
+#make_ly {
+	OVERFLOW-Y: scroll; FLOAT: right; MARGIN: auto; WIDTH: 670px; HEIGHT: 580px; TEXT-ALIGN: center
+}
+#make_ly_control {
+	WIDTH: 200px; HEIGHT: 50px; TEXT-ALIGN: center
+}
+#make_ly_control INPUT {
+	FONT-SIZE: 0.8em; MARGIN-BOTTOM: 2px
+}
+#make_ly_control #lyal_control {
+	FONT-SIZE: 0.8em; MARGIN-BOTTOM: 5px
+}
+#make_ly_control #fifo_adjust {
+	FONT-SIZE: 0.8em; MARGIN: 0px auto 0px 20%; WIDTH: 200px; TEXT-ALIGN: left
+}
+#make_ly_control #fifo_adjust .text {
+	WIDTH: 20px
+}
+.ly {
+	FONT-SIZE: 32px; MARGIN: 0px 0px 0.5em; WIDTH: 81%; FONT-FAMILY: Fixedsys; TEXT-DECORATION: underline
+}
+.ly_p {
+	FONT-SIZE: 16px; MARGIN: 0px; WIDTH: 81%; FONT-FAMILY: Fixedsys; TEXT-DECORATION: underline
+}
+.ly_s {
+	CLEAR: both; DISPLAY: none; FONT-SIZE: 10pt
+}
+.ly_st .ly_inout {
+	WIDTH: 50px
+}
+.ly_st .fad_inout {
+	WIDTH: 30px
+}
+.ly_st INPUT {
+	BORDER-RIGHT: #666666 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #666666 1px solid; PADDING-LEFT: 0px; FONT-SIZE: 8pt; PADDING-BOTTOM: 0px; BORDER-LEFT: #666666 1px solid; MARGIN-RIGHT: 10px; PADDING-TOP: 0px; BORDER-BOTTOM: #666666 1px solid; TEXT-ALIGN: center
+}
+.ly_sv {
+	MARGIN-TOP: 3px; FLOAT: left; TEXT-ALIGN: center
+}
+#copyright {
+	DISPLAY: none; FONT-SIZE: 0.8em; MARGIN: 1em auto; WIDTH: 90%; PADDING-TOP: 0.5em; TEXT-ALIGN: center
+}
+#edit {
+	FONT-SIZE: 0.8em; MARGIN: 1em auto; WIDTH: 80%; TEXT-ALIGN: left
+}
+#edit DD {
+	MARGIN-TOP: 1em; MARGIN-LEFT: 2em; WHITE-SPACE: pre
+}
+H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 1.5em; FONT-SIZE: 1.5em; PADDING-BOTTOM: 0.1em; WIDTH: 87%; PADDING-TOP: 0px; BORDER-BOTTOM: black 1px solid; TEXT-ALIGN: left; margih: auto
+}
+H1 A {
+	PADDING-RIGHT: 3em; FONT-WEIGHT: normal; FONT-SIZE: 0.5em; FLOAT: right; PADDING-TOP: 0.8em
+}
+H1 A:visited {
+	COLOR: blue
+}
+H2 {
+	DISPLAY: inline; FONT-SIZE: 1em
+}
+.hint {
+	MARGIN-TOP: 0.5em; PADDING-LEFT: 6%; FLOAT: left; MARGIN-BOTTOM: 0.5em; WIDTH: 70%; TEXT-ALIGN: left
+}
+.hint A {
+	BORDER-RIGHT: #ffffff 0px solid; BORDER-TOP: #ffffff 0px solid; FONT-SIZE: 0.8em; BORDER-LEFT: #ffffff 0px solid; CURSOR: hand; COLOR: blue; BORDER-BOTTOM: #ffffff 0px solid; TEXT-DECORATION: underline
+}
+.help {
+	CLEAR: both; PADDING-LEFT: 4%; FONT-SIZE: 0.8em; MARGIN-BOTTOM: 0.5em; TEXT-ALIGN: left
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 10.5pt; PADDING-BOTTOM: 0px; MARGIN: 5px 0px 0px; PADDING-TOP: 0px
+}
+#trans_style {
+	MARGIN: auto auto auto 5em; TEXT-ALIGN: left
+}
+#lyal_control INPUT {
+	FONT-SIZE: 8px; WIDTH: 18px
+}
+#priview {
+	FLOAT: right;
+	margin:0;
+	padding:0;
+}
+.custom_list {
+	CLEAR: left; MARGIN-TOP: 0px
+}
+.hint_help {
+	BORDER-RIGHT: #ffffff 0px solid; BORDER-TOP: #ffffff 0px solid; FONT-SIZE: 0.8em; BORDER-LEFT: #ffffff 0px solid; CURSOR: hand; COLOR: blue; BORDER-BOTTOM: #ffffff 0px solid; TEXT-DECORATION: underline
+}
+</style>
+
+<meta content="MSHTML 6.00.2900.2802" name="GENERATOR">
+
+<form action="http://kfn.myweb.hinet.net/timemark_to_ssa(temp).htm" method="get">
+<h1><a href="mailto:puddingchen.35@gmail.com?subject=[Timemark%20to%20SSA]">[問題回報]</a> <a href="http://140.136.152.127/oped/upload/[%C2%A4u%C2%A8%C3%A3]/timemark_to_ssa.htm">[下載本程式]</a> 
+Timemark to SSA (var 3.12+) </h1>
+<div class="hint" style="WIDTH: 60%">
+<h2>來源歌詞(Accesskey: Alt+1 or Ctrl+1)：</h2><a onclick="show_hidden(&#39;tm_help&#39;)">(提示說明) </a></div>
+<div class="control"><!--<input type="submit" value="重新讀取" />--><input style="WIDTH: 70px" onclick="example()" type="button" value="輸入範例"> 
+<input style="WIDTH: 100px" onclick="example2()" type="button" value="輸入拼音範例"> <input onclick="selec(&#39;source&#39;)" type="button" value="全選"> <input onclick="clean(&#39;source&#39;)" type="button" value="清空"> </div>
+<ul class="help" id="tm_help" style="DISPLAY: none">
+  <li>所謂Timemark是指[00:00:00]這樣子的文字記號 
+  </li><li>程式轉換時，會將各行視為一個歌詞，並判定開頭和結尾的timemark，歌詞中間的Timemark會被當成歌詞本身的一部份 
+  </li><li>結尾的Timemark以及空行的Timemark會被視為[Break Point!]，而對字幕的進出時間點以及字幕的位置會造成複雜的影響 
+  </li><li>為避免非預期的情況產生，請先整理好歌詞再做轉換 </li></ul>
+  
+<table style="width:100%">
+  <tbody><tr>
+    <td style="width:320px; vertical-align: top ">
+
+<!---------------------------------------------------------------------------->
+<!--播放器-->
+
+<object id="mplayer" classid="clsid:22d6f312-b0f6-11d0-94ab-0080c74c7e95" style="height: 285px;width:320px">
+<param name="filename" value="">
+<param name="ShowControls" value="True">
+<param name="PlayCount" value="0">
+</object>
+<br>
+<input type="file" id="file" onchange="filename_change()" style="width:320px ">
+
+<script type="text/javascript">
+<!--
+function filename_change()
+{
+  //alert("file://"+ document.getElementById("file").value);
+  var filename = "file://"+ document.getElementById("file").value;
+  
+  var subfn = filename.split(".");
+  subfilename = subfn[subfn.length -1];
+  //alert(subfilename);
+  if (subfilename == "avi" || subfilename == "mpeg"
+    || subfilename == "wmv" || subfilename == "rmvb"
+	|| subfilename == "mpg" || subfilename == "rm"
+	|| subfilename == "mp3" || subfilename == "wma"
+	|| subfilename == "wav" || subfilename == "vob"
+	)
+    document.getElementById("mplayer").filename = filename;
+}
+
+-->
+</script>
+	
+	</td>
+	<td>
+
+<!---------------------------------------------------------------------------->
+<!--標籤-->
+<span class="soutm_tag" style="background-color:#000000 " onclick="tmedt_to_source()">歌詞編輯模式</span>
+<span class="soutm_tag" style="background-color:#0000FF " onclick="source_to_tmedt()">時間標籤編輯模式</span>
+<br>
+
+  <style type="text/css">
+  .soutm_tag	{
+  	color:#FFFFFF;
+	font-size: 10pt;
+	text-decoration:none;
+	padding:3px;
+	cursor: pointer;
+	
+  }
+  </style>
+
+<!---------------------------------------------------------------------------->
+<!--歌詞編輯模式-->
+
+<textarea id="source" onkeydown="source_temdt_switch()" style="width: 100%; margin:auto;height: 302px; 
+  border:3px solid black;margin:0;padding:0;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 10pt; letter-spacing:0;
+  display:block" accesskey="1" name="source" wrap="off" onfocus="source_onfocus();" onchange="source_onchange();">請輸入標註有Timemark的歌詞</textarea>
+
+<!---------------------------------------------------------------------------->
+<!--時間標籤編輯模式-->
+
+<div onkeydown="source_temdt_switch()" style="OVERFLOW-Y: scroll;height: 287px; width: auto;
+  border:3px solid blue;margin:0;padding:0;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 12pt; letter-spacing:0;
+  display:none;" id="tmedt">
+</div>
+
+  <style type="text/css">
+  <!--
+  .tm_editor	{
+    /*width: 600px;*/
+	display:block;
+	width: 100%;
+	margin:0;padding:0;
+	border: 0px none white;
+  }
+  -->
+  </style>
+  
+  <script type="text/javascript">
+  <!--
+  //alert(event.ctrlKey);
+  function editor_keydown(id)
+  {
+	//alert(event.keyCode);
+	
+	//up 38
+	//down 40
+	if (event.keyCode == 38)
+    {
+  	  event.returnValue=false;
+	  if (id != 0)
+	    document.getElementById("tm_editor["+(id-1)+"]").focus();
+    }
+	else if (event.keyCode == 40)
+	{
+	  event.returnValue=false;
+	  if (id != source_row_nums - 1)
+	    document.getElementById("tm_editor["+(eval(id)+1)+"]").focus();
+	}
+
+	//space 32
+	//enter 13
+	//ctrl 17
+	else if (event.keyCode == 32)
+	{
+	  event.returnValue=false;
+	  htm_add(id);
+	}
+	else if (event.keyCode == 13 || event.keyCode == 17)
+	{
+	  event.returnValue=false;
+	  //alert("enter");
+	  ftm_add(id);
+	  
+	  //然後跳下一行
+	  if (id != source_row_nums - 1)
+	    document.getElementById("tm_editor["+(eval(id)+1)+"]").focus();
+	}
+	
+	//del 46
+	//backspace 8
+	else if (event.keyCode == 46)
+	{
+	  event.returnValue=false;
+	  htm_remove(id);
+	}
+	else if (event.keyCode == 8)
+	{
+	  event.returnValue=false;
+	  ftm_remove(id);
+	}
+
+  }
+  
+  //取得現在影片播放時間
+  function get_cp()
+  {
+    var cp = document.getElementById('mplayer').currentPosition;
+	return parseInt(cp * 100);
+  }
+  
+  //加入Head TM
+  function htm_add(id)
+  {
+    var value = trim(document.getElementById("tm_editor["+id+"]").value);
+	
+	var lyric = get_lyric(value);
+	/*
+	if (is_tm_head(value))
+	  var htm = get_head_tm(value);
+	else
+	  var htm = "";
+	*/
+
+	
+	var htm = "["+tm_to_time(get_cp())["min"]+":"+tm_to_time(get_cp())["sec"]+":"+tm_to_time(get_cp())["minsec"]+"]";
+	
+	if (is_tm_foot(value))
+	{
+	  var tm = get_foot_tm(value);
+	  var ftm = "["+tm_to_time(tm)["min"]+":"+tm_to_time(tm)["sec"]+":"+tm_to_time(tm)["minsec"]+"]";
+	}
+	else
+	  var ftm = "";
+	
+	document.getElementById("tm_editor["+id+"]").value = htm + trim(lyric) + ftm;
+  }
+  
+  function ftm_add(id)
+  {
+    var value = trim(document.getElementById("tm_editor["+id+"]").value);
+	
+	var lyric = get_lyric(value);
+	
+	if (is_tm_head(value))
+	{
+	  var tm = get_head_tm(value);
+	  var htm = "["+tm_to_time(tm)["min"]+":"+tm_to_time(tm)["sec"]+":"+tm_to_time(tm)["minsec"]+"]";
+	}
+	else
+	  var htm = "";
+	
+	var ftm = "["+tm_to_time(get_cp())["min"]+":"+tm_to_time(get_cp())["sec"]+":"+tm_to_time(get_cp())["minsec"]+"]";
+	
+	/*
+	if (is_tm_foot(value))
+	  var ftm = get_foot_tm(value);
+	else
+	  var ftm = "";
+	*/
+	document.getElementById("tm_editor["+id+"]").value = htm + trim(lyric) + ftm;  
+  }
+  
+  function htm_remove(id)
+  {
+    var value = document.getElementById("tm_editor["+id+"]").value;
+	
+	var lyric = get_lyric(value);
+	/*
+	if (is_tm_head(value))
+	  var htm = get_head_tm(value);
+	else
+	  var htm = "";
+	*/
+	var htm = "";
+	
+	
+	if (is_tm_foot(value))
+	{
+	  var tm = get_foot_tm(value);
+	  var ftm = "["+tm_to_time(tm)["min"]+":"+tm_to_time(tm)["sec"]+":"+tm_to_time(tm)["minsec"]+"]";
+	}
+	else
+	  var ftm = "";
+	
+	document.getElementById("tm_editor["+id+"]").value = htm + trim(lyric) + ftm;  
+  }
+  
+  function ftm_remove(id)
+  {
+    var value = document.getElementById("tm_editor["+id+"]").value;
+	
+	var lyric = get_lyric(value);
+	
+	if (is_tm_head(value))
+	{
+	  var tm = get_head_tm(value);
+	  var htm = "["+tm_to_time(tm)["min"]+":"+tm_to_time(tm)["sec"]+":"+tm_to_time(tm)["minsec"]+"]";
+	}
+	else
+	  var htm = "";
+	
+	var ftm = "";
+	
+	/*
+	if (is_tm_foot(value))
+	  var ftm = get_foot_tm(value);
+	else
+	  var ftm = "";
+	*/
+	document.getElementById("tm_editor["+id+"]").value = htm + trim(lyric) + ftm;    
+  }
+  
+  -->
+  </script>
+
+<!---------------------------------------------------------------------------->
+<!--模式轉換-->
+
+<script type="text/javascript">
+<!--
+function source_to_tmedt()
+{
+  var source = document.getElementById("source").innerHTML;
+  var source_in_line = source.split("\n");
+  
+  var tmedt = document.getElementById("tmedt");
+  tmedt.innerHTML = "";
+  
+  source_row_nums = source_in_line.length;
+  
+  for (var i = 0; i < source_in_line.length; i++)
+  {
+    tmedt_field = '<input class="tm_editor" type="text" onkeydown="editor_keydown('+i+')" id="tm_editor['+i+']" value="'+trim(source_in_line[i])+'" onChange="tmedt_to_source();source_to_tmedt()" />';
+	tmedt.innerHTML = tmedt.innerHTML + tmedt_field + "\n";
+  }
+  
+  //關閉與打開 
+  document.getElementById("source").style.display = "none";
+  document.getElementById("tmedt").style.display = "block";
+  document.getElementById("tm_editor[0]").focus();
+
+  document.getElementById("source_help").style.display = "none";
+  document.getElementById("tmedt_help").style.display = "block";
+
+  //document.getElementById("source_to_tmedt").style.display = "none";
+  //document.getElementById("tmedt_to_source").style.display = "inline";
+}
+
+function tmedt_to_source()
+{
+  //先確認TM editor裡面有東西
+  if (typeof(source_row_nums) == "undefined")
+    return;
+  
+  //待存入source裡面的資料
+  var source = "";
+  
+  //開始過濾每一個有資料的行數
+  for (var i = 0; i < source_row_nums; i++)
+  {
+    tm_editor = document.getElementById("tm_editor["+i+"]").value;
+	source = source + trim(tm_editor) + '\n';
+  }
+
+  document.getElementById("source").value = source;
+
+  //關閉與打開
+  document.getElementById("tmedt").style.display = "none";
+  document.getElementById("source").style.display = "inline";
+  
+  document.getElementById("tmedt_help").style.display = "none";
+  document.getElementById("source_help").style.display = "block";
+  
+  document.getElementById("source").focus();
+  
+  //document.getElementById("source_to_tmedt").style.display = "inline";
+  //document.getElementById("tmedt_to_source").style.display = "none";
+}
+
+-->
+</script>
+
+<!---------------------------------------------------------------------------->
+<!--轉換啟動-->
+
+<!--
+<br />
+<input type="button" onclick="source_to_tmedt()" id="source_to_tmedt" value="轉換到時間軸編輯模式" style="border-color:#0000CC " />
+<input type="button" onclick="tmedt_to_source()" id="tmedt_to_source" value="轉換到歌詞編輯模式" style="display:none; " />
+-->
+
+<style type="text/css">
+<!--
+  #source_to_tmedt, #tmedt_to_source	{
+    border:1px solid black;
+	padding:0;
+	background-color:#FFFFFF;
+  }
+-->
+</style>
+
+<script type="text/javascript">
+<!--
+function source_temdt_switch()
+{
+  if (event.ctrlKey && event.keyCode == 77)
+  {
+    event.returnValue = false;
+	
+	if (document.getElementById("source").style.display != "none") {
+	  source_to_tmedt();
+	}
+	else {
+	  tmedt_to_source();
+	}
+  }
+}
+-->
+</script>
+
+<!---------------------------------------------------------------------------->
+<!--說明-->
+
+<ul id="source_help">
+  <li>ctrl-m: 切換歌詞編輯模式與時間標籤編輯模式</li>
+</ul>
+
+<ul id="tmedt_help" style="display:none">
+  <li>ctrl-m: 切換歌詞編輯模式與時間標籤編輯模式</li>
+  (以下功能，可以按著shift鍵以暫時失效)
+  <li>space(空白鍵): 在該行開頭加入時間標籤</li>
+  <li>ctrl或enter: 在該行結尾加入時間標籤</li>
+  <li>delete: 刪除該行開頭的時間標籤</li>
+  <li>backspace(←): 刪除該行結尾的時間標籤</li>
+</ul>
+
+<!---------------------------------------------------------------------------->	
+	
+	</td>
+  </tr>
+</tbody></table>
+
+  <script type="text/javascript">
+  <!--
+  function source_onfocus()
+  {	
+	if ($('#source').val() == "請輸入標註有Timemark的歌詞") {
+	  $('#source').val('');
+	}
+  }
+  
+  function source_onchange()
+  {
+    $('#source_change').val('true');
+	source_end_tm($('#source').val());
+  }
+  
+  function source_end_tm(source)
+  {
+	//alert(source);
+	if (is_tm_foot(source))
+	{
+	  return true;
+	}
+	else
+	{	  
+	  if (source != "" && source != "請輸入標註有Timemark的歌詞") {
+	    alert("來源歌詞檔結尾沒有Timemark，TTS無法進行運算");
+	  }
+	  return false;
+	}
+  }
+  -->
+  </script>
+
+</form>
+<form><input id="source_change" type="hidden" value="true"> 
+<div class="hint">
+<h2>參數與格式設定 (Accesskey: Alt+2 or Ctrl+2)：您可以取消預設勾選來進行進階的設定</h2></div>
+<div id="ly_arg"><label for="ly_arg_default"><input id="ly_arg_default" accesskey="2" onclick="check_show_hidden(&#39;ly_arg_default&#39;,&#39;arg_custom&#39;)" type="checkbox" checked="" onchange="check_show_hidden(&#39;ly_arg_default&#39;,&#39;arg_custom&#39;)" value="yes" name="ly_arg_default"> 使用預設的時間軸設定參數 </label>
+<div class="custom_form" id="arg_custom" style="DISPLAY: none">
+<div class="style_custom1" style="FLOAT: left; WIDTH: 45%">
+<dl>
+  <dt style="WIDTH: 100px">偏移參數
+  	<dd><input type="text" id="shift_time" value="10" style="width:40px" onchange="$('#source_change').val('true');"></dd>
+  <script type="text/javascript">
+				<!--
+				$("#shift_time").val(arg['shift_time']);
+				//document.writeln('<dd><input type="text" id="shift_time" value="'+arg['shift_time']+'" style="width:40px" onchange="document.getElementById(\'source_change\').value = \'true\';" /></dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<div class="help">影響歌詞時間軸之間的改變，是一個普遍性影響參數。數值越大，歌詞與歌詞之間的空白時間就越長，適合節奏慢的時候使用；反之，節奏越快的歌曲，偏移參數就越小越好</div>
+<dl>
+  <dt style="WIDTH: 100px">歌詞偏移參數
+  	<dd>延後<input type="text" id="ly_shift" value="2" style="width:40px" onchange="$('#source_change').val('true');">分之一的時間</dd>
+  <script type="text/javascript">
+				<!--
+				$("#ly_shift").val(arg['ly_shift']);
+				//document.writeln('<dd>延後<input type="text" id="ly_shift" value="'+arg['ly_shift']+'" style="width:40px" onchange="document.getElementById(\'source_change\').value = \'true\';" />分之一的時間</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<div class="help">影響歌詞出現點(IN)和結束點(OUT)的參數，表示「這一句歌詞唱到1/n的時候，就會顯示下一句歌詞」，數值越大，歌詞節奏就越快</div></div>
+<div class="style_custom1">
+<dl>
+  <dt>歌詞結尾延長時間
+  	<dd>延長<input type="text" id="ly_last_extend" value="1.2" style="width:40px" onchange="$('#source_change').val('true');">倍</dd>
+  <script type="text/javascript">
+				<!--
+				$("#ly_last_extend").val(arg['ly_last_extend']);
+				//document.writeln('<dd>延長<input type="text" id="ly_last_extend" value="'+arg['ly_last_extend']+'" style="width:40px" onchange="document.getElementById(\'source_change\').value = \'true\';" />倍</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<div class="help">最後一句歌詞所延長的時間，表示「歌詞延長本身長度的n倍時間」，增加的時間用於延長的歌詞淡出，較為美觀</div>
+<dl>
+  <dt>淡入淡出偏移參數
+  	<dd>長度為<input type="text" id="fad_shift" value="3" style="width:40px" onchange="$('#source_change').val('true');">分之一的時間</dd>
+  <script type="text/javascript">
+				<!--
+				$("#fad_shift").val(arg['fad_shift']);
+				//document.writeln('<dd>長度為<input type="text" id="fad_shift" value="'+arg['fad_shift']+'" style="width:40px" onchange="document.getElementById(\'source_change\').value = \'true\';" />分之一的時間</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<div class="help">影響歌詞淡入淡出的時間長短，表示「淡入淡出的長度是這句歌詞出現到結束時間的1/n」，參數越大，淡入淡出時間越短，越適合快節奏音樂使用</div></div>
+<hr>
+</div></div>
+<div class="ly_style"><label for="ly_style_default"><input id="ly_style_default" onclick="check_show_hidden(&#39;ly_style_default&#39;,&#39;style_custom&#39;)" type="checkbox" checked="" onchange="check_show_hidden(&#39;ly_style_default&#39;,&#39;style_custom&#39;)" value="yes" name="ly_style_default"> 使用預設的字幕顯示格式 </label>
+<div class="custom_form" id="style_custom" style="DISPLAY: none"><input id="priview" style="width: 245.5px; height: 80px;text-align: center; font-family: &#39;MS Gothic&#39;; font-size: 18px; color: rgb(255, 255, 255); font-weight: bold; font-style: normal; border-width: 1.5pt; padding: 32.5px; background-color: rgb(0, 0, 0);" onchange="style_priview()" value="可修改預覽文字">
+<div class="help" style="CLEAR: none; PADDING-RIGHT: 1em; FLOAT: right; MARGIN: 0px 0px 0px; WIDTH: 24%">
+  ※變更字型與字體大小皆可能導致拼音對位發生錯誤，如果並非使用預設值，則須特別注意<br>
+  ※此預覽字型、邊緣距離、框線僅為參考，在套用SSA的時候會依影片解析度不同而改變
+</div>
+<script type="text/javascript">
+		<!--
+			style_priview();
+		-->
+		</script>
+
+<div class="style_custom0" style="PADDING-RIGHT: 0px; WIDTH: auto">
+<dl style="FLOAT: left">
+  <dt>字型
+
+  	<dd class="custom_list">
+	<label for="fontname[0]"><input type="radio" name="fontname" id="fontname[0]" onclick="style_priview();document.getElementById(&#39;encoding&#39;).value=128" checked="">MS Gothic<span onclick="document.getElementById(&#39;fontsize&#39;).value = 36; style_priview()" class="hint_help">(建議文字大小：36)</span> </label><br>
+	<label for="fontname[1]"><input type="radio" name="fontname" id="fontname[1]" onclick="style_priview();document.getElementById(&#39;encoding&#39;).value=136">標楷體 <span onclick="document.getElementById(&#39;fontsize&#39;).value = 36; style_priview()" class="hint_help">(建議文字大小：36)</span> </label> <br>
+	<label for="fontname[2]"><input type="radio" name="fontname" id="fontname[2]" onclick="style_priview()"> <input type="text" id="fontname_custom" onchange="document.getElementById(&#39;fontname[2]&#39;).checked = true;document.getElementById(&#39;encoding&#39;).value=136"> </label>
+</dd>
+
+  <script type="text/javascript">
+				<!--
+				var checked0 = "";
+				var checked1 = "";
+				if (lys['fontname'] == "MS Gothic") {
+					var checked0 = "checked";
+					$("#fontname[0]").attr("checked", "checked");
+				}
+				else if (lys['fontname'] == "DFKai-SB") {
+					var checked1 = "checked";
+					$("#fontname[1]").attr("checked", "checked");
+				}
+					
+				
+				//document.writeln('<dd class="custom_list">');
+				//document.writeln('	<label for="fontname[0]"><input type="radio" name="fontname" id="fontname[0]" onClick="style_priview();document.getElementById(\'encoding\').value=128" '+checked0+' />MS Gothic<span onclick="document.getElementById('+"'fontsize'"+').value = 36; style_priview()" class="hint_help">(建議文字大小：36)</span> </label><br />');
+				//document.writeln('	<label for="fontname[1]"><input type="radio" name="fontname" id="fontname[1]" onClick="style_priview();document.getElementById(\'encoding\').value=136" '+checked1+' />標楷體 <span onclick="document.getElementById('+"'fontsize'"+').value = 36; style_priview()" class="hint_help">(建議文字大小：36)</span> </label> <br />');
+				//document.writeln('	<label for="fontname[2]"><input type="radio" name="fontname" id="fontname[2]" onClick="style_priview()"/> <input type="text" id="fontname_custom" onChange="document.getElementById('+"'fontname[2]'"+').checked = true;document.getElementById(\'encoding\').value=136"> </label>');
+				//document.writeln('</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<dl style="CLEAR: left">
+  <dt>字體大小<dd><input type="text" id="fontsize" value="36" style="width:40px" onchange="style_priview()"></dd>
+  <script type="text/javascript">
+				<!--
+				$("#fontsize").val(lys['fontsize']);
+				//document.writeln('<dd><input type="text" id="fontsize" value="'+lys['fontsize']+'" style="width:40px" onChange="style_priview()" /></dd>');
+				-->
+				</script></dt>
+
+   </dl><!--<dl style="clear:left ">
+				<dt>影像長寬</dt>-->
+<script type="text/javascript">
+				<!--
+				//document.writeln('<dd><input type="text" id="width" value="'+lys['width']+'" style="width:40px" /> ╳ <input type="text" id="height" value="'+lys['height']+'" style="width:40px" /></dd>');
+				-->
+				</script>
+<!--</dl>--></div>
+<div class="style_custom1" style="CLEAR: left; MARGIN-LEFT: 1%">
+<dl>
+  <dt>主要顏色(字體顏色)<dd><input type="text" id="primarycolour" value="FFFFFF" style="width:80px" onchange="style_priview()">
+</dd>
+  <script type="text/javascript">
+				<!--
+				$("#primarycolour").val(lys['primarycolour']);
+				//document.writeln('<dd><input type="text" id="primarycolour" value="'+trans_color(lys['primarycolour'])+'" style="width:80px" onChange="style_priview()" />');
+				//document.writeln('</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<table style="width:250px; cursor:pointer; margin:0 " title="點選使用其他主要顏色">
+     <tbody><tr>
+	 <script type="text/javascript">
+	 <!-- 
+	 /*
+	 var set_bgcolor = new Array;
+	 var set_i = 0
+	 set_bgcolor[set_i++] = "FFFFFF"; 
+	 set_bgcolor[set_i++] = "E8E8E8"; 
+	 set_bgcolor[set_i++] = "D2FF78"; 
+	 set_bgcolor[set_i++] = "78FF78"; 
+	 set_bgcolor[set_i++] = "78FFDD"; 
+	 set_bgcolor[set_i++] = "78FFFF"; 
+	 set_bgcolor[set_i++] = "78D2FF"; 
+	 set_bgcolor[set_i++] = "7878FF"; 
+	 set_bgcolor[set_i++] = "C778FF"; 
+	 set_bgcolor[set_i++] = "FF78FF"; 
+	 set_bgcolor[set_i++] = "FF50A7"; 
+	 set_bgcolor[set_i++] = "FF5050"; 
+	 set_bgcolor[set_i++] = "FF7C50"; 
+	 set_bgcolor[set_i++] = "FFA850"; 
+	 set_bgcolor[set_i++] = "FFDD78"; 
+	 set_bgcolor[set_i++] = "FFFF78"; 
+	 
+	 for (var i = 0; i < set_bgcolor.length; i++)
+	 {
+	   document.writeln('<td style="background-color:#'+set_bgcolor[i]+' " onClick="document.getElementById(\'primarycolour\').value=\''+set_bgcolor[i]+'\';style_priview();">&nbsp;</td>');
+	 }
+	 */
+	 -->
+	 </script><td style="background-color:#FFFFFF " onclick="document.getElementById(&#39;primarycolour&#39;).value=&#39;FFFFFF&#39;;style_priview();">&nbsp;</td>
+<td style="background-color:#E8E8E8 " onclick="$('#primarycolour').val('E8E8E8');style_priview();">&nbsp;</td>
+<td style="background-color:#D2FF78 " onclick="$('#primarycolour').val('D2FF78');style_priview();">&nbsp;</td>
+<td style="background-color:#78FF78 " onclick="$('#primarycolour').val('78FF78');style_priview();">&nbsp;</td>
+<td style="background-color:#78FFDD " onclick="$('#primarycolour').val('78FFDD');style_priview();">&nbsp;</td>
+<td style="background-color:#78FFFF " onclick="$('#primarycolour').val('78FFFF');style_priview();">&nbsp;</td>
+<td style="background-color:#78D2FF " onclick="$('#primarycolour').val('78D2FF');style_priview();">&nbsp;</td>
+<td style="background-color:#7878FF " onclick="$('#primarycolour').val('7878FF');style_priview();">&nbsp;</td>
+<td style="background-color:#C778FF " onclick="$('#primarycolour').val('C778FF');style_priview();">&nbsp;</td>
+<td style="background-color:#FF78FF " onclick="$('#primarycolour').val('FF78FF');style_priview();">&nbsp;</td>
+<td style="background-color:#FF50A7 " onclick="$('#primarycolour').val('FF50A7');style_priview();">&nbsp;</td>
+<td style="background-color:#FF5050 " onclick="$('#primarycolour').val('FF5050');style_priview();">&nbsp;</td>
+<td style="background-color:#FF7C50 " onclick="$('#primarycolour').val('FF7C50');style_priview();">&nbsp;</td>
+<td style="background-color:#FFA850 " onclick="$('#primarycolour').val('FFA850');style_priview();">&nbsp;</td>
+<td style="background-color:#FFDD78 " onclick="$('#primarycolour').val('FFDD78');style_priview();">&nbsp;</td>
+<td style="background-color:#FFFF78 " onclick="$('#primarycolour').val('FFFF78');style_priview();">&nbsp;</td>
+
+	   
+	 </tr>
+</tbody></table>
+※在電視播放的時候，顏色會更鮮豔、更淡
+<dl>
+  <dt>背景顏色(外框顏色)
+
+  	<dd><input type="text" id="backcolour" value="000000" style="width:80px" onchange="style_priview()"></dd>
+
+  <script type="text/javascript">
+				<!--
+				$("#backcolour").val(trans_color(lys['backcolour']));
+				//document.writeln('<dd><input type="text" id="backcolour" value="'+trans_color(lys['backcolour'])+'" style="width:80px" onChange="style_priview()" /></dd>');
+				-->
+				</script></dt>
+
+   
+   
+</dl>
+<table style="width:250px; cursor:pointer; margin:0 " title="點選使用其他背景顏色">
+     <tbody><tr>
+	 <script type="text/javascript">
+	 <!-- 
+	 /*
+	 var set_bgcolor = new Array;
+	 var set_i = 0
+	 set_bgcolor[set_i++] = "000000"; 
+	 set_bgcolor[set_i++] = "2C2C2C"; 
+	 set_bgcolor[set_i++] = "466900"; 
+	 set_bgcolor[set_i++] = "006900"; 
+	 set_bgcolor[set_i++] = "00694F"; 
+	 set_bgcolor[set_i++] = "006969"; 
+	 set_bgcolor[set_i++] = "004669"; 
+	 set_bgcolor[set_i++] = "000069"; 
+	 set_bgcolor[set_i++] = "3D0069"; 
+	 set_bgcolor[set_i++] = "690069"; 
+	 set_bgcolor[set_i++] = "690034"; 
+	 set_bgcolor[set_i++] = "690000"; 
+	 set_bgcolor[set_i++] = "691A00"; 
+	 set_bgcolor[set_i++] = "693500"; 
+	 set_bgcolor[set_i++] = "550B00"; 
+	 set_bgcolor[set_i++] = "552800"; 
+ 
+	 
+	 for (var i = 0; i < set_bgcolor.length; i++)
+	 {
+	   document.writeln('<td style="background-color:#'+set_bgcolor[i]+' " onClick="document.getElementById(\'backcolour\').value=\''+set_bgcolor[i]+'\';style_priview();">&nbsp;</td>');
+	 }
+	 */
+	 -->
+	 </script><td style="background-color:#000000 " onclick="document.getElementById(&#39;backcolour&#39;).value=&#39;000000&#39;;style_priview();">&nbsp;</td>
+<td style="background-color:#2C2C2C " onclick="$('#backcolour').val('2C2C2C');style_priview();">&nbsp;</td>
+<td style="background-color:#466900 " onclick="$('#backcolour').val('466900');style_priview();">&nbsp;</td>
+<td style="background-color:#006900 " onclick="$('#backcolour').val('006900');style_priview();">&nbsp;</td>
+<td style="background-color:#00694F " onclick="$('#backcolour').val('00694F');style_priview();">&nbsp;</td>
+<td style="background-color:#006969 " onclick="$('#backcolour').val('006969');style_priview();">&nbsp;</td>
+<td style="background-color:#004669 " onclick="$('#backcolour').val('004669');style_priview();">&nbsp;</td>
+<td style="background-color:#000069 " onclick="$('#backcolour').val('000069');style_priview();">&nbsp;</td>
+<td style="background-color:#3D0069 " onclick="$('#backcolour').val('3D0069');style_priview();">&nbsp;</td>
+<td style="background-color:#690069 " onclick="$('#backcolour').val('690069');style_priview();">&nbsp;</td>
+<td style="background-color:#690034 " onclick="$('#backcolour').val('690034');style_priview();">&nbsp;</td>
+<td style="background-color:#690000 " onclick="$('#backcolour').val('690000');style_priview();">&nbsp;</td>
+<td style="background-color:#691A00 " onclick="$('#backcolour').val('691A00');style_priview();">&nbsp;</td>
+<td style="background-color:#693500 " onclick="$('#backcolour').val('693500');style_priview();">&nbsp;</td>
+<td style="background-color:#550B00 " onclick="$('#backcolour').val('550B00');style_priview();">&nbsp;</td>
+<td style="background-color:#552800 " onclick="$('#backcolour').val('552800');style_priview();">&nbsp;</td>
+
+	   
+	 </tr>
+</tbody></table>
+<dl>
+  <dt>到畫面邊緣的距離
+  	<dd><input type="text" id="margin" value="65" style="width:40px" onchange="style_priview()"></dd>
+  <script type="text/javascript">
+				<!--
+				$("#margin").val(lys['margin']);
+				//document.writeln('<dd><input type="text" id="margin" value="'+lys['margin']+'" style="width:40px" onChange="style_priview()" /></dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>與拼音的行距<dd><input type="text" id="line_height" value="1" style="width:40px" onchange="$('#source_change').val('true');">倍字體高度</dd>
+
+  <script type="text/javascript">
+				<!--
+				$("#line_height").val(lys['line_height']);
+				//document.writeln('<dd><input type="text" id="line_height" value="'+lys['line_height']+'" style="width:40px" onchange="document.getElementById(\'source_change\').value = \'true\';" />倍字體高度</dd>');
+				-->
+				</script></dt>
+   </dl>
+</div>
+<div class="style_custom1">
+<dl>
+  <dt>框線寬度
+  	<dd><input type="text" id="outline" value="3" style="width:40px" onchange="style_priview()"></dd>
+  <script type="text/javascript">
+				<!--
+				$("#outline").val(lys['outline']);
+				//document.writeln('<dd><input type="text" id="outline" value="'+lys['outline']+'" style="width:40px" onChange="style_priview()" /></dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt style="WIDTH: 50px">粗體<dd>
+	<label for="bold[0]"><input type="radio" name="bold" id="bold[0]" onclick="style_priview()">正常 </label>
+	<label for="bold[1]"><input type="radio" name="bold" id="bold[1]" onclick="style_priview()" checked="">粗體 </label>
+</dd>
+  <script type="text/javascript">
+				<!--
+				var checked0 = "";
+				var checked1 = "";
+				if (lys['bold'] == 0) {
+					var checked0 = "checked";
+					$("#bold[0]").attr("checked", "checked");
+				}
+				else {
+					var checked1 = "checked";
+					$("#bold[1]").attr("checked", "checked");
+				}
+				
+				//document.writeln('<dd>');
+				//document.writeln('	<label for="bold[0]"><input type="radio" name="bold" id="bold[0]" onClick="style_priview()" '+checked0+' />正常 </label>');
+				//document.writeln('	<label for="bold[1]"><input type="radio" name="bold" id="bold[1]" onClick="style_priview()" '+checked1+' />粗體 </label>');
+				//document.writeln('</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt style="WIDTH: 50px">斜體
+  	<dd>
+	<label for="italic[0]"><input type="radio" name="italic" id="italic[0]" onclick="style_priview()" checked="">正常 </label>
+	<label for="italic[1]"><input type="radio" name="italic" id="italic[1]" onclick="style_priview()">斜體 </label>
+</dd>
+  <script type="text/javascript">
+				<!--
+				var checked0 = "";
+				var checked1 = "";
+				if (lys['italic'] == 0) {
+					var checked0 = "checked";
+					$("#italic[0]").attr("checked", "checked");
+				}
+				else {
+					var checked1 = "checked";
+					$("#italic[1]").attr("checked", "checked");
+				}
+				
+				//document.writeln('<dd>');
+				//document.writeln('	<label for="italic[0]"><input type="radio" name="italic" id="italic[0]" onClick="style_priview()" '+checked0+' />正常 </label>');
+				//document.writeln('	<label for="italic[1]"><input type="radio" name="italic" id="italic[1]" onClick="style_priview()" '+checked1+' />斜體 </label>');
+				//document.writeln('</dd>');
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>靠左歌詞對齊
+  		<dd><input type="text" id="alignment_l" value="'+lys['alignment_l']+'" style="width:40px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+				<!--
+				$("#alignment_l").val(lys['alignment_l']);
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>置中歌詞對齊
+  	<dd><input type="text" id="alignment_c" value="'+lys['alignment_c']+'" style="width:40px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+				<!--
+				$("#alignment_c").val(lys['alignment_c']);
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>靠右歌詞對齊
+  	<dd><input type="text" id="alignment_r" value="'+lys['alignment_r']+'" style="width:40px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+				<!--
+				$("#alignment_r").val(lys['alignment_r']);
+				-->
+				</script></dt>
+
+   </dl></div>
+<div class="style_custom1">
+<dl>
+  <dt>陰影
+  	<dd><input type="text" id="shadow" value="'+lys['shadow']+'" style="width:40px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+				<!--
+				$("#shadow").val(lys['shadow']);
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>次要顏色(無效)
+  	<dd><input type="text" id="secondarycolour" value="'+trans_color(lys['secondarycolour'])+'" style="width:80px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+				<!--
+				$("#secondarycolour").val(lys['secondarycolour']);
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>第三顏色(無效)
+  	<dd><input type="text" id="tertiarycolour" value="'+lys['tertiarycolour']+'" style="width:40px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+				<!--
+				$("#tertiarycolour").val(lys['tertiarycolour']);
+				-->
+				</script></dt>
+
+   </dl>
+<dl>
+  <dt>框線格式(無效)
+  	<dd><input type="text" id="borderstyle" value="'+lys['borderstyle']+'" style="width:40px" onChange="style_priview()" /></dd>
+
+  <script type="text/javascript">
+	$("#borderstyle").val(lys['borderstyle']);
+	</script></dt>
+
+   </dl>
+<dl>
+  <dt>透明程度(無效)
+	<dd><input type="text" id="alphalevel" value="'+lys['alphalevel']+'" style="width:40px" onChange="style_priview()" /></dd>
+  <script type="text/javascript">
+  	$("#alphalevel").val(lys['alphalevel']);
+	</script></dt>
+
+   </dl>
+<dl>
+	<dt>編碼
+		<dd><input type="text" id="encoding" value="128" style="width:40px" onchange="style_priview()"></dd>
+	</dt>
+		<script type="text/javascript">
+		$("#encoding").val(lys['encoding']);
+		</script>
+
+   </dl></div>
+<hr>
+</div></div>
+<div class="hint">
+<h2>轉換設定 (Accesskey: Alt+3 or Ctrl+3)：</h2></div>
+<div id="trans_style" style="CLEAR: both">
+<div style="MARGIN: 5pt 0px"><label for="trans_style[1]"><input id="trans_style[1]" type="radio" name="trans_style"> <strong>單行置中格式(建議慢歌使用)</strong></label> <label for="trans_style[0]"><input id="trans_style[0]" type="radio" checked="" name="trans_style"> 
+<strong>兩行左右格式(建議快歌使用)</strong></label> <br><label for="trans_style[2]"><input id="trans_style[2]" type="radio" name="trans_style"> <strong>註解格式(上)</strong></label> 
+<label for="trans_style[3]"><input id="trans_style[3]" type="radio" name="trans_style"> 
+<strong>註解格式(下)</strong></label> 
+*動畫字幕組使用的格式</div>
+<input id="format_record" type="hidden">
+
+	<input type="hidden" id="over_load" value="20">
+<script type="text/javascript">
+	<!--
+		var over_load = parseInt((640 - eval(lys["margin"])*2) / parseInt(eval(lys["fontsize"]) * 0.7));
+		//document.getElementById("make_ly").style.width = eval(over_load)*32 + 120;	//字數超載的寬度
+		$("#over_load").val(over_load);
+		//document.writeln('<input type="hidden" id="over_load" value="'+over_load+'" />');
+	-->
+	</script>
+
+<div id="process_history" style="display:block;"></div>
+ <br><label for="ly_lock"><input id="ly_lock" type="checkbox" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="ly_lock"> 鎖定歌詞拼音不被取代 </label><label for="lyp_auto"><input id="lyp_auto" type="checkbox" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="lyp_auto"> 使用拼音補完功能 </label><label for="lyp_locate"><input id="lyp_locate" type="checkbox" checked="" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="lyp_locate"> 使用自動拼音對位功能 </label>
+
+<label for="tmfix"><input id="tmfix" type="checkbox" checked="" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="tmfix"> 啟用SSA時間軸校正 </label>
+
+<label for="show_bp"><input id="show_bp" type="checkbox" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="show_bp"> 除錯模式 </label><br><input accesskey="3" onclick="make_ly()" type="button" value="轉換來源 -&gt;"> 
+(需要手動編輯歌詞內容，或是想要做歌詞注音的動作的話，請按下這個按鈕) </div>
+<div class="hint">
+<h2>歌詞編輯 (Accesskey: Alt+4 or Ctrl+4)：</h2><a onclick="show_hidden(&#39;p_help&#39;)">(提示說明)</a> </div>
+<div class="control"><input onclick="makely_show()" type="button" value="顯示"> <input onclick="makely_hidden()" type="button" value="隱藏"> <input onclick="ly_add()" type="button" value="新增欄位"> </div>
+<ul class="help" id="p_help" style="DISPLAY: none">
+  <h3>拼音的注意事項：</h3>
+  <li>拼音的規則是：歌詞的字體大小 = 拼音的字體大小 兩倍 
+  </li><li>拼音的對位是使用「全型空白」，為編輯方便，程式將全型空白轉成□符號，可能是漢字的則會是■ 
+  </li><li>依照字型的不同，全型空白並不一定等於兩個半形空白，通常是等於四個半形空白 
+  </li><li>要讓拼音定位吻合，選用字型時，必須選用各字體寬度皆相等的字型 
+  </li><li>程式預設使用的MS Gothic字型，在英文字時寬度不一，因此歌詞中混雜英文時，要特別注意拼音定位的錯誤 
+  <h3>字數超載：</h3>
+  </li><li>當字體顏色變成<span style="COLOR: #ff0000">紅色</span>的時候，表示系統提示這個句子可能會發生字數超載 
+  </li><li>字數超載是指單行歌詞字數過多，使得畫面上容納不下，而會跑出畫面之外 
+  </li><li>依照選擇的字型以及字體大小不同，字數超載的上限會有所改變。系統提示的字數超載只能當作參考用，請務必注意 </li></ul>
+<div id="edit_ly">
+<div id="make_ly">
+<script type="text/javascript">
+		<!--
+		for (var i = 0; i < arg['ly_number']; i++)
+		{
+			document.writeln('<div id="ly_s['+i+']" class="ly_s">');
+	
+			document.write('<div id="ly_sv['+i+']" class="ly_sv">');
+			document.write('	<label for="ly_sv['+i+']">歌詞位置 ('+i+')<br />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][0][0]" onClick="lyal_left('+i+')"  />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][0][1]" onClick="lyal_center('+i+')" />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][0][2]" onClick="lyal_right('+i+')" /><br />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][1][0]" onClick="lyal_left('+i+')"  />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][1][1]" onClick="lyal_center('+i+')" />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][1][2]" onClick="lyal_right('+i+')" /><br />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][2][0]" onClick="lyal_left('+i+')"  />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][2][1]" onClick="lyal_center('+i+')" />');
+			document.write('	<input type="radio" name="ly_sv['+i+']" id="ly_sv['+i+'][2][2]" onClick="lyal_right('+i+')" /></label>');		
+			document.write('</div>');
+			
+			document.writeln('<div id="ly_st['+i+']" class="ly_st">');
+			document.writeln('	<label for="ly_i['+i+']">歌詞出現時間 <input type="text" id="ly_i['+i+']" class="ly_inout" /></label>');
+			document.writeln('	<label for="fad_in['+i+']">淡入長度 <input type="text" id="fad_in['+i+']" class="fad_inout" /></label>');
+			document.writeln('	<label for="fad_out['+i+']">淡出長度 <input type="text" id="fad_out['+i+']" class="fad_inout" /></label>');
+			document.writeln('	<label for="ly_o['+i+']">歌詞結束時間 <input type="text" id="ly_o['+i+']" class="ly_inout" /></label>');
+			document.writeln('</div>');
+	
+			document.write('<input id="ly_p['+i+']" type="text" class="ly_p" onChange="check_overload_p(\'ly_p['+i+']\')" /><br />\n');
+			document.write('<input id="ly['+i+']" type="text" class="ly" onChange="check_overload(\'ly['+i+']\')" />\n');
+			
+			document.write('</div>');		
+		}
+		-->
+		</script>
+</div>
+<div id="make_ly_control">
+<div id="lyal_control">全部歌詞<br>位置調整<br><input onclick="lyal_control(0,0)" type="button" value="↖"> 
+<input onclick="lyal_control(0,1)" type="button" value="↑"> <input onclick="lyal_control(0,2)" type="button" value="↗"><br><input onclick="lyal_control(1,0)" type="button" value="←"> 
+<input onclick="lyal_control(1,1)" type="button" value="╳"> <input onclick="lyal_control(1,2)" type="button" value="→"><br><input onclick="lyal_control(2,0)" type="button" value="↙"> 
+<input onclick="lyal_control(2,1)" type="button" value="↓"> <input onclick="lyal_control(2,2)" type="button" value="↘"> </div><span style="FONT-SIZE: 0.8em">淡入淡出<br>時間調整</span> 
+<div id="fifo_adjust"><input id="fifo[0]" type="radio" name="fifo"> 全部調整<input class="text" id="fifo_multi" value="1"> 倍<br><input id="fifo[1]" type="radio" name="fifo"> 
+固定長度 <input class="text" id="fifo_fix" style="WIDTH: 30px" value="300"> 毫秒<br><input id="fifo_extend" type="checkbox"> 結尾延長為<input class="text" id="fifo_extime" value="3"> 倍 
+</div><input onclick="fifo_adjust()" type="button" value="調整"> 
+<div style="MARGIN: 15px"><input onclick="ly_all_clean()" type="button" value="清空歌詞"> 
+<br></div></div>
+<hr style="WIDTH: 90%; TEXT-ALIGN: center">
+</div>
+<div class="ly_style">
+<div><input accesskey="4" onclick="trans()" type="button" value="結果輸出 -&gt;"> <span style="COLOR: red" onclick="prohis_start();">(不知道該怎麼調整的話，只要按下這個按鈕就可以了)</span></div></div>
+
+
+  <script type="text/javascript">
+  <!--
+  function prohis_start()
+  {
+	document.getElementById("body").style.cursor = "wait";
+	document.getElementById("process_history").style.display = "block";
+	prohis_input("計算開始");
+  }
+
+  function prohis_input(msg)
+  {
+    document.getElementById("process_history").innerHTML = msg;
+  }
+  
+  function proflag()
+  {
+    prohis_flag = flase;
+  }
+
+  function prohis_end()
+  {
+    document.getElementById("body").style.cursor = "default";
+	document.getElementById("process_history").style.display = "none";
+  }
+  
+  -->
+  </script>
+
+<div class="hint">
+<h2>結果字幕檔案原始碼 (Accesskey: Alt+5 or Ctrl+5)：</h2><a onclick="show_hidden(&#39;ssa_help&#39;)">(提示說明)</a> </div>
+<div class="control"><input onclick="selec(&#39;target&#39;)" type="button" value="全選"> <input onclick="reset_ly(&#39;target&#39;)" type="button" value="重置"> </div>
+<ul class="help" id="ssa_help" style="DISPLAY: none">
+  <li>請將輸出結果複製貼上到筆記本 
+  </li><li>存檔時，編碼必須為Unicode，而非ANSI。否則拼音對位會發生錯誤，半形空白會被當成四分之一全形空白。 
+  </li><li>副檔名必須為.ssa，檔名則與影片檔的檔名相同 
+  </li><li>將ssa字幕檔與影片檔擺置在同一個資料夾底下，並安裝且正確設定Vobsub Director 
+  2.23版以上，便可以正常觀賞。Codec可以下載KK-lite Mega Codec Pack 1.38以上，<a href="http://home.hccnet.nl/h.edskes/mirror.htm" target="_blank">下載網頁</a>。 
+</li></ul><textarea id="target" accesskey="5" name="" wrap="off">Title: VirtualDub 'subtitler' filter demonstration
+Original Script: Avery Lee &lt;phaeron@virtualdub.org&gt;
+ScriptType: v4.00
+Collisions: Normal
+PlayResY: 480
+PlayDepth: 0
+Timer: 100.0000
+
+[V4 Styles]
+Format: Name,         Fontname,         Fontsize, PrimaryColour, SecondaryColour, TertiaryColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, AlphaLevel, Encoding
+</textarea> </form>
+<hr style="WIDTH: 90%">
+<a class="hint_help" style="DISPLAY: block" onclick="show_hidden(&#39;copyright&#39;)">版權宣言及程式注意事項</a> 
+<div id="copyright" style="DISPLAY: none">
+<p>本程式是由<a href="mailto:puddingchen-35@yahoo.com.tw?subject=[Timemark%20to%20SSA]">布丁</a>為輔大動漫電玩研習社特別製作<br>沒有任何版權，使用者可以自行修改、使用、散佈<br>只求有問題能夠<a href="mailto:puddingchen-35@yahoo.com.tw?subject=[Timemark%20to%20SSA]">告訴製作者</a> 
+</p>
+<p>本程式使用JavaScript語言撰寫<br>以Internet Explorer 6.0為主要平台，使用其他瀏覽器則會有計算上的誤差，請務必注意 
+</p>
+<p>本網頁在1024*768的桌面大小下會有最佳的瀏覽畫面 </p></div><a class="hint_help" style="DISPLAY: block" onclick="show_hidden(&#39;edit&#39;)">版本修改記事</a> 
+<dl id="edit" style="DISPLAY: none">
+	<dt>2014 Oct. 11 / 3.2 為IE Tester修正 </dt>
+  <dd>之前下載時發生許多問題，現在修正。加入jQuery以修正相容性。</dd>
+  <dt>2006 Apr. 21 / 3.12+ TMeditor導入 </dt>
+  <dd>雖然版面沒有調過，不過應該會方便許多</dd>
+  <dt>2006 Apr. 20 / 3.12 續‧修正 </dt>
+  <dd>之前最重要的trim()函式一整個是錯誤的，我居然完全沒發現
+  修正之後會發現很多錯誤也一股腦的跑了出來，只好一個一個慢慢修
+  另外，加入了時間軸修正功能，這個超方便的，請大家一定要使用
+  接下來除了小修正之外，我接下來在策劃另一個TTS，也順便正名改為：Timatag To SSA
+  是個從TG(Timetag)標時間軸、時間軸計算、字幕預覽到SSA檔案輸出，一氣呵成的工作
+  現在只差字幕預覽的作法，以及版面設計上
+  應該是可以完成的，這不是夢想。</dd>
+  <dt>2006 Apr. 14 / 3.12 色盤功能加入 </dt>
+  <dd>順便調整了一下格式的版面設計...但其實我還是不怎麼滿意這種設計就是
+  算了...現在也不想改了...</dd>
+  <dt>2006 Apr. 13 / 3.11 英文判斷修正 </dt>
+  <dd>好個0.25</dd>
+  <dt>2006 Mar. 31 / 3.1再改 </dt>
+  <dd>沒想到轉換到Unicode之後，光是修正半形空格要視為0.5個全形空格這點，就花了非常多時間
+  其他倒是還好...
+  總之，希望這次是最後一次修正了。再這樣下去，身體可吃不消啊。
+  </dd><dt>2006 Mar. 14 / 3.1 </dt>
+  <dd>用MS Gothic取代了Arial Unicode
+  MS在空格仍沒有完全等寬的缺點以Unicode格式儲存就可以解決這個問題只要在句子左右加上{\t}，原本會被Unicode省略空格的問題也可以一併解決 
+  然後加入了額外的注解格式簡單來說，就是單行格式的歌詞，只是字型縮減為80%，位置高度調整到原本高度的上方或下方這很方便的喲！ 
+  </dd><dt>2005 Nov. 14 / 3.0 Beta </dt>
+  <dd>加上了自動拼音對位的功能在三個月之前，我還以為這功能是不可能完成的沒想到居然被我辦到了... 
+  一方面也是siroma的邏輯夠清楚，能夠看到關鍵感激不盡 順手加入了自動補完拼音的功能如果歌詞裡面沒有拼音，當資料庫有內建拼音時，就會自動補完 樂勝～ 
+  </dd><dt>2005 Nov. 14 / 2.2 </dt>
+  <dd>補正拼音左右兩邊半形會被忽略的Bug 修改參數的時候，程式也會認為是修改過來源歌詞，需要重新計算時間 
+  判斷歌詞裡面非五十音的位置，在拼音的位置作提示...找五十音找到腦羞... 可是這功能又會使程式計算時間大幅增加耶...(狂汗) 
+  又調整了一下版面，補強了一些功能 本來想要讓輸出歌詞可以開新網頁，以方便儲存(不必再複製貼上) 可是怎麼弄都弄不好... 未來預計增加功能： 
+  ‧調整全部歌詞時間 ‧拼音資料彙整，可以儲存成一個檔案 ‧顏色色盤 下次再看看吧... 
+  </dd><dt>2005 Nov. 13 / 2.1</dt> 
+  <dd>加大了歌詞上限，並對雙行格式的斷行判斷加上一層過濾，使之更精確(奇怪，之前居然沒有發現到這件事情？) 修改了版面，增加完成提示的功能修改了Space 
+  Change的功能，讓英文之間的空格不會變成全型空白本來還想寫斷行教學...算了下次吧 
+  </dd><dt>2005 Oct. 18 / 2.0</dt>
+  <dd>第二版完成。 </dd>
+</dl>
+</body></html>

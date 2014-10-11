@@ -49,6 +49,7 @@ var _submitToGoogleTrans = function (_form) {
 
     if (_form.sentence_nl.checked) {
         _source = _googleTransUtils.str_replace(". ", ". \n\n", _source);
+        _source = _googleTransUtils.str_replace("• ", "\n\n• ", _source);
             _source = _source.replace(/p\. \n\n\d/g, function (_word) {
                 //alert(_word);
                 return _googleTransUtils.str_replace("\n", "", _word);
@@ -67,7 +68,7 @@ var _submitToGoogleTrans = function (_form) {
             _source = _source.replace(/et al\. \n\n[^A-Z]/g, _strip_nl);
             //_source = _googleTransUtils.str_replace("etc. \n\n", "etc. ", _source); //等
             _source = _source.replace(/etc\. \n\n[^A-Z]/g, _strip_nl);
-        
+            
         _source = _googleTransUtils.str_replace("。", "。 \n\n", _source);
         _source = _googleTransUtils.str_replace(".\" ", ".\" \n\n", _source);
             _source = _googleTransUtils.str_replace(".\" \n\n(", ".\" (", _source); //等
@@ -91,6 +92,11 @@ var _submitToGoogleTrans = function (_form) {
         //    _source = _googleTransUtils.str_replace(" (" + _i + ")", " \n\n(" + _i + ")", _source);
         //}
         _source = _googleTransUtils.str_replace("\n ", "\n", _source);
+        
+        _source = _source.replace(/[0-9]+\. \n\n[A-Z]/g, function (_word) {
+                return "\n\n" + _googleTransUtils.str_replace("\n", "", _word);
+            });
+        
     }
     
     if (_form.trim_citation.checked) {

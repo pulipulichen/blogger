@@ -3095,21 +3095,31 @@ function style_priview()
 	lys = get_style();
 	//alert(lys["fontname"]);
 	
+	
 	document.getElementById("priview").style.fontFamily = lys["fontname"];
-	document.getElementById("priview").style.fontSize = (lys["fontsize"])/2+"px";
+	document.getElementById("priview").style.fontSize = ((lys["fontsize"])/2)+"px";
 	
-	document.getElementById("priview").style.color = "#"+trans_color(lys["primarycolour"]);
-	document.getElementById("priview").style.backgroundColor = "#"+trans_color(lys["backcolour"]);
-	
-	if (lys["bold"] != 0)
+	if (typeof(lys["primarycolour"]) !== "undefined") {
+		//alert("primarycolour: " + lys["primarycolour"]);
+		document.getElementById("priview").style.color = "#"+trans_color(lys["primarycolour"]);
+	}
+	if (typeof(lys["backcolour"]) !== "undefined") {
+		//alert("backcolour: " + lys["backcolour"]);
+		document.getElementById("priview").style.backgroundColor = "#"+trans_color(lys["backcolour"]);
+	}
+	if (lys["bold"] != 0) {
 		document.getElementById("priview").style.fontWeight = "bold";
-	else
+	}
+	else {
 		document.getElementById("priview").style.fontWeight = "normal";
-
-	if (lys["italic"] != 0)
+	}
+	
+	if (lys["italic"] != 0) {
 		document.getElementById("priview").style.fontStyle = "italic";
-	else
+	}
+	else {
 		document.getElementById("priview").style.fontStyle = "normal";
+	}
 	
 	document.getElementById("priview").style.borderWidth = (lys["outline"])/2+"pt";
 	document.getElementById("priview").style.padding = (lys["margin"])/2+"px";
@@ -3173,7 +3183,7 @@ function example()
 		document.getElementById("source").value = document.getElementById("source").value+"[00:59:48]空(そら)は待(ま)っている"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[01:04:28]";
 		*/
-		document.getElementById("source").value = document.getElementById("source").value+"[00:03:95]きっと巡り合わせた"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:04:25]きっと巡り合わせた"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[00:07:63]天使のほんの気まぐれだよ"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[00:11:81]散歩()道で吹いた砂風"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[00:16:14]心が逸っていく[00:21:29]"+"\n";
@@ -3235,7 +3245,7 @@ function example2()
 		document.getElementById("source").value = document.getElementById("source").value+"[00:59:48]空(そら)は待(ま)っている"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[01:04:28]";
 		*/
-		document.getElementById("source").value = document.getElementById("source").value+"[00:03:95]きっと巡(めぐ)り合(あ)わせた"+"\n";
+		document.getElementById("source").value = document.getElementById("source").value+"[00:04:25]きっと巡(めぐ)り合(あ)わせた"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[00:07:63]天使(てんし)のほんの気(き)まぐれだよ"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[00:11:81]散歩道(さんぽみち)で吹(ふ)いた砂風(すなかぜ)"+"\n";
 		document.getElementById("source").value = document.getElementById("source").value+"[00:16:14]心(こころ)が逸(はや)っていく[00:21:29]"+"\n";
@@ -3269,10 +3279,10 @@ function example2()
 	TEXT-ALIGN: center; marign: auto 5%
 }
 #source {
-	CLEAR: both; DISPLAY: block; MARGIN: 2%; WIDTH: 90%; HEIGHT: 15em
+	CLEAR: both; display: block; MARGIN: 2%; WIDTH: 90%; HEIGHT: 15em
 }
 #target {
-	CLEAR: both; DISPLAY: block; MARGIN: 2%; WIDTH: 90%; HEIGHT: 15em
+	CLEAR: both; display: block; MARGIN: 2%; WIDTH: 90%; HEIGHT: 15em
 }
 #target {
 	HEIGHT: 15em
@@ -3305,7 +3315,7 @@ HR {
 	CLEAR: both; MARGIN: 1em auto
 }
 #edit_ly {
-	DISPLAY: none
+	display: none
 }
 #make_ly {
 	OVERFLOW-Y: scroll; FLOAT: right; MARGIN: auto; WIDTH: 670px; HEIGHT: 580px; TEXT-ALIGN: center
@@ -3332,7 +3342,7 @@ HR {
 	FONT-SIZE: 16px; MARGIN: 0px; WIDTH: 81%; FONT-FAMILY: Fixedsys; TEXT-DECORATION: underline
 }
 .ly_s {
-	CLEAR: both; DISPLAY: none; FONT-SIZE: 10pt
+	CLEAR: both; display: none; FONT-SIZE: 10pt
 }
 .ly_st .ly_inout {
 	WIDTH: 50px
@@ -3347,13 +3357,16 @@ HR {
 	MARGIN-TOP: 3px; FLOAT: left; TEXT-ALIGN: center
 }
 #copyright {
-	DISPLAY: none; FONT-SIZE: 0.8em; MARGIN: 1em auto; WIDTH: 90%; PADDING-TOP: 0.5em; TEXT-ALIGN: center
+	display: none; FONT-SIZE: 0.8em; MARGIN: 1em auto; WIDTH: 90%; PADDING-TOP: 0.5em; TEXT-ALIGN: center
 }
 #edit {
 	FONT-SIZE: 0.8em; MARGIN: 1em auto; WIDTH: 80%; TEXT-ALIGN: left
 }
+#edit DT {
+	margin-top: 1em;
+}
 #edit DD {
-	MARGIN-TOP: 1em; MARGIN-LEFT: 2em; WHITE-SPACE: pre
+	MARGIN-TOP: 1em; MARGIN-LEFT: 2em; WHITE-SPACE: pre; white-space: pre;
 }
 H1 {
 	PADDING-RIGHT: 0px; PADDING-LEFT: 1.5em; FONT-SIZE: 1.5em; PADDING-BOTTOM: 0.1em; WIDTH: 87%; PADDING-TOP: 0px; BORDER-BOTTOM: black 1px solid; TEXT-ALIGN: left; margih: auto
@@ -3365,7 +3378,7 @@ H1 A:visited {
 	COLOR: blue
 }
 H2 {
-	DISPLAY: inline; FONT-SIZE: 1em
+	display: inline; FONT-SIZE: 1em
 }
 .hint {
 	MARGIN-TOP: 0.5em; PADDING-LEFT: 6%; FLOAT: left; MARGIN-BOTTOM: 0.5em; WIDTH: 70%; TEXT-ALIGN: left
@@ -3400,14 +3413,19 @@ H3 {
 
 <meta content="MSHTML 6.00.2900.2802" name="GENERATOR">
 
-<form action="http://kfn.myweb.hinet.net/timemark_to_ssa(temp).htm" method="get">
-<h1><a href="mailto:puddingchen.35@gmail.com?subject=[Timemark%20to%20SSA]">[問題回報]</a> <a href="http://140.136.152.127/oped/upload/[%C2%A4u%C2%A8%C3%A3]/timemark_to_ssa.htm">[下載本程式]</a> 
-Timemark to SSA (var 3.12+) </h1>
+<form>
+<h1>
+	<a href="mailto:puddingchen.35@gmail.com?subject=[Timemark%20to%20SSA]">[問題回報]</a> 
+	<a href="http://140.136.152.127/oped/upload/[%C2%A4u%C2%A8%C3%A3]/timemark_to_ssa.htm" target="_blank">[下載本程式]</a> 
+	<a href="http://pulipuli.blogspot.tw/2009/09/timemark-to-ssa.html" target="_blank">[操作說明]</a>
+	<a href="http://pulipuli.blogspot.tw/2009/09/ie-testertimemark-to-ssa.html" target="_blank">請使用Internet Explorer 6或是IE Tester來開啟Timemark to SSA</a>
+	<div style="white-space: nowrap">Timemark to SSA (var 3.2) </div>
+</h1>
 <div class="hint" style="WIDTH: 60%">
-<h2>來源歌詞(Accesskey: Alt+1 or Ctrl+1)：</h2><a onclick="show_hidden(&#39;tm_help&#39;)">(提示說明) </a></div>
+<h2>來源歌詞(Accesskey: Alt+1 or Ctrl+1)：</h2><a onclick="show_hidden('tm_help')">(提示說明) </a></div>
 <div class="control"><!--<input type="submit" value="重新讀取" />--><input style="WIDTH: 70px" onclick="example()" type="button" value="輸入範例"> 
-<input style="WIDTH: 100px" onclick="example2()" type="button" value="輸入拼音範例"> <input onclick="selec(&#39;source&#39;)" type="button" value="全選"> <input onclick="clean(&#39;source&#39;)" type="button" value="清空"> </div>
-<ul class="help" id="tm_help" style="DISPLAY: none">
+<input style="WIDTH: 100px" onclick="example2()" type="button" value="輸入拼音範例"> <input onclick="selec('source')" type="button" value="全選"> <input onclick="clean('source')" type="button" value="清空"> </div>
+<ul class="help" id="tm_help" style="display: none">
   <li>所謂Timemark是指[00:00:00]這樣子的文字記號 
   </li><li>程式轉換時，會將各行視為一個歌詞，並判定開頭和結尾的timemark，歌詞中間的Timemark會被當成歌詞本身的一部份 
   </li><li>結尾的Timemark以及空行的Timemark會被視為[Break Point!]，而對字幕的進出時間點以及字幕的位置會造成複雜的影響 
@@ -3426,7 +3444,8 @@ Timemark to SSA (var 3.12+) </h1>
 <param name="PlayCount" value="0">
 </object>
 <br>
-<input type="file" id="file" onchange="filename_change()" style="width:320px ">
+<input type="file" id="file" onchange="filename_change()" style="width:320px "><br />
+請使用Windows Media Player支援的影片格式 (<a href="http://pulipuli.blogspot.tw/2014/10/timemark-to-ssawmv.html" target="_blank">說明</a>)
 
 <script type="text/javascript">
 <!--
@@ -3676,7 +3695,8 @@ function filename_change()
 <!--
 function source_to_tmedt()
 {
-  var source = document.getElementById("source").innerHTML;
+  //var source = document.getElementById("source").innerHTML;
+  var source = $("#source").val();
   var source_in_line = source.split("\n");
   
   var tmedt = document.getElementById("tmedt");
@@ -3833,8 +3853,8 @@ function source_temdt_switch()
 <form><input id="source_change" type="hidden" value="true"> 
 <div class="hint">
 <h2>參數與格式設定 (Accesskey: Alt+2 or Ctrl+2)：您可以取消預設勾選來進行進階的設定</h2></div>
-<div id="ly_arg"><label for="ly_arg_default"><input id="ly_arg_default" accesskey="2" onclick="check_show_hidden(&#39;ly_arg_default&#39;,&#39;arg_custom&#39;)" type="checkbox" checked="" onchange="check_show_hidden(&#39;ly_arg_default&#39;,&#39;arg_custom&#39;)" value="yes" name="ly_arg_default"> 使用預設的時間軸設定參數 </label>
-<div class="custom_form" id="arg_custom" style="DISPLAY: none">
+<div id="ly_arg"><label for="ly_arg_default"><input id="ly_arg_default" accesskey="2" onclick="check_show_hidden('ly_arg_default','arg_custom')" type="checkbox" checked="" onchange="check_show_hidden('ly_arg_default','arg_custom')" value="yes" name="ly_arg_default"> 使用預設的時間軸設定參數 </label>
+<div class="custom_form" id="arg_custom" style="display: none">
 <div class="style_custom1" style="FLOAT: left; WIDTH: 45%">
 <dl>
   <dt style="WIDTH: 100px">偏移參數
@@ -3887,8 +3907,8 @@ function source_temdt_switch()
 <div class="help">影響歌詞淡入淡出的時間長短，表示「淡入淡出的長度是這句歌詞出現到結束時間的1/n」，參數越大，淡入淡出時間越短，越適合快節奏音樂使用</div></div>
 <hr>
 </div></div>
-<div class="ly_style"><label for="ly_style_default"><input id="ly_style_default" onclick="check_show_hidden(&#39;ly_style_default&#39;,&#39;style_custom&#39;)" type="checkbox" checked="" onchange="check_show_hidden(&#39;ly_style_default&#39;,&#39;style_custom&#39;)" value="yes" name="ly_style_default"> 使用預設的字幕顯示格式 </label>
-<div class="custom_form" id="style_custom" style="DISPLAY: none"><input id="priview" style="width: 245.5px; height: 80px;text-align: center; font-family: &#39;MS Gothic&#39;; font-size: 18px; color: rgb(255, 255, 255); font-weight: bold; font-style: normal; border-width: 1.5pt; padding: 32.5px; background-color: rgb(0, 0, 0);" onchange="style_priview()" value="可修改預覽文字">
+<div class="ly_style"><label for="ly_style_default"><input id="ly_style_default" onclick="check_show_hidden('ly_style_default','style_custom')" type="checkbox" checked="" onchange="check_show_hidden('ly_style_default','style_custom')" value="yes" name="ly_style_default"> 使用預設的字幕顯示格式 </label>
+<div class="custom_form" id="style_custom" style="display: none"><input id="priview" style="width: 245.5px; height: 80px;text-align: center; font-family: 'MS Gothic'; font-size: 18px; color: rgb(255, 255, 255); font-weight: bold; font-style: normal; border-width: 1.5pt; padding: 32.5px; background-color: rgb(0, 0, 0);" onchange="style_priview()" value="可修改預覽文字">
 <div class="help" style="CLEAR: none; PADDING-RIGHT: 1em; FLOAT: right; MARGIN: 0px 0px 0px; WIDTH: 24%">
   ※變更字型與字體大小皆可能導致拼音對位發生錯誤，如果並非使用預設值，則須特別注意<br>
   ※此預覽字型、邊緣距離、框線僅為參考，在套用SSA的時候會依影片解析度不同而改變
@@ -3904,9 +3924,9 @@ function source_temdt_switch()
   <dt>字型
 
   	<dd class="custom_list">
-	<label for="fontname[0]"><input type="radio" name="fontname" id="fontname[0]" onclick="style_priview();document.getElementById(&#39;encoding&#39;).value=128" checked="">MS Gothic<span onclick="document.getElementById(&#39;fontsize&#39;).value = 36; style_priview()" class="hint_help">(建議文字大小：36)</span> </label><br>
-	<label for="fontname[1]"><input type="radio" name="fontname" id="fontname[1]" onclick="style_priview();document.getElementById(&#39;encoding&#39;).value=136">標楷體 <span onclick="document.getElementById(&#39;fontsize&#39;).value = 36; style_priview()" class="hint_help">(建議文字大小：36)</span> </label> <br>
-	<label for="fontname[2]"><input type="radio" name="fontname" id="fontname[2]" onclick="style_priview()"> <input type="text" id="fontname_custom" onchange="document.getElementById(&#39;fontname[2]&#39;).checked = true;document.getElementById(&#39;encoding&#39;).value=136"> </label>
+	<label for="fontname[0]"><input type="radio" name="fontname" id="fontname[0]" onclick="style_priview();$('#encoding').val(128)" checked="">MS Gothic<span onclick="$('#fontsize').val(36); style_priview()" class="hint_help">(建議文字大小：36)</span> </label><br>
+	<label for="fontname[1]"><input type="radio" name="fontname" id="fontname[1]" onclick="style_priview();$('#encoding').val(136)">標楷體 <span onclick="$('#fontsize').val(36); style_priview()" class="hint_help">(建議文字大小：36)</span> </label> <br>
+	<label for="fontname[2]"><input type="radio" name="fontname" id="fontname[2]" onclick="style_priview()"> <input type="text" id="fontname_custom" onchange="$('#fontname[2]').attr('checked', 'checked');$('#encoding').val(136)"> </label>
 </dd>
 
   <script type="text/javascript">
@@ -3955,7 +3975,7 @@ function source_temdt_switch()
 </dd>
   <script type="text/javascript">
 				<!--
-				$("#primarycolour").val(lys['primarycolour']);
+				$("#primarycolour").val(trans_color(lys['primarycolour']));
 				//document.writeln('<dd><input type="text" id="primarycolour" value="'+trans_color(lys['primarycolour'])+'" style="width:80px" onChange="style_priview()" />');
 				//document.writeln('</dd>');
 				-->
@@ -3992,7 +4012,7 @@ function source_temdt_switch()
 	 }
 	 */
 	 -->
-	 </script><td style="background-color:#FFFFFF " onclick="document.getElementById(&#39;primarycolour&#39;).value=&#39;FFFFFF&#39;;style_priview();">&nbsp;</td>
+	 </script><td style="background-color:#FFFFFF " onclick="document.getElementById('primarycolour').value='FFFFFF';style_priview();">&nbsp;</td>
 <td style="background-color:#E8E8E8 " onclick="$('#primarycolour').val('E8E8E8');style_priview();">&nbsp;</td>
 <td style="background-color:#D2FF78 " onclick="$('#primarycolour').val('D2FF78');style_priview();">&nbsp;</td>
 <td style="background-color:#78FF78 " onclick="$('#primarycolour').val('78FF78');style_priview();">&nbsp;</td>
@@ -4059,7 +4079,7 @@ function source_temdt_switch()
 	 }
 	 */
 	 -->
-	 </script><td style="background-color:#000000 " onclick="document.getElementById(&#39;backcolour&#39;).value=&#39;000000&#39;;style_priview();">&nbsp;</td>
+	 </script><td style="background-color:#000000 " onclick="document.getElementById('backcolour').value='000000';style_priview();">&nbsp;</td>
 <td style="background-color:#2C2C2C " onclick="$('#backcolour').val('2C2C2C');style_priview();">&nbsp;</td>
 <td style="background-color:#466900 " onclick="$('#backcolour').val('466900');style_priview();">&nbsp;</td>
 <td style="background-color:#006900 " onclick="$('#backcolour').val('006900');style_priview();">&nbsp;</td>
@@ -4212,7 +4232,7 @@ function source_temdt_switch()
   	<dd><input type="text" id="secondarycolour" value="'+trans_color(lys['secondarycolour'])+'" style="width:80px" onChange="style_priview()" /></dd>
   <script type="text/javascript">
 				<!--
-				$("#secondarycolour").val(lys['secondarycolour']);
+				$("#secondarycolour").val(trans_color(lys['secondarycolour']));
 				-->
 				</script></dt>
 
@@ -4222,7 +4242,7 @@ function source_temdt_switch()
   	<dd><input type="text" id="tertiarycolour" value="'+lys['tertiarycolour']+'" style="width:40px" onChange="style_priview()" /></dd>
   <script type="text/javascript">
 				<!--
-				$("#tertiarycolour").val(lys['tertiarycolour']);
+				$("#tertiarycolour").val(trans_color(lys['tertiarycolour']));
 				-->
 				</script></dt>
 
@@ -4275,17 +4295,17 @@ function source_temdt_switch()
 	-->
 	</script>
 
-<div id="process_history" style="display:block;"></div>
- <br><label for="ly_lock"><input id="ly_lock" type="checkbox" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="ly_lock"> 鎖定歌詞拼音不被取代 </label><label for="lyp_auto"><input id="lyp_auto" type="checkbox" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="lyp_auto"> 使用拼音補完功能 </label><label for="lyp_locate"><input id="lyp_locate" type="checkbox" checked="" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="lyp_locate"> 使用自動拼音對位功能 </label>
 
-<label for="tmfix"><input id="tmfix" type="checkbox" checked="" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="tmfix"> 啟用SSA時間軸校正 </label>
+ <br><label for="ly_lock"><input id="ly_lock" type="checkbox" onchange="document.getElementById('source_change').value = 'true';" value="yes" name="ly_lock"> 鎖定歌詞拼音不被取代 </label><label for="lyp_auto"><input id="lyp_auto" type="checkbox" onchange="document.getElementById('source_change').value = 'true';" value="yes" name="lyp_auto"> 使用拼音補完功能 </label><label for="lyp_locate"><input id="lyp_locate" type="checkbox" checked="" onchange="document.getElementById('source_change').value = 'true';" value="yes" name="lyp_locate"> 使用自動拼音對位功能 </label>
 
-<label for="show_bp"><input id="show_bp" type="checkbox" onchange="document.getElementById(&#39;source_change&#39;).value = &#39;true&#39;;" value="yes" name="show_bp"> 除錯模式 </label><br><input accesskey="3" onclick="make_ly()" type="button" value="轉換來源 -&gt;"> 
+<label for="tmfix"><input id="tmfix" type="checkbox" checked="" onchange="document.getElementById('source_change').value = 'true';" value="yes" name="tmfix"> 啟用SSA時間軸校正 </label>
+
+<label for="show_bp"><input id="show_bp" type="checkbox" onchange="document.getElementById('source_change').value = 'true';" value="yes" name="show_bp"> 除錯模式 </label><br><input accesskey="3" onclick="make_ly()" type="button" value="轉換來源 -&gt;"> 
 (需要手動編輯歌詞內容，或是想要做歌詞注音的動作的話，請按下這個按鈕) </div>
 <div class="hint">
-<h2>歌詞編輯 (Accesskey: Alt+4 or Ctrl+4)：</h2><a onclick="show_hidden(&#39;p_help&#39;)">(提示說明)</a> </div>
+<h2>歌詞編輯 (Accesskey: Alt+4 or Ctrl+4)：</h2><a onclick="show_hidden('p_help')">(提示說明)</a> </div>
 <div class="control"><input onclick="makely_show()" type="button" value="顯示"> <input onclick="makely_hidden()" type="button" value="隱藏"> <input onclick="ly_add()" type="button" value="新增欄位"> </div>
-<ul class="help" id="p_help" style="DISPLAY: none">
+<ul class="help" id="p_help" style="display: none">
   <h3>拼音的注意事項：</h3>
   <li>拼音的規則是：歌詞的字體大小 = 拼音的字體大小 兩倍 
   </li><li>拼音的對位是使用「全型空白」，為編輯方便，程式將全型空白轉成□符號，可能是漢字的則會是■ 
@@ -4346,7 +4366,7 @@ function source_temdt_switch()
 </div>
 <div class="ly_style">
 <div><input accesskey="4" onclick="trans()" type="button" value="結果輸出 -&gt;"> <span style="COLOR: red" onclick="prohis_start();">(不知道該怎麼調整的話，只要按下這個按鈕就可以了)</span></div></div>
-
+<div id="process_history" style="display:none; margin: 50px; font-size: 2em; font-weight: bold;"></div>
 
   <script type="text/javascript">
   <!--
@@ -4377,16 +4397,16 @@ function source_temdt_switch()
   </script>
 
 <div class="hint">
-<h2>結果字幕檔案原始碼 (Accesskey: Alt+5 or Ctrl+5)：</h2><a onclick="show_hidden(&#39;ssa_help&#39;)">(提示說明)</a> </div>
-<div class="control"><input onclick="selec(&#39;target&#39;)" type="button" value="全選"> <input onclick="reset_ly(&#39;target&#39;)" type="button" value="重置"> </div>
-<ul class="help" id="ssa_help" style="DISPLAY: none">
+<h2>結果字幕檔案原始碼 (Accesskey: Alt+5 or Ctrl+5)：</h2><a onclick="show_hidden('ssa_help')">(提示說明)</a> </div>
+<div class="control"><input onclick="selec('target')" type="button" value="全選"> <input onclick="reset_ly('target')" type="button" value="重置"> </div>
+<ul class="help" id="ssa_help" style="display: none">
   <li>請將輸出結果複製貼上到筆記本 
   </li><li>存檔時，編碼必須為Unicode，而非ANSI。否則拼音對位會發生錯誤，半形空白會被當成四分之一全形空白。 
   </li><li>副檔名必須為.ssa，檔名則與影片檔的檔名相同 
   </li><li>將ssa字幕檔與影片檔擺置在同一個資料夾底下，並安裝且正確設定Vobsub Director 
   2.23版以上，便可以正常觀賞。Codec可以下載KK-lite Mega Codec Pack 1.38以上，<a href="http://home.hccnet.nl/h.edskes/mirror.htm" target="_blank">下載網頁</a>。 
 </li></ul><textarea id="target" accesskey="5" name="" wrap="off">Title: VirtualDub 'subtitler' filter demonstration
-Original Script: Avery Lee &lt;phaeron@virtualdub.org&gt;
+Original Script: Pulipuli Chen &lt;pulipuli.chen@gmail.com&gt;
 ScriptType: v4.00
 Collisions: Normal
 PlayResY: 480
@@ -4397,26 +4417,29 @@ Timer: 100.0000
 Format: Name,         Fontname,         Fontsize, PrimaryColour, SecondaryColour, TertiaryColour, BackColour, Bold, Italic, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, AlphaLevel, Encoding
 </textarea> </form>
 <hr style="WIDTH: 90%">
-<a class="hint_help" style="DISPLAY: block" onclick="show_hidden(&#39;copyright&#39;)">版權宣言及程式注意事項</a> 
-<div id="copyright" style="DISPLAY: none">
+<a class="hint_help" style="display: block" onclick="show_hidden('copyright')">版權宣言及程式注意事項</a> 
+<div id="copyright" style="display: none">
 <p>本程式是由<a href="mailto:puddingchen-35@yahoo.com.tw?subject=[Timemark%20to%20SSA]">布丁</a>為輔大動漫電玩研習社特別製作<br>沒有任何版權，使用者可以自行修改、使用、散佈<br>只求有問題能夠<a href="mailto:puddingchen-35@yahoo.com.tw?subject=[Timemark%20to%20SSA]">告訴製作者</a> 
 </p>
-<p>本程式使用JavaScript語言撰寫<br>以Internet Explorer 6.0為主要平台，使用其他瀏覽器則會有計算上的誤差，請務必注意 
+<p>本程式使用JavaScript語言撰寫<br>以Internet Explorer 6.0為主要平台，使用其他瀏覽器則會有計算上的誤差，請務必注意。<br />如果沒有IE6，您可以使用IE Tester。<a href="http://pulipuli.blogspot.tw/2009/09/ie-testertimemark-to-ssa.html" target="_blank">詳情請看這一篇介紹</a>。
 </p>
-<p>本網頁在1024*768的桌面大小下會有最佳的瀏覽畫面 </p></div><a class="hint_help" style="DISPLAY: block" onclick="show_hidden(&#39;edit&#39;)">版本修改記事</a> 
-<dl id="edit" style="DISPLAY: none">
+<p>本網頁在1024*768的桌面大小下會有最佳的瀏覽畫面 </p></div><a class="hint_help" style="display: block" onclick="show_hidden('edit')">版本修改記事</a> 
+<dl id="edit" style="display: none">
 	<dt>2014 Oct. 11 / 3.2 為IE Tester修正 </dt>
-  <dd>之前下載時發生許多問題，現在修正。加入jQuery以修正相容性。</dd>
+  <dd><pre>之前下載時發生許多問題，現在修正。加入jQuery以修正相容性。
+  	TTS長久典藏在<a href="https://github.com/pulipulichen/blogger/raw/master/project/2014/10/Timemark_to_SSA.htm" target="_blank">GitHub</a>。
+  	範例歌詞參考的影片是<a href="http://www.youtube.com/watch?v=JPfK8R8zLKQ" target="_blank">Onegai Twins op.</a></pre>
+  </dd>
   <dt>2006 Apr. 21 / 3.12+ TMeditor導入 </dt>
   <dd>雖然版面沒有調過，不過應該會方便許多</dd>
   <dt>2006 Apr. 20 / 3.12 續‧修正 </dt>
-  <dd>之前最重要的trim()函式一整個是錯誤的，我居然完全沒發現
+  <dd><pre>之前最重要的trim()函式一整個是錯誤的，我居然完全沒發現
   修正之後會發現很多錯誤也一股腦的跑了出來，只好一個一個慢慢修
   另外，加入了時間軸修正功能，這個超方便的，請大家一定要使用
   接下來除了小修正之外，我接下來在策劃另一個TTS，也順便正名改為：Timatag To SSA
   是個從TG(Timetag)標時間軸、時間軸計算、字幕預覽到SSA檔案輸出，一氣呵成的工作
   現在只差字幕預覽的作法，以及版面設計上
-  應該是可以完成的，這不是夢想。</dd>
+  應該是可以完成的，這不是夢想。</pre></dd>
   <dt>2006 Apr. 14 / 3.12 色盤功能加入 </dt>
   <dd>順便調整了一下格式的版面設計...但其實我還是不怎麼滿意這種設計就是
   算了...現在也不想改了...</dd>

@@ -2,7 +2,7 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
   <!-- This style was edited with the Visual CSL Editor (http://steveridout.com/csl/visualEditor/) -->
   <info>
-    <title>American Psychological Association 6th edition / Chinese APA by Pulipuli Chen</title>
+    <title>Chinese American Psychological Association 6th edition</title>
     <title-short>APA Pulipuli</title-short>
     <id>http://www.zotero.org/styles/apa_zh_pulipuli</id>
     <link href="http://www.zotero.org/styles/apa_zh_pulipuli" rel="self"/>
@@ -86,7 +86,8 @@
               </names>
             </if>
             <else>
-              <text variable="container-title" />
+              <!--<text variable="container-title" font-style="italic" />-->
+              <text macro="chinese-container-title" font-style="italic"/>
             </else>
           </choose>
           
@@ -409,7 +410,7 @@
         <text type="report thesis" variable="genre" prefix="[" suffix="]"/>
       </else-if>
       <else-if type="book thesis motion_picture report song manuscript speech" match="any">
-        <text variable="title" font-style="italic"/>
+        <text macro="title-zh-italic" font-style="italic"/>
       </else-if>
       <else>
         <text variable="title"/>
@@ -418,6 +419,10 @@
     <text macro="container-contributors-zh"/>
     <text macro="secondary-contributors-zh"/>          
     <text macro="locators-books-zh" />
+  </macro>
+
+  <macro name="title-zh-italic">
+    <text variable="title" font-style="italic"/>
   </macro>
   
   <!---->
@@ -831,7 +836,7 @@
       </choose>
       <text macro="container-contributors"/>
       <text macro="secondary-contributors"/>
-      <text macro="container-title"/>
+      <text macro="container-title" font-style="italic"/>
     </group>
   </macro>
   
@@ -850,7 +855,7 @@
           <choose>
             <if variable="container-title">
               <text variable="volume"/>
-              <text variable="container-title"/>
+              <text variable="container-title" font-style="italic"/>
               <group delimiter=" ">
                 <!--change to label variable="section" as that becomes available -->
                 <text term="section" form="symbol"/>
@@ -890,24 +895,28 @@
       <group delimiter="。">
           <text macro="title-zh"/>
           <group delimiter="，">
-            <choose>
-              <if type="book chapter" match="none">
-                <text variable="container-title" font-style="italic"/>
-                <group>
-                  <text variable="collection-number" suffix="，"/>
-                  <text variable="collection-title"/>
-                </group>
-              </if>
-              <if type="paper-conference" match="any">
-                <text variable="container-title" font-style="italic"/>
-              </if>
-            </choose>
+          <choose>
+            <if type="book chapter" match="none">
+              <text macro="chinese-container-title" font-style="italic"/>
+              <group>
+                <text variable="collection-title"/>
+              </group>
+            </if>
+            <if type="paper-conference" match="any">
+              <text macro="chinese-container-title" font-style="italic"/>
+            </if>
+          </choose>
+            
             <text macro="locators-zh"/>
           </group>
         <text macro="publisher-zh"/>
       </group>
       <text macro="access-zh"/>
 
+  </macro>
+
+  <macro name="chinese-container-title">
+      <text variable="container-title" font-style="italic" />
   </macro>
 
   <!---->

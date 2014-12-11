@@ -5,8 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>JS-XLSX Live Demo</title>
+
+</head>
+<body>
+
+<!-- ------------------------------- -->
+
+<h3>將Excel轉換成Solr XML格式 / Excel to Solr XML format</h3>
+
 <style>
-#drop{
+.solr-xml-20141212 #drop{
 	border:2px dashed #bbb;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
@@ -15,20 +23,12 @@
 	text-align:center;
 	font:20pt bold,"Vollkorn";color:#bbb
 }
-#b64data{
+.solr-xml-20141212 #b64data{
 	width:100%;
 }
 </style>
-</head>
-<body>
 
-<!-- ------------------------------- -->
-
-<h3>將Excel轉換成Solr XML格式 / Excel to Solr XML format</h3>
-
-<p>
-	Apache Solr要匯入資料的格式預設是使用XML結構，但這跟我們習慣使用的Excel有很大的差別。因此我利用js-xlsx套件作了一個線上Excel轉成Solr XML格式的工具，方便大家把Excel轉換成可以匯入Solr的格式。
-</p>
+<div class="solr-xml-20141212">
 
 <hr />
 
@@ -69,6 +69,10 @@
 
 <h5>Upload XLSX</h5>
 
+<ul>
+	<li>Example XLSX data: <a href="https://github.com/pulipulichen/blogger/raw/master/project/2014/12/20141211-xlsx_to_solr_xml/example-data.xlsx">example-data.xlsx</a></li>
+</ul>
+
 <!--<input type="radio" name="format" value="csv" checked> CSV<br>
 <input type="radio" name="format" value="json"> JSON<br>
 <input type="radio" name="format" value="form"> FORMULAE<br> -->
@@ -94,10 +98,12 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
 <pre id="out_20141212"></pre>
 </div>
 
+</div>
 <!-- ------------------------------------------------ -->
 
 <!-- uncomment the next line here and in xlsxworker.js for encoding support -->
 <!--<script src="dist/cpexcel.js"></script>-->
+<script src="import_xlsxworker2.js"></script>
 <script src="shim.js"></script>
 <script src="jszip.js"></script>
 <script src="xlsx.js"></script>

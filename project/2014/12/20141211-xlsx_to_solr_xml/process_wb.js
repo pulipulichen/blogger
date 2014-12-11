@@ -52,7 +52,9 @@ function xlsxworker_noxfer(data, cb) {
 }
 
 function xlsxworker_xfer(data, cb) {
-    var worker = new Worker(rABS ? './xlsxworker2.js' : './xlsxworker1.js');
+    //var worker = new Worker(rABS ? './xlsxworker2.js' : './xlsxworker1.js');
+    //var worker = new Worker(xlsxworker2);
+    var worker = xlsxworker2;
     worker.onmessage = function(e) {
         switch(e.data.t) {
             case 'ready': break;

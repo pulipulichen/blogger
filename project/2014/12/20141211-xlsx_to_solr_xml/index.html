@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- xlsx.js (C) 2013-2014 SheetJS http://sheetjs.com -->
+<!-- vim: set ts=2: -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>JS-XLSX Live Demo</title>
+<style>
+#drop{
+	border:2px dashed #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	padding:25px;
+	text-align:center;
+	font:20pt bold,"Vollkorn";color:#bbb
+}
+#b64data{
+	width:100%;
+}
+</style>
+</head>
+<body>
+
+<!-- ------------------------------- -->
+
+<h3>將Excel轉換成Solr XML格式 / Excel to Solr XML format</h3>
+
+<p>
+	Apache Solr要匯入資料的格式預設是使用XML結構，但這跟我們習慣使用的Excel有很大的差別。因此我利用js-xlsx套件作了一個線上Excel轉成Solr XML格式的工具，方便大家把Excel轉換成可以匯入Solr的格式。
+</p>
+
+<hr />
+
+<p>
+	Source code from: JS-XLSX (XLSX/XLSB/XLSM) Live Demo 
+	<ul>
+		<li><a href="https://github.com/SheetJS/js-xlsx">Github Repo</a></li>
+		<li><a href="https://github.com/SheetJS/js-xlsx/issues">Issues?  Something look weird?  Click here and report an issue</a></li>
+	</ul>
+</p>
+
+<hr />
+
+<div id="solr_xml_20141212_form">
+<h5>Configuration</h5>
+
+<ul>
+	<li>
+		<label>
+			Output Format:
+			<select name="format">
+				<option value="solr_xml" selected> Solr XML</option>
+				<option value="csv"> CSV</option>
+				<option value="json"> JSON</option>
+				<option value="form"> FORMULAE</option>
+			</select>
+		</label>
+	</li>
+	<li>
+		<label>
+			Split: 
+			<input type="text" name="split_20141212" value=";" />
+		</label>
+	</li>
+</ul>
+
+<!-- -------------------------------------- -->
+
+<h5>Upload XLSX</h5>
+
+<!--<input type="radio" name="format" value="csv" checked> CSV<br>
+<input type="radio" name="format" value="json"> JSON<br>
+<input type="radio" name="format" value="form"> FORMULAE<br> -->
+
+<div id="drop">Drop an XLSX / XLSM / XLSB / ODS file here to see sheet data</div>
+<p><input type="file" name="xlfile" id="xlf" /> ... or click here to select a file</p>
+<!--
+<textarea id="b64data">... or paste a base64-encoding here</textarea>
+<input type="button" id="dotext" value="Click here to process the base64 text" onclick="b64it();"/><br />
+-->
+
+<div style="display:none">
+Advanced Demo Options: <br />
+Use Web Workers: (when available) <input type="checkbox" name="useworker" checked><br />
+Use Transferrables: (when available) <input type="checkbox" name="xferable" checked><br />
+Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked><br />
+</div>
+</div>
+
+<div id="solr_xml_20141212_output" style="display:none;">
+<button onclick="value_to_download('out_20141212')">DOWNLOAD</button>
+<button onclick="reset_upload()">RESET</button>
+<pre id="out_20141212"></pre>
+</div>
+
+<!-- ------------------------------------------------ -->
+
+<!-- uncomment the next line here and in xlsxworker.js for encoding support -->
+<!--<script src="dist/cpexcel.js"></script>-->
+<script src="shim.js"></script>
+<script src="jszip.js"></script>
+<script src="xlsx.js"></script>
+<!-- uncomment the next line here and in xlsxworker.js for ODS support -->
+<script src="ods.js"></script>
+<script src="process_wb.js"></script>
+</body>
+</html>

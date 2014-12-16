@@ -122,6 +122,80 @@ function to_solr_xml(workbook) {
     return result.join("\n");
 }
 
+/**
+ * @author Pulipuli Chen 20141216
+ * @param  {[type]} workbook [description]
+ * @return {[type]}          [description]
+ */
+function csv_to_solr_xml(_csv_array) {
+    _csv_array = _csv_array.data;
+    var result = [];
+    var SPLIT = document.getElementsByName( 'split_20141212' )[0].value;
+    console.log(_csv_array);
+    //console.log(_csv_array);
+    var _fields = [];
+    if(_csv_array.length > 0){
+        result.push("<add>");
+        var _first = true;
+        //console.log(_csv_array[0]);
+        for (var _j = 0; _j < _csv_array.length; _j++) {
+            var _row_xml = "";
+            var _row = _csv_array[_j];
+            
+            if (_first === true) {
+                for (var _col in _row) {
+                    _fields.push(_row[_col]);
+                }
+            }
+            else {
+                var _txt_first = true;
+                for (var _k = 0; _k < _row.length; _k++) {
+                    var _field = _fields[_k];
+                    //console.log(_field);
+                    var txt = _row[_k];
+                    var _txt_first = true;
+                    if (SPLIT !== undefined 
+                            && txt.indexOf(SPLIT) > -1) {
+                        var _txt_ary = txt.split(SPLIT);
+                        for (var _i in _txt_ary) {
+                            txt = _txt_ary[_i];	
+                            txt = txt.trim();
+                            if (txt === '') {
+                                    continue;
+                            }
+                            txt = htmlEnDeCode_20141216.htmlEncode(txt);
+                            txt = '\t\t<field name="' + _field + '">' + txt + '</field>\n';
+                            
+                            _row_xml += txt;
+                        }
+                    }
+                    else {
+                        if (txt.trim() === '') {
+                            continue;
+                        }
+                        txt = htmlEnDeCode_20141216.htmlEncode(txt);
+                        txt = '\t\t<field name="' + _field + '">' + txt + '</field>\n';
+                        
+                        _row_xml += txt;
+                    }
+                    _txt_first = false;
+                }
+                
+                if (_row_xml !== "") {
+                    _row_xml = '\t<doc>\n' + _row_xml + '\t</doc>';
+                }
+            }   //else {
+            //console.log(_row_xml);
+            result.push(_row_xml);
+            _first = false;
+        }
+        result.push("</add>");
+    }
+    
+    _utils_20141216.check_fields(_fields);
+    return result.join("\n");
+}
+
 function to_csv(workbook) {
     var result = [];
     workbook.SheetNames.forEach(function(sheetName) {
@@ -170,9 +244,39 @@ function process_wb(wb) {
         default:
             output = to_csv(wb);
     }
+    rocess_wb_output(output)
+}
+
+var _utils_20141216 = {
+    check_fields: function (_fields) {
+        //console.log(_fields);
+        var _has_id = false;
+        var _has_title = false;
+        for (var _i in _fields) {
+            var _field = _fields[_i];
+            if (_field === "id") _has_id = true;
+            if (_field === "title") _has_title = true;
+        }
+        
+        if (_has_id === false || _has_title === false) {
+            var _msg = 'You must have "id" and "title" fields.';
+            alert(_msg);
+            throw _msg;
+        }
+    }
+};
+
+function process_wb_output(output) {
     var out = document.getElementById('out_20141212');
+    var textarea = document.getElementById('out_20141212_textarea');
+    
     if(out.innerText === undefined) out.textContent = output;
     else out.innerText = output;
+
+    textarea.value = output;
+    //if(textarea.innerText === undefined) textarea.textContent = output;
+    //else textarea.innerText = output;
+
     if(typeof console !== 'undefined') console.log("output", new Date());
 
     document.getElementById('solr_xml_20141212_output').style.display = 'block';
@@ -190,24 +294,43 @@ function handleDrop(e) {
     for (i = 0, f = files[i]; i != files.length; ++i) {
         var reader = new FileReader();
         var name = f.name;
-        reader.onload = function(e) {
-            if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
-            var data = e.target.result;
-            if(use_worker) {
-                xlsxworker(data, process_wb);
-            } else {
-                var wb;
-                if(rABS) {
-                    wb = XLSX.read(data, {type: 'binary'});
+        
+        if (name.substring(name.length - 4, name.length) !== ".csv") {
+            reader.onload = function(e) {
+                if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+                var data = e.target.result;
+
+                if(use_worker) {
+                    xlsxworker(data, process_wb);
                 } else {
-                var arr = fixdata(data);
-                    wb = XLSX.read(btoa(arr), {type: 'base64'});
+                    var wb;
+                    if(rABS) {
+                        wb = XLSX.read(data, {type: 'binary'});
+                    } else {
+                    var arr = fixdata(data);
+                        wb = XLSX.read(btoa(arr), {type: 'base64'});
+                    }
+                    process_wb(wb);
                 }
-                process_wb(wb);
+            };  //reader.onload = function(e) {
+
+            if(rABS) reader.readAsBinaryString(f);
+            else reader.readAsArrayBuffer(f);
+        }
+        else {
+        //if (name.substring(name.length - 4, name.length) !== ".csv") {
+            reader.readAsText(f, 'UTF-8');
+            
+            reader.onload = function(e) {
+                var data = e.target.result;
+                //console.log(f);
+                var results = Papa.parse(data);
+                results = csv_to_solr_xml(results);
+                //console.log(results);
+                process_wb_output(results);
             }
-        };
-        if(rABS) reader.readAsBinaryString(f);
-        else reader.readAsArrayBuffer(f);
+                
+         }
     }
 }
 
@@ -231,26 +354,42 @@ function handleFile(e) {
     var files = e.target.files;
     var i,f;
     for (i = 0, f = files[i]; i != files.length; ++i) {
-        var reader = new FileReader();
         var name = f.name;
-        reader.onload = function(e) {
-            if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
-            var data = e.target.result;
-            if(use_worker) {
-                xlsxworker(data, process_wb);
-            } else {
-                var wb;
-                if(rABS) {
-                    wb = XLSX.read(data, {type: 'binary'});
+        var reader = new FileReader();
+        
+        if (name.substring(name.length - 4, name.length) !== ".csv") {
+            reader.onload = function(e) {
+                if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+                var data = e.target.result;
+                if(use_worker) {
+                    xlsxworker(data, process_wb);
                 } else {
-                var arr = fixdata(data);
-                    wb = XLSX.read(btoa(arr), {type: 'base64'});
+                    var wb;
+                    if(rABS) {
+                        wb = XLSX.read(data, {type: 'binary'});
+                    } else {
+                    var arr = fixdata(data);
+                        wb = XLSX.read(btoa(arr), {type: 'base64'});
+                    }
+                    process_wb(wb);
                 }
-                process_wb(wb);
+            };
+            if(rABS) reader.readAsBinaryString(f);
+            else reader.readAsArrayBuffer(f);
+        }
+        else {
+            reader.readAsText(f, 'UTF-8');
+            
+            reader.onload = function(e) {
+                var data = e.target.result;
+                //console.log(f);
+                var results = Papa.parse(data);
+                results = csv_to_solr_xml(results);
+                //console.log(results);
+                process_wb_output(results);
             }
-        };
-        if(rABS) reader.readAsBinaryString(f);
-        else reader.readAsArrayBuffer(f);
+                
+         }
     }
 }
 

@@ -5362,15 +5362,15 @@ function sheet_to_solr_xml(sheet, opts) {
 
 			txt = val !== undefined ? ''+format_cell(val) : "";
 			for(i = 0, cc = 0; i !== txt.length; ++i) {
-				if((cc = txt.charCodeAt(i)) === fs || cc === rs || cc === 34) 
-				{
-					txt = "\"" + txt.replace(qreg, '""') + "\""; 
-					break; 
-				}
+                            if((cc = txt.charCodeAt(i)) === fs || cc === rs || cc === 34) 
+                            {
+                                txt = "\"" + txt.replace(qreg, '""') + "\""; 
+                                break; 
+                            }
 			}
 			
 			if (R === 0) {
-				_fields.push(txt);
+                            _fields.push(txt);
 			}
 			else {
 				console.log(SPLIT);
@@ -5380,13 +5380,19 @@ function sheet_to_solr_xml(sheet, opts) {
 					for (var _i in _txt_ary) {
 						txt = _txt_ary[_i];	
 						txt = txt.trim();
-						txt = htmlEnDeCode.htmlEncode(txt);
+						if (txt === '') {
+							continue;
+						}
+						txt = htmlEnDeCode_20141216.htmlEncode(txt);
 						txt = '\t\t<field name="' + _fields[C] + '">' + txt + '</field>\n';
 						row += (C === r.s.c ? "" : FS) + txt;
 					}
 				}
 				else {
-					txt = htmlEnDeCode.htmlEncode(txt);
+					if (txt.trim() === '') {
+						continue;
+					}
+					txt = htmlEnDeCode_20141216.htmlEncode(txt);
 					txt = '\t\t<field name="' + _fields[C] + '">' + txt + '</field>\n';
 					row += (C === r.s.c ? "" : FS) + txt;
 				}
@@ -5400,13 +5406,14 @@ function sheet_to_solr_xml(sheet, opts) {
 		}
 		
 	}
+        _utils_20141216.check_fields(_fields);
 	return out;
 }
 
 // -----------------------------
 // FROM: http://stackoverflow.com/questions/3700326/decode-amp-back-to-in-javascript
 
-var htmlEnDeCode = (function() {
+htmlEnDeCode_20141216 = (function() {
     var charToEntityRegex,
         entityToCharRegex,
         charToEntity,

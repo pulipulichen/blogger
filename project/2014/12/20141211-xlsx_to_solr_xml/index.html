@@ -77,7 +77,7 @@
 <input type="radio" name="format" value="json"> JSON<br>
 <input type="radio" name="format" value="form"> FORMULAE<br> -->
 
-<div id="drop">Drop an XLSX / XLSM / XLSB / ODS file here to see sheet data</div>
+<div id="drop">Drop an CSV / XLSX / XLSM / XLSB / ODS file here to see sheet data</div>
 <p><input type="file" name="xlfile" id="xlf" /> ... or click here to select a file</p>
 <!--
 <textarea id="b64data">... or paste a base64-encoding here</textarea>
@@ -95,7 +95,10 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
 <div id="solr_xml_20141212_output" style="display:none;">
 <button onclick="value_to_download('out_20141212')">DOWNLOAD</button>
 <button onclick="reset_upload()">RESET</button>
+<div>
+<textarea style="float:right;width: 50%; height: 10em;" onfocus="this.select()" id="out_20141212_textarea"></textarea>
 <pre id="out_20141212"></pre>
+</div>
 </div>
 
 </div>
@@ -109,6 +112,7 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
 <script src="xlsx.js"></script>
 <!-- uncomment the next line here and in xlsxworker.js for ODS support -->
 <script src="ods.js"></script>
+<script src="papaparse.min.js"></script>
 <script src="process_wb.js"></script>
 </body>
 </html>

@@ -29,6 +29,7 @@ function s2ab(s) {
 onmessage = function (oEvent) {
   var v;
   try {
+    console.log(oEvent.data);
     v = XLSX.read(ab2str(oEvent.data), {type: 'binary'});
   } catch(e) { postMessage({t:"e",d:e.stack}); }
   var res = {t:"xlsx", d:JSON.stringify(v)};

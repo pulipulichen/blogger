@@ -244,7 +244,7 @@ function process_wb(wb) {
         default:
             output = to_csv(wb);
     }
-    rocess_wb_output(output)
+    process_wb_output(output)
 }
 
 var _utils_20141216 = {

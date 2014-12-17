@@ -990,10 +990,16 @@ function make_ly1()
 
 
 			//FTM判定，存在的話，自動視為一個BP
-                        if (typeof(source[i]) === "undefined") { throw "source undefined" }
+                        if (is_tm_foot(source[i]) && is_tm_head(source[i])
+                                && trim(source[i]).length > 11
+                                && get_head_tm(source[i]) === get_foot_tm(source[i])) {
+                            //alert([trim(source[i]).length, source[i]]);
+                            alert("發生錯誤，此行內容的前後時間標籤相同！ \n" + source[i]);
+                        }
 			if (is_tm_foot(source[i]) 
                                 && (get_head_tm(source[i]) !== get_foot_tm(source[i])) 
-                                && source[i].length != 11 && s_ly[tm_counter-1] != "[Break Point!]")
+                                && source[i].length !== 11 
+                                && s_ly[tm_counter-1] !== "[Break Point!]")
 			{
                             s_tm[tm_counter] = get_foot_tm(source[i]);
                             s_ly[tm_counter] = "[Break Point!]";
@@ -1002,8 +1008,9 @@ function make_ly1()
 			
 			//「--」以後的都不算！
 			temp = source[i].split("");
-			if (temp[0]+temp[1] == "--")
-				i = source_length;
+			if (temp[0]+temp[1] === "--") {
+                            i = source_length;
+                        }
 		}
 		
 		//結尾增加一個BP
@@ -2010,29 +2017,29 @@ function w(str)
 {
 	document.getElementById("target").value = document.getElementById("target").value+str;
 }
-function s(str)
-{
-	document.getElementById("source").value = document.getElementById("source").value+str;
+function s(str) {
+    document.getElementById("source").value = document.getElementById("source").value+str;
 }
 
-function is_tm_head(source)
-{
-	source = trim(source).split("");
-	if (source[0] == "[" && source[9] == "]" )
-		return true;
-	else
-		return false;
+function is_tm_head(source) {
+    source = trim(source).split("");
+    if (source[0] === "[" && source[9] === "]" ) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function is_tm_foot(source)
 {
     var source = trim(source).split("");
         
-    if (typeof(source) === "undefined" 
-            && source.length === 0) {
-        //alert(typeof(source));
-        return false;
-    }
+    //if (typeof(source) === "undefined" 
+    //        && source.length === 0) {
+    //    //alert(typeof(source));
+    //    return false;
+    //}
     
     /*if (source[source.length -1]+source[source.length]=="\n")
 	{
@@ -2244,9 +2251,9 @@ function no_parent(str)
 				result = result + str_ary[i];			
 			}
 		}
-		else if (str_ary[i] == "{")
+		else if (str_ary[i] === "{")
 		{
-			while (str_ary[i] != "}" && i < str_ary.length)
+			while (str_ary[i] !== "}" && i < str_ary.length)
 			{
 				//alert(str_ary[i]);
 				i++;
@@ -2264,21 +2271,23 @@ function no_parent(str)
 
 function block_change(str)
 {
-	var result = "";
-	if (str != "[Break Point!]")
-	{
-		str = str.split("");
-		for (var i=0; i < str.length; i++)
-		{
-			if (str[i] == "□" || str[i] == "■")
-				str[i] = "　";
-			else if (str[i] == "|")
-				str[i] = " ";
-			result = result+str[i];
-		}
-	}
-	
-	return result;
+    var result = "";
+    if (str !== "[Break Point!]")
+    {
+        str = str.split("");
+        for (var i=0; i < str.length; i++)
+        {
+            if (str[i] === "□" || str[i] === "■") {
+                str[i] = "　";
+            }
+            else if (str[i] === "|") {
+                str[i] = " ";
+            }
+            result = result+str[i];
+        }
+    }
+
+    return result;
 }
 
 function make_ly_p(i, source)
@@ -3444,11 +3453,11 @@ H3 {
 
 <form>
 <h1>
-	<a href="mailto:puddingchen.35@gmail.com?subject=[Timemark%20to%20SSA]">[問題回報]</a> 
-	<a href="http://140.136.152.127/oped/upload/[%C2%A4u%C2%A8%C3%A3]/timemark_to_ssa.htm" target="_blank">[下載本程式]</a> 
+	<a href="mailto:pulipuli.chen@gmail.com?subject=[Timemark%20to%20SSA]">[問題回報]</a> 
+	<a href="https://github.com/pulipulichen/blogger/raw/master/project/2014/10/Timemark_to_SSA.htm" target="_blank">[下載本程式]</a> 
 	<a href="http://pulipuli.blogspot.tw/2009/09/timemark-to-ssa.html" target="_blank">[操作說明]</a>
 	<a href="http://pulipuli.blogspot.tw/2009/09/ie-testertimemark-to-ssa.html" target="_blank">請使用Internet Explorer 6或是IE Tester來開啟Timemark to SSA</a>
-	<div style="white-space: nowrap">Timemark to SSA (var 3.2) </div>
+	<div style="white-space: nowrap">Timemark to SSA (version 3.3) </div>
 </h1>
 <div class="hint" style="WIDTH: 60%">
 <h2>來源歌詞(Accesskey: Alt+1 or Ctrl+1)：</h2><a onclick="show_hidden('tm_help')">(提示說明) </a></div>
@@ -3520,134 +3529,29 @@ function filename_change()
 
 <!---------------------------------------------------------------------------->
 <!--歌詞編輯模式-->
-<!--
+
 <textarea id="source" onkeydown="source_temdt_switch()" style="width: 100%; margin:auto;height: 302px; 
   border:3px solid black;margin:0;padding:0;
   font-family:Arial, Helvetica, sans-serif;
   font-size: 10pt; letter-spacing:0;
   display:block" accesskey="1" name="source" wrap="off" onfocus="source_onfocus();" 
   onchange="source_onchange();">請輸入標註有Timemark的歌詞</textarea>
--->
+
+
+<!--
 <textarea id="source" onkeydown="source_temdt_switch()" style="width: 100%; margin:auto;height: 302px; 
   border:3px solid black;margin:0;padding:0;
   font-family:Arial, Helvetica, sans-serif;
   font-size: 10pt; letter-spacing:0;
   display:block" accesskey="1" name="source" wrap="off" onfocus="source_onfocus();" 
-  onchange="source_onchange();">[00:12:02]ハロ 窓(まど)を開(あ)けて
-[00:15:12]小(ちい)さく呟(つぶや)いた
-[00:17:01]ハワユ 誰(だれ)もいない
-[00:19:99]部屋(へや)で一人(ひとり)
-[00:21:96]モーニン
-[00:23:19]朝(あさ)が来(き)たよ
-[00:25:06]土砂降(どしゃぶ)りの朝(あさ)が
-[00:27:11]ティクタク
-[00:28:22]私(わたし)のネジを
-[00:30:24]誰(だれ)か巻(ま)いて
-[00:38:03]
-[00:44:88]ハロ 昔(むかし)のアニメに
-[00:47:63]そんなのいたっけな
-[00:49:79]ハワユ 羨(うらや)ましいな
-[00:52:45]皆(みんな)に愛(あい)されて
-[00:54:83]スリーピン
-[00:56:06]馬鹿(ばか)な事言(ことい)ってないで
-[00:57:85]支度(したく)をしなくちゃ
-[00:59:86]クライン
-[01:01:07]涙(なみだ)の跡(あと)を隠(かく)す為(ため)
-[01:04:54]もう口癖(くちぐせ)になった
-[01:06:70]「まぁいっか」
-[01:07:66]昨日(きのう)の言葉(ことば)が
-[01:09:05]ふと頭(あたま)を過(よぎ)る
-[01:10:56]「もう君(きみ)には
-[01:11:00]全然期待(ぜんぜんきたい)してないから」
-[01:15:89]そりゃまぁ私(わたし)だって
-[01:18:06]自分(じぶん)に期待(きたい)などしてないけれど
-[01:20:74]アレは一体(いったい)どういうつもりですか
-[01:25:69]喉元(のどもと)まで
-[01:28:02]出(で)かかった言葉(ことば)
-[01:30:67]口(くち)をついて
-[01:32:90]出(で)たのは嘘(うそ)
-[01:35:16]こうして今日(きょう)も
-[01:37:66]私(わたし)はーあ貴重(きちょう)な
-[01:40:79]言葉(ことば)を浪費(ろうひ)して
-[01:43:35]生(い)きてゆく
-[01:45:29]何故隠(なぜかく)してしまうのですか
-[01:48:01]笑(わら)われるのが怖(こわ)いのですか
-[01:50:50]誰(だれ)にも会(あ)いたくないのですか
-[01:53:14]それ本当(ほんとう)ですか
-[01:55:40]曖昧(あいまい)という名(なま)の海(うみ)に
-[01:57:24]溺(おぼ)れて
-[01:58:03]息(いき)も出来(でき)ないほど
-[01:59:47]苦(くる)しいの
-[02:00:65]少(すこ)し声(こえ)が
-[02:01:60]聞(き)きたくなりました
-[02:03:25]本当(ほんとう)に弱(よわ)いな
-[02:05:86]
-[02:10:90]一向(いっこう)に進(すす)まない
-[02:12:63]支度(したく)の途中(とちゅう)
-[02:13:71]朦朧(もうろう)とした
-[02:14:96]頭(あたま)で思(おも)う
-[02:16:29]「もう理由(りゆう)を付(つ)けて
-[02:18:43]休(やす)んでしまおうかな」
-[02:21:58]いやいや分(わ)かってますって
-[02:23:73]何(なん)となく言(い)ってみただけだよ
-[02:26:65]分(わ)かってるから
-[02:28:56]怒(おこ)らないでよ
-[02:31:36]幸(しあわ)せだろうと
-[02:33:76]不幸(ふしあわ)せだろうと
-[02:36:38]平等(びょうどう)に 残酷(ざんこく)に
-[02:38:63]朝日(あさひ)は昇(のぼ)る
-[02:40:87]生(い)きていくだけで
-[02:43:33]精一杯(せいいっぱい)の私(わたし)に
-[02:46:39]これ以上何(いじょうなに)を
-[02:48:42]望(のぞ)むというの
-[02:50:94]何故気(なぜき)にしてしまうのですか
-[02:53:63]本当(ほんとう)は愛(あい)されたいのですか
-[02:56:22]その手(て)を離(はな)したのは誰(だれ)ですか
-[02:58:74]気(き)が付(つ)いてますか
-[03:00:97]人生(じんせい)にタイムカードがあるなら
-[03:03:71]終(お)わりの時間(じかん)は
-[03:05:13]何時(いつ)なんだろう
-[03:06:32]私(わたし)が生(い)きた分(ぶん)の給料(きゅうりょう)は
-[03:08:82]誰(だれ)が払(はら)うんですか
-[03:11:17]
-[03:21:23]サンキュー
-[03:22:41]ありがとうって
-[03:24:04]言(い)いたいの
-[03:26:24]サンキュー
-[03:27:51]ありがとうって
-[03:29:11]言(い)いたいよ
-[03:31:29]サンキュー
-[03:32:48]一度(いちど)だけでも良(い)いから
-[03:36:96]心(こころ)の底(そこ)から
-[03:38:19]大泣(おおな)きしながら
-[03:39:54]ありがとうって
-[03:40:52]言(い)いたいの
-[03:42:48]
-[03:44:06]何故隠(なぜかく)してしまうのですか
-[03:46:58]本当(ほんとう)は聞(き)いて欲(ほ)しいのですか
-[03:49:08]絶対(ぜったい)に笑(わら)ったりしないから
-[03:51:79]話(はな)してみませんか
-[03:53:89]口(くち)を開(ひら)かなければ
-[03:56:25]分(わ)からない
-[03:56:95]思(おも)ってるだけでは
-[03:58:30]伝(つた)わらない
-[03:59:31]なんて面倒(めんどう)くさい
-[04:00:60]生(い)き物(もの)でしょう
-[04:01:87]人間(にんげん)というのは
-[04:04:03]
-[04:06:70]ハロ ハワユ
-[04:11:62]ハロ ハワユ
-[04:19:18]あなたに
-[04:29:01]ハロ ハワユ[04:29:01]
-</textarea>
-
+  onchange="source_onchange();"></textarea>
 
 <script>
 setTimeout(function () {
     $(".tts-convert-source").click();
 }, 1000);  
 </script>
-
+-->
 
 <!---------------------------------------------------------------------------->
 <!--時間標籤編輯模式-->
@@ -4577,11 +4481,17 @@ Format: Name,         Fontname,         Fontsize, PrimaryColour, SecondaryColour
 </p>
 <p>本網頁在1024*768的桌面大小下會有最佳的瀏覽畫面 </p></div><a class="hint_help" style="display: block" onclick="show_hidden('edit')">版本修改記事</a> 
 <dl id="edit" style="display: none">
-	<dt>2014 Oct. 11 / 3.2 為IE Tester修正 </dt>
-  <dd><pre>之前下載時發生許多問題，現在修正。加入jQuery以修正相容性。
-  	TTS長久典藏在<a href="https://github.com/pulipulichen/blogger/raw/master/project/2014/10/Timemark_to_SSA.htm" target="_blank">GitHub</a>。
-  	範例歌詞參考的影片是<a href="http://www.youtube.com/watch?v=JPfK8R8zLKQ" target="_blank">Onegai Twins op.</a></pre>
-  </dd>
+    <dt>2014 Dec. 17 / 3.3 修正轉換來源 </dt>
+    <dd>
+        <pre>最近歌詞越來越長了，所以把歌詞上限從100句改到300句。
+        有些時間標籤前後重複，歌詞不會顯示出來，現在加上檢查驗證。
+        還有一些bug的處理。</pre>
+    </dd>
+    <dt>2014 Oct. 11 / 3.2 為IE Tester修正 </dt>
+    <dd><pre>之前下載時發生許多問題，現在修正。加入jQuery以修正相容性。
+          TTS長久典藏在<a href="https://github.com/pulipulichen/blogger/raw/master/project/2014/10/Timemark_to_SSA.htm" target="_blank">GitHub</a>。
+          範例歌詞參考的影片是<a href="http://www.youtube.com/watch?v=JPfK8R8zLKQ" target="_blank">Onegai Twins op.</a></pre>
+    </dd>
   <dt>2006 Apr. 21 / 3.12+ TMeditor導入 </dt>
   <dd>雖然版面沒有調過，不過應該會方便許多</dd>
   <dt>2006 Apr. 20 / 3.12 續‧修正 </dt>

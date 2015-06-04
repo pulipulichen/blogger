@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cohen (1960)</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+
+<body>
+
+<!-- more -->
+<div>
+<label> Paste <strong>coding result</strong> into following textarea: <button type="button" onclick="_example20150531()">EXAMPLE</button>
+<textarea id="input20150531" style="width: 80%;height: 10em; display: block"> 
+ 
+ 
+</textarea>
+</label>
+</div>
+<!--
+<label>Splitor
+<select id="splitor20150531">
+    <option value="space">space</option>
+    <option value="tab">tab</option>
+    <option value=",">,</option>
+</select>
+</label>
+-->
+<button type="button" onclick="_cokenKappa20150531()">Count Cohen's Kappa Index</button><button type="button" onclick="_cokenKappaReset20150531()">Reset</button>
+
+<div id="output20150531"></div>
+
+<script type="text/javascript">
+var _cokenKappa20150531 = function () {
+    var _input = $("#input20150531").val();
+    //if ($.trim(_input) === "") {
+    //    alert("Coding result is empty. Please paste coding result into textarea.")
+    //    $("#input20150531").focus();
+    //    return;
+    //}
+    var _output = $("#output20150531");
+
+    var _countResult = _getCodeCount20150531(_input);
+    var _codeCount = _countResult["codeCount"];
+    var _codeList = _countResult["codeList"];
+    var _sumCoderA = _countResult["sumCoderA"];
+    var _sumCoderB = _countResult["sumCoderB"];
+    var _totalCase = _countResult["totalCase"];
+
+    // --------------------------------
+    var _kappa = _countKappaResult20150531(_codeCount, _codeList, _sumCoderA, _sumCoderB, _totalCase);
+    var _table = _drawTable20150531(_codeCount, _codeList, _kappa, _sumCoderA, _sumCoderB, _totalCase);
+
+    _output.html(_table);
+};
+
+var _getCodeCount20150531 = function (_input) {
+    var _codeCount = {};
+    var _codeList = [];
+    var _sumCoderA = {};
+    var _sumCoderB = {};
+
+
+    /*
+    var _splitor = $("#splitor20150531").val();
+    if (_splitor == "tab") {
+        _splitor = "\t";
+    }
+    else if (_splitor == "space") {
+        _splitor = " ";
+    }
+    */
+    var _lineAry = _input.split("\n");
+
+    var _splitor = null;
+
+    
+    var _totalCase = 0;
+    for (var _l in _lineAry) {
+        var _line = _lineAry[_l];
+        //if ($.trim(_line) === "") {
+        //    //console.log(1);
+        //    continue;
+        //}
+        if (_line.length == 0) {
+            continue;
+        }
+
+        if (_splitor === null) {
+            if (_line.indexOf("\t") > -1) {
+                _splitor = "\t";
+            }
+            else if (_line.indexOf(",") > -1) {
+                _splitor = ",";
+            }
+            else if (_line.indexOf(" ") > -1) {
+                _splitor = " ";
+            }
+        }
+
+        if (_line.indexOf(_splitor) === -1) {
+            //console.log("AA");
+            continue;
+        }
+
+        while (_line.indexOf(_splitor + _splitor) > -1) {
+            _line = _line.replace(_splitor + _splitor, _splitor);
+        }
+        var _pair = _line.split(_splitor);
+
+        //console.log(_pair.length);
+        var _pairA = $.trim(_pair[0]);
+        var _pairB = $.trim(_pair[1]);
+
+        if (_pairA === "") {
+            _pairA = "[SPACE]";
+        }
+        if (_pairB === "") {
+            _pairB = "[SPACE]";
+        }
+
+        if (typeof(_codeCount[_pairA]) === "undefined") {
+            _codeCount[_pairA] = {};
+        }
+        else if (typeof(_codeCount[_pairB]) === "undefined") {
+            _codeCount[_pairB] = {};
+        }
+
+        //----
+
+        if (typeof(_codeCount[_pairA][_pairB]) === "undefined") {
+            _codeCount[_pairA][_pairB] = 0;
+        }
+        _codeCount[_pairA][_pairB]++;
+
+        //console.log([_pairA, _pairB, _codeCount[_pairA][_pairB]]);
+
+        //----
+
+        if ($.inArray(_pairA, _codeList) === -1) {
+            _codeList.push(_pairA);
+        }
+        if ($.inArray(_pairB, _codeList) === -1) {
+            _codeList.push(_pairB);
+        }
+
+        // ----------
+        if (typeof(_sumCoderA[_pairA]) === "undefined") {
+            _sumCoderA[_pairA] = 0;
+        }
+        _sumCoderA[_pairA]++;   
+        
+        if (typeof(_sumCoderB[_pairB]) === "undefined") {
+            _sumCoderB[_pairB] = 0;
+        }
+        _sumCoderB[_pairB]++;
+
+        // -------------
+        _totalCase++;
+
+    }   //for (var _l in _lineAry) {
+
+
+    //console.log(_codeCount);
+    console.log(_sumCoderA);
+    
+    for (var _c in _codeList) {
+        var _code = _codeList[_c];
+
+        if (typeof(_sumCoderA[_code]) === "undefined") {
+            _sumCoderA[_code] = 0;
+        }
+        if (typeof(_sumCoderB[_code]) === "undefined") {
+            _sumCoderB[_code] = 0;
+        }
+    }
+
+    return {
+        "codeCount": _codeCount,
+        "codeList": _codeList,
+        "sumCoderA": _sumCoderA,
+        "sumCoderB": _sumCoderB,
+        "totalCase": _totalCase
+    };
+};
+
+var _countKappaResult20150531 = function(_codeCount, _codeList, _sumCoderA, _sumCoderB, _totalCase) {
+    var _consistentCount = 0;
+    var _probabilityCount = 0;
+    for (var _c in _codeList) {
+        var _code = _codeList[_c];
+
+        if (typeof(_codeCount[_code]) !== "undefined" 
+                && typeof(_codeCount[_code][_code]) !== "undefined") {
+            _consistentCount = _consistentCount + ( _codeCount[_code][_code] / _totalCase);
+        }
+
+        // ----------------
+        _probabilityCount = _probabilityCount + ( (_sumCoderA[_code]/_totalCase) * (_sumCoderB[_code]/_totalCase));
+    }
+
+    var _kappa = 1;
+    if (_probabilityCount < 1) {
+        _kappa = (_consistentCount - _probabilityCount) / ( 1 - _probabilityCount);
+    }
+    //console.log([_consistentCount, _probabilityCount]);
+    
+    if (isNaN(_kappa)) {
+        alert(["Kappa is not a number: ", _totalCase]);
+        console.log(_codeCount);
+        console.log(_codeList);
+        console.log(_sumCoderA);
+        console.log(_sumCoderB);
+    }
+    return _kappa;
+};
+
+var _drawTable20150531 = function(_codeCount, _codeList, _kappa, _sumCoderA, _sumCoderB, _totalCase) {
+    var _table = $('<table border="1" />');
+
+    var _rowNum = _codeList.length + 4;
+    var _colNum = _codeList.length + 2;
+
+
+    // -----------------
+
+    var _thead = $("<thead />").appendTo(_table);
+    $('<tr><th colspan="'+_colNum+'">Cohen\'s Kappa Coefficient = <strong style="color:red">' + _kappa + '</strong></th></tr>').appendTo(_thead);
+    $('<tr><th rowspan="2">' + 'Coder A' + '</th><th colspan="' + _codeList.length + '">' + "Coder B" + '</th><th rowspan="2">' + 'SUM' + '</th></tr>').appendTo(_thead);
+
+    var _theadTr = $('<tr />').appendTo(_thead);
+    for (var _cc in _codeList) {
+        var _codeCol = _codeList[_cc];
+        $('<th>'+_codeCol+'</th>').appendTo(_theadTr);
+    }
+
+    // ------------------
+    
+    var _tbody = $('<tbody />').appendTo(_table);
+    for (var _cr in _codeList) {
+        var _codeRow = _codeList[_cr];
+        var _tr = $('<tr><th>'+_codeRow+'</th></tr>').appendTo(_tbody);
+
+        for (var _cc in _codeList) {
+            var _codeCol = _codeList[_cc];
+
+            var _count = 0;
+            if (typeof(_codeCount[_codeRow]) !== "undefined" 
+                    && typeof(_codeCount[_codeRow][_codeCol]) !== "undefined" ) {
+                _count = _codeCount[_codeRow][_codeCol];
+            }
+
+            $('<td>'+_count+'</td>').appendTo(_tr);
+        }
+
+        $('<td>'+_sumCoderA[_codeRow]+'</td>').appendTo(_tr);
+    }
+
+    // ------------------
+    
+    var _tfoot = $("<tfoot />").appendTo(_table);
+    var _tfootTr = $('<tr><th>' + "SUM" +'</th></tr>').appendTo(_tfoot);
+    for (var _c in _codeList) {
+        var _code = _codeList[_c];
+
+        var _sum = 0;
+        if (typeof(_sumCoderB[_code]) !== "undefined") {
+            _sum = _sumCoderB[_code];
+        }
+        $('<td>'+_sum+'</td>').appendTo(_tfootTr);
+    }
+
+    // 計算B的所有數字
+    $('<td>'+_totalCase+'</td>').appendTo(_tfootTr);
+
+    return _table;
+};
+
+var _countTotalSum = function(_sumCoder) {
+    var _totalSum = 0;
+    for (var _s in _sumCoder) {
+        _totalSum = _totalSum + _sumCoder[_s];
+    }
+    return _totalSum;
+};
+
+var _example20150531 = function () {
+    var _data = "A   B\nB   B\nA   A\nA   B\nA   A\nA   B\nA   A\nA   A";
+    var _input = $("#input20150531").val(_data);
+};
+var _cokenKappaReset20150531 = function () {
+    $("#input20150531").val("");
+    $("#output20150531").empty();
+};
+
+//$(function () {
+//    _cokenKappa20150531();
+//});
+
+</script>
+
+</body>
+</html>

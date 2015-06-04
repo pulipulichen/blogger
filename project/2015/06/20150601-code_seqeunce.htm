@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Cohen (1960)</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+
+<body>
+
+<!-- more -->
+<div>
+<label> Paste <strong>coding result</strong> from Excel:  <button type="button" onclick="_example20150601()">EXAMPLE</button>
+<textarea id="input20150601" style="width: 80%;height: 10em; display: block"></textarea>
+</label>
+</div>
+<button type="button" onclick="_convertCodeSeq20150601()">Convert</button>
+<div>
+<label> Converted <strong>coding sequence</strong>: 
+<textarea id="output20150601" style="width: 80%;height: 10em; display: block"></textarea>
+</label>
+</div>
+
+<script type="text/javascript">
+var _convertCodeSeq20150601 = function () {
+    var _input = $("#input20150601").val();
+    var _output = $("#output20150601");
+
+    _input = _input.replace(/(?:\r\n|\r|\n)/g,"");
+    _input = _input.replace(" ","");
+
+    _output.val(_input);
+};
+
+var _example20150601 = function () {
+    var _data = "\n\n2\n\n\n\n\n\n\n\n\n\n\n\n1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1\n3\n\n\n\n\n\n\n\n\n3\n\n\n\n2\n3\n\n\n2\n\n\n\n\n\n\n2\n\n\n\n2\n\n\n\n\n1\n1\n\n\n\n\n1\n\n2\n2\n\n\n\n2\n\n\n3\n\n\n2\n\n3\n\n2\n\n2\n\n\n\n\n3\n1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2\n1\n5\n5\n\n\n2\n";
+    $("#input20150601").val(_data);
+};
+
+</script>
+
+</body>
+</html>

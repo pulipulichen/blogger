@@ -27,11 +27,15 @@ ORCID_puli_utils.init({
         open_account: "開啟設定頁面",
         open_bookmarket: "請點選授權按鈕。<br /><img src='http://lh3.googleusercontent.com/-5nG84mlwL4M/VbKNLhucyKI/AAAAAAACYbc/vTY8lJcgnUA/orcid2_thumb%25255B2%25255D.png' style='border:1px gray solid' />",
         input_password: "請輸入您的密碼 <br /><img src='http://lh3.googleusercontent.com/-yJLdDHowcP4/VbKNOgRqFQI/AAAAAAACYbs/qDu9ypACb0g/orcid3_thumb%25255B2%25255D.png' style='border:1px gray solid' />",
-        prompt_hint: "請輸入您的ORCID密碼",
+        prompt_hint: "授權政大: 請輸入您的ORCID密碼",
         prompt_error: "ORCID密碼錯誤，請再次輸入您的ORCID密碼",
         alert_success: "授權成功，視窗即將關閉。",
         delegated: "已經授權",
         need_delegated: "尚未授權",
-        prompt_domain_error: "請將此按鈕拖曳至書籤，並在登入ORCID之後再點選此按鈕"
+        prompt_domain_error: "請將此按鈕拖曳至書籤，並在登入ORCID之後再點選此按鈕",
+        error_prompt_disabled: "授權錯誤，請手動開啟「彈出式視窗」",
+        trust_loading: "授權動作處理中，請稍候",
+        submit: "確定",
+        close: "關閉",
     }
 });

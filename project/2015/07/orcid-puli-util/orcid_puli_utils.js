@@ -32,6 +32,15 @@ ORCID_puli_utils.init = function (_params) {
     }
     
     // ------------------------------
+    // 檢查是否有trust
+    if (_.get_trust()) {
+        _.set_cookie("given_trusted", "true");
+        //alert("成功設定");
+        window.close();
+        return;
+    }
+    
+    // ------------------------------
     
     var _input = $(_.params.input.orcid_id);
     if (_input.length === 0) {
@@ -233,6 +242,13 @@ ORCID_puli_utils.get_code = function () {
         }
     }
     return code;
+};
+
+/**
+ * 取得trust
+ */
+ORCID_puli_utils.get_trust = function () {
+    return (window.location.search.indexOf("trust=true") !== -1);
 };
 
 /**
@@ -448,7 +464,7 @@ ORCID_puli_utils.display_delegate_instruction = function () {
  */
 ORCID_puli_utils.create_delegate_instruction = function () {
     var _ = this;
-    var _ol = $('<ol></ol>')
+    var _ol = $('<ol></ol>');
 
     _ol.append($("<li></li>").append(_.create_bookmarklet()));
     _ol.append($("<li>" + _.params.message.bookmarklet_usage + "</li>"));
@@ -487,6 +503,12 @@ ORCID_puli_utils.create_bookmarklet = function () {
     _func_str = _func_str.replace("\"[[message:employment_disambiguated_id]]\"", _.params.employment.disambiguated_id);
     _func_str = _func_str.replace("[[message:keyword]]", _.params.employment.keyword);
     _func_str = _func_str.replace("[[message:prompt_domain_error]]", _.params.message.prompt_domain_error);
+    _func_str = _func_str.replace("[[message:redirect_uri]]", _.params.app.redirect_uri);
+    
+    _func_str = _func_str.replace("[[message:submit]]", _.params.message.submit);
+    _func_str = _func_str.replace("[[message:close]]", _.params.message.close);
+    _func_str = _func_str.replace("[[message:error_prompt_disabled]]", _.params.message.error_prompt_disabled);
+    _func_str = _func_str.replace("[[message:trust_loading]]", _.params.message.trust_loading);
     _func_str = _func_str.replace(";", ";\n");
 
     var _href = "javascript:" + _func_str.substring(13, _func_str.length - 2);
@@ -494,6 +516,9 @@ ORCID_puli_utils.create_bookmarklet = function () {
     return _a;
 };
 
+/**
+ * 注意：以下程式千萬不可以用 // 註解！！
+ */
 ORCID_puli_utils.create_bookmarklet_href = function () {
 
     var _message = "[[message:prompt_hint]]";
@@ -503,22 +528,84 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
     var _employment_orcid = "[[message:employment_orcid]]";
     var _employment_disambiguated_id = "[[message:employment_disambiguated_id]]";
     var _keyword = "[[message:keyword]]";
+    var _redirect_uri = "[[message:redirect_uri]]";
+    
+    var _submit = "[[message:submit]]";
+    var _close = "[[message:close]]";
+    var _error_prompt_disabled = "[[message:error_prompt_disabled]]";
+    var _trust_loading = "[[message:trust_loading]]";
 
     /* 確認是在orcid網域底下才生效 */
     var _is_orcid_domain = function () {
         if (location.href.length < 19 || location.href.substr(0, 18) !== "https://orcid.org/") {
             window.alert(_message_prompt_domain_error);
-            window.open("https://orcid.org/account", "given_trust");
+            /*window.open("https://orcid.org/account", "given_trust");*/
             return false;
         }
         return true;
     };
 
+    var _create_mask = function () {
+        var mask = $('.puli-overlay-mask');
+        if (!mask.length) {
+            mask = $('<div class="puli-overlay-mask"></div>');
+            mask.css({
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: '0px',
+              left: '0px',
+              zIndex: 100,
+              backgroundColor: "rgba(0%,0%,0%,0.6)",
+              textAlign: "center",
+              color: "white",
+              padding: "1em",
+              fontSize: "2em"
+            }).appendTo($("body"));
+
+            var _fields = $('<div class="orcid-puli-fields"></div>')
+                    .appendTo(mask);
+
+            _fields.append('<div style="">' + _message  + '</div>');
+            _fields.append('<div><input type="password" name="orcid_puli_password" /></div>');
+
+            var _btn_style = "margin: 0 0.5em;display: inline-block;margin-bottom: 0px;font-weight: 400;text-align: center;vertical-align: middle;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 14px;line-height: 1.42857;border-radius: 4px;-moz-user-select: none;";
+            var _submit_btn = $('<button type="button" style="color:white;background: none repeat scroll 0% 0% #31789B;' + _btn_style + '">' + _submit + '</button>').appendTo(_fields);
+            _submit_btn.click(function () {
+                _add_delegate();
+            });
+
+            var _cancel_btn = $('<button type="button" style="color:#333;' + _btn_style + '">' + _close + '</button>').appendTo(_fields);
+            _cancel_btn.click(function () {
+                mask.remove();
+            });
+            
+            var _loading = $('<div class="orcid-puli-loading"></div>')
+                    .hide()
+                    .appendTo(mask);
+            _loading.html(_trust_loading);
+        }
+    };
+    
+    var _toggle_loading = function (_enable_loading) {
+        if (_enable_loading === true) {
+            $(".orcid-puli-loading").show();
+            $(".orcid-puli-fields").hide();
+        }
+        else {
+            $(".orcid-puli-loading").hide();
+            $(".orcid-puli-fields").show();
+        }
+    };
+
     var _add_delegate = function () {
-        var _pw = window.prompt(_message);
+        /*var _pw = window.prompt(_message);*/
+        var _pw = $('[name="orcid_puli_password"]').val();
+        /*alert(_pw);*/
         if (_pw === null || _pw === "") {
             return;
         }
+        _toggle_loading(true);
         $.ajax({
             url: "/account/addDelegate.json",
             type: "POST",
@@ -529,7 +616,8 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
             success: function (_result) {
                 if (typeof(_result.errors[0]) !== "undefined") {
                     _message = _message_prompt_error;
-                    _add_delegate();
+                    window.alert(_message);
+                    _toggle_loading(false);
                 }
                 else {
                     _check_employment();
@@ -671,7 +759,7 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
                         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
                     },
                     success: function (_result) {
-                        _exit_callback();
+                        _trusted_callback();
                     }
                 });
 
@@ -679,22 +767,38 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
         });
     };  /*var _add_keyword = function () {*/
 
+    var _trusted_callback = function () {
+        var _href = _redirect_uri + "?trust=true";
+        
+        var _given_trusted_cookie = window.open(_href
+            , "given_trusted_cookie"
+            , "toolbar=no, scrollbars=no, width=320, height=240, top=0, left=0");
+            
+        if (_given_trusted_cookie === undefined) {
+            window.alert(_error_prompt_disabled);
+            _toggle_loading(false);
+        }
+        else {
+            _given_trusted_cookie.onunload = function () {
+                _exit_callback();
+            };
+        }
+    };
+
     var _exit_callback = function () {
-        window.alert(_message_alert_success);
+        /*window.alert(_message_alert_success);*/
         window.close();
     };
 
     /* 真正開始執行動作 */
     /*console.log(0);*/
-    /*_exit_callback();*/
+    /*_trusted_callback();*/
     
     if (_is_orcid_domain()) {
         if ($("#DelegatesCtrl").find('table thead tbody tr td a.ng-binding:contains("' + _employment_orcid +  '")').length === 0) {
-            /*console.log(1);*/
-            _add_delegate();
+            _create_mask();
         }
         else {
-            /*console.log(2);*/
             _check_employment();
         }
     }
@@ -712,55 +816,8 @@ ORCID_puli_utils.create_account_link = function () {
     _btn.html(_.params.message.open_account);
 
     _btn.click(function () {
-//        window.blur();
         _.account_window = window.open("https://orcid.org/account", "given_trust");
         _.account_window_lock = true;
-//        _.account_window.focus();
-//        
-//        
-//        var _check = function () {
-//            if (_.account_window.closed === false) {
-//                console.log(1);
-//                return;
-//            }
-//            else { 
-//                console.log(2);
-//            }
-//            $("ol.orcid-delegate").remove();
-//            $("ol.orcid-delegate-instruction").remove();
-//            $(".orcid-delegated").show();
-//            $(_.params.input.given_trusted).val("true");
-//
-//            /*var _input = $(_.params.input.orcid_id);
-//            var _orcid_id = _input.val();*/
-//
-//            /*$("ol.orcid-delegate").hide();
-//            $("ol.orcid-delegate-instruction").hide();
-//            
-//            _.has_delegated(_orcid_id, function (_result) {
-//
-//                console.log(["_result1 ", _result]); 
-//                if (_result === false) {
-//                    _.has_delegated(_orcid_id, function (_result) {
-//                        if (_result === false) {
-//                            $("ol.orcid-delegate").show();
-//                            $("ol.orcid-delegate-instruction").show();
-//                        }
-//                        else {
-//                            $("ol.orcid-delegate").remove();
-//                            $("ol.orcid-delegate-instruction").remove();
-//                            $(".orcid-delegated").show();
-//                        }
-//                    });
-//                }
-//                else {
-//                    $("ol.orcid-delegate").remove();
-//                    $("ol.orcid-delegate-instruction").remove();
-//                    $(".orcid-delegated").show();
-//                }
-//            });*/
-//        };
-//        
         var _check = function () {
             _.set_trusted();
         };
@@ -781,16 +838,19 @@ ORCID_puli_utils.set_trusted = function () {
     }
     
     setTimeout(function () {
-        console.log("set_trusted");
+        //console.log("set_trusted");
+        //console.log([1, _.account_window !== undefined, _.account_window.closed === false, _.get_cookie("given_trusted")]);
 
-        if (_.account_window !== undefined
-                && _.account_window.closed === false) {
-            console.log([1, _.account_window !== undefined, _.account_window.closed === false]);
-            //return;
+        if ((_.account_window !== undefined
+                && _.account_window.closed === false)
+                ||  (_.get_cookie("given_trusted") === undefined || _.get_cookie("given_trusted") === null)) {
+            //console.log([1, _.account_window !== undefined, _.account_window.closed === false]);
+            return;
         }
         else { 
             //console.log(2);
             _.account_window_lock = false;
+            _.delete_cookie("given_trusted");
         }
 
         $("ol.orcid-delegate").hide();
@@ -839,4 +899,22 @@ ORCID_puli_utils.reset = function () {
     
     _.display_connect_button();
     $(_.params.input.orcid_id).val("");
+};
+
+//------------------------------------
+
+ORCID_puli_utils.set_cookie = function(key, value)  {
+    document.cookie = key + '=' + value;
+    //console.log("設定cookie:" + key + "=" + value);
+};
+
+ORCID_puli_utils.get_cookie = function(key) {
+    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    //console.log(["讀取cookie:", key, document.cookie]);
+    return keyValue ? keyValue[2] : null;
+};
+
+ORCID_puli_utils.delete_cookie = function(key) {
+    document.cookie = key + '=;expires='+(new Date()).toGMTString();
+    //console.log("刪除cookie:" + key);
 };

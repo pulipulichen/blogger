@@ -1,0 +1,329 @@
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<!--
+<form action="https://orcid.org/account/addDelegate.json"  method="post">
+  <input type="text" name="delegateToManage" value="0000-0002-5496-8565" />
+  <input type="text" name="password" value="aaaaa" />
+  <input type="submit" />
+</form>
+-->
+<input type="text" name="orcid_id" id="orcid_id" />
+
+<script type="text/javascript">
+
+var ORCID_puli_utils = {};
+
+ORCID_puli_utils.init = function (_params) {
+    var _ = this;
+    var _input = $(_params.input);
+    if (_input.length === 0) {
+        return;
+    }
+
+    // var _app_client_id = _params.app.client_id;
+    // var _app_client_secret = _params.app.client_secret;
+    // var _redirect_uri = _params.redirect_uri;
+    //
+    // var _employment_disambiguated_id = _params.employment.disambiguated_id;
+    // var _employment_source_id = _params.employment.source_id;
+    //
+    // var _message_bookmarklet = _params.message.bookmarklet;
+    // var _message_prompt_password = _params.message.prompt_password;
+    // var _message_success = _params.message.success;
+    // var _message_error = _params.message.error;
+
+    // 1. 如果input沒有值
+    var _orcid_id = _input.val();
+
+    var _callback = function () {
+        _.display_delegate_instruction(_params);
+    };
+    if (_.validate_orcid_id(_orcid_id) === false) {
+        // 顯示按鈕
+        _.display_connect_button(_params, _callback);
+    }
+    else {
+        // 確認是否有機構
+        var _employment_source_id = _params.employment.source_id;
+        _.has_added_employment(_orcid_id, _employment_source_id, function (_result) {
+            if (_result === false) {
+                _callback();
+            }
+        });
+    }
+};
+
+/**
+ * 是ORCID id嗎？
+ */
+ORCID_puli_utils.validate_orcid_id = function (_orcid_id) {
+    return (_orcid_id.match(/^(\d{4})-(\d{4})-(\d{4})-(\d{3}[0-9X])$/) !== null);
+    // "0000-0003-3751-610X".match(/^(\d{4})-(\d{4})-(\d{4})-(\d{3}[0-9X])$/) !== null
+};
+
+/**
+ * 顯示連接的按鈕
+ */
+ORCID_puli_utils.display_connect_button = function (_params) {
+
+};
+
+/**
+ * 顯示授權的按鈕
+ */
+ORCID_puli_utils.display_delegate_instruction = function (_params) {
+
+};
+
+</script>
+
+
+
+
+
+
+
+
+
+<button id="connect-orcid-button" onclick="orcidOAUTH()"
+style="  border: 1px solid #d3d3d3;
+padding: .3em;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 1px 1px 3px #999;
+cursor: pointer;
+color: #999;
+font-weight: bold;
+font-size: .8em;
+line-height: 24px;
+vertical-align: middle;-webkit-appearance: button;  margin: 0;text-transform: none;box-sizing: border-box;align-items: flex-start;
+text-align: center;  text-rendering: auto;letter-spacing: normal;
+word-spacing: normal;  text-indent: 0px;
+text-shadow: none;
+display: inline-block;-webkit-writing-mode: horizontal-tb;box-sizing: border-box;">
+  <img alt="ORCID logo" height="24" id="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24"
+  style="  margin: 0 5px 4px 0;
+  padding: 0;vertical-align: middle;  border: 0;  box-sizing: border-box;  color: #338caf;"
+  >
+  Create or Connect your ORCID iD
+  </button>
+<script type="text/javascript">
+
+var oauthWindow;
+
+function orcidOAUTH() {
+    var oauthWindow = window.open("https://orcid.org/oauth/authorize?client_id=APP-68BQLRZTLVPSWUW7&response_type=code&scope=/authenticate&redirect_uri=http://pc-pudding.dlll.nccu.edu.tw/temp/20150630-orcid.html"
+    //,"_self"
+    ,"_blank"
+    , "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
+}
+
+$(function () {
+  var _code = _getCode();
+  if (_code !== undefined) {
+    _getORCID(_code, function (_orcid) {
+        window.opener.$("#orcid_id").val(_orcid);
+        window.close();
+
+        //$("#orcid_id").val(_orcid);
+        //_addFavorite();
+    });
+  }
+});
+
+var _getCode = function () {
+  if (window.location.search.indexOf("code=") !== -1) {
+    var code;
+     var query = window.location.search.substring(1);
+     var vars = query.split("&");
+     for (var i=0;i<vars.length;i++) {
+       var pair = vars[i].split("=");
+       if (pair[0] == "code") {
+         code = pair[1];
+       }
+     }
+
+  }
+  return code;
+};
+
+var _getORCID = function (_code, _callback) {
+    $.ajax({
+      url: "https://pub.orcid.org/oauth/token",
+      type: 'POST',
+      dataType: "json",
+      data: {
+         client_id: "APP-68BQLRZTLVPSWUW7",
+         client_secret: "61b33e42-307e-413a-b5f2-dea5aa2ca00f",
+         grant_type: "authorization_code",
+         redirect_uri: "http://pc-pudding.dlll.nccu.edu.tw/temp/20150630-orcid.html",
+         code: _code
+      },
+      success: function (_result) {
+        console.log(_result);
+        var _orcid = _result.orcid;
+        //$("#orcid_id").val(_orcid);
+        if (typeof(_callback) === "function") {
+          _callback(_orcid);
+        }
+      }
+    });
+
+    //curl -i -L -k -H 'Accept: application/json' --data 'client_id=APP-68BQLRZTLVPSWUW7&client_secret=61b33e42-307e-413a-b5f2-dea5aa2ca00f&grant_type=authorization_code&redirect_uri=http://pc-pudding.dlll.nccu.edu.tw/temp/20150630-orcid.html&code=REPLACE WITH OAUTH CODE' https://pub.orcid.org/oauth/token
+};
+/*
+var _addFavorite = function () {
+  var _title = "ORCIDaddDelegate";
+  var _href = $("#bookmarklet").attr("href");
+  if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
+      window.sidebar.addPanel(_title,_href,'');
+  } else if(window.external && ('AddFavorite' in window.external)) { // IE Favorite
+      window.external.AddFavorite(_href,_title);
+  }
+  else {
+    alert("?");
+  }
+};
+*/
+
+ORCID_puli_utils.has_employment = function (_orcid_id, _employment_id) {
+    //http://pub.orcid.org/v1.2/0000-0003-3751-610X/orcid-profile
+    //var _employment_source_id = 32787;
+
+    var _orcid_id = "0000-0003-3751-610X";
+    var _employment_source_id = 34913;
+
+    $.ajax({
+        url: "http://pub.orcid.org/v1.2/"+_orcid_id+"/orcid-profile",
+        type: "GET",
+        //beforeSend: function (xhr) {
+        //    xhr.setRequestHeader("Content-type", "application/orcid+json; charset=UTF-8");
+        //},
+        success: function (_result) {
+            //var _message = $.parseXML(_result);
+            var _result = $(_result);
+            //var _found = _message.find("disambiguated-organization-identifier:contents("+_employment_source_id+")").length;
+            var _found = _result.find("disambiguated-organization-identifier:contains("+_employment_source_id+")").length;
+            console.log(_found);
+        }
+    });
+};
+
+ORCID_puli_utils.add_employment = function (_id) {
+    var _id = 32787;
+    $.ajax({
+        url: "https://orcid.org/affiliations/disambiguated/id/" + _id,
+        type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        },
+        success: function (_result) {
+            // {"orgType":"academic","region":null,"sourceType":"RINGGOLD","value":"National Chengchi University","countryForDisplay":"Taiwan","sourceId":"34913","country":"TW","city":"Taipei"}
+            var _data = {
+                "visibility":{
+                    "visibility":"PUBLIC"
+                },
+                "affiliationName":{
+                    "value":_result.value,
+              },
+              "city":{
+                 "value":_result.countryForDisplay,
+              },
+              "region":{
+                 "value":_result.region,
+              },
+              "country":{
+                 "value":_result.country,
+              },
+              "roleTitle":{
+              },
+              "departmentName":{
+              },
+              "affiliationType":{
+                 "value":"employment",
+              },
+              "disambiguatedAffiliationSourceId":_result.sourceId,
+              "disambiguationSource":_result.sourceType,
+              "orgDisambiguatedId":{
+                 "value":_id,
+              }};
+
+              $.ajax({
+                url: "https://orcid.org/affiliations/affiliation.json",
+                type: 'POST',
+                data: JSON.stringify(_data),
+                 beforeSend: function (xhr) {
+                     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+                 },
+                 success: function (_result) {
+                   console.log(_result);
+                 }
+              });
+        }
+    });
+};
+
+</script>
+
+<p>
+<hr />
+</p>
+
+<a id="bookmarklet" href='javascript:var xhr;xhr=window.ActiveXObject?new ActiveXObject("Microsoft.XMLHTTP"):window.XMLHttpRequest?new XMLHttpRequest:null,xhr.open("post","https://orcid.org/account/addDelegate.json");var pw=window.prompt("Confirm ORCID Password");if(""!==pw){var data=JSON.stringify({delegateToManage:"0000-0002-5496-8565",password:pw});xhr.setRequestHeader("Content-type","application/json; charset=UTF-8"),xhr.send(data),xhr.onreadystatechange=function(){if(4==xhr.readyState&&200==xhr.status){var e=JSON.parse(xhr.responseText);"undefined"!=typeof e.errors[0]?alert("ERROR: "+e.errors[0]):(alert("Trusted individual success! Window is going to close."),window.close())}}}'>
+  ORCIDaddDelegate
+</a>
+<button type="button" onclick='window.open("https://orcid.org/account", "_blank")'>Add Trusted individual</button>
+
+<script>
+
+
+
+// pc-pudding.dlll.nccu.edu.tw/temp/20150630-orcid.html
+
+/*
+var xhr;if(window.ActiveXObject) {xhr= new ActiveXObject("Microsoft.XMLHTTP");}else if (window.XMLHttpRequest) {xhr= new XMLHttpRequest();}else {xhr= null;} xhr.open("post","https://orcid.org/account/addDelegate.json");var pw = window.prompt("Confirm ORCID Password");var data = JSON.stringify({delegateToManage: "0000-0002-5496-8565", password: pw});xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");xhr.send(data);xhr.onreadystatechange= function() {if(xhr.readyState == 4 && xhr.status == 200) {var _responseText = JSON.parse(xhr.responseText);if (typeof(_responseText.errors[0]) !== "undefined") {alert("ERROR: "+ _responseText.errors[0]);}else {alert("Trusted individual success!");}}};
+*/
+// http://jscompress.com/
+function ORCIDaddDelegate() {
+          //document.domain = "http://orcid.org";
+          var orcidId = "0000-0002-5496-8565";
+          var xhr;
+          if(window.ActiveXObject) {
+                   xhr= new ActiveXObject("Microsoft.XMLHTTP");
+          }else if (window.XMLHttpRequest) {
+                   xhr= new XMLHttpRequest();
+          }else {
+                   xhr= null;
+          }
+          xhr.open("post","/account/addDelegate.json");
+          //xhr.open("post","http://orcid.org/account/addDelegate.json");
+          //xhr.open("post","20150630-orcid.html");
+          var pw = window.prompt("Confirm ORCID Password");
+          if (pw !== "") {
+
+            var data = JSON.stringify({delegateToManage: orcidId, password: pw});
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+            xhr.send(data);
+            xhr.onreadystatechange= function() {
+                     if(xhr.readyState == 4 && xhr.status == 200) {
+                       //console.log(typeof(xhr.responseText));
+                       //console.log(typeof(JSON.parse(xhr.responseText)));
+                       var _responseText = JSON.parse(xhr.responseText);
+                       if (typeof(_responseText.errors[0]) !== "undefined") {
+                         alert("ERROR: "+ _responseText.errors[0]);
+                       }
+                       else {
+                         alert("Trusted individual success! Window is going to close.");
+                         window.close();
+                       }
+                     }
+            };
+
+          } //if (pw !== "") {
+}
+//save();
+
+/**
+confirmAddDelegate("", "0000-0002-5496-8565", 0);
+*/
+</script>

@@ -20,21 +20,7 @@ ORCID_puli_utils.init = function (_params) {
     if (typeof(_.params.debug) === "undefined") {
         _.params.debug = false;
     }
-    var _input = $(_.params.inputs.orcid_id);
-    if (_input.length === 0) {
-        return;
-    }
-
-    var _delegated = $('<a class="orcid-delegated" href="https://orcid.org/account" target="orcid_account">' + _.params.message.delegated + '</a>')
-        .hide()
-        .insertAfter(_input);
-
-    // ------------------------------
-
-    // 如果input沒有值
-    var _orcid_id = _input.val();
-    //_params.message.connect_button;console.log(_orcid_id);
-
+    
     // ------------------------------
     // 檢查是否有code
     var _code = _.get_code();
@@ -42,17 +28,98 @@ ORCID_puli_utils.init = function (_params) {
         _.get_orcid_id(_code, function (_orcid) {
             _.setup_opener_input(_orcid);
         });
+        return;
     }
+    
+    // ------------------------------
+    
+    var _input = $(_.params.input.orcid_id);
+    if (_input.length === 0) {
+        return;
+    }
+    
+    _input.hide();
+    
+    var _inline_hint = $('<span class="orcid-inline-hint"></span>').insertAfter(_input);
+    var _block_hint = $('<div class="orcid-block-hint"></div>').insertAfter(_inline_hint);
+
+    var _btn_style = "border: 1px solid #d3d3d3;padding: .3em;background-color: #fff;" 
+        + "border-radius: 8px;box-shadow: 1px 1px 3px #999;cursor: pointer;color: #999;" 
+        + "font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle; " 
+        + "margin: 0.5em;text-transform: none;" 
+        + "box-sizing: border-box;align-items: flex-start;text-align: center;  " 
+        + "text-rendering: auto;letter-spacing: normal;word-spacing: normal;  " 
+        + "text-indent: 0px;text-shadow: none;display: inline-block;" 
+        + "-webkit-writing-mode: horizontal-tb;box-sizing: border-box;";
+    var _a_style = "color: #999;text-decoration: initial;font-weight:bold;font-size: .8em;";
+    
+    // -------------
+    
+    var _connect_button = _.create_connect_button();
+    _connect_button.hide();
+    _connect_button.appendTo(_inline_hint);
+
+    var _profile_link = $('<div style="'+_btn_style+'" class="orcid-profile">'
+        + '<img alt="ORCID logo" height="24" id="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" style="margin: 0 5px 4px 0; padding: 0;vertical-align: middle;  border: 0;  box-sizing: border-box;  color: #338caf;">'
+        + '<a target="orcid_profile" style="'+_a_style+'"></a>'
+        + '</div>')
+        .hide()
+        .appendTo(_inline_hint);
+
+    var _delegated = $('<span class="orcid-delegated">'
+        + '<input type="checkbox" checked="true" disabled="true">'
+        + '<a href="https://orcid.org/account" target="orcid_account" style="'+_a_style+'">' + _.params.message.delegated + '</a>'
+        + '</span>')
+        .hide()
+        .appendTo(_inline_hint);
+
+    var _need_delegated = $('<span class="orcid-need-delegated">'
+        + '<input type="checkbox" disabled="true">'
+        + '<span style="'+_a_style+'">' + _.params.message.need_delegated + '</span>'
+        + '</span>')
+        .hide()
+        .appendTo(_inline_hint);
+
+    //_profile_link.wrap("<div/>");
+    
+    var _reset_orcid = _.create_reset_orcid_link();
+    _reset_orcid.hide();
+    _reset_orcid.appendTo(_block_hint);
+    
+    var _delegate_instruction = _.create_delegate_instruction();
+    _delegate_instruction.hide();
+    _delegate_instruction.appendTo(_block_hint);
+    
 
     // ------------------------------
+
+    // 如果input沒有值
+    var _orcid_id = _input.val();
+    //_params.message.connect_button;console.log(_orcid_id);
+
+
+    // ------------------------------
+    
+    // 檢查欄位裡面是否已經填寫了ORCID
     if (_.validate_orcid_id(_orcid_id) === false) {
+        // 沒填寫的情況
+        $(_.params.input.given_trusted).val("false");
+        
         // 顯示按鈕
-        _.check_login(function () {
-            _.display_connect_button();
-        });
+        //_.check_login(function () {
+            if (_code === undefined) {
+                _.display_connect_button();
+            }
+        //});
     }
     else {
+        // 欄位已經填寫了ORCID
+        
         _.init_delegate();
+        _reset_orcid.show();
+        var _orcid_url = "http://orcid.org/" + _orcid_id;
+        _profile_link.find("a").html(_orcid_url).attr("href", _orcid_url);
+        _profile_link.show();
     }
 };
 
@@ -60,8 +127,10 @@ ORCID_puli_utils.init = function (_params) {
 
 ORCID_puli_utils.init_delegate = function () {
     var _ = this;
-    var _input = $(_.params.inputs.orcid_id);
+    var _input = $(_.params.input.orcid_id);
     var _orcid_id = _input.val();
+
+    $(".orcid-need-delegated").show();
 
     // 確認是否有機構與關鍵字
     _.has_delegated(_orcid_id, function (_result) {
@@ -70,13 +139,18 @@ ORCID_puli_utils.init_delegate = function () {
             _.display_delegate_instruction();
         }
         else {
-            $("a.orcid-delegated").show();
+            $(".orcid-need-delegated").hide();
+            $(".orcid-delegated").show();
 
             if (_.params.debug) {
                 console.log("已經有機構與關鍵字");
                 _.display_delegate_instruction();
             }
         }
+        var _orcid_url = "http://orcid.org/" + _orcid_id;
+        var _profile_link = $(".orcid-profile");
+        _profile_link.find("a").html(_orcid_url).attr("href", _orcid_url);
+        _profile_link.show();
     });
 };
 
@@ -101,32 +175,45 @@ ORCID_puli_utils.get_oauth_url = function () {
         + "&scope=/authenticate" 
         + "&redirect_uri=" + _redirect_uri 
         + "&show_login=true"
-        + "&state=state_information";
+        + "&state=state_information"
+        + "&lang=" + _.params.app.lang;
 
-    var _email = $(_.params.inputs.email);
-    if (_email.length > 0 && _email.val().trim().length > 0) {
-        _url = _url + "&email=" + _email.val().trim();
+    // API說明：https://members.orcid.org/api/get-oauthauthorize
+
+    var _family_names = $(_.params.input.family_names);
+    if (_family_names.length > 0 && _family_names.eq(0).val().trim().length > 0) {
+        _url = _url + "&family_names=" + _family_names.eq(0).val().trim();
+    }
+    
+    var _given_names = $(_.params.input.given_names);
+    if (_given_names.length > 0 && _given_names.eq(0).val().trim().length > 0) {
+        _url = _url + "&given_names=" + _given_names.eq(0).val().trim();
+    }
+    
+    var _email = $(_.params.input.email);
+    if (_email.length > 0 && _email.eq(0).val().trim().length > 0) {
+        _url = _url + "&email=" + _email.eq(0).val().trim();
     }
     return _url;
 };
 
-ORCID_puli_utils.check_login = function (_callback) {
-    var _ = this;
-    var _url = _.get_oauth_url();
-
-    var _iframe = $("<iframe />")
-        .css({
-            width: 0,
-            height: 0,
-            visibility: "hidden"
-        })
-        .addClass("orcid-check-login")
-        .appendTo("body");
-    _iframe.attr("src", _url);
-    _iframe.load(function () {
-        _callback();
-    });
-};
+//ORCID_puli_utils.check_login = function (_callback) {
+//    var _ = this;
+//    var _url = _.get_oauth_url();
+//
+//    var _iframe = $("<iframe />")
+//        .css({
+//            width: 0,
+//            height: 0,
+//            visibility: "hidden"
+//        })
+//        .addClass("orcid-check-login")
+//        .appendTo("body");
+//    _iframe.attr("src", _url);
+//    _iframe.load(function () {
+//        _callback();
+//    });
+//};
 
 // ----------------------------------------------
 
@@ -134,13 +221,13 @@ ORCID_puli_utils.check_login = function (_callback) {
  * 取得code
  */
 ORCID_puli_utils.get_code = function () {
+    var code;
     if (window.location.search.indexOf("code=") !== -1) {
-        var code;
         var query = window.location.search.substring(1);
         var vars = query.split("&");
         for (var i=0;i<vars.length;i++) {
             var pair = vars[i].split("=");
-            if (pair[0] == "code") {
+            if (pair[0] === "code") {
                 code = pair[1];
             }
         }
@@ -153,19 +240,26 @@ ORCID_puli_utils.get_code = function () {
  */
 ORCID_puli_utils.get_orcid_id = function (_code, _callback) {
     var _ = this;
-    $.ajax({
-        url: "https://pub.orcid.org/oauth/token",
-        type: 'POST',
-        dataType: "json",
-        data: {
+    //console.log("開始取得ORCID");
+    
+    var _data = {
             client_id: _.params.app.client_id,
             client_secret: _.params.app.client_secret,
             grant_type: "authorization_code",
             redirect_uri: _.params.app.redirect_uri,
             code: _code
-        },
+    };
+    //_data = JSON.stringify(_data);
+    $.ajax({
+        url: "https://pub.orcid.org/oauth/token",
+        type: 'POST',
+        dataType: 'json',
+        //contentType: 'application/json',
+        data: _data,
+        //processData: false,
         success: function (_result) {
             var _orcid = _result.orcid;
+            //console.log("取得ORCID: " + _orcid);
             if (typeof(_callback) === "function") {
                 _callback(_orcid);
             }
@@ -182,13 +276,14 @@ ORCID_puli_utils.setup_opener_input = function (_orcid) {
     if (_window === null) {
         _window = window.parent;
     }
-    var _input = _window.$(_.params.inputs.orcid_id);
+    var _input = _window.$(_.params.input.orcid_id);
     _input.val(_orcid);
-    _input.nextAll(".orcid-delegated-instruction").remove();
-    _input.nextAll(".orcid-connect-button").remove();
-    _input.show();
+    _window.$(".orcid-delegated-instruction").hide();
+    _window.$(".orcid-connect-button").hide();
+    /*_input.show();*/
     _window.$("iframe.orcid-check-login").remove();
     _window.ORCID_puli_utils.init_delegate();
+    _window.$(".orcid-reset-link").show();
     window.close();
 };
 
@@ -200,19 +295,20 @@ ORCID_puli_utils.oauthWindow;
 /**
  * 顯示連接的按鈕
  */
-ORCID_puli_utils.display_connect_button = function () {
+ORCID_puli_utils.create_connect_button = function () {
     var _ = this;
     var _msg = _.params.message.connect_button;
 
     var _btn_style = "border: 1px solid #d3d3d3;padding: .3em;background-color: #fff;" 
         + "border-radius: 8px;box-shadow: 1px 1px 3px #999;cursor: pointer;color: #999;" 
         + "font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle; " 
-        + "-webkit-appearance: button;  margin: 0;text-transform: none;" 
+        //+ "-webkit-appearance: button;"
+        + "margin: 0;text-transform: none;" 
         + "box-sizing: border-box;align-items: flex-start;text-align: center;  " 
         + "text-rendering: auto;letter-spacing: normal;word-spacing: normal;  " 
         + "text-indent: 0px;text-shadow: none;display: inline-block;" 
         + "-webkit-writing-mode: horizontal-tb;box-sizing: border-box;";
-    var _btn = $('<button style="'+_btn_style+'" class="orcid-connect-button"></button>');
+    var _btn = $('<a style="'+_btn_style+'" class="orcid-connect-button"></a>');
     _btn.html(_msg);
 
     var _btn_img_style = "margin: 0 5px 4px 0; padding: 0;vertical-align: middle;  " 
@@ -222,9 +318,9 @@ ORCID_puli_utils.display_connect_button = function () {
         + 'style="'+_btn_img_style+'">');
     _btn_img.prependTo(_btn);
 
-    var _input = $(_.params.inputs.orcid_id);
-    _input.after(_btn);
-    _input.hide();
+    //var _input = $(_.params.input.orcid_id);
+    //_input.afterAll(".orcid-inline-hint:first").append(_btn);
+    //_input.hide();
 
     _btn.click(function () {
         var _url = _.get_oauth_url();
@@ -238,6 +334,15 @@ ORCID_puli_utils.display_connect_button = function () {
         //}
     });
 
+    return _btn;
+};
+
+ORCID_puli_utils.display_connect_button = function () {
+    var _ = this;
+    
+    var _btn = $('.orcid-connect-button');
+    _btn.show();
+    
     if (_.params.debug === true) { 
         $(function () {
             _btn.click();
@@ -247,13 +352,32 @@ ORCID_puli_utils.display_connect_button = function () {
 
 // ----------------------------------------------
 
+/**
+ * 確認是否已經授權了
+ * @param {String} _orcid_id
+ * @param {Function} _callback
+ */
 ORCID_puli_utils.has_delegated = function (_orcid_id, _callback) {
     var _ = this;
+    var _found = false;
+    
+    // 用欄位來確認是否已經授權
+    var _given_trusted = $(_.params.input.given_trusted);
+    if (_given_trusted.length > 0) {
+        _given_trusted = _given_trusted.val();
+        _found = (_given_trusted === "true");
+        if (typeof(_callback) === "function") {
+            _callback(_found);
+        }
+        return;
+    }
+    
+    // ---------------------------------------------
+    
     $.ajax({
         url: "http://pub.orcid.org/v1.2/"+_orcid_id+"/orcid-profile?_=" + new Date().getTime(),
         type: "GET",
         success: function (_result) {
-            var _found = false;
             var _result = $(_result);
             var _organization = _result.find("disambiguated-organization-identifier:contains("+ _.params.employment.source_id+")");
             if (_organization.length > 0) {
@@ -316,14 +440,15 @@ ORCID_puli_utils.has_delegated = function (_orcid_id, _callback) {
  */
 ORCID_puli_utils.display_delegate_instruction = function () {
     var _ = this;
-    var _input = $(_.params.inputs.orcid_id);
+    $(".orcid-delegate-instruction").show();
+};
 
-    if (_input.nextAll(".orcid-delegate-instruction").length > 0) {
-        return;
-    }
-
-    var _ol = $('<ol class="orcid-delegate-instruction"></ol>')
-        .insertAfter(_input.next());
+/**
+ * 顯示授權的按鈕
+ */
+ORCID_puli_utils.create_delegate_instruction = function () {
+    var _ = this;
+    var _ol = $('<ol></ol>')
 
     _ol.append($("<li></li>").append(_.create_bookmarklet()));
     _ol.append($("<li>" + _.params.message.bookmarklet_usage + "</li>"));
@@ -331,15 +456,21 @@ ORCID_puli_utils.display_delegate_instruction = function () {
     _ol.append($("<li>" + _.params.message.open_bookmarket + "</li>"));
     _ol.append($("<li>" + _.params.message.input_password + "</li>"));
 
-    // 加入bookmarklet
+    var _fidleset = $("<fieldset></fieldset>");
+    _fidleset.addClass("orcid-delegate-instruction");
+    _fidleset.append("<legend>" + _.params.message.fieldset_legend + "</legend>");
+    _fidleset.append(_ol);
+
+    return _fidleset;
 };
 
 ORCID_puli_utils.create_bookmarklet = function () {
     var _ = this;
     var _btn_style = "border: 1px solid #d3d3d3;padding: .3em;background-color: #fff;border-radius: 8px;box-shadow: 1px 1px 3px #999;"
-        + "cursor: pointer;color: #999;font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle;-webkit-appearance: button;"
+        + "cursor: pointer;color: #999;font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle;"
+        //+ "-webkit-appearance: button;"
         + "margin: 0;margin-bottom: 5px;text-transform: none;box-sizing: border-box;align-items: flex-start;text-align: center;  text-rendering: auto;letter-spacing: normal;word-spacing: normal;  text-indent: 0px;text-shadow: none;display: inline-block;-webkit-writing-mode: horizontal-tb;box-sizing: border-box;";
-    var _btn = $('<button style="'+_btn_style+'"></button>');
+    var _btn = $('<a style="'+_btn_style+'"></a>');
     _btn.html(_.params.message.bookmarklet);
 
     var _a = $("<a></a>").append(_btn);
@@ -354,6 +485,8 @@ ORCID_puli_utils.create_bookmarklet = function () {
     _func_str = _func_str.replace("[[message:employment_orcid]]", _.params.employment.orcid);
     _func_str = _func_str.replace("\"[[message:employment_disambiguated_id]]\"", _.params.employment.disambiguated_id);
     _func_str = _func_str.replace("[[message:keyword]]", _.params.employment.keyword);
+    _func_str = _func_str.replace("[[message:prompt_domain_error]]", _.params.message.prompt_domain_error);
+    _func_str = _func_str.replace(";", ";\n");
 
     var _href = "javascript:" + _func_str.substring(13, _func_str.length - 2);
     _a.attr("href", _href);
@@ -365,9 +498,20 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
     var _message = "[[message:prompt_hint]]";
     var _message_prompt_error = "[[message:prompt_error]]";
     var _message_alert_success = "[[message:alert_success]]";
+    var _message_prompt_domain_error = "[[message:prompt_domain_error]]";
     var _employment_orcid = "[[message:employment_orcid]]";
     var _employment_disambiguated_id = "[[message:employment_disambiguated_id]]";
     var _keyword = "[[message:keyword]]";
+
+    /* 確認是在orcid網域底下才生效 */
+    var _is_orcid_domain = function () {
+        if (location.href.length < 19 || location.href.substr(0, 18) !== "https://orcid.org/") {
+            window.alert(_message_prompt_domain_error);
+            window.open("https://orcid.org/account", "given_trust");
+            return false;
+        }
+        return true;
+    };
 
     var _add_delegate = function () {
         var _pw = window.prompt(_message);
@@ -502,7 +646,7 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
                     var _value = {value: _result.keywords[_i].value};
                     _keywords.push(_value);
 
-                    if (_keyword == _result.keywords[_i].value) {
+                    if (_keyword === _result.keywords[_i].value) {
                         _existed = true;
                     }
                 }
@@ -539,14 +683,19 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
         window.close();
     };
 
+    /* 真正開始執行動作 */
     /*console.log(0);*/
-    if ($("#DelegatesCtrl").find('table thead tbody tr td a.ng-binding:contains("' + _employment_orcid +  '")').length === 0) {
-        /*console.log(1);*/
-        _add_delegate();
-    }
-    else {
-        /*console.log(2);*/
-        _check_employment();
+    /*_exit_callback();*/
+    
+    if (_is_orcid_domain()) {
+        if ($("#DelegatesCtrl").find('table thead tbody tr td a.ng-binding:contains("' + _employment_orcid +  '")').length === 0) {
+            /*console.log(1);*/
+            _add_delegate();
+        }
+        else {
+            /*console.log(2);*/
+            _check_employment();
+        }
     }
 };
 
@@ -556,45 +705,123 @@ ORCID_puli_utils.account_window;
 ORCID_puli_utils.create_account_link = function () {
     var _ = this;
     var _btn_style = "border: 1px solid #d3d3d3;padding: .3em;background-color: #fff;border-radius: 8px;box-shadow: 1px 1px 3px #999;cursor: pointer;color: #999;font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle;-webkit-appearance: button;  margin: 0;margin-bottom:5px;text-transform: none;box-sizing: border-box;align-items: flex-start;text-align: center;  text-rendering: auto;letter-spacing: normal;word-spacing: normal;  text-indent: 0px;text-shadow: none;display: inline-block;-webkit-writing-mode: horizontal-tb;box-sizing: border-box;";
-    var _btn = $('<button style="'+_btn_style+'"></button>');
+    var _btn = $('<button type="button" style="'+_btn_style+'"></button>');
     _btn.html(_.params.message.open_account);
 
     _btn.click(function () {
-        _.account_window = window.open("https://orcid.org/account", "_blank");
-        $(_.account_window).unload(function () {
-            $("ol.orcid-delegate").remove();
-            $("ol.orcid-delegate-instruction").remove();
-            $("a.orcid-delegated").show();
-
-            /*var _input = $(_.params.inputs.orcid_id);
-            var _orcid_id = _input.val();*/
-
-            /*$("ol.orcid-delegate").hide();
-            $("ol.orcid-delegate-instruction").hide();
-            
-            _.has_delegated(_orcid_id, function (_result) {
-
-                console.log(["_result1 ", _result]); 
-                if (_result === false) {
-                    _.has_delegated(_orcid_id, function (_result) {
-                        if (_result === false) {
-                            $("ol.orcid-delegate").show();
-                            $("ol.orcid-delegate-instruction").show();
-                        }
-                        else {
-                            $("ol.orcid-delegate").remove();
-                            $("ol.orcid-delegate-instruction").remove();
-                            $("a.orcid-delegated").show();
-                        }
-                    });
-                }
-                else {
-                    $("ol.orcid-delegate").remove();
-                    $("ol.orcid-delegate-instruction").remove();
-                    $("a.orcid-delegated").show();
-                }
-            });*/
-        });
-    });
+//        window.blur();
+        _.account_window = window.open("https://orcid.org/account", "given_trust");
+//        _.account_window.focus();
+//        
+//        
+//        var _check = function () {
+//            if (_.account_window.closed === false) {
+//                console.log(1);
+//                return;
+//            }
+//            else { 
+//                console.log(2);
+//            }
+//            $("ol.orcid-delegate").remove();
+//            $("ol.orcid-delegate-instruction").remove();
+//            $(".orcid-delegated").show();
+//            $(_.params.input.given_trusted).val("true");
+//
+//            /*var _input = $(_.params.input.orcid_id);
+//            var _orcid_id = _input.val();*/
+//
+//            /*$("ol.orcid-delegate").hide();
+//            $("ol.orcid-delegate-instruction").hide();
+//            
+//            _.has_delegated(_orcid_id, function (_result) {
+//
+//                console.log(["_result1 ", _result]); 
+//                if (_result === false) {
+//                    _.has_delegated(_orcid_id, function (_result) {
+//                        if (_result === false) {
+//                            $("ol.orcid-delegate").show();
+//                            $("ol.orcid-delegate-instruction").show();
+//                        }
+//                        else {
+//                            $("ol.orcid-delegate").remove();
+//                            $("ol.orcid-delegate-instruction").remove();
+//                            $(".orcid-delegated").show();
+//                        }
+//                    });
+//                }
+//                else {
+//                    $("ol.orcid-delegate").remove();
+//                    $("ol.orcid-delegate-instruction").remove();
+//                    $(".orcid-delegated").show();
+//                }
+//            });*/
+//        };
+//        
+        var _check = function () {
+            setTimeout(function () {
+                _.set_trusted();
+            }, 10);
+        };
+        
+        $(window).focus(_check);
+        $(_.account_window).unload(_check);
+        
+        
+    }); //_btn.click(function () {
     return _btn;
+};
+
+ORCID_puli_utils.set_trusted = function () {
+    var _ = this;
+    
+    console.log("set_trusted");
+    
+    if (_.account_window !== undefined
+            && _.account_window.closed === false) {
+        console.log([1, _.account_window !== undefined, _.account_window.closed === false]);
+        return;
+    }
+    else { 
+        console.log(2);
+    }
+    
+    $("ol.orcid-delegate").remove();
+    $(".orcid-delegate-instruction").remove();
+    $(".orcid-delegated").show();
+    $(".orcid-need-delegated").hide();
+    $(_.params.input.given_trusted).val("true");
+    
+    return;
+};
+
+ORCID_puli_utils.create_reset_orcid_link = function () {
+    var _ = this;
+    
+    var _msg = _.params.message.reset_button;
+    
+    var _style = "font-size: .8em;color:#999;cursor:pointer;text-decoration:underline;";
+    
+    var _link = $('<span style="' + _style + '"></span>')
+            .addClass("orcid-reset-link")
+            .html(_.params.message.reset_link);
+    _link.click(function () {
+        _.reset();
+    });
+    
+    return _link;
+};
+
+ORCID_puli_utils.reset = function () {
+    var _ = this;
+    
+    $(_.params.input.given_trusted).val("false");
+    $(".orcid-profile").hide();
+    $(".orcid-delegated").hide();
+    $(".orcid-need-delegated").hide();
+    $(".orcid-delegate-instruction").hide();
+    $(".orcid-reset-link").hide();
+    $(_.params.input.given_trusted).val("false");
+    
+    _.display_connect_button();
+    $(_.params.input.orcid_id).val("");
 };

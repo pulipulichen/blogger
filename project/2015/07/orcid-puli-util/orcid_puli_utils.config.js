@@ -9,7 +9,7 @@ ORCID_puli_utils.init({
     app: { 
         client_id: "APP-2QXG8GW8BZ9SN0RD",
         client_secret: "5ccb12f8-a791-4df9-9514-cfbf1e52037d",
-        redirect_uri: "http://pc-pudding.dlll.nccu.edu.tw/blogger/project/2015/07/orcid-puli-util/20150630-orcid.html",    // 需要一個外部網址 
+        redirect_uri: "http://pc-pudding.dlll.nccu.edu.tw/blogger/project/2015/07/orcid-puli-util/20150630-orcid-redirect.html",    // 需要一個外部網址 
         lang: "zh_TW"
     }, 
     employment: { 
@@ -34,8 +34,9 @@ ORCID_puli_utils.init({
         need_delegated: "尚未授權",
         prompt_domain_error: "請將此按鈕拖曳至書籤，並在登入ORCID之後再點選此按鈕",
         error_prompt_disabled: "授權錯誤，請手動開啟「彈出式視窗」",
-        trust_loading: "授權動作處理中，請稍候",
+        trust_loading: "授權動作處理中，請稍候...",
         submit: "確定",
         close: "關閉",
+        browser_detect: '請使用桌面版Google Chrome操作。<a href="https://www.google.com.tw/chrome/browser/desktop/" target="download_chrome">下載Google Chrome</a>'
     }
 });

@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>ORCID</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+<!---------------------------------------->
+
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+
+<!-- <script type="text/javascript" src="https://googledrive.com/host/0B3_qgRmbvvZ1RmhGYmVFeTExblU"></script> -->
+<!-- https://drive.google.com/file/d//view?usp=sharing -->
+
+
+<!-- http://pc-pudding.dlll.nccu.edu.tw/blogger/project/2015/07/20150630-orcid.html -->
+
+<ul style="display: none;">
+    <li>
+        <label>
+            Family Name: 
+            <input type="text" name="family_names" value="Chen" />
+        </label>
+    </li>
+    <li>
+        <label>
+            Given Name: 
+            <input type="text" name="given_names" value="Pudding" />
+        </label>
+    </li>
+    <li>
+        <label>
+            Email: 
+            <input type="text" name="email" value="pulipuli@gmail.com" />
+        </label>
+    </li>
+    
+    <li>
+        <label>
+            Given Trusted: 
+            <input type="text" name="given_trusted" id="given_trusted" value="false" />
+            <script type="text/javascript">
+                //document.getElementById("given_trusted").value = "true";
+            </script>
+        </label>
+        <hr />
+    </li>
+</ul>
+<ul>
+    <li>
+        <label>
+            ORCID ID: 
+            <input type="text" name="orcid_id" id="orcid_id" />
+            <!-- <input type="text" name="orcid_id" id="orcid_id" value="0000-0003-3751-610X" /> -->
+            <script type="text/javascript">
+                document.getElementById("orcid_id").value = "0000-0003-3751-610X";
+            </script>
+            
+        </label>
+    </li>
+</ul>
+
+
+<script type="text/javascript" src="orcid_puli_utils.js"></script>
+<script type="text/javascript" src="orcid_puli_utils.config.js"></script>
+
+
+<!------------------------------------>
+    </body>
+</html>

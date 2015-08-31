@@ -37,6 +37,8 @@ ORCID_puli_utils.init({
         trust_loading: "授權動作處理中，請稍候...",
         submit: "確定",
         close: "關閉",
-        browser_detect: '請使用桌面版Google Chrome操作。<a href="https://www.google.com.tw/chrome/browser/desktop/" target="download_chrome">下載Google Chrome</a>'
+        browser_detect: '請使用桌面版Google Chrome操作。<a href="https://www.google.com.tw/chrome/browser/desktop/" target="download_chrome">下載Google Chrome</a>',
+        prompt_enable: '請點選以下按鈕以完成授權',
+        continue_delegate: "確認授權"
     }
 });

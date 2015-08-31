@@ -382,6 +382,7 @@ ORCID_puli_utils.has_delegated = function (_orcid_id, _callback) {
     var _given_trusted = $(_.params.input.given_trusted);
     if (_given_trusted.length > 0) {
         _given_trusted = _given_trusted.val();
+        _given_trusted = _given_trusted.toLowerCase();
         _found = (_given_trusted === "true");
         if (typeof(_callback) === "function") {
             _callback(_found);
@@ -524,6 +525,9 @@ ORCID_puli_utils.create_bookmarklet = function () {
     _func_str = _func_str.replace("[[message:error_prompt_disabled]]", _.params.message.error_prompt_disabled);
     _func_str = _func_str.replace("[[message:trust_loading]]", _.params.message.trust_loading);
     
+    _func_str = _func_str.replace("[[message:prompt_enable]]", _.params.message.prompt_enable);
+    _func_str = _func_str.replace("[[message:continue_delegate]]", _.params.message.continue_delegate);
+    
     //var _replaceAll = function (find, replace, str) {
     //    return str.replace(new RegExp(find, 'g'), replace);
     //};
@@ -555,6 +559,12 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
     var _close = "[[message:close]]";
     var _error_prompt_disabled = "[[message:error_prompt_disabled]]";
     var _trust_loading = "[[message:trust_loading]]";
+    /*
+    //var _prompt_enable_encodeURIComponent = "[[message:prompt_enable_encodeURIComponent]]";
+    //var _prompt_enable = decodeURIComponent(_prompt_enable_encodeURIComponent);
+    */
+    var _prompt_enable = "[[message:prompt_enable]]";
+    var _continue_delegate = "[[message:continue_delegate]]";
 
     /* 確認是在orcid網域底下才生效 */
     var _is_orcid_domain = function () {
@@ -579,13 +589,18 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
               zIndex: 100,
               backgroundColor: "rgba(0%,0%,0%,0.6)",
               textAlign: "center",
-              color: "white",
               padding: "1em",
               fontSize: "2em"
             }).appendTo($("body"));
 
-            var _fields = $('<div class="orcid-puli-fields"></div>')
+            var _content_style = "background-color:white;margin: 1em 5em;padding: 1em;border-radius: 0.5em;";
+            var _content_container = $('<div style="'+_content_style+'"></div>')
                     .appendTo(mask);
+
+            /* ------------------------- */
+
+            var _fields = $('<div class="orcid-puli-fields"></div>')
+                    .appendTo(_content_container);
 
             _fields.append('<div style="">' + _message  + '</div>');
             _fields.append('<div><input type="password" name="orcid_puli_password" /></div>');
@@ -601,21 +616,45 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
                 mask.remove();
             });
             
+            /* ------------------------- */
+            
             var _loading = $('<div class="orcid-puli-loading"></div>')
                     .hide()
-                    .appendTo(mask);
+                    .appendTo(_content_container);
             _loading.html(_trust_loading);
+            
+            /* ------------------------- */
+            
+            var _enable_prompt = $('<div class="orcid-puli-prompt"></div>')
+                    .hide()
+                    .appendTo(_content_container);
+            _enable_prompt.html(_prompt_enable);
+            var _btn_container = $('<div style="text-align:center"></div>')
+                .appendTo(_enable_prompt);
+            var _continue_btn = $('<button type="button" style="color:white;background: none repeat scroll 0% 0% #31789B;' + _btn_style + '">' + _continue_delegate + '</button>')
+                    .appendTo(_btn_container);
+            _continue_btn.click(function () {
+                _trusted_callback();
+            });
         }
     };
     
     var _toggle_loading = function (_enable_loading) {
+        var _fields = $(".orcid-puli-fields");
+        var _loading = $(".orcid-puli-loading");
+        var _prompt = $(".orcid-puli-prompt");
+        
+        _loading.hide();
+        _fields.hide();
+        _prompt.hide();
         if (_enable_loading === true) {
-            $(".orcid-puli-loading").show();
-            $(".orcid-puli-fields").hide();
+            _loading.show();
+        }
+        else if (_enable_loading === "prompt") {
+            _prompt.show();
         }
         else {
-            $(".orcid-puli-loading").hide();
-            $(".orcid-puli-fields").show();
+            _fields.show();
         }
     };
 
@@ -796,8 +835,8 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
             , "toolbar=no, scrollbars=no, width=320, height=240, top=0, left=0");
             
         if (_given_trusted_cookie === undefined) {
-            window.alert(_error_prompt_disabled);
-            _toggle_loading(false);
+            /*window.alert(_error_prompt_disabled);*/
+            _toggle_loading("prompt");
         }
         else {
             _given_trusted_cookie.onunload = function () {

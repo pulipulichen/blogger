@@ -477,12 +477,18 @@ ORCID_puli_utils.create_delegate_instruction = function () {
     //if (true) {
     
         var _ol = $('<ol></ol>');
-
-        _ol.append($("<li></li>").append(_.create_bookmarklet()));
-        _ol.append($("<li>" + _.params.message.bookmarklet_usage + "</li>"));
-        _ol.append($("<li></li>").append(_.create_account_link()));
-        _ol.append($("<li>" + _.params.message.open_bookmarket + "</li>"));
-        _ol.append($("<li>" + _.params.message.input_password + "</li>"));
+        
+        var _delegate_guide = _.params.message.delegate_guide;
+        for (var _i in _.params.message.delegate_guide) {
+            var _desc = _delegate_guide[_i];
+            
+            var _li = $("<li></li>")
+                    .html(_desc)
+                    .appendTo(_ol);
+        }
+        
+        _ol.find(".bookmarklet").append(_.create_bookmarklet());
+        _ol.find(".open_account").append(_.create_account_link());
 
         _fieldset.append(_ol);
 
@@ -497,11 +503,12 @@ ORCID_puli_utils.create_delegate_instruction = function () {
 
 ORCID_puli_utils.create_bookmarklet = function () {
     var _ = this;
-    var _btn_style = "border: 1px solid #d3d3d3;padding: .3em;background-color: #fff;border-radius: 8px;box-shadow: 1px 1px 3px #999;"
-        + "cursor: pointer;color: #999;font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle;"
-        //+ "-webkit-appearance: button;"
-        + "text-decoration:initial;font-weight: bold;"
-        + "margin: 0;margin-bottom: 5px;text-transform: none;box-sizing: border-box;align-items: flex-start;text-align: center;  text-rendering: auto;letter-spacing: normal;word-spacing: normal;  text-indent: 0px;text-shadow: none;display: inline-block;-webkit-writing-mode: horizontal-tb;box-sizing: border-box;";
+//    var _btn_style = "border: 1px solid #d3d3d3;padding: .3em;background-color: #fff;border-radius: 8px;box-shadow: 1px 1px 3px #999;"
+//        + "cursor: pointer;color: #999;font-weight: bold;font-size: .8em;line-height: 24px;vertical-align: middle;"
+//        //+ "-webkit-appearance: button;"
+//        + "text-decoration:initial;font-weight: bold;"
+//        + "margin: 0;margin-bottom: 5px;text-transform: none;box-sizing: border-box;align-items: flex-start;text-align: center;  text-rendering: auto;letter-spacing: normal;word-spacing: normal;  text-indent: 0px;text-shadow: none;display: inline-block;-webkit-writing-mode: horizontal-tb;box-sizing: border-box;";
+    var _btn_style = "text-decoration:initial;margin: 10px 0;background: #31789B;color: #fff;border-color: #357ebd;display: inline-block;    font-weight: 400;    text-align: center;    vertical-align: middle;    cursor: pointer;    border: 1px solid transparent;    white-space: nowrap;    padding: 6px 12px;    font-size: 14px;    line-height: 1.428571429;    border-radius: 4px;    -webkit-user-select: none;";
     var _btn = $('<a style="'+_btn_style+'"></a>');
     _btn.html(_.params.message.bookmarklet);
 
@@ -593,7 +600,7 @@ ORCID_puli_utils.create_bookmarklet_href = function () {
               fontSize: "2em"
             }).appendTo($("body"));
 
-            var _content_style = "background-color:white;margin: 1em 5em;padding: 1em;border-radius: 0.5em;";
+            var _content_style = "background-color:white;margin: 1em;padding: 1em;border-radius: 0.5em;";
             var _content_container = $('<div style="'+_content_style+'"></div>')
                     .appendTo(mask);
 
@@ -923,6 +930,9 @@ ORCID_puli_utils.set_trusted = function () {
         $(".orcid-need-delegated").hide();
         $(_.params.input.given_trusted).val("true");
         
+        if (typeof(_.params.input.submit) !== "undefined") {
+            $(_.params.input.submit).click();
+        }
     }, 10);
     
     return;

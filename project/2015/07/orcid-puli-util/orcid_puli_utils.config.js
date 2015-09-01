@@ -4,7 +4,8 @@ ORCID_puli_utils.init({
         given_names: "[name='given_names']",
         email: "[name='email']",
         orcid_id: "[name='orcid_id']",
-        given_trusted: "[name='given_trusted']"
+        given_trusted: "[name='given_trusted']",
+        submit: ":submit:first",
     }, 
     app: { 
         client_id: "APP-2QXG8GW8BZ9SN0RD",
@@ -23,10 +24,7 @@ ORCID_puli_utils.init({
         reset_link: "重設ORCID",
         bookmarklet: "授權政大",
         fieldset_legend: "請按照以下步驟進行授權",
-        bookmarklet_usage: "請拖曳上面授權按鈕到書籤列<br /><img src='http://lh3.googleusercontent.com/-JAjetUuBu6c/VbKNIq_oLVI/AAAAAAACYbM/VQujuHiLQdM/orcid1_thumb%25255B1%25255D.png' style='border:1px gray solid' />",
         open_account: "開啟設定頁面",
-        open_bookmarket: "請點選授權按鈕。<br /><img src='http://lh3.googleusercontent.com/-5nG84mlwL4M/VbKNLhucyKI/AAAAAAACYbc/vTY8lJcgnUA/orcid2_thumb%25255B2%25255D.png' style='border:1px gray solid' />",
-        input_password: "請輸入您的密碼 <br /><img src='http://lh3.googleusercontent.com/-yJLdDHowcP4/VbKNOgRqFQI/AAAAAAACYbs/qDu9ypACb0g/orcid3_thumb%25255B2%25255D.png' style='border:1px gray solid' />",
         prompt_hint: "授權政大: 請輸入您的ORCID密碼",
         prompt_error: "ORCID密碼錯誤，請再次輸入您的ORCID密碼",
         alert_success: "授權成功，視窗即將關閉。",
@@ -39,6 +37,19 @@ ORCID_puli_utils.init({
         close: "關閉",
         browser_detect: '請使用桌面版Google Chrome操作。<a href="https://www.google.com.tw/chrome/browser/desktop/" target="download_chrome">下載Google Chrome</a>',
         prompt_enable: '請點選以下按鈕以完成授權',
-        continue_delegate: "確認授權"
+        continue_delegate: "確認授權",
+        delegate_guide: [
+            '確認Google Chrome的書籤列已經開啟，或參考<a href="https://support.google.com/chrome/answer/95745?hl=zh-Hant" target="open_bookmark">顯示書籤列</a>的說明'
+                + '<br /><img src="https://lh3.googleusercontent.com/-NIMg2yFCaGs/VeWcR8y4kQI/AAAAAAACk5o/iUSs4lQ-WqM/s0/orcid_open_bookmark.jpg" style="border:1px gray solid" />',
+            '請拖曳「授權按鈕」 <span class="bookmarklet" /> 到書籤列' 
+                + '<br /><img src="https://lh3.googleusercontent.com/-Sm-6xx014ic/VeWfIxO9qLI/AAAAAAACk6Y/J7T0JlvODHo/s0/orcid_add_bookmarklet.jpg" style="border:1px gray solid" />',
+            "請點選 <span class='open_account' />",
+            '請點選書籤列上的「授權按鈕」。'
+                + '<br /><img src="http://lh3.googleusercontent.com/-5nG84mlwL4M/VbKNLhucyKI/AAAAAAACYbc/vTY8lJcgnUA/orcid2_thumb%25255B2%25255D.png" style="border:1px gray solid" />',
+            '輸入您的ORCID密碼'
+                + '<br /><img src="https://lh3.googleusercontent.com/-7_FZN7KBSk0/VeWdSRrUM_I/AAAAAAACk58/GWH6i_aNOW8/s0/orcid_password.jpg" style="border:1px gray solid" />',
+            '點選「確認授權」按鈕'
+                + '<br /><img src="https://lh3.googleusercontent.com/-69ForfztAVY/VeWdKUpXm0I/AAAAAAACk50/ToFraWlbYCc/s0/orcid_ok.jpg" style="border:1px gray solid" />'
+        ]
     }
 });

@@ -91,9 +91,28 @@ ORCID_puli_utils.init = function (_params) {
 
     //_profile_link.wrap("<div/>");
     
+    var _support = $('<ul></ul>')
+        .css('list-style', 'initial')
+        .css('margin-left', '30px')
+        .css('margin-top', '1em')
+        .addClass('orcid-support')
+        .appendTo(_block_hint);
+
     var _reset_orcid = _.create_reset_orcid_link();
-    _reset_orcid.hide();
-    _reset_orcid.appendTo(_block_hint);
+    
+    for (var _i in _.params.message.support) {
+        var _desc = _.params.message.support[_i];
+        if (_desc !== "[[orcid-reset]]") {
+            $('<li></li>').html(_desc).appendTo(_support);
+        }
+        else {
+            _reset_orcid.hide().appendTo(_support);
+        }
+    }
+    
+    
+    //_reset_orcid.hide();
+    //_reset_orcid.appendTo(_support);
     
     var _delegate_instruction = _.create_delegate_instruction();
     _delegate_instruction.hide();
@@ -467,7 +486,8 @@ ORCID_puli_utils.display_delegate_instruction = function () {
 ORCID_puli_utils.create_delegate_instruction = function () {
     var _ = this;
     
-    var _fieldset = $("<fieldset></fieldset>");
+    var _fieldset = $("<fieldset></fieldset>")
+            .css("margin-top", "1em");
     _fieldset.addClass("orcid-delegate-instruction");
     _fieldset.css("display", "inline-block");
     _fieldset.append("<legend>" + _.params.message.fieldset_legend + "</legend>");
@@ -483,6 +503,7 @@ ORCID_puli_utils.create_delegate_instruction = function () {
             var _desc = _delegate_guide[_i];
             
             var _li = $("<li></li>")
+                    .css("margin-bottom", ".5em")
                     .html(_desc)
                     .appendTo(_ol);
         }
@@ -943,7 +964,7 @@ ORCID_puli_utils.create_reset_orcid_link = function () {
     
     var _msg = _.params.message.reset_button;
     
-    var _style = "font-size: .8em;cursor:pointer;text-decoration:underline;margin: 1em 0;";
+    var _style = "cursor:pointer;text-decoration:underline;padding:0;    background: none;";
     
     var _link = $('<a style="' + _style + '"></a>')
             .html(_.params.message.reset_link);
@@ -952,9 +973,9 @@ ORCID_puli_utils.create_reset_orcid_link = function () {
         _.reset();
     });
     
-    _link = $("<div></div>")
+    _link = $("<li></li>")
         .addClass("orcid-reset-link")
-        .css("margin", ".5em 0")
+        //.css("margin", ".5em 0")
         .append(_link);
     
     return _link;

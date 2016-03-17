@@ -4,7 +4,7 @@
 ---
 name: terra_pinyin.mine
 version: "2014.08.04"
-sort: by_weight
+sort: by_weight變
 # 萌典：https://www.moedict.tw/
 # 發問區：http://code.google.com/p/rimeime/wiki/Downloads
 # 導入預設詞彙
@@ -29,3 +29,31 @@ import_tables:
 法	fa4
 遍	pian4
 普遍	pu3 pian4
+會	hui3
+嗎	ma1
+嬤	ma4
+癌	yan2
+壁癌	bi4 yan2
+砲	pao4
+骰	shai3
+擲	zhi2
+擲骰	zhi2 shai3
+拖曳	tuo1 yi4
+曳	yi4
+液	yi4
+液晶	yi4 jing1
+兇	xiong1
+兇手	xiong1 shou3
+圳	zun4
+變項	bian4 xiang4
+淑	shu2
+質	zhi2
+識	shì4
+越來越	yue4 lai2 yue4
+亞	ya3
+認識	ren3 shi4
+企	qi4
+夕	xi4
+嚨	long2
+妮	ni2
+柏	bo2

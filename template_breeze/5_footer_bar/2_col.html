@@ -1,0 +1,50 @@
+<!-- 熱門文章 -->
+<b:section class='footerbar-popular-post' id='footerbar-popular-post' preferred='yes'>
+<b:widget id='PopularPosts2' locked='false' title='Popular Posts' type='PopularPosts'>
+    <b:includable id='main'>
+<b:if cond='data:title'><h2><data:title/></h2></b:if>
+  <div class='widget-content popular-posts'>
+    <ul>
+      <b:loop values='data:posts' var='post'>
+      <dd>
+        <b:if cond='data:showThumbnails == &quot;false&quot;'>
+          <b:if cond='data:showSnippets == &quot;false&quot;'>
+            <!-- (1) No snippet/thumbnail -->
+            <a expr:href='data:post.href'><data:post.title/></a>
+          <b:else/>
+            <!-- (2) Show only snippets -->
+            <div class='item-title'><a expr:href='data:post.href'><data:post.title/></a></div>
+            <div class='item-snippet'><data:post.snippet/></div>
+          </b:if>
+        <b:else/>
+          <b:if cond='data:showSnippets == &quot;false&quot;'>
+            <!-- (3) Show only thumbnails -->
+            <div class='item-thumbnail-only'>
+              <b:if cond='data:post.thumbnail'>
+                <div class='item-thumbnail'>
+                  <a expr:href='data:post.href' target='_blank'>
+                    <img alt='' border='0' expr:height='data:thumbnailSize' expr:src='data:post.thumbnail' expr:width='data:thumbnailSize'/>
+                  </a>
+                </div>
+              </b:if>
+              <div class='item-title'><a expr:href='data:post.href'><data:post.title/></a></div>
+            </div>
+            <div style='clear: both;'/>
+          <b:else/>
+           <!-- (4) Show snippets and thumbnails -->
+        <b:if cond='data:post.thumbnail'>
+            <img expr:alt='data:post.title' expr:src='data:post.thumbnail' height='50' width='50'/>
+<b:else/>
+            <img alt='no image' height='50' src='//lh4.ggpht.com/_u7a1IFxc4WI/TTjruHJjcfI/AAAAAAAAAk0/i11Oj6i_bHY/s50/no-image.png' width='50'/>
+        </b:if>
+        <a expr:href='data:post.href' expr:title='data:post.snippet' rel='bookmark'><data:post.title/></a>
+            <div style='clear: both;'/>
+          </b:if>
+        </b:if>
+      </dd>
+      </b:loop>
+    </ul>
+  </div>
+</b:includable>
+  </b:widget>
+</b:section>

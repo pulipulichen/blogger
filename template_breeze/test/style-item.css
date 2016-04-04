@@ -2,18 +2,18 @@
 /************************************/
 
 @media (min-width:767px) {
-    .page-type-item #side-bar {
+    #side-bar {
         /*display: none;*/
         width: 100%;
     }
     
-    .page-type-item #sidebar > div.widget {
+    #sidebar > div.widget {
         float: left;
         width: calc(33% - 0.8em);
         margin-right: 1.2em;
     }
     
-    .page-type-item #sidebar > div.widget .widget-content {
+    #sidebar > div.widget .widget-content {
         min-height: 360px;
         max-height: 360px;
         overflow-y: auto;
@@ -24,16 +24,16 @@
         margin-bottom: 0;
     }
     
-    .page-type-item #sidebar > div.widget:nth-of-type(3) {
+    #sidebar > div.widget:nth-of-type(3) {
         margin-right: 0;
     }
     
-    .page-type-item #sidebar > .comments {
+    #sidebar > .comments {
         display: none;
     }
     
-    .page-type-item #content {
-        width: 100%;
+    #content {
+        width: 100% !important;
     }
     
     .popular-posts {
@@ -42,23 +42,23 @@
 }
 
 @media (min-width:767px) and (max-width: 979px) {
-    .page-type-item #sidebar > div.widget,
-    .page-type-item #sidebar > div.widget:nth-of-type(3) {
+    #sidebar > div.widget,
+    #sidebar > div.widget:nth-of-type(3) {
         width: calc(50% - 0.5em);
         margin-right: 1em;
     }
     
-    .page-type-item #sidebar > div.widget:nth-of-type(even) {
+    #sidebar > div.widget:nth-of-type(even) {
         margin-right: 0;
         clear: none;
     }
     
-    .page-type-item #sidebar > div.widget:nth-of-type(odd) {
+    #sidebar > div.widget:nth-of-type(odd) {
         clear: both;
         margin-bottom: 1em;
     }
     
-    .page-type-item #sidebar > .comments {
+    #sidebar > .comments {
         display: block;
     }
     

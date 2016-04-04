@@ -35,3 +35,17 @@ function pulipuli_related_results_labels_thumbs(e) {
         }
     }
 }
+
+
+$(function () {
+    $("#srch_btn").click(function () {
+        $("input.gsc-search-button").click();
+    });
+});
+
+var menu_search_submit = function (_form) {
+    var _query = _form.q.value;
+    $("input.gsc-input").val(_query);
+    $("input.gsc-search-button").click();
+    return false;
+};

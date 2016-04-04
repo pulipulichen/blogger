@@ -28,12 +28,18 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 </style>
 <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/style.css"/>
 <script type="text/javascript" src="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/script.js"></script>
-<?php echo file_get_contents("0_header/3_scripts.html"); ?>
+<script type='text/javascript'>//<![CDATA[
+<?php 
+echo file_get_contents("0_header/3_scripts.js"); ?>
+//]]></script>
 <?php echo file_get_contents("0_header/4_facebook_code.html"); ?>
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/style-item.css"/>
 </b:if>
+
+<meta name="msvalidate.01" content="09F5F270E3016847B9723E71AEE3FC24" />
+<meta name="baidu-site-verification" content="0XST85Xh5F" />
 </head>
 <body>
 
@@ -125,10 +131,26 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 
 <div class='search-bar'>
 <div class='nav-search'>
+<!--
 <form action='/search' id='searchform' method='get' role='search'>
  <input class='search_input' id='s' name='q' onblur='if(this.value==&apos;&apos;)this.value=this.defaultValue;' onfocus='if(this.value==this.defaultValue)this.value=&apos;&apos;' type='text' value='Search and hit'/>
 </form>
-<div class='srch_btn'/>
+-->
+<script type="text/javascript">
+  (function() {
+    var cx = '017270649262638447003:o6vaq9on3vs';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<div class="gcse">
+<gcse:search></gcse:search>
+</div>
+<div class='srch_btn' id="gsce_submit" />
   </div></div>
 
 

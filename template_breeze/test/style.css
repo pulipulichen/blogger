@@ -175,6 +175,8 @@ div.post-avatar {
     background-color: white;
     color: black !important;
     padding-left: 0.5em;
+    border-radius: 3px;
+    margin-top:27px;
 }
 
 #header h1 {
@@ -214,9 +216,41 @@ div.post-avatar {
     }
 }
 
-@media (max-width: 580px) {
+@media (max-width: 680px) {
     .search-bar {
-        display: none;
+        /*display: none;*/
+        position: absolute;
+        top: -1000px;
+    }
+    
+    
+    /*********************/
+    .navbar .nav li.search {
+        display: list-item !important;
+    }
+
+    .navbar .nav li.search form {
+        margin: 0;
+    }
+
+    .navbar .nav li.search input {
+        width: calc(100% - 100px);
+        /*margin: 0 18px;*/
+    }
+
+    .navbar .nav li.search .srch_btn {
+        height: 42px;
+        width: 23px;
+        margin-top: 0;
+        background: url(//3.bp.blogspot.com/-h-x1pzE69JE/U5sUcTyNfAI/AAAAAAAAAdg/PYKJ6twHM1M/s1600/search-icon.png) 2px center no-repeat;
+        text-indent: 9999px;
+        position: relative;
+        float: left;
+        margin-left: 18px;
+        margin-right: 10px;
+        margin-top: -5px;
+        display: inline !important;
+        border-width: 0;
     }
     /*
     .search-bar {
@@ -259,6 +293,7 @@ div.post-avatar {
 
     .nav-collapse .dropdown-menu {
         display: block;
+        margin: 0;
     }
 
     .navbar .nav .dropdown-menu li a {
@@ -275,32 +310,6 @@ div.post-avatar {
         color: #fff;
     }
 
-    /*********************/
-    .navbar .nav li.search {
-        display: list-item !important;
-    }
-
-    .navbar .nav li.search form {
-        margin: 0;
-    }
-
-    .navbar .nav li.search input {
-        width: calc(100% - 100px);
-        /*margin: 0 18px;*/
-    }
-
-    .navbar .nav li.search .srch_btn {
-        height: 42px;
-        width: 23px;
-        margin-top: 0;
-        background: url(//3.bp.blogspot.com/-h-x1pzE69JE/U5sUcTyNfAI/AAAAAAAAAdg/PYKJ6twHM1M/s1600/search-icon.png) 2px center no-repeat;
-        text-indent: 9999px;
-        position: relative;
-        float: left;
-        margin-left: 18px;
-        margin-right: 10px;
-        margin-top: -5px;
-    }
 
     /************/
     #masthead {
@@ -456,4 +465,50 @@ body .addthis-smartlayers {
 
 .pager li.link > span {
     width: 6em;
+}
+
+/***********************/
+.gsc-control-cse {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
+.gcse {
+    float: left;
+    /*margin-left: 30px;*/
+    margin-top: 7px;
+}
+
+.nav-search {
+     margin-top: 19px;
+}
+
+.nav-search .srch_btn {
+    float: left;
+}
+
+.fixed-nav .nav-search .srch_btn {
+    margin-top: -15px;
+}
+
+.cse .gsc-control-wrapper-cse, .gsc-control-wrapper-cse {
+    width: 200px !important;
+}
+
+.gsc-search-button {
+    display: none !important;
+}
+
+.gsc-input-box {
+    border-radius: 0.5em;
+}
+
+.gsc-input-box input.gsc-input {
+    opacity: 1 !important;
+    border-width: 0;
+}
+
+.navbar .nav {
+    margin-right: 0;
 }

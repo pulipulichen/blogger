@@ -515,3 +515,11 @@ body:not(.page-type-item) .addthis-smartlayers {
     background-color: #FF5D39;
 }
 
+/***********************/
+.pager .previous.hidden {
+    visibility: hidden;
+}
+
+.pager li.link > span {
+    width: 6em;
+}

@@ -645,25 +645,50 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 </b:includable>
     <b:includable id='nextprev'>
   <div class='blog-pager' id='blog-pager'>
-    <b:if cond='data:newerPageUrl'>
-      <span id='blog-pager-newer-link'>
-      <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
-      </span>
-    </b:if>
-    
-    <a class='home-link' expr:href='data:blog.homepageUrl'><data:homeMsg/></a>
-    
-    <b:if cond='data:olderPageUrl'>
-      <span id='blog-pager-older-link'>
-      <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'><data:olderPageTitle/></a>
-      </span>
-    </b:if>
-
-    <b:if cond='data:mobileLinkUrl'>
-      <div class='blog-mobile-link'>
-        <a expr:href='data:mobileLinkUrl'><data:mobileLinkMsg/></a>
-      </div>
-    </b:if>
+    <nav>
+        <ul class="pager">
+            <b:if cond='data:newerPageUrl'>
+                <li class="previous link">
+                    <span id='blog-pager-newer-link'>
+                        <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'>
+                            <i class="fa fa-chevron-left"></i> <data:newerPageTitle/>
+                        </a>
+                    </span>
+                </li>
+            <b:else/>
+                <li class="previous hidden link">
+                    <span id='blog-pager-newer-link'>
+                        <a class='blog-pager-newer-link' href='#'>
+                            <i class="fa fa-chevron-left"></i> <data:newerPageTitle/>
+                        </a>
+                    </span>
+                </li>
+            </b:if>
+            
+            <li>
+                <a class='home-link' expr:href='data:blog.homepageUrl'><data:homeMsg/></a>
+            </li>
+            
+            <b:if cond='data:olderPageUrl'>
+                <li class="next link">
+                    <span id='blog-pager-older-link'>
+                    <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>
+                        <data:olderPageTitle/> <i class="fa fa-chevron-right"></i>
+                    </a>
+                    </span>
+                </li>
+            </b:if>
+            
+            
+            <b:if cond='data:mobileLinkUrl'>
+                <li class="next">
+                    <div class='blog-mobile-link'>
+                      <a expr:href='data:mobileLinkUrl'><data:mobileLinkMsg/></a>
+                    </div>
+                </li>
+            </b:if>
+        </ul>
+    </nav>
 
   </div>
   <div class='clear'/>

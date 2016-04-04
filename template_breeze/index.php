@@ -1078,6 +1078,7 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 </div> 
 
 
+<!--
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
 
 <div class='site-footer sidebar' id='footer_bar' role='contentinfo'>
@@ -1085,14 +1086,20 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
  <div class='container'>
  <div class='row-fluid' id='footer_bar_body'>
 <div class="cleanwidget  nopadding span4 bl_html section" id="footbar_column1">
-<?php echo file_get_contents("5_footer_bar/1_col.html") ?>
+<?php 
+//echo file_get_contents("5_footer_bar/1_col.html"); 
+?>
 </div>
 <div class="cleanwidget  nopadding span4 bl_html section" id="footbar_column2">
-<?php echo file_get_contents("5_footer_bar/2_col.html") ?>
+<?php 
+//echo file_get_contents("5_footer_bar/2_col.html");
+?>
 </div>
 
 <div class="cleanwidget  nopadding span4 bl_html section" id="footbar_column3">
-<?php echo file_get_contents("5_footer_bar/3_col.html") ?>
+<?php 
+//echo file_get_contents("5_footer_bar/3_col.html");
+?>
 </div>
  <div class='clear'/>
 </div>
@@ -1100,7 +1107,7 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 </div>
 
 </b:if>
-
+-->
 <div class='site-footer' id='colophon' role='contentinfo'>
 
  <div class='container'>

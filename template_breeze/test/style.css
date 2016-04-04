@@ -82,7 +82,7 @@
 }
 
 .about-me .widget-content {
-    margin: 1em;
+    margin: 0 1em;
 }
 
 .about-me .email-subscribe td:first-of-type {
@@ -118,14 +118,70 @@
 
 /************************************/
 
-@media (min-width:979px) {
+@media (min-width:767px) {
     .page-type-item #side-bar {
+        /*display: none;*/
+        width: 100%;
+    }
+    
+    .page-type-item #sidebar > div.widget {
+        float: left;
+        width: calc(33% - 0.8em);
+        margin-right: 1.2em;
+    }
+    
+    .page-type-item #sidebar > div.widget .widget-content {
+        min-height: 360px;
+        max-height: 360px;
+        overflow-y: auto;
+        margin-bottom: 0;
+    }
+    
+    .sidebar .widget {
+        margin-bottom: 0;
+    }
+    
+    .page-type-item #sidebar > div.widget:nth-of-type(3) {
+        margin-right: 0;
+    }
+    
+    .page-type-item #sidebar > .comments {
         display: none;
     }
+    
     .page-type-item #content {
         width: 100%;
     }
+    
+    .popular-posts {
+        padding-bottom: 0;
+    }
 }
+
+@media (min-width:767px) and (max-width: 979px) {
+    .page-type-item #sidebar > div.widget,
+    .page-type-item #sidebar > div.widget:nth-of-type(3) {
+        width: calc(50% - 0.5em);
+        margin-right: 1em;
+    }
+    
+    .page-type-item #sidebar > div.widget:nth-of-type(even) {
+        margin-right: 0;
+        clear: none;
+    }
+    
+    .page-type-item #sidebar > div.widget:nth-of-type(odd) {
+        clear: both;
+        margin-bottom: 1em;
+    }
+    
+    .page-type-item #sidebar > .comments {
+        display: block;
+    }
+    
+    
+}
+
 @media (max-width:979px) {
     #footer_bar {
         display: none;

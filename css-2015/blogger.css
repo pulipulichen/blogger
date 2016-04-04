@@ -1,0 +1,343 @@
+/*body	{border-top: 10px solid blue}*/
+#header-inner, 
+#header-inner div.titlewrapper
+#header-inner div.titlewrapper h1.title	{width: 760px !important;}
+#header-inner {background-image:url(http://www.blogblog.com/thisaway/icon_header.gif) !important;
+	background-position: 16px 26px !important;
+	background-repeat:no-repeat !important;}
+div#content-wrapper	{
+	background-image:none !important;
+	border: 3px solid #B57939;
+	border-width: 0 3px;
+	width: 754px;
+}
+div#main-wrapper	{width: 100%}
+div#main-wrapper div#main	{width: 66%;float:left;}
+div#sidebar-wrapper	{width: 30%;
+	background-color:#F7EFDE;
+	border-left: 1px solid #EFD7BD;
+	float:right;
+	border-bottom: 1px solid #EFD7BD;
+}
+#sidebar.sidebar.section	{
+	background-position:150px 0;
+}
+#header h1 span {font-size: 10pt; display:none;}
+#header h1.title span {font-size: 100%;}
+div.post-header-line-1	{text-align:right;width: 100%;padding-bottom: 1em;}
+{
+	font-size: 12pt !important;
+	line-height:2em !important;
+	text-indent:0;
+}
+.post-body h4,
+.post-body p h4{
+	font-size: 14pt !important;
+	font-weight:bold;
+	text-indent:0em !important;
+	color:#BA8247 !important;
+	/*line-height:1.5em !important;*/
+}
+.post-body h5,
+.post-body p h5{
+	font-size: 12pt !important;
+	font-weight:bold;
+	text-indent:0em !important;
+	/*line-height:1.5em !important;*/
+}
+
+.post-body h6,
+.post-body p h6{
+	font-size: 12pt !important;
+	font-style: italic;
+	/*font-weight:bold;*/
+	text-indent:0em !important;
+	/*line-height:1.5em !important;*/
+}
+
+.post-body code p,
+.post-body table p,
+.post-body pre p,
+.post-body ul p,
+.post-body ol p,
+.post-body div p,
+.post-body span p {
+	text-indent:0 !important;
+}
+
+.post-body p,
+.post-body div.post_show p,
+.post-body div.post_hidden p {
+	text-indent:2em !important;
+	font-size: 12pt !important;
+	/*line-height:1.5em !important;*/
+}
+
+.post-body li
+{
+	font-size: 12pt !important;
+	line-height:1.5em !important;
+	background: url("http://www.blogblog.com/thisaway/icon_list_item_left.gif") no-repeat scroll left 8px transparent !important;
+	background: 0 0 4px 17px;
+}
+
+.post-body ol li
+{
+	padding-left: 0 !important;
+	background-image: none;
+}
+
+.post-body p.code  { 
+  text-indent: 0em;
+  display: block; /* fixes a strange ie margin bug */
+  font-family: Courier New; 
+  font-size: 8pt; 
+  width: 85%;
+  overflow-y:auto;
+  overflow-x:auto;
+  background: #f0f0f0 url(http://puddingchen.35.googlepages.com/Code_BG.gif) left top repeat-y;
+  border: 1px solid #ccc;
+  padding: 10px 10px 10px 21px;
+  max-height:300px;
+  max-width:500px;
+  line-height: 1.5em;
+  color: #ba8247;
+}
+
+div.post-body hr {
+	display:block !important;
+	margin: 30px 0 !important;
+	text-align:center;
+	border-color: #CE8A42;
+	color: #CE8A42;
+}
+
+div.ref-list,
+div.ref-list ul
+div.ref-list ul li	{
+	font-size: small;
+}
+span.digest-point	{display:none; color:gray; font-size: smaller;}
+
+@media print {
+	#sidebar-wrapper {display:none;}
+	#navbar-iframe{display: none;}
+	#sidecon	{display:none;}
+	#content-wrapper {border-width:0;width: 90%;padding: 0;margin:0}
+	#main-wrapper	{display:block;width: 90%;padding: 0;margin:0}
+	#main	{padding: 0;}
+	#header h1 {padding:0;}
+	#header .description {padding:0;}
+	#header h1 span {display:inline;}
+	#header	{padding-bottom: 3px;border-bottom: 3px solid #634320}
+	.comments	{display:none;}
+	.blog-pager	{display:none;}
+	.feed-links	{display:none;}
+	div#header-wrapper div.sidebar-controller {display:none;}
+	div#content-wrapper {border-width: 0;}
+	div#main-wrapper div#main div.blog-posts h2.date-header span.breadcrumbs {display:none;}
+	div#main-wrapper div#main div.blog-posts h2.date-header span {padding-left: 0;}
+	div#main-wrapper div#main div.blog-posts div.share-buttons { display:none;border:1px solid red; }
+}
+
+div.date-outer h2.date-header {
+	background-position: 13px center;
+}
+
+div.date-outer h2.date-header span {
+	padding-left: 60px;
+	background-position: left center;
+}
+
+#footer .widget { background-image: none; }
+
+div.post-footer {margin: 5px;}
+div#sidebar h2 {
+	background-image: none;
+	padding-left: 0px; 
+}
+div#sidebar div.widget-toggle {
+	border: 1px solid #EBD4BD; 
+	font-size: 8pt; 
+	font-weight: bold; 
+	height: 14px; 
+	width: 14px; 
+	float: left; 
+	margin-right: 5px;
+	cursor: pointer; 
+	padding: 0pt; 
+	text-align: center;
+	background-color: #EBD4BD;
+	color: #956F4B;
+    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+div#sidebar div.widget-toggle.hover {
+	background-color: #F2E4D6;
+	color: #BD9E80;
+}
+
+div.blog-posts div.post div.iframe-div {
+	padding: 10px;
+	border: 1px solid #724C25;
+	font-weight: bold;
+	cursor: pointer;
+	/*background-image: url(http://sites.google.com/site/puddingchen35/Home/stock_insert-floating-frame.png);
+	background-color: transparent;
+	background-position: left top;
+	background-repeat: no-repeat;*/
+	/*padding-left: 30px;*/
+	max-width: 400px;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	background-color: #724C25;
+	color: #F7F0E9;
+}
+
+div.blog-posts div.post div.iframe-div a { color: #F7F0E9; }
+div.blog-posts div.post entry-content-text {display:none;}
+
+dd.comment-footer { margin-bottom: 1em; border-bottom: 1px solid rgb(240, 224, 206); padding-bottom: 0.5em; }
+div#header-wrapper div.sidebar-controller {
+	cursor:default;color:#CCCCCC;float:right;font-size: 10pt;font-weight:normal;margin-right:1em;margin-top:15px;
+}
+
+div#main-wrapper div#main div.blog-posts h2.date-header span.breadcrumbs {
+	padding-left: 50px;
+}
+
+div#main-wrapper div#main div.blog-posts div.share-buttons {
+	display:block;
+	margin-left: 20px;
+}
+
+div#main-wrapper div#main div.blog-posts div.share-buttons .add-this {
+	float:right;
+	margin-top: 3px;
+}
+div#main-wrapper div#main div.blog-posts div.share-buttons .facebook-like {
+	overflow:hidden; width:380px; height:30px;background-color:#F7F0E9;border: medium none;
+}
+
+/*--------------------------------*/
+/* 訪客留言板 */
+#Feedpulipuli_guestbookDisplay {
+	border: 3px solid white;
+	max-height: 300px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	color: #5B5743;
+	font-size:90%;
+}
+
+#Feedpulipuli_guestbookDisplay {
+	padding: 0;
+	margin: 0;
+}
+
+#pulipuli_guestbook .guest-book-li {
+	background-image:none;
+	background-color: white;
+	margin: 0;
+	padding: 5px;
+	list-style:none;
+	clear:both;
+}
+
+#pulipuli_guestbook .guest-book-li.readmore {
+	text-align:center;
+	font-weight: bold;
+	border-top: 1px solid #5B5743;
+	background-color: white;
+	padding: 10px 0;
+}
+
+#pulipuli_guestbook .guestbook-write {
+	text-align:center;
+	font-weight: bold;
+	padding: 10px 0;
+    
+    
+}
+
+#pulipuli_guestbook .guestbook-write a.write {
+	color: #5B5743;
+	border: 1px solid #D2CBBD;
+	background-color:white;
+	padding: 5px;
+	margin: 5px;
+	text-decoration:none;
+	font-size:90%;
+	cursor:pointer;
+    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+#pulipuli_guestbook .guestbook-write a.write:hover {
+    color: #5B5743;
+}
+#pulipuli_guestbook .guest-book-li-0 {
+	background-color: #F6F3E0;
+}
+
+#pulipuli_guestbook .date {
+	display: block;
+	float:right;
+	text-align: right;
+	color: #B4AF98;
+	font-size:70%;
+	margin-left: 10px;
+}
+
+/*-----------------------------------------*/
+/* 熱門文章 */
+
+.PopularPosts .widget-content ul li {
+	padding: 0 0 4px 17px !important;
+}
+
+.PopularPosts .item-thumbnail-only {
+	text-align:center !important;
+}
+
+/* -------- */
+/* Rating Stars */
+
+.RatingPanelCustom {
+    float: right;
+    background-color:transparent;
+}
+
+.linkwithin_outer {
+	display: none;
+}
+.post-body.show-linkwithin .linkwithin_outer {
+	display: block !important;
+}
+
+.post-body > p > a > img {
+	margin-left: -2em;
+}
+
+.author-box {
+	background: #F3F3F3;
+    margin: 0 0 30px 0;
+    padding: 10px;
+    border: 1px solid #DDDDDD;
+    overflow: hidden;
+    border-radius: 8px;
+    font-family: 'Microsoft Yahei','Microsoft JhengHei','Li Hei Pro','Heiti TC',tahoma,arial,'Hiragino Sans GB',SimSun,sans-serif;
+    line-height: 1.5;
+}
+
+.author-box input {
+    display: inline;
+    border: 1px solid #BA7429;
+    background: transparent;
+    color: #BA7429;
+    border-radius: 5px;
+    cursor: pointer;
+}

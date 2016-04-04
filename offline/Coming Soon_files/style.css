@@ -1,0 +1,126 @@
+/* Reset */
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,dfn,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+body{
+margin:0;
+padding:0;
+background: #fff url(../images/bg.gif) top center repeat-x;
+font-family: Helvetica Neue, Helvetica, Arial;
+color: #ffffff;
+}
+
+#wrapper{
+margin: 0 auto;
+width: 940px;
+}
+
+.main_content, .uppersection{
+width: 940px;
+float: left;
+}
+
+.logo{
+margin: 0 auto 60px auto;
+width: 160px;
+text-align: center;
+}
+
+.logo h1{
+width: 95px;
+height: 70px;
+margin: 44px auto 5px auto;
+border-radius: 50%;
+background: #fff;
+color: #68b2b1;
+text-align: center;
+padding-top: 25px;
+font-size: 49px;
+}
+
+.logo span{
+font-size: 22px;
+text-align: center;
+margin: 0 auto;
+}
+
+h2{
+font-weight: normal;
+text-align: center;
+display: block;
+font-size: 30px;
+}
+
+h2 strong{
+text-transform: uppercase;
+font-size: 64px;
+}
+
+
+h2 span{
+font-style: italic;
+font-size: 30px;
+}
+
+p{
+font-size: 19px;
+text-align: center;
+padding: 20px 140px 0;
+line-height: 26px;
+font-weight: 300;
+}
+
+ul.social{
+margin-top: 90px;
+float: left;
+padding-left: 120px;
+}
+
+ul.social li{
+float: left;
+margin-right: 40px;
+font-size: 11px;
+font-weight: bold;
+text-transform: uppercase;
+}
+
+ul.social li a{
+color: #333;
+text-decoration: none;
+padding-right: 30px;
+padding-bottom: 9px;
+padding-top: 4px;
+}
+
+ul.social li a:hover{
+text-decoration: underline;
+padding-top: 3px;
+}
+
+ul.social li a.fb{
+background: url(../images/social.png) right -30px no-repeat;
+}
+
+
+
+ul.social li a.tw{
+background: url(../images/social.png) right -90px no-repeat;
+}
+
+ul.social li a.google{
+background: url(../images/social.png) right -150px no-repeat;
+}
+
+ul.social li a.insta{
+background: url(../images/social.png) right -60px no-repeat;
+}
+
+ul.social li a.skype{
+background: url(../images/social.png) right -90px no-repeat;
+}
+
+ul.social li a.vimeo{
+background: url(../images/social.png) right -120px no-repeat;
+}
+
+

@@ -1,0 +1,184 @@
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:   Morning
+Author: Lasantha Bandara
+URL 1:  http://www.premiumbloggertemplates.com/
+URL 2:  http://www.bloggertipandtrick.net/
+Theme URL: http://www.premiumbloggertemplates.com/morning-blogger-template/
+Date:   April 2014
+License:  This free Blogger template is licensed under the Creative Commons Attribution 3.0 License, which permits both personal and commercial use.
+However, to satisfy the 'attribution' clause of the license, you are required to keep the footer links intact which provides due credit to its authors. For more specific details about the license, you may visit the URL below:
+http://creativecommons.org/licenses/by/3.0/
+----------------------------------------------- */
+body#layout ul{list-style-type:none;list-style:none}
+body#layout ul li{list-style-type:none;list-style:none}
+body#layout #myGallery{display:none}
+body#layout .featuredposts{display:none}
+body#layout .fp-slider{display:none}
+body#layout #navcontainer{display:none}
+body#layout .menu-secondary-wrap{display:none}
+body#layout .menu-secondary-container{display:none}
+body#layout #skiplinks{display:none}
+body#layout .feedtwitter{display:none}
+body#layout #header-wrapper {margin-bottom:10px;min-height:120px;}
+body#layout .social-profiles-widget h3 {display:none;}
+/* Variable definitions
+====================
+<Variable name="bgcolor" description="Page Background Color"
+type="color" default="#fff" value="#ffffff">
+<Variable name="textcolor" description="Text Color"
+type="color" default="#333" value="#333333">
+<Variable name="linkcolor" description="Link Color"
+type="color" default="#58a" value="#5588aa">
+<Variable name="pagetitlecolor" description="Blog Title Color"
+type="color" default="#666" value="#666666">
+<Variable name="descriptioncolor" description="Blog Description Color"
+type="color" default="#999" value="#999999">
+<Variable name="titlecolor" description="Post Title Color"
+type="color" default="#c60" value="#cc6600">
+<Variable name="bordercolor" description="Border Color"
+type="color" default="#ccc" value="#cccccc">
+<Variable name="sidebarcolor" description="Sidebar Title Color"
+type="color" default="#999" value="#999999">
+<Variable name="sidebartextcolor" description="Sidebar Text Color"
+type="color" default="#666" value="#666666">
+<Variable name="visitedlinkcolor" description="Visited Link Color"
+type="color" default="#999" value="#999999">
+<Variable name="bodyfont" description="Text Font"
+type="font" default="normal normal 100% Georgia, Serif" value="normal normal 100% Georgia, Serif">
+<Variable name="headerfont" description="Sidebar Title Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif" value="normal normal 78% 'Trebuchet MS',Trebuchet,Arial,Verdana,Sans-serif">
+<Variable name="pagetitlefont" description="Blog Title Font"
+type="font"
+default="normal normal 200% Georgia, Serif" value="normal normal 200% Georgia, Serif">
+<Variable name="descriptionfont" description="Blog Description Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif" value="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif">
+<Variable name="postfooterfont" description="Post Footer Font"
+type="font"
+default="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif" value="normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif">
+<Variable name="startSide" description="Side where text starts in blog language"
+type="automatic" default="left" value="left">
+<Variable name="endSide" description="Side where text ends in blog language"
+type="automatic" default="right" value="right">
+*/
+/* Use this with templates/template-twocol.html */
+body{background: url('http://2.bp.blogspot.com/-no6wWidklSQ/U0gSOpCWFjI/AAAAAAAAIR8/nH0zSifoC0A/s1600/background1.png') left 10px repeat-x, url('http://3.bp.blogspot.com/-7IGSl-LTdEk/U0gSRBwOCNI/AAAAAAAAISE/vd1tih3lXV8/s1600/background.png') fixed;color:#555555;font-family: Arial, Helvetica, Sans-serif;font-size: 13px;margin:0px;padding:0px;}
+a:link,a:visited{color:#A1501A;text-decoration:none;outline:none;}
+a:hover{color:#FF9F40;text-decoration:none;outline:none;}
+a img{border-width:0}
+#body-wrapper{margin:0px;padding:0px;}
+.section, .widget {margin:0;padding:0;}
+/* Header-----------------------------------------------*/
+#header-wrapper{width:960px;margin:0px auto 0px;height:62px;padding:20px 0px 20px 0px;overflow:hidden;}
+#header-inner{background-position:center;margin-left:auto;margin-right:auto}
+#header{margin:0;border:0 solid #cccccc;color:#CE6E06;float:left;width:60%;overflow:hidden;}
+#header h1{color:#CE6E06;text-shadow:0px 1px 0px #fff;margin:0 5px 0;padding:5px 0px 0px 0px;font-family:&#39;Oswald&#39;,Arial,Helvetica,Sans-serif;font-weight:bold;font-size:24px;line-height:24px;}
+#header .description{padding-left:7px;color:#CE6E06;text-shadow:0px 1px 0px #fff;line-height:14px;font-size:14px;padding-top:0px;margin-top:10px;font-family:Roboto,Arial,Helvetica,Sans-serif;}
+#header h1 a,#header h1 a:visited{color:#CE6E06;text-decoration:none}
+#header h2{padding-left:5px;color:#CE6E06;font:14px Arial,Helvetica,Sans-serif}
+#header2{float:right;width:38%;margin-right:0px;padding-right:0px;overflow:hidden;}
+#header2 .widget{padding:0px 0px 0px 0px;float:right}
+.social-profiles-widget img{margin:0 4px 0 0}
+.social-profiles-widget img:hover{opacity:0.8}
+#top-social-profiles{padding-top:4px;height:32px;text-align:right;}
+#top-social-profiles img{margin:0 0 0 6px !important;}
+#top-social-profiles img:hover{opacity:0.8;}
+#top-social-profiles .widget-container{background:none;border:0;padding:0;}
+/* Outer-Wrapper----------------------------------------------- */
+#outer-wrapper{width:960px;margin:0px auto 0px;padding:0px;text-align:left;}
+#content-wrapper{padding:15px;background:url('http://2.bp.blogspot.com/-OhECdGdCZVg/U0gSWX5q4lI/AAAAAAAAITw/jW5xoL42WJ0/s1600/main-bg.png');}
+#main-wrapper{width:615px;float:left;margin:0px;padding:0px 0px 0px 0px;word-wrap:break-word;overflow:hidden;}
+#rsidebar-wrapper{width:300px;float:right;margin:0px;padding:0px 0px 0px 0px;word-wrap:break-word;overflow:hidden;}
+/* Headings----------------------------------------------- */
+h2{}
+/* Posts-----------------------------------------------*/
+h2.date-header{margin:1.5em 0 .5em;display:none;}
+.wrapfullpost{}
+.post{margin-bottom:15px;border:1px solid #E5C18E;background:#F5E9D5;padding:10px 10px 0;}
+.post-title{color:#84310D;margin:0 0 10px 0;padding:0;font-family:'Oswald',sans-serif;font-size:20px;line-height:20px;font-weight:normal;}
+.post-title a,.post-title a:visited,.post-title strong{display:block;text-decoration:none;color:#84310D;text-decoration:none;}
+.post-title strong,.post-title a:hover{color:#CE6E06;text-decoration:none;}
+.post-body{margin:0px;padding:0px 10px 0px 0px;font-family:Arial, Helvetica, Sans-serif;line-height: 20px;}
+.post-footer{margin:5px 0;}
+.comment-link{margin-left:.6em}
+.post-body img{padding:3px;}
+.pbtthumbimg {float:left;margin:0px 10px 5px 0px;padding:6px !important;border:0px solid #eeeeee;background:none;width:200px;height:auto;}
+.postmeta-primary{color:#DBA956;font-size:12px;line-height:18px;padding:0 0 5px;}
+.postmeta-secondary{color:#DBA956;font-size:12px;line-height:18px;padding:0 0 10px;}
+.postmeta-primary span,.postmeta-secondary span{background-position:left center;background-repeat:no-repeat;padding:3px 0 3px 20px;}
+.meta_date{background-image:url(http://4.bp.blogspot.com/-vPklR-CeHkk/U0gSR-7j81I/AAAAAAAAIS0/cRPXngf9nlM/s1600/date.png);}
+.meta_author{background-image:url(http://4.bp.blogspot.com/-AAa5HWHKUIE/U0gSNHiQoMI/AAAAAAAAIR0/bfe8-wUrRwk/s1600/author.png);}
+.meta_comments{background-image:url(http://1.bp.blogspot.com/-YWs_yEOsbNI/U0gSRX0cM4I/AAAAAAAAISI/QhOmV4jUlXw/s1600/comments.png);}
+.meta_edit{background-image:url(images/edit.png);}
+.meta_categories{background-image:url(http://2.bp.blogspot.com/-BJOr4Ypa-uU/U0gSRbXv5tI/AAAAAAAAISM/zl2Q4GijaFc/s1600/category.png);}
+.meta_tags{background-image:url(http://2.bp.blogspot.com/-Q5P7chWsyx8/U0gSVxwK33I/AAAAAAAAITs/l6lgIwk9YD4/s1600/tags.png);}
+.readmore{margin-bottom:5px;float:right;}
+.readmore a{color:#B28648;background:#FAF5ED;font-size:12px;line-height:12px;display:inline-block;text-decoration:none;text-transform:none;border:1px solid #B48036;padding:8px 14px;}
+.readmore a:hover{color:#fff;background:#F0B47A;text-decoration:none;border:1px solid #E7CFAD;}
+/* Sidebar Content----------------------------------------------- */
+.sidebar{margin:0 0 10px 0;font-size:13px;color:#812A05;}
+.sidebar a{text-decoration:none;color:#812A05;}
+.sidebar a:hover{text-decoration:none;color:#FCA62F;}
+.sidebar h2, h3.widgettitle{background:#FAF5ED url(http://2.bp.blogspot.com/-CKRIUIsCpXk/U0gSWGWXOlI/AAAAAAAAIT4/UemT7sCkV-Q/s1600/widgettitle-bg.png) 10px center no-repeat;border:1px solid #E7CFAD;color:#CE6E06;font-size:16px;line-height:16px;font-family:Oswald, sans-serif;font-weight:normal;text-decoration:none;text-transform:none;margin:0 0 10px;padding:10px 10px 10px 30px;}
+.sidebar ul{list-style-type:none;list-style:none;margin:0px;padding:0px;}
+.sidebar ul li{margin:0 0 5px;padding:0 0 5px;}
+.sidebar .widget{margin:0 0 15px 0;padding:0;color:#812A05;font-size:13px;}
+.main .widget{margin:0 0 5px;padding:0 0 2px}
+.main .Blog{border-bottom-width:0}
+.widget-container{list-style-type:none;list-style:none;margin:0 0 15px 0;padding:0;color:#812A05;font-size:13px}
+/* FOOTER ----------------------------------------------- */
+#footer-container{}
+#footer{ margin-bottom:15px}
+#copyrights{ color:#812A05;  text-align:center;  padding:20px 0;  border-top:2px solid #842D05;  background-image:-webkit-gradient(linear,top,bottom,color-stop(0,#F2D9B8),color-stop(1,#E1BA82));  background-image:-ms-linear-gradient(top,#F2D9B8,#E1BA82);  background-image:-o-linear-gradient(top,#F2D9B8,#E1BA82);  background-image:-moz-linear-gradient(top,#F2D9B8,#E1BA82);  background-image:-webkit-linear-gradient(top,#F2D9B8,#E1BA82);  background-image:linear-gradient(to bottom,#F2D9B8,#E1BA82)}
+#copyrights a{ color:#812A05}
+#copyrights a:hover{ color:#812A05;  text-decoration:none}
+#credits{ color:#904624;  text-align:center;  font-size:11px;  padding:10px 0 0 0}
+#credits a{ color:#904624;  text-decoration:none}
+#credits a:hover{ text-decoration:none;  color:#904624}
+#footer-widgets-container{}
+#footer-widgets, .footer-widgets {background:url(http://2.bp.blogspot.com/-SosZwdb-x4E/U0gSTNj1ZrI/AAAAAAAAISw/-5PQM4gbuK0/s1600/footer-widgets-bg.png);border-top:3px solid #EFDBBF;padding:20px 0 0;}
+.footer-widget-box{width:300px;float:left;margin-left:15px;}
+.footer-widget-box-last{}
+#footer-widgets .widget-container, .footer-widgets .widget-container{color:#812A05;}
+#footer-widgets .widget-container a, .footer-widgets .widget-container a{text-decoration:none;color:#812A05;}
+#footer-widgets .widget-container a:hover, .footer-widgets .widget-container a:hover{text-decoration:none;color:#FCA62F;}
+#footer-widgets h2, .footer-widgets h2{background:#FAF5ED url(http://2.bp.blogspot.com/-CKRIUIsCpXk/U0gSWGWXOlI/AAAAAAAAIT4/UemT7sCkV-Q/s1600/widgettitle-bg.png) 10px center no-repeat;border:1px solid #E7CFAD;color:#CE6E06;font-size:16px;line-height:16px;font-family:Oswald, sans-serif;font-weight:normal;text-decoration:none;text-transform:none;margin:0 0 10px;padding:10px 10px 10px 30px;}
+#footer-widgets .widget > ul, .footer-widgets .widget > ul{list-style-type:none;list-style:none;margin:0px;padding:0px;}
+#footer-widgets .widget > ul > li, .footer-widgets .widget > ul > li{margin:0 0 5px;padding:0 0 5px;}
+@media (max-width: 768px) {
+#footer-bar-widgets {display: none;}
+}
+@media only screen and (min-width: 768px) {
+#footer-bar-widgets {display: none;}
+.page-type-item #footer-bar-widgets {display: block;}
+}
+.footersec {}
+.footersec .widget{margin-bottom:20px;}
+.footersec ul{}
+.footersec ul li{}
+/* Search ----------------------------------------------- */
+#search{border:1px solid #E3BD89;background:#fff url(http://2.bp.blogspot.com/-XhZjPiofeaU/U0gSVmJtFcI/AAAAAAAAITg/Wc3a1TnUiEY/s1600/search.png) 99% 50% no-repeat;text-align:left;padding:6px 24px 6px 6px;}
+#search #s{background:none;color:#C28B3B;border:0;width:100%;outline:none;margin:0;padding:0;}
+#content-search{width:300px;padding:15px 0;}
+#topsearch{float:right;margin-top:22px;}
+#topsearch #s{width:220px;}
+/* Comments----------------------------------------------- */
+#comments{margin-bottom:15px;border:1px solid #E5C18E;background:#F5E9D5;padding:10px 10px 0;}
+#comments h4{font-size:16px;font-weight:bold;margin:1em 0;}
+.deleted-comment{font-style:italic;color:gray}
+#blog-pager-newer-link{float:left}
+#blog-pager-older-link{float:right}
+#blog-pager{text-align:center}
+.feed-links{clear:both;line-height:2.5em}
+/* Profile ----------------------------------------------- */
+.profile-img{float:left;margin-top:0;margin-right:5px;margin-bottom:5px;margin-left:0;padding:4px;border:1px solid #cccccc}
+.profile-data{margin:0;text-transform:uppercase;letter-spacing:.1em;font:normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;color:#999999;font-weight:bold;line-height:1.6em}
+.profile-datablock{margin:.5em 0 .5em}
+.profile-textblock{margin:0.5em 0;line-height:1.6em}
+.avatar-image-container{background:url(http://4.bp.blogspot.com/_4HKUHirY_2U/TLlJUqSaolI/AAAAAAAAEq4/qpgAHAOe9x0/s1600/comment-avatar.jpg);width:32px;height:32px;float:right;margin:5px 10px 5px 5px;border:1px solid #ddd;}
+.avatar-image-container img{width:32px;height:32px;}
+.profile-link{font:normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;text-transform:uppercase;letter-spacing:.1em}
+#navbar-iframe{height:0;visibility:hidden;display:none;}

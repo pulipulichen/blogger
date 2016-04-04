@@ -1,0 +1,41 @@
+
+<!-- saved from url=(0088)chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content/share_tools/share_tools.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/css/common.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content/auxiliary.css">
+    <link href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content/share_tools/share_tools.css" rel="stylesheet">
+    <script src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/third_party/port.js" type="text/javascript"></script>
+    <script src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/opera.js" type="text/javascript"></script>
+    <script src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/yandex.js" type="text/javascript"></script>
+    <script src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/common/Browser.js" type="text/javascript"></script>
+    <script src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/GlobalUtils.js" type="text/javascript"></script>
+    <script type="text/javascript" src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/js/common/Log.js"></script>
+    <script type="text/javascript" src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/thrift/gen/Limits_types.js"></script>
+    <script src="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content/share_tools/share_tools.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="main">
+      <div id="status">
+        <span class="icon"></span>
+        <span class="text" message="savingClip">儲存擷取中 ...</span>
+      </div>
+      <div id="title"></div>
+      <div id="urlHeader" message="evernoteLink">Evernote 連結</div>
+      <input id="url" readonly="">
+      <div id="linkSwitcher" linktype="source" message="switchToEvernoteLink">切換至 Evernote 連結</div>
+      <div id="copiedConfirmation" message="urlCopied">已經複製 URL 到剪貼簿。</div>
+      <div id="shareButtons">
+        <div class="shareButton" id="facebook"></div><!--
+        --><div class="shareButton" id="twitter"></div><!--
+        --><div class="shareButton" id="weibo"></div><!--
+        --><div class="shareButton" id="linkedin"></div><!--
+        --><div class="shareButton" id="email"></div>
+      </div>
+      <div id="errorTitle"><span></span></div>
+      <div id="errorDetails"></div>
+      <div class="button" id="dismissMessage" message="notNow">並非此時</div>
+      <a class="button" id="upgrade" target="_blank"></a>
+      <div class="button" id="dismissDialog" message="ok">確定</div>
+    </div>
+  
+</body></html>

@@ -41,13 +41,13 @@ ORCID_puli_utils.init({
         continue_delegate: "確認授權",
         delegate_guide: [
             '確認Google Chrome的書籤列已經開啟，或參考<a href="https://support.google.com/chrome/answer/95745?hl=zh-Hant" target="open_bookmark" style="padding:0;display: inline; background: none;">顯示書籤列的說明</a>'
-                + '<br /><img src="https://lh3.googleusercontent.com/-NIMg2yFCaGs/VeWcR8y4kQI/AAAAAAACk5o/iUSs4lQ-WqM/s0/orcid_open_bookmark.jpg" style="border:1px gray solid" />',
+                + '<br /><img src="http://i.imgur.com/9bUmSPP.jpg" style="border:1px gray solid" />',
             '請拖曳右方圖示 <span class="bookmarklet" /> 到書籤列' 
                 + '<br /><img src="https://lh3.googleusercontent.com/-YE-dLVRQ7R0/VeZ_Vdwja0I/AAAAAAACk8M/EbW349v26EE/s0/orcid-bookmark.jpg" '
                 + 'onclick="this.src=\'https://lh3.googleusercontent.com/-twDikBAEUV8/VeZ2ufgRlPI/AAAAAAACk7M/8ZKgsymE8Tc/s0/orcid-bookmark.gif\'; this.style.cursor=\'default\';" '
                 + 'style="border:1px gray solid;cursor:pointer;" />',
             '請點選右邊圖示 <span class="open_account" />，開啟ORCID網站後，再點選書籤列上的「設定ORCID代理人」。'
-                + '<br /><img src="http://lh3.googleusercontent.com/-5nG84mlwL4M/VbKNLhucyKI/AAAAAAACYbc/vTY8lJcgnUA/orcid2_thumb%25255B2%25255D.png" style="border:1px gray solid" />',
+                + '<br /><img src="https://lh3.googleusercontent.com/-bp9POJFV_j0/Ve2WyRhXmuI/AAAAAAAClOs/TqdP83WJxq0/s0/bookmark_click.jpg" style="border:1px gray solid" />',
             '請按照「設定ORCID代理人」指示完成後續步驟，就可以成功授權!'
                 + '<br /><img src="https://lh3.googleusercontent.com/-CGmHMkzNfh8/VeZ-MK5ta-I/AAAAAAACk8A/Hp6_i4pl400/s0/orcid-proxy.jpg" '
                 + 'onclick="this.src=\'https://lh3.googleusercontent.com/-nk-xh5JMvA4/VeZ74tpzvmI/AAAAAAACk7o/s3r9WO1NjA8/s0/orcid-proxy.gif\'; this.style.cursor=\'default\';" '

@@ -1,0 +1,210 @@
+body{
+	padding: 0;
+	margin: 0;
+	font-size: 13px;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 140%;
+	text-align: center;
+	background:#FFF;
+	color:#000000;
+}
+a
+{
+    text-decoration:none;
+    color:#000;
+}
+#wrap{
+	width: 19cm;
+	margin: 0 auto;
+	overflow:hidden;
+}
+#header
+{
+    height: 55px;
+    background-image: url(images/PrintLogo.gif);
+    background-repeat: no-repeat;
+}
+#header h1{	
+	display:none;
+}
+#headerMenu{
+	display:none;
+}
+#sideleft
+{
+	display:none;
+}
+#sideright{
+	width: 19cm;
+	float: left;
+	background: #fff;
+	text-align: left;
+}
+#footer{
+	width: 19cm;
+	text-align:left;
+}
+h1,h2,address,p{
+	margin: 0;
+	padding: .3em;
+	
+}
+h1,h2{
+	font-size: 1.8em;
+	font-family:"º–∑¢≈È";
+	line-height:1.2em;
+}
+#sideleft{
+	display:none;
+}
+
+/*--------------------------*/
+/* CSS Document */
+
+#searchNav{
+	margin:0;
+	padding-right: 0px;
+	background-image: url(images/search_bg.jpg);
+	height: 22px;
+}
+/*#ctl00_SearchNav1_Doc{*/
+/*#ctl00_CPHolder1_Publisher1_Doc, #ctl00_SearchNav1_Doc{
+	margin0;
+	padding-right: 0px;
+	background-color:#fff;
+	height: 22px;
+
+}
+
+#ctl00_CPHolder1_Publisher1_List, #ctl00_SearchNav1_List{
+	margin0;
+	padding-right: 0px;
+	background-image: url(images/search_bg.jpg);
+	height: 22px;
+}*/
+
+#NavForm{
+	display:none;
+}
+#NavTxt{
+	float:left;
+	left:0;
+	top:20px;
+	margin-top:5px;
+	margin-left:10px;
+	color:#000;
+	font-size:11px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+
+#NavTxt img{
+	margin-right:3px;
+}
+
+#TitlePic{
+	display:none;
+}
+
+#TitlePicText{
+	display:none;
+}
+
+#TitlePicText .chinese{
+	display:none;
+}
+#TitlePicText .english{
+	margin-left:22px;
+	color: #A0971B;	
+	font-size:10px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+#NavTxt2{
+	float:left;
+	left:0;
+	margin-top:-20px;
+	margin-left:10px;
+	color:#000;
+	font-size:11px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+}
+#NavTxt2 a:link, #NavTxt a:link, #NavTxt2 a:visited, #NavTxt a:visited{
+	text-decoration:none;
+	color: #000;
+}
+#NavTxt2 a:hover, #NavTxt a:hover, #NavTxt2 a:active, #NavTxt a:active{
+	text-decoration:underline;
+	color: #000;
+}
+#PublishContent{
+	width:19cm;
+	font-size:15px;
+	line-height:22px;
+}
+.DateTime{
+	margin-left:8px;
+	margin-top:-30px;
+}
+#bottomNav{
+	display:none;
+}
+
+#footer
+{
+    line-height:15px;
+    font-size:9px;
+    background-color: #fff;
+    padding-top: 5px;
+    border-top: #000 1px solid;
+    border-bottom: #000 1px solid;
+}
+#footer .left
+{
+    width: 4cm;
+    text-align:left;
+    padding-left:8px;
+    vertical-align:top;
+}
+#footer .right
+{
+    width: 15cm;
+    text-align:left;
+    padding-left:8px;
+    vertical-align:top;
+}
+#footer a:link
+{
+    text-decoration:none;
+}
+#footer img
+{
+    display:none;
+}
+
+.AppTable
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+	width:100%;
+	border:1px solid #000;
+	border-collapse:collapse;
+	margin-top:6px;
+}
+.AppTable th
+{
+    font-weight: bold;
+    padding: 3px;
+    border-bottom: #00417d solid 1px;
+    text-align:center;
+}
+.AppTable th a:link, .AppTable th a:visited
+{
+    text-decoration:none;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 3px;
+    text-align:center;
+}
+.AppTable td{	
+	padding:3px;
+	background:none;
+}

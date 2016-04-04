@@ -30,13 +30,12 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 <script type="text/javascript" src="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/script.js"></script>
 <?php echo file_get_contents("0_header/3_scripts.html"); ?>
 <?php echo file_get_contents("0_header/4_facebook_code.html"); ?>
+
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+    <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/style-item.css"/>
+</b:if>
 </head>
 <body>
-<b:if cond='data:blog.pageType == &quot;item&quot;'>
-  <script type='text/javascript'>
-    jQuery("body").addClass("page-type-item");
-  </script>
-</b:if>
 
 <script src='//connect.facebook.net/en_US/all.js#xfbml=1'/>
 <div class='firstload-background'>
@@ -1102,37 +1101,6 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 </div> 
 </div> 
 
-
-<!--
-<b:if cond='data:blog.pageType == &quot;item&quot;'>
-
-<div class='site-footer sidebar' id='footer_bar' role='contentinfo'>
-
- <div class='container'>
- <div class='row-fluid' id='footer_bar_body'>
-<div class="cleanwidget  nopadding span4 bl_html section" id="footbar_column1">
-<?php 
-//echo file_get_contents("5_footer_bar/1_col.html"); 
-?>
-</div>
-<div class="cleanwidget  nopadding span4 bl_html section" id="footbar_column2">
-<?php 
-//echo file_get_contents("5_footer_bar/2_col.html");
-?>
-</div>
-
-<div class="cleanwidget  nopadding span4 bl_html section" id="footbar_column3">
-<?php 
-//echo file_get_contents("5_footer_bar/3_col.html");
-?>
-</div>
- <div class='clear'/>
-</div>
-</div>
-</div>
-
-</b:if>
--->
 <div class='site-footer' id='colophon' role='contentinfo'>
 
  <div class='container'>
@@ -1143,13 +1111,6 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 <div class="cleanwidget  nopadding span8 bl_html section" id="column2">
 <?php echo file_get_contents("3_footer/2_col.html") ?>
 </div>
-<!--
-<div class="cleanwidget  nopadding span4 bl_html section" id="column3">
-<?php 
-//echo file_get_contents("3_footer/3_col.html") 
-?>
-</div>
--->
  <div class='clear'/>
 </div>
 </div>

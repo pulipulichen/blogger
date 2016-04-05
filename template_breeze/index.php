@@ -113,7 +113,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   </b:if>
 </b:includable>
      <b:includable id='description'>
-  <div class='descriptionwrapper'>
+  <div class='descriptionwrapper' expr:url='data:blog.url'>
     <p class='description'><span><data:description/></span></p>
   </div>
 </b:includable>
@@ -1147,14 +1147,19 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
             
             
             <p>
-                &#169; Copyright <?php echo date("Y"); ?> <a expr:href='data:blog.homepageUrl'>
-                <data:blog.title/>
-                </a> / Created by <a href='http://themexpose.com/' id='mycontent'>ThemeXpose</a>
+            <span class="blog-copyright">
+                &#169; Copyright <?php echo date("Y"); ?> 
+                <a expr:href='data:blog.homepageUrl'><data:blog.title/></a> 
+            </span>
+            <span class="themexpose">
+            / Created by <a href='http://themexpose.com/' id='mycontent'>ThemeXpose</a>
 
-            </p> - Published By <a href='http://gooyaabitemplates.com/' rel='dofollow' target='_blank' title='Blogger Templates'>Gooyaabi Templates</a>
+             - Published By <a href='http://gooyaabitemplates.com/' rel='dofollow' target='_blank' title='Blogger Templates'>Gooyaabi Templates</a>
+            </span>
+            </p>
             <p class="management">
-                <?php echo file_get_contents("3_footer/4_management.html") ?></p>
-                        
+                <?php echo file_get_contents("3_footer/4_management.html") ?>
+            </p>
         </div>
         
   </div>

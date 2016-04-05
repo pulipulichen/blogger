@@ -68,3 +68,28 @@
 body .addthis-smartlayers {
     display: block !important;
 }
+
+/*************************/
+
+@media print {
+    #main .post {
+        margin-bottom: 0;
+    }
+    
+    #main .blog-pager {
+        display: none;
+    }
+    /*****************************/
+    #sidebar > div.widget {
+        width: 100%;
+    }
+    
+    #sidebar > div.widget .widget-content {
+        min-height: max-content;
+        max-height: max-content;
+    }
+    
+    #sidebar > .comments {
+        display: none;
+    }
+}

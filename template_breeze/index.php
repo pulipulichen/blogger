@@ -195,8 +195,10 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
         <b:include data='post' name='post'/>
         <b:if cond='data:blog.pageType != &quot;index&quot;'>
           <b:if cond='data:post.showThreadedComments'>
+            <div class="comments" id="disqus_thread"></div>
             <b:include data='post' name='threaded_comments'/>
           <b:else/>
+            <div class="comments" id="disqus_thread"></div>
             <b:include data='post' name='comments'/>
           </b:if>
         </b:if>
@@ -230,40 +232,17 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   </b:if>
 
 </b:includable>
-    <b:includable id='backlinkDeleteIcon' var='backlink'>
+<b:includable id='backlinkDeleteIcon' var='backlink'>
   <span expr:class='&quot;item-control &quot; + data:backlink.adminClass'>
     <a expr:href='data:backlink.deleteUrl' expr:title='data:top.deleteBacklinkMsg'>
       <img src='//www.blogger.com/img/icon_delete13.gif'/>
     </a>
   </span>
 </b:includable>
-    <b:includable id='backlinks' var='post'>
-  <a name='links'/><h4><data:post.backlinksLabel/></h4>
-  <b:if cond='data:post.numBacklinks != 0'>
-    <dl class='comments-block' id='comments-block'>
-      <b:loop values='data:post.backlinks' var='backlink'>
-        <div class='collapsed-backlink backlink-control'>
-          <dt class='comment-title'>
-            <span class='backlink-toggle-zippy'>&#160;</span>
-            <a expr:href='data:backlink.url' rel='nofollow'><data:backlink.title/></a>
-            <b:include data='backlink' name='backlinkDeleteIcon'/>
-          </dt>
-          <dd class='comment-body collapseable'>
-            <data:backlink.snippet/>
-          </dd>
-          <dd class='comment-footer collapseable'>
-            <span class='comment-author'><data:post.authorLabel/> <data:backlink.author/></span>
-            <span class='comment-timestamp'><data:post.timestampLabel/> <data:backlink.timestamp/></span>
-          </dd>
-        </div>
-      </b:loop>
-    </dl>
-  </b:if>
-  <p class='comment-footer'>
-    <a class='comment-link' expr:href='data:post.createLinkUrl' expr:id='data:widget.instanceId + &quot;_backlinks-create-link&quot;' target='_blank'><data:post.createLinkLabel/></a>
-  </p>
+<b:includable id='backlinks' var='post'>
+  <?php echo file_get_contents("4_content/backlinks.html"); ?>
 </b:includable>
-    <b:includable id='comment-form' var='post'>
+<b:includable id='comment-form' var='post'>
   <div class='comment-form'>
     <a name='comment-form'/>
     <b:if cond='data:mobile'>
@@ -314,7 +293,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
     </b:if>
   </b:if>
 </b:includable>
-    <b:includable id='comment_picker' var='post'>
+<b:includable id='comment_picker' var='post'>
   <b:if cond='data:post.forceIframeComments'>
     <b:include data='post' name='iframe_comments'/>
     <b:if cond='data:post.showThreadedComments'>
@@ -334,121 +313,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
     </b:if>
   </b:if>
 </b:includable>
-    <b:includable id='comments' var='post'>
-  <div class='comments' id='comments'>
-    <a name='comments'/>
-    <b:if cond='data:post.allowComments'>
-      <h4>
-        <b:if cond='data:post.numComments == 1'>
-          1 <data:commentLabel/>:
-        <b:else/>
-          <data:post.numComments/> <data:commentLabelPlural/>:
-        </b:if>
-      </h4>
-
-      <b:if cond='data:post.commentPagingRequired'>
-        <span class='paging-control-container'>
-          <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'><data:post.oldestLinkText/></a>
-          &#160;
-          <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'><data:post.olderLinkText/></a>
-          &#160;
-          <data:post.commentRangeText/>
-          &#160;
-          <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'><data:post.newerLinkText/></a>
-          &#160;
-          <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'><data:post.newestLinkText/></a>
-        </span>
-      </b:if>
-
-      <div expr:id='data:widget.instanceId + &quot;_comments-block-wrapper&quot;'>
-        <div expr:class='data:post.avatarIndentClass' id='comments-block'>
-          <b:loop values='data:post.comments' var='comment'>
-            <div expr:class='&quot;comment-author &quot; + data:comment.authorClass' expr:id='data:comment.anchorName'>
-              <b:if cond='data:comment.favicon'>
-                <img expr:src='data:comment.favicon' height='16px' style='margin-bottom:-2px;' width='16px'/>
-              </b:if>
-              <a expr:name='data:comment.anchorName'/>
-              <b:if cond='data:blog.enabledCommentProfileImages'>
-                <data:comment.authorAvatarImage/>
-              </b:if>
-              <b:if cond='data:comment.authorUrl'>
-                <a expr:href='data:comment.authorUrl' rel='nofollow'><data:comment.author/></a>
-              <b:else/>
-                <data:comment.author/>
-              </b:if>
-              <data:commentPostedByMsg/>
-            </div>
-            <div class='comment-body' expr:id='data:widget.instanceId + data:comment.cmtBodyIdPostfix'>
-              <b:if cond='data:comment.isDeleted'>
-                <span class='deleted-comment'><data:comment.body/></span>
-              <b:else/>
-                <p>
-                  <data:comment.body/>
-                </p>
-              </b:if>
-            </div>
-            <div class='comment-footer'>
-              <span class='comment-timestamp'>
-                <a expr:href='data:comment.url' title='comment permalink'>
-                  <data:comment.timestamp/>
-                </a>
-                <b:include data='comment' name='commentDeleteIcon'/>
-              </span>
-            </div>
-          </b:loop>
-        </div>
-      </div>
-
-      <b:if cond='data:post.commentPagingRequired'>
-        <span class='paging-control-container'>
-          <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'>
-            <data:post.oldestLinkText/>
-          </a>
-          <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'>
-            <data:post.olderLinkText/>
-          </a>
-          &#160;
-          <data:post.commentRangeText/>
-          &#160;
-          <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'>
-            <data:post.newerLinkText/>
-          </a>
-          <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'>
-            <data:post.newestLinkText/>
-          </a>
-        </span>
-      </b:if>
-
-      <p class='comment-footer'>
-        <b:if cond='data:post.embedCommentForm'>
-          <b:if cond='data:post.allowNewComments'>
-            <b:include data='post' name='comment-form'/>
-          <b:else/>
-            <data:post.noNewCommentsText/>
-          </b:if>
-        <b:else/>
-          <b:if cond='data:post.allowComments'>
-            <a expr:href='data:post.addCommentUrl' expr:onclick='data:post.addCommentOnclick'><data:postCommentMsg/></a>
-          </b:if>
-        </b:if>
-
-      </p>
-    </b:if>
-    <b:if cond='data:showCmtPopup'>
-      <div id='comment-popup'>
-        <iframe allowtransparency='true' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
-        </iframe>
-      </div>
-    </b:if>
-
-    <div id='backlinks-container'>
-    <div expr:id='data:widget.instanceId + &quot;_backlinks-container&quot;'>
-       <b:if cond='data:post.showBacklinks'>
-         <b:include data='post' name='backlinks'/>
-       </b:if>
-    </div>
-    </div>
-  </div>
+<b:includable id='comments' var='post'>
+  <?php echo file_get_contents("4_content/comments.html"); ?>
 </b:includable>
     <b:includable id='feedLinks'>
   <b:if cond='data:blog.pageType != &quot;item&quot;'> <!-- Blog feed links -->
@@ -571,7 +437,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   </div>
   <div class='clear'/>
 </b:includable>
-    <b:includable id='mobile-post' var='post'>
+<b:includable id='mobile-post' var='post'>
   <div class='date-outer'>
     <div class='date-posts'>
       <div class='post-outer'>
@@ -654,11 +520,16 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
         <b:if cond='data:blog.pageType != &quot;index&quot;'>
           <b:if cond='data:post.showThreadedComments'>
+            <div class="comments" id="disqus_thread"></div>
             <b:include data='post' name='threaded_comments'/>
           <b:else/>
+            <div class="comments" id="disqus_thread"></div>
             <b:include data='post' name='comments'/>
           </b:if>
         </b:if>
+          
+        
+          
 
       </div>
     </div>
@@ -774,10 +645,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
  
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
-<div class='pull-left author-meta'>
-<script expr:src='&quot;/feeds/posts/default/&quot; + data:post.id + &quot;?alt=json-in-script&amp;amp;callback=av&quot;'/>
- <h4 class='bl_popover' data-content='<?php echo file_get_contents("4_content/author.html") ?>' data-placement='top' data-title='Admin' data-trigger='hover'><b:if cond='data:top.showAuthor'><a><data:post.author/></a></b:if></h4>
-  </div></b:if>
+    <?php echo file_get_contents("4_content/author.html") ?>
+</b:if>
 
 
 <style>
@@ -869,7 +738,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   <div class='clear'/>
   </b:if>
 </b:includable>
-    <b:includable id='threaded-comment-form' var='post'>
+<b:includable id='threaded-comment-form' var='post'>
   <div class='comment-form'>
     <a name='comment-form'/>
     <b:if cond='data:mobile'>
@@ -1069,7 +938,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 // ]]>
   </script>
 </b:includable>
-    <b:includable id='threaded_comments' var='post'>
+<b:includable id='threaded_comments' var='post'>
   <div class='comments' id='comments'>
     <a name='comments'/>
     <h4><data:post.commentLabelFull/>:</h4>

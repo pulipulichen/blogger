@@ -243,7 +243,10 @@ jQuery.puliGuestBook = function (config) {
 	
 	
 	temp += '<div class="guestbook-write">'
-		+ ' <a href="'+rss_link+'" style="float:right;"><img src="http://3.bp.blogspot.com/_yr4MQB4zDus/Ru35yvgloDI/AAAAAAAABOQ/bbtw-pQhpOk/s200/rss.gif" border="0" /></a>'
+		+ ' <a href="'+rss_link+'" style="float:right;margin-right:1em;font-size: 1.5em;line-height: 1em;">'
+                //+ '<img src="http://3.bp.blogspot.com/_yr4MQB4zDus/Ru35yvgloDI/AAAAAAAABOQ/bbtw-pQhpOk/s200/rss.gif" border="0" />'
+                + '<i class="fa fa-rss-square"></i>'
+                + '</a>'
 		
 		+ ' <a href="'+add_link+'" class="write" target="guestbook_write">'+write+'</a>'
 		+ ' <a class="write" onclick="'+reload_cmd+'">'+reload+'</a>'

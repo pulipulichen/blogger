@@ -34,6 +34,7 @@
     
     #content {
         width: 100% !important;
+        max-width: 1170px;
     }
     
     .popular-posts {
@@ -72,10 +73,14 @@ body .addthis-smartlayers {
 /*************************/
 
 @media print {
-    #main .post {
+    #masthead {
         margin-bottom: 0;
     }
     
+    /****************************/
+    #main .post {
+        margin-bottom: 0;
+    }
     #main .blog-pager {
         display: none;
     }
@@ -91,5 +96,13 @@ body .addthis-smartlayers {
     
     #sidebar > .comments {
         display: none;
+    }
+}
+
+/************************************/
+
+@media print and (min-width:1200px) {
+    #primary {
+        margin-left: 0px;
     }
 }

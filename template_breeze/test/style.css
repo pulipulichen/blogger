@@ -105,6 +105,7 @@
 .about-me .social-media {
     margin-top: 0.5em;
     text-align: center;
+    clear: both;
 }
 .about-me .email-subscribe {
     text-align: center;
@@ -583,21 +584,28 @@ body .addthis-smartlayers {
     #masthead {
         border-bottom: 1px solid gray;
         position: static !important;
-        margin-bottom: 0;
     }
     
     #masthead.fixed-nav {
         position: static !important;
+        height: 82px;
+    }
+    
+    #masthead.fixed-nav.fixed-nav h1 {
+        line-height: 30px;
+        margin-top: 10px;
+        font-size: 30px;
     }
     
     #masthead .gcse,
-    #masthead .btn-navbar {
+    #masthead .btn-navbar,
+    #masthead #menu-primary {
         display:none;
     }
     
     #masthead #header-inner {
         width: 100% !important;
-        padding-left: 10px;
+        padding-left: 0;
     }
     #masthead .titlewrapper {
         float: left;
@@ -617,6 +625,10 @@ body .addthis-smartlayers {
         padding-top: 5px;
     }
     
+    #masthead.fixed-nav.affix #header-inner .descriptionwrapper {
+        display: block;
+    }
+    
     #masthead .descriptionwrapper:after {
         content:attr(url);
         display:block;
@@ -629,9 +641,19 @@ body .addthis-smartlayers {
     
     /****************/
     
+    .row {
+        margin-left: 0;
+    }
+    
+    #content {
+        margin-left:0;
+    }
+    
     #content-wrapper {
         padding-top: 0;
     }
+    
+    /*****************/
     
     #main .read-more,
     #main .share-story-container,
@@ -676,8 +698,21 @@ body .addthis-smartlayers {
     #main .post table {
         page-break-inside: avoid;
     }
+    
+    #main .post .entry-content {
+        padding-left:0;
+        padding-right:0;
+    }
+    
+    #main #comments {
+        border-bottom-width: 0;
+    }
         
     /*********************/
+    #sidebar {
+        margin-left: 0;
+    }
+    
     #sidebar .about-me img[align="right"] {
         float:left;
         margin-left: 0;
@@ -747,6 +782,10 @@ body .addthis-smartlayers {
         display: none;
     }
     
+    #sidebar .widget {
+        page-break-inside: avoid;
+    }
+    
     /**********************************/
     #content-wrapper {
         margin-bottom: 0;
@@ -780,5 +819,46 @@ body .addthis-smartlayers {
     /*****************************/
     a.quickedit {
         display: none;
+    }
+    
+    a:after {
+        white-space:nowrap;
+    }
+}
+
+/**************************/
+@media (max-width: 767px) {
+    .entry-container .entry-content {
+        padding-bottom: 5px;
+    }
+    
+    .entry-meta .author-meta {
+        padding-left:0;
+        text-align: center;
+        display: none;
+    }
+    
+    .entry-meta img {
+        margin-right:0;
+    }
+    
+    .entry-meta .author-meta h4:after {
+        content: attr(data-content);
+        display:block;
+        font-weight: normal;
+        line-height: 1.5em;
+    }
+    
+    .entry-meta .popover {
+        display:none !important;
+    }
+    
+    .entry-meta {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    
+    .share-story-container ul {
+        margin-top:0;
     }
 }

@@ -45,6 +45,11 @@
 .entry-content li {
     list-style: square !important;
     line-height: 200%;
+
+}
+
+.entry-content .post ol > li {
+    list-style: decimal !important;
 }
 
 .entry-content blockquote {
@@ -90,6 +95,17 @@
 .entry-content > table>tbody>tr:hover {
     background-color: #f5f5f5; 
 }
+
+#main .post > h3 {
+    display: none;
+}
+
+#main .post .entry-image .thumb {
+    width: 102%;
+    max-width: 102%;
+}
+
+/* ************************ */
 
 #disqus_thread {
     overflow: hidden;
@@ -275,7 +291,7 @@ div.post-avatar {
         /*margin-top: 15px;*/
         margin-right:0 ;
         max-width: calc(100% - 101px);
-        margin-left: 1em;
+        margin-left: 5px;
         overflow-x: hidden;
         white-space: nowrap;
     }
@@ -288,10 +304,6 @@ div.post-avatar {
     #header h1{
         line-height:55px;
         margin-top: 0;
-    }
-
-    #footer .management {
-        margin-bottom: 70px;
     }
 }
 
@@ -841,12 +853,16 @@ body .addthis-smartlayers {
 
 /********************/
 @media (max-width: 460px) {
+    body {
+        font-size: 1rem;
+    }
+    
     #masthead.fixed-nav.affix {
         /*padding-top: 27px;*/
     }
     
     #masthead .btn-navbar {
-        margin-right: 1em;
+        margin-right: 5px;
     }
     
     #masthead #menu-primary {
@@ -857,10 +873,34 @@ body .addthis-smartlayers {
         top: 0;
     }
     
+    #masthead #header {
+        /*border:1px solid red;*/
+        max-width: calc(100% - 110px);
+    }
+    
+    #masthead #header-inner {
+        margin-left: 0 !important;
+    }
+    
+    #masthead #header h1 {
+        font-size: 25px;
+    }
+    
+    
     /***********************/
     
     #main .share-story {
         display: none;
+    }
+    
+    #main .post h1 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    
+    
+    #main .post .entry-content p {
+        font-size: 1rem;
     }
     
     #main .read-more {

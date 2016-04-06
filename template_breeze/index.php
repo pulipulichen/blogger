@@ -37,6 +37,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/style-item.css"/>
 </b:if>
+<!-- <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/style-olw.css"/> -->
 
 <meta name="msvalidate.01" content="09F5F270E3016847B9723E71AEE3FC24" />
 <meta name="baidu-site-verification" content="0XST85Xh5F" />
@@ -592,7 +593,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 
 
-<h3 style='display: none'>
+<h3>
 <b:if cond='data:post.link'>
 <a expr:href='data:post.link' expr:title='data:post.title'><data:post.title/></a>
 <b:else/>

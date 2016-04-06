@@ -1,0 +1,129 @@
+body {
+    background: url("pattern5[1].png") repeat scroll 0 0 transparent;
+}
+
+#content-wrapper {
+    padding-top: 0;
+    width: 100%;
+}
+
+#masthead {
+    display: none;
+}
+
+#main .post > h3 {
+    display: block;
+    border-bottom: 3px solid #CE8A42;
+    padding-bottom: 20px;
+}
+
+#main .post > h3 > a {
+    text-decoration: none;
+    color: #333;
+    font-size: 38.5px;
+    font-weight: normal;
+    line-height: 100%;
+    margin-bottom: 20px;
+}
+
+/********************************/
+
+#main .post {
+    line-height: 200%;
+    background: #FFF;
+    padding: 50px;
+    width:100%;
+}
+
+#main .post > SPAN > DIV > DIV > p {
+    text-indent: 2em;
+}
+
+#main .post > SPAN > DIV > DIV > h4 {
+    font-size: 24pt;
+    color:#BD8242;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+#main .post > SPAN > DIV > DIV > h5 {
+    font-size: 20pt;
+    color:#BD8242;
+
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+#main .post > SPAN > DIV > DIV > h6 {
+    font-size: 18pt;
+    font-style: italic;
+    color:#634121;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+#main .post > SPAN > DIV > DIV > hr {
+    border-top: 3px solid #CE8A42;
+    border-bottom: 0px solid #BD8A39;
+}
+
+#main .post ul,
+#main .post li {
+    margin-left: 2em !important;
+    margin-top:0.5em !important;
+    margin-bottom:0.5em !important;
+}
+
+#main .post li {
+    list-style: square !important;
+    line-height: 200%;
+
+}
+
+#main .post ol > li {
+    list-style: decimal !important;
+}
+
+#main .post > SPAN > DIV > DIV > blockquote {
+    border-left-color: #F7EBDE;
+}
+
+#main .post a {
+    text-decoration: underline;
+    color: #BD8242;
+}
+
+#main .post > SPAN > DIV > DIV > h1 a {
+    text-decoration: none;
+    color: #333;
+}
+
+#main .post > SPAN > DIV > DIV > table,
+#main .post > SPAN > DIV > DIV > table th,
+#main .post > SPAN > DIV > DIV > table td {
+    /*border: 1px solid #BD8242;*/
+}
+
+#main .post > SPAN > DIV > DIV > table > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+#main .post > SPAN > DIV > DIV > table>tbody>tr>td,
+#main .post > SPAN > DIV > DIV > table>tbody>tr>th, 
+#main .post > SPAN > DIV > DIV > table>tfoot>tr>td,
+#main .post > SPAN > DIV > DIV > table>tfoot>tr>th,
+#main .post > SPAN > DIV > DIV > table>thead>tr>td,
+#main .post > SPAN > DIV > DIV > table>thead>tr>th {
+    padding: 8px;
+    /*line-height: 1.42857143;*/
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+#main .post > SPAN > DIV > DIV > table>tbody>tr:first-of-type>td {
+    border-top-width: 0;
+}
+
+#main .post > SPAN > DIV > DIV > table > tbody > tr:hover {
+    background-color: #f5f5f5; 
+}

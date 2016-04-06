@@ -272,3 +272,16 @@ body .addthis-smartlayers {
         margin-left:0;
     }
 }
+
+/*********************************/
+
+#related-posts .item-img > a > img {
+    max-width: 240px;
+    width: 100% !important;
+    height: auto !important;
+}
+
+#related-posts .item-img {
+    max-height: 160px;
+    overflow: hidden;
+}

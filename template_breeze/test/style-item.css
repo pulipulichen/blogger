@@ -204,6 +204,10 @@ body .addthis-smartlayers {
         margin-bottom: 70px;
     }
     
+    body > .sumome-stylebufferbottom-shim {
+        display: none;
+    }
+    
     #main .post h4 {
         font-size: 1.3rem;
         line-height: 1.5rem;

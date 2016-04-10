@@ -828,6 +828,9 @@ body .addthis-smartlayers {
     }
     
     /*************************************/
+    #footer .container {
+        padding: 0;
+    }
     #footer p {
         text-align: center;
         width: 100%;
@@ -915,4 +918,27 @@ body .addthis-smartlayers {
         border-top-width: 0;
         padding-top: 0;
     }
+}
+
+/**********************************/
+/* 來處理SumoMe的問題 */
+body > a[title="SumoMe"] {
+    visibility: hidden;
+}
+
+body > div.sumome-share-client-counts a[title="SumoMe"] > img {
+    display: none;
+}
+body > div.sumome-share-client-counts a[title="SumoMe"] {
+    background-image: url(//lh3.googleusercontent.com/-qWpis5y0_fQ/Vwp4Y1ies0I/AAAAAAACuvg/9VCLXE9q7Wk/s0/share-alt.png) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+body > div.sumome-share-client-wrapper.sumome-share-client-wrapper-left-page {
+    top: 100px !important;
+}
+
+body > div.sumome-share-client-counts div.sumome-share-client-animated {
+    border: 1px solid rgb(15, 82, 186);
 }

@@ -1,4 +1,15 @@
 
+#main .entry-content > p:first-of-type > a[href$=".png"]:first-of-type {
+    margin-left: -2em;
+    display: block;
+    text-align:center;
+}
+
+#main .entry-content, 
+#main .entry-content li {
+    word-wrap: break-word;
+}
+
 /************************************/
 
 @media (min-width:767px) {
@@ -159,6 +170,7 @@ body .addthis-smartlayers {
     #main .author-meta {
         max-width: calc(100% - 300px);
     }
+    
 }
 
 #main .entry-meta .creative-commons {
@@ -202,6 +214,11 @@ body .addthis-smartlayers {
         font-size: 1rem;
         line-height: 1.5rem;
     }
+    
+    /*#main .entry-content > p > a[href$=".png"]:first-of-type img {
+        max-height: 300px;
+    }*/
+    
 }
 /**************************/
 @media (max-width: 767px) {
@@ -216,9 +233,17 @@ body .addthis-smartlayers {
     
     #main .entry-content > p > a[href$=".png"]:first-of-type {
         margin-left: -2em;
-        width: 100%;
+        /*width: 100%;
+        height: auto;*/
+        /*max-height: 200px;*/
+        display: block;
+        text-align:center;
+    }
+    
+    #main .entry-content a[href$=".png"]:first-of-type img {
+        width: 80%;
         height: auto;
-        max-height: 200px;
+        /*max-height: 500px;*/
     }
     
     #main .entry-meta .author-meta {

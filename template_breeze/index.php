@@ -57,6 +57,9 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 
 <!-- ======================================== -->
 <script type="text/javascript" src="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/script.js"></script>
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+    <script type="text/javascript" src="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/test/script-item.js"></script>
+</b:if>
 <script type='text/javascript'>//<![CDATA[
 <?php 
 echo file_get_contents("0_header/3_scripts.js"); ?>
@@ -172,7 +175,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   })();
 </script>
 <div class="gcse">
-<gcse:search></gcse:search>
+<gcse:search enableAutoComplete="true"></gcse:search>
 </div>
 <div class='srch_btn' id="gsce_submit" />
   </div></div>
@@ -685,6 +688,10 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
     <li><a class='tips social-button facebook' data-title='Facebook' target='_blank'
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=facebook&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <i class="fa fa-facebook"></i>
+    </a></li>
+    <li><a class='tips social-button line' data-title='LINE' target='_blank'
+        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=lineme&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
+        <strong>L</strong>
     </a></li>
     <li><a class='tips social-button plurk' data-title='Plurk' target='_blank'
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=plurk&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>

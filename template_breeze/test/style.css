@@ -266,13 +266,55 @@ div.post-avatar {
 }
 
 .gsc-results-wrapper-overlay .gsc-wrapper {
-    max-height: calc(100% - 50px);
+    max-height: calc(100% - 120px);
     overflow-y: auto;
+}
+
+.gsc-results-wrapper-overlay .gsc-wrapper > .gsc-adBlock {
+    display: none;
 }
 
 #masthead.fixed-nav.affix .search-bar {
     padding-bottom: 0;
 }
+
+.gsc-results-wrapper-overlay .gsc-wrapper img.gs-image {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    border: 1px solid gray;
+}
+
+.gsc-results-wrapper-overlay .gsc-wrapper a.gs-image {
+    width: 176px;
+}
+
+.gsc-results-wrapper-overlay .gs-image-box.gs-web-image-box {
+    width: 176px !important;
+    height: auto !important;
+    max-height: 176px;
+    /*margin-right: calc(1em + 7px);*/
+    top: -3em;
+    margin-bottom: -3em;
+    position: relative;
+}
+
+.gsc-results-wrapper-overlay div.gs-title,
+.gsc-results-wrapper-overlay div.gsc-url-top {
+    margin-left: calc(176px + 1em);
+}
+
+.gsc-results-wrapper-overlay div.gs-snippet {
+    margin-left: 19px;
+}
+
+.gsc-results-wrapper-overlay td.gsc-table-cell-thumbnail.gsc-thumbnail {
+    width: 176px;
+    display: block !important;
+}
+
+/******************/
 
 #header h1 {
     line-height:30px;
@@ -518,6 +560,11 @@ body .addthis-smartlayers {
 .social-button.plurk:hover {
     color:white;
     background-color: #EF4539;
+}
+
+.social-button.line:hover {
+    color:white;
+    background-color: #4ACF00;
 }
 
 .social-button.google-plus:hover {

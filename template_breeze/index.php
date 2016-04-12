@@ -725,7 +725,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
         <i class="fa fa-envelope"></i>
     </a></li>
 
-    <li><a class='tips social-button addthis' data-title='AddThis' target='_blank'
+    <li><a class='tips social-button addthis' data-title='More Share' target='_blank'
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <i class="fa fa-plus"></i>
     </a></li>

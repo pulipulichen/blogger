@@ -226,10 +226,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
         <b:include data='post' name='post'/>
         <b:if cond='data:blog.pageType != &quot;index&quot;'>
           <b:if cond='data:post.showThreadedComments'>
-            <div class="comments" id="disqus_thread"></div>
             <b:include data='post' name='threaded_comments'/>
           <b:else/>
-            <div class="comments" id="disqus_thread"></div>
             <b:include data='post' name='comments'/>
           </b:if>
         </b:if>
@@ -598,6 +596,24 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
                     <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>
                         <data:olderPageTitle/> <i class="fa fa-chevron-right"></i>
                     </a>
+                    </span>
+                </li>
+            </b:if>
+            
+            <b:if cond='data:olderPageUrl'>
+                <li class="next link">
+                    <span id='blog-pager-older-link'>
+                        <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>
+                            <i class="fa fa-chevron-right"></i> <data:olderPageTitle/>
+                        </a>
+                    </span>
+                </li>
+            <b:else/>
+                <li class="next hidden link">
+                    <span id='blog-pager-older-link'>
+                        <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>
+                            <i class="fa fa-chevron-right"></i> <data:olderPageTitle/>
+                        </a>
                     </span>
                 </li>
             </b:if>
@@ -971,6 +987,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   </script>
 </b:includable>
 <b:includable id='threaded_comments' var='post'>
+  <div class="comments" id="disqus_thread"></div>
+    
   <div class='comments' id='comments'>
     <a name='comments'/>
     <h4><data:post.commentLabelFull/>:</h4>

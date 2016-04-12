@@ -45,7 +45,7 @@
     line-height: 200%;
 }
 
-.entry-content > p {
+.entry-content > article > p {
     text-indent: 2em;
 }
 

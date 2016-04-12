@@ -292,7 +292,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
 		
 	var goCata = jQuery('<a style="margin:0;padding:0;text-decoration:none;font-size:smaller;font-weight:normal;float:right;" href="#'+cataTitleID+'"><sup>&lt;^&gt;</sup></a>');
 
-	var ulObj = jQuery("<ul></ul>");
+	var ulObj = jQuery("<ul></ul>").addClass("puli-toc");
 
 	//在每個Heading後面加入錨點
 	for (i = 0; i < headingAry.length; i++) {

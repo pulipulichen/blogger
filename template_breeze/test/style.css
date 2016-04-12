@@ -3,7 +3,7 @@
     line-height: 200%;
 }
 
-.entry-content > p {
+.entry-content > article > p {
     text-indent: 2em;
 }
 
@@ -72,27 +72,27 @@
     /*border: 1px solid #BD8242;*/
 }
 
-.entry-content > table > tbody > tr:nth-of-type(odd) {
+.entry-content > article > table > tbody > tr:nth-of-type(odd) {
     background-color: #f9f9f9;
 }
 
-.entry-content > table>tbody>tr>td,
-.entry-content > table>tbody>tr>th, 
-.entry-content > table>tfoot>tr>td,
-.entry-content > table>tfoot>tr>th,
-.entry-content > table>thead>tr>td,
-.entry-content > table>thead>tr>th {
+.entry-content > article > table>tbody>tr>td,
+.entry-content > article > table>tbody>tr>th, 
+.entry-content > article > table>tfoot>tr>td,
+.entry-content > article > table>tfoot>tr>th,
+.entry-content > article > table>thead>tr>td,
+.entry-content > article > table>thead>tr>th {
     padding: 8px;
     /*line-height: 1.42857143;*/
     vertical-align: top;
     border-top: 1px solid #ddd;
 }
 
-.entry-content > table>tbody>tr:first-of-type>td {
+.entry-content > article > table>tbody>tr:first-of-type>td {
     border-top-width: 0;
 }
 
-.entry-content > table>tbody>tr:hover {
+.entry-content > article > table>tbody>tr:hover {
     background-color: #f5f5f5; 
 }
 
@@ -737,7 +737,7 @@ body .addthis-smartlayers {
         display: none;
     }
     
-    #main .post a:after{
+    #main .post a[href]:after{
         content:" (" attr(href) ") ";
         font-size:0.8em;
         font-weight:normal;
@@ -748,10 +748,20 @@ body .addthis-smartlayers {
     #main .post .entry-content a[href$=".png"]:after,
     #main #comments a[href]:after,
     #main .post a[href="javascript:void(0)"]:after,
+    #main .post a[href^="#"]:after,
     #main .post a.toggle:after,
     #main .post #ArchiveList a.post-count-link:after {
         content: "";
     }
+    
+    #main .post a[href^="#"] {
+        display: none;
+    }
+    
+    #main .post .puli-toc a[href^="#"] {
+        display: inline;
+    }
+    
     
     #main #comments h4:after {
         border-top-width: 0;
@@ -774,6 +784,10 @@ body .addthis-smartlayers {
     #main .post .entry-content {
         padding-left:0;
         padding-right:0;
+    }
+    
+    #main .entry-meta {
+        display: none;
     }
     
     #main #comments {
@@ -849,8 +863,16 @@ body .addthis-smartlayers {
         display: block;
     }
     
+    #sidebar .guestbook a[href]:after,
+    #sidebar .new a[href]:after,
+    #sidebar .comments a[href]:after {
+        content: "";
+    }
+    
     #sidebar .guestbook,
-    #sidebar .comments {
+    #sidebar .comments,
+    #sidebar .new,
+    #sidebar .PopularPosts {
         display: none;
     }
     
@@ -898,6 +920,10 @@ body .addthis-smartlayers {
     
     a:after {
         white-space:nowrap;
+    }
+    
+    body > .sumome-share-client-wrapper {
+        display: none;
     }
 }
 

@@ -82,7 +82,9 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
  <div class='btn-navbar' data-target='.nav-collapse' data-toggle='collapse' type='button'>
     <img src='//lh3.googleusercontent.com/-joQnbCCa6Jg/VwFqIuKnCCI/AAAAAAACuUo/iZTPC_EVSyE/s0/bmenu_brown.png'/></div>
 
- <b:section class='header' id='header' maxwidgets='1' showaddelement='no'>
+<header>
+<b:section class='header' id='header' maxwidgets='1' showaddelement='no'>
+     
    <b:widget id='Header1' locked='true' title='Breeze Responsive Blogger Template  (Header)' type='Header'>
      <b:includable id='main'>
 
@@ -152,8 +154,9 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   </b:if>
 </b:includable>
    </b:widget>
- </b:section>
-
+    
+</b:section>
+</header>
 
 
 <div class='search-bar'>
@@ -180,9 +183,10 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <div class='srch_btn' id="gsce_submit" />
   </div></div>
 
-
+<nav>
 <?php echo file_get_contents("1_menu/1_menu.html"); ?>
-
+</nav>
+    
  </div> 
 </div>
 </div>
@@ -635,7 +639,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 <span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
 <script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm(&quot;p<data:post.id/>&quot;)</script><b:else/><div class='entry-container'>
-<div class='entry-content'>
+    <div class='entry-content'><article>
     <h1><b:if cond='data:post.link'><a expr:href='data:post.link' expr:title='data:post.title'><data:post.title/></a>
 <b:else/>
 <data:post.title/>
@@ -655,7 +659,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
                             </b:if></span><i class='fa fa-comments'/> <data:post.numComments/> Comments</small></p></div>
   </b:if></h1>
   <data:post.body/>
-</div></div>
+</article></div></div>
  
 </b:if>
 
@@ -665,7 +669,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <div class='entry-meta clearfix'>
 <div class='up_arrow'/>
 
-
+<aside>
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
  <div class='pull-left'> <a class='read-more' expr:href='data:post.url'>Read More</a>
   </div></b:if>
@@ -674,13 +678,6 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <?php echo file_get_contents("4_content/author.html") ?>
 </b:if>
-
-
-<style>
-
-
-
-</style>
 
 <div class='pull-right share-story-container'>
 
@@ -697,10 +694,12 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=plurk&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <strong>P</strong>
     </a></li>
+    <!--
     <li><a class='tips social-button twitter' data-title='Twitter' target='_blank'
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=twitter&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <i class="fa fa-twitter"></i>
     </a></li>
+    -->
     <li><a class='tips social-button google-plus' data-title='Google Plus' target='_blank'
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=google_plusone_share&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <i class="fa fa-google-plus"></i>
@@ -719,6 +718,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </div>  
 
 <div class='clear'/>
+
+</aside>
 </div>
 
 
@@ -1038,7 +1039,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </div>
 
 <div class='footer' id='footer'>
-        
+    <footer>
         <div class='container clearfix'>
                  
                 <div class='go-top'>
@@ -1061,7 +1062,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
                 <?php echo file_get_contents("3_footer/4_management.html") ?>
             </p>
         </div>
-        
+    </footer>        
   </div>
 </div>
 </div>

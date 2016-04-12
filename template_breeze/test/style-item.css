@@ -1,5 +1,5 @@
 
-#main .entry-content > p:first-of-type > a[href$=".png"]:first-of-type {
+#main .entry-content > article > p:first-of-type > a[href$=".png"]:first-of-type {
     margin-left: -2em;
     display: block;
     text-align:center;
@@ -35,11 +35,12 @@
         margin-bottom: 0;
     }
     
-    #sidebar > div.widget:nth-of-type(3) {
+    #sidebar > div.widget:nth-of-type(4) {
         margin-right: 0;
     }
     
-    #sidebar > .comments {
+    #sidebar > .comments,
+    #sidebar > .guestbook {
         display: none;
     }
     
@@ -54,18 +55,24 @@
 }
 
 @media (min-width:767px) and (max-width: 979px) {
+    #side-bar {
+        margin-left: 0 !important;
+    }
+    
     #sidebar > div.widget,
-    #sidebar > div.widget:nth-of-type(3) {
+    #sidebar > div.widget:nth-of-type(4) {
         width: calc(50% - 0.5em);
         margin-right: 1em;
     }
     
-    #sidebar > div.widget:nth-of-type(even) {
+    #sidebar > div.widget:nth-of-type(2), 
+    #sidebar > div.widget:nth-of-type(5) {
         margin-right: 0;
         clear: none;
     }
     
-    #sidebar > div.widget:nth-of-type(odd) {
+    #sidebar > div.widget:nth-of-type(1), 
+    #sidebar > div.widget:nth-of-type(4) {
         clear: both;
         margin-bottom: 1em;
     }
@@ -219,7 +226,7 @@ body .addthis-smartlayers {
         line-height: 1.5rem;
     }
     
-    /*#main .entry-content > p > a[href$=".png"]:first-of-type img {
+    /*#main .entry-content > article > p > a[href$=".png"]:first-of-type img {
         max-height: 300px;
     }*/
     
@@ -235,7 +242,7 @@ body .addthis-smartlayers {
         border-top-width: 1px;
     }
     
-    #main .entry-content > p > a[href$=".png"]:first-of-type {
+    #main .entry-content > article > p > a[href$=".png"]:first-of-type {
         margin-left: -2em;
         /*width: 100%;
         height: auto;*/

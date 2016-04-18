@@ -1015,3 +1015,28 @@ body > div.sumome-share-client-wrapper.sumome-share-client-wrapper-left-page {
 body > div.sumome-share-client-counts div.sumome-share-client-animated {
     border: 1px solid rgb(15, 82, 186);
 }
+
+@media (max-height: 320px) {
+    body > div.sumome-share-client-wrapper {
+        display: none;
+    }
+}
+
+/*********************************/
+/* 底部按鈕的問題 */
+#footer .go-top {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+    z-index: 999;
+}
+
+#footer .go-top a {
+    background-color: #B58231;
+}
+
+@media (max-height: 320px) {
+    #footer .go-top {
+        position: static;
+    }
+}

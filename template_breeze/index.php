@@ -593,16 +593,6 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
             <b:if cond='data:olderPageUrl'>
                 <li class="next link">
                     <span id='blog-pager-older-link'>
-                    <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>
-                        <data:olderPageTitle/> <i class="fa fa-chevron-right"></i>
-                    </a>
-                    </span>
-                </li>
-            </b:if>
-            
-            <b:if cond='data:olderPageUrl'>
-                <li class="next link">
-                    <span id='blog-pager-older-link'>
                         <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'>
                             <i class="fa fa-chevron-right"></i> <data:olderPageTitle/>
                         </a>
@@ -1072,8 +1062,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
             </span>
             <span class="themexpose">
             / Created by <a href='http://themexpose.com/' id='mycontent'>ThemeXpose</a>
-
-             - Published By <a href='http://gooyaabitemplates.com/' rel='dofollow' target='_blank' title='Blogger Templates'>Gooyaabi Templates</a>
+            / Published By <a href='http://gooyaabitemplates.com/' rel='dofollow' target='_blank' title='Blogger Templates'>Gooyaabi Templates</a>
             </span>
             </p>
             <p class="management">

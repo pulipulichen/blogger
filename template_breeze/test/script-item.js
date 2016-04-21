@@ -69,7 +69,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
             cata_container = $('<span></span>')
                     .hide()
                     .insertBefore(firstHeading);
-            cata_container.attr('id', 'postcata' + PULI_UTILS.create_id());
+            cata_container.attr('id', 'postcata' + PULI_UTILS.create_page_id());
         }
 
         //get cataSlt ID

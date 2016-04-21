@@ -1045,3 +1045,10 @@ body > div.sumome-share-client-counts div.sumome-share-client-animated {
         position: static;
     }
 }
+
+/**************************/
+
+a[name][id]:target {
+    margin-top: -60px;
+    position: absolute;
+}

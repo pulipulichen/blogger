@@ -129,6 +129,17 @@ PULI_UTILS.is_guess_message = function()
  * @return {integer}
  */
 PULI_UTILS.create_id = function () {
-	return (new Date()).getTime() + '';
+    return (new Date()).getTime() + '';
+};
+
+var _page_index = 0;
+PULI_UTILS.create_page_id = function () {
+    var _pagename = location.pathname.split("/").slice(-1);
+    if (typeof(_pagename[0]) === "string") {
+        _pagename = _pagename[0];
+    }
+    _pagename = _pagename + _page_index;
+    _page_index++;
+    return _pagename;
 };
 

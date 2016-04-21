@@ -572,6 +572,11 @@ body .addthis-smartlayers {
     background-color: #DE4939;
 }
 
+.social-button.chrome:hover {
+    color:white;
+    background-color: #42556B;
+}
+
 .social-button.github:hover {
     color:white;
     background-color: black;

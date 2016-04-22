@@ -650,9 +650,9 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 <span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
-<script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm(&quot;p<data:post.id/>&quot;)</script><b:else/><div class='entry-container'>
+<script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>#more&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm(&quot;p<data:post.id/>&quot;)</script><b:else/><div class='entry-container'>
     <div class='entry-content'><article>
-    <h1><b:if cond='data:post.link'><a expr:href='data:post.link' expr:title='data:post.title'><data:post.title/></a>
+    <h1><b:if cond='data:post.link'><a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
 <b:else/>
 <data:post.title/>
 
@@ -683,7 +683,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 <aside>
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
- <div class='pull-left'> <a class='read-more' expr:href='data:post.url'>Read More</a>
+ <div class='pull-left'> <a class='read-more' expr:href='data:post.url + &quot;#more&quot;'>Read More</a>
   </div></b:if>
  
 

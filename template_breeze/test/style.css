@@ -1048,7 +1048,8 @@ body > div.sumome-share-client-counts div.sumome-share-client-animated {
 
 /**************************/
 
-a[name][id]:target {
+a[name][id]:target,
+a[name="more"]:target {
     margin-top: -60px;
     position: absolute;
 }

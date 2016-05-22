@@ -494,9 +494,15 @@ div.post-avatar {
 @media (max-width: 979px) {
     .search-bar {
         margin-top: 4px;
+        padding-left: 0;
+        padding-right: 0;
     }
+    
     .navbar-inverse .navbar-inner {
         background: #2d2d2d;
+    }
+    #header {
+        margin-right: 0;
     }
 }
 
@@ -628,7 +634,8 @@ body .addthis-smartlayers {
 }
 
 .nav-search {
-     margin-top: 19px;
+    margin-top: 19px;
+    float: right;
 }
 
 .nav-search .srch_btn {
@@ -959,7 +966,7 @@ body .addthis-smartlayers {
     
     #masthead #header {
         /*border:1px solid red;*/
-        max-width: calc(100% - 110px);
+        max-width: calc(100% - 130px);
     }
     
     #masthead #header-inner {
@@ -1075,3 +1082,63 @@ header > .back-button {
     line-height: 35px;
     width: 20px;
 }
+
+@media (max-width: 979px) {
+    header > .back-button {
+        margin-left: 10px;
+    }
+    
+    .fixed-nav header > .back-button {
+        line-height: 55px;
+    }
+}
+
+@media (max-width: 460px) {
+    header > .back-button {
+        font-size: 25px;
+        line-height: 80px;
+    }
+    
+    .fixed-nav header > .back-button {
+        font-size: 25px;
+        line-height: 55px;
+    }
+}
+
+/*********************************/
+/* 20160522 修正導覽列的問題 */
+@media (max-width: 1200px) and (min-width: 979px) {
+    .search-bar .gsc-control-wrapper-cse {
+        width: 130px !important;
+    }
+    .search-bar {
+        width: 160px !important;
+    }
+}
+
+@media (min-width: 979px) {
+    .search-bar {
+        width: 240px;
+    }
+}
+
+    
+
+@media (min-width: 480px) and (max-width: 979px) {
+    /*
+    .nav-collapse ul li {
+        padding-left: 50px;
+    }
+    */
+    .sumome-share-client-wrapper.sumome-share-client-wrapper-left-page {
+        z-index: auto !important;
+    }
+}
+
+/*
+@media (max-width: 979px) {
+    .nav-collapse:not(.in) {
+        clear: none;
+    }
+} 
+*/

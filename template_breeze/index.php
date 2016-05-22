@@ -175,12 +175,10 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </header>
 
 
-    
-<nav>
-<?php echo file_get_contents("1_menu/1_menu.html"); ?>
-</nav>
-
 <?php echo file_get_contents("1_menu/2_search.html"); ?>
+
+<?php echo file_get_contents("1_menu/1_menu.html"); ?>
+
      
  </div> 
 </div>

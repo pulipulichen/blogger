@@ -45,7 +45,10 @@
 .entry-content li {
     list-style: square !important;
     line-height: 200%;
+}
 
+.entry-content ol > li {
+    list-style: decimal !important;
 }
 
 .entry-content .post ol > li {

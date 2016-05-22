@@ -192,7 +192,6 @@ $(function () {
     PULI_UTILS.post.toc();
 });
 
-
 //----------------------
 
 function pulipuli_related_results_labels_thumbs(e) {
@@ -211,29 +210,40 @@ function pulipuli_related_results_labels_thumbs(e) {
         var n = e.feed.entry[t];
         relatedTitles[relatedTitlesNum] = n.title.$t;
         try {
-            thumburl[relatedTitlesNum] = n.media$thumbnail.url
+            thumburl[relatedTitlesNum] = n.media$thumbnail.url;
         } catch (r) {
-            s = n.content.$t;
-            a = s.indexOf("<img");
-            b = s.indexOf('src="', a);
-            c = s.indexOf('"', b + 5);
-            d = s.substr(b + 5, c - b - 5);
-            if (a != -1 && b != -1 && c != -1 && d != "") {
-                thumburl[relatedTitlesNum] = d
+            var s = n.content.$t;
+            var a = s.indexOf("<img");
+            var b = s.indexOf('src="', a);
+            var c = s.indexOf('"', b + 5);
+            var d = s.substr(b + 5, c - b - 5);
+            if (a !== -1 && b !== -1 && c !== -1 && d !== "") {
+                thumburl[relatedTitlesNum] = d;
             } else {
                 if (typeof defaultnoimage !== "undefined")
                     thumburl[relatedTitlesNum] = defaultnoimage;
                 else
-                    thumburl[relatedTitlesNum] = ""
+                    thumburl[relatedTitlesNum] = "";
             }
         }
-        if (relatedTitles[relatedTitlesNum].length > 60)
-            relatedTitles[relatedTitlesNum] = relatedTitles[relatedTitlesNum].substring(0, 60) + "...";
+        //if (relatedTitles[relatedTitlesNum].length > 60) {
+        //    relatedTitles[relatedTitlesNum] = relatedTitles[relatedTitlesNum].substring(0, 60) + "...";
+        //}
         for (var i = 0; i < n.link.length; i++) {
-            if (n.link[i].rel == "alternate") {
+            if (n.link[i].rel === "alternate") {
                 relatedUrls[relatedTitlesNum] = n.link[i].href;
-                relatedTitlesNum++
+                relatedTitlesNum++;
             }
         }
     }
 }
+
+var _puli_related_post_render = function (_owl_items) {
+    //console.log($(_owl_items[0]).html());
+    for (var _i = 0; _i < _owl_items.length; _i++) {
+        var _item = $(_owl_items[_i]);
+        var _a = _item.find("a:first");
+        var _title = _a.attr("title");
+        _a.prepend('<div class="related-post-title">' + _title + '</div>');
+    }
+};

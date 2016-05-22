@@ -321,3 +321,11 @@ body .addthis-smartlayers {
     max-height: 160px;
     overflow: hidden;
 }
+
+#related-posts .related-post-title {
+    overflow-x: hidden;
+    white-space: nowrap;
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+}

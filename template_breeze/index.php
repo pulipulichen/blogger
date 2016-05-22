@@ -77,12 +77,14 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <body>
 
 <script src='https://connect.facebook.net/en_US/all.js#xfbml=1'/>
-<div class='firstload-background'>
-</div>
+
+<div class='firstload-background'></div>
+
 <div class='site' id='page'>
 <div id='masthead' role='banner'>
 <div class='container'>
 
+    
 <div class='navbar navbar-inverse'>
  <div class='navbar-inner'>
  <div class='btn-navbar' data-target='.nav-collapse' data-toggle='collapse' type='button'>
@@ -136,7 +138,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
     <b:else/>
       <!--Show the image only-->
       <div id='header-inner'>
-        <a expr:href='data:blog.homepageUrl' style='display: block'>
+        <a accesskey="1" expr:href='data:blog.homepageUrl' id='header-inner-link' style='display: block'>
           <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_headerimg&quot;' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
         </a>
         <!--Show the description-->
@@ -166,7 +168,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   <b:if cond='data:blog.url == data:blog.homepageUrl'>
     <data:title/>
   <b:else/>
-    <a expr:href='data:blog.homepageUrl'><data:title/></a>
+    <a accesskey="1" expr:href='data:blog.homepageUrl'><data:title/></a>
   </b:if>
 </b:includable>
    </b:widget>
@@ -174,12 +176,12 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </b:section>
 </header>
 
-
+<a accesskey="N" href="#menu-primary" title="accesskey: menu" class="accesskey-menu"> ::: </a>
+     
 <?php echo file_get_contents("1_menu/2_search.html"); ?>
 
 <?php echo file_get_contents("1_menu/1_menu.html"); ?>
 
-     
  </div> 
 </div>
 </div>
@@ -210,8 +212,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 }
 </style>
 </b:if>
-
 <div class='span9 main' id='content' role='main'>
+    <a accesskey="C" href="#content" title="accesskey: main section"> ::: </a>
 <b:section class='main' id='main' showaddelement='no'>
   <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
     <b:includable id='main' var='top'>
@@ -727,7 +729,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
     <div class='related_posts'>
         <script type='text/javascript'>
-          var maxresults=6;
+          var maxresults=10;
           var splittercolor=&quot;&quot;;
           var relatedpoststitle=&quot;Related Posts&quot;;
         </script>
@@ -854,6 +856,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 
 <div class='span3' id='side-bar'>
+    <a accesskey="L" href="#side-bar" title="accesskey: sidebar section"> ::: </a>
     <div class="sidebar section" id="sidebar">
         <?php echo file_get_contents("2_sidebar/1_sidebar.html"); ?>
     </div>
@@ -863,19 +866,19 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </div> 
 </div> 
 
-<div class='site-footer' id='colophon' role='contentinfo'>
-
- <div class='container'>
- <div class='row-fluid' id='footer-body'>
-<div class="cleanwidget  nopadding span4 bl_html section" id="column1">
-<?php echo file_get_contents("3_footer/1_col.html") ?>
-</div>
-<div class="cleanwidget  nopadding span8 bl_html section" id="column2">
-<?php echo file_get_contents("3_footer/2_col.html") ?>
-</div>
- <div class='clear'/>
-</div>
-</div>
+    <div class='site-footer' id='colophon' role='contentinfo'>
+        <div class='container'>
+            <a accesskey="B" href="#colophon" title="accesskey: footer section"> ::: </a>
+            <div class='row-fluid' id='footer-body'>
+                <div class="cleanwidget  nopadding span4 bl_html section" id="column1">
+                    <?php echo file_get_contents("3_footer/1_col.html") ?>
+                </div>
+                <div class="cleanwidget  nopadding span8 bl_html section" id="column2">
+                    <?php echo file_get_contents("3_footer/2_col.html") ?>
+                </div>
+                <div class='clear'/>
+            </div>
+        </div>
 
 <div class='footer' id='footer'>
     <footer>

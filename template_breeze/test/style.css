@@ -420,7 +420,7 @@ div.post-avatar {
 @media (max-width: 979px) {
 
     #content-wrapper {
-        padding-top: 100px;
+        padding-top: 80px;
     }
 
     .nav-collapse.in.collapse .dropdown .dropdown-toggle {
@@ -1114,6 +1114,11 @@ header > .back-button {
     .search-bar {
         width: 160px !important;
     }
+    
+    .navbar .nav > li > a {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 @media (min-width: 979px) {
@@ -1142,3 +1147,38 @@ header > .back-button {
     }
 } 
 */
+
+/*********************************************/
+/* 20160522 accesskey */
+#masthead a[accesskey],
+.site-footer a[accesskey] {
+    color:white;
+}
+
+#masthead a[accesskey].accesskey-menu {
+    line-height: 70px;
+    float: left;
+    padding-left:5px;
+}
+
+#masthead.fixed-nav a[accesskey].accesskey-menu {
+    line-height: 45px;
+}
+
+.site-footer .container {
+    padding-top:0 !important;
+}
+
+#content-wrapper {
+    padding-top: 80px;
+}
+
+@media (max-width: 979px) {
+    #masthead a[accesskey].accesskey-menu {
+        line-height: 80px;
+    }
+    
+    #masthead.fixed-nav a[accesskey].accesskey-menu {
+        line-height: 55px;
+    }
+}

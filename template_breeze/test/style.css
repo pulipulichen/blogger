@@ -1056,3 +1056,22 @@ a[name="more"]:target {
     margin-top: -60px;
     position: absolute;
 }
+
+
+/**************************/
+/* 20160522 首頁回去按鈕 */
+header > .back-button {
+    float: left;
+    font-size: 30px;
+    padding-right: 10px;
+    color: white;
+    cursor: pointer;
+    line-height: 70px;
+    width: 30px;
+}
+
+.fixed-nav header > .back-button {
+    font-size: 20px;
+    line-height: 35px;
+    width: 20px;
+}

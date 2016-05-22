@@ -89,11 +89,21 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
     <img src='//lh3.googleusercontent.com/-joQnbCCa6Jg/VwFqIuKnCCI/AAAAAAACuUo/iZTPC_EVSyE/s0/bmenu_brown.png'/></div>
 
 <header>
+<?php
+// 在這邊加上回去上一頁的按鈕
+?>
+    <b:if cond='data:blog.url != data:blog.homepageUrl'>
+        <div onclick="javascript: _header_back_button_click();" class="back-button">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
+    </b:if>
+    
 <b:section class='header' id='header' maxwidgets='1' showaddelement='no'>
      
    <b:widget id='Header1' locked='true' title='Breeze Responsive Blogger Template  (Header)' type='Header'>
      <b:includable id='main'>
 
+         
   <b:if cond='data:useImage'>
     <b:if cond='data:imagePlacement == &quot;BEHIND&quot;'>
       <!--

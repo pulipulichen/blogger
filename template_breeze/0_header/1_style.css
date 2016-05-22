@@ -1064,27 +1064,27 @@ z-index: -1;
 
 
 .search-bar {
--moz-transition: .3s linear;
--webkit-transition: .3s ease-out;
-transition: .3s linear;
-float: right;
-right: 0;
-cursor: pointer;
-background-image: url();
-background-repeat: no-repeat;
-padding: 0px 20px 23px;
-background-size: 100px 100px;
-top: 0;
-z-index: 99999;
-margin-top: -5px;
+    -moz-transition: .3s linear;
+    -webkit-transition: .3s ease-out;
+    transition: .3s linear;
+    float: right;
+    right: 0;
+    cursor: pointer;
+    background-image: url();
+    background-repeat: no-repeat;
+    padding: 0px 20px 23px;
+    background-size: 100px 100px;
+    top: 0;
+    z-index: 99999;
+    margin-top: -5px;
   }
 
 .search-bar:hover {
     -moz-transition: .01s linear;
     -webkit-transition: .01s ease-out;
     transition: .01s linear;
-    opacity: 1; 
-background-image:none;
+    /*opacity: 1; */
+    background-image:none;
 }
 
 .nav-search {
@@ -1103,26 +1103,25 @@ background-image:none;
 
 .nav-search input {
     float: left;
-    width: 0;
+    /*width: 0;*/
     background: none;
     height: 30px;
     line-height: 20px;
     margin: 22px 0 0;
     padding: 0 10px 0 0;
     font-size: 15px;
-    color: #fff !important;
+    /*color: #fff !important;*/
     outline: 0;
     border-radius: 0;
     border: 0;
-    opacity: 0;
-    -webkit-transition: all .8s ease-in-out;
+    /*opacity: 1;*/
+    /*opacity: 1;*/
+    /*-webkit-transition: all .8s ease-in-out;
     -moz-transition: all .8s ease-in-out;
     -o-transition: all .8s ease-in-out;
     transition: all .8s ease-in-out;
-    -webkit-appearance: none;
-}
-
-.search-bar:hover .nav-search input {
+    -webkit-appearance: none;*/
+    
     width: 160px;
     margin-left: 33px;
     background: none;
@@ -1130,6 +1129,16 @@ background-image:none;
     opacity: 1;
 }
 
+/*
+.search-bar:hover .nav-search input {
+    width: 160px;
+    margin-left: 33px;
+    background: none;
+    border-bottom: 1px solid #f1f1f1;
+    opacity: 1;
+}
+*/
+/*
 .nav-search input::-webkit-input-placeholder {
     color: #eee;
 }
@@ -1149,6 +1158,7 @@ background-image:none;
 .nav-search input:focus {
     color: #fff;
 }
+*/
 
 .nav-search .srch_btn {
     height: 42px;

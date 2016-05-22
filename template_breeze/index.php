@@ -165,37 +165,19 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </header>
 
 
-<div class='search-bar'>
-<div class='nav-search'>
-<!--
-<form action='/search' id='searchform' method='get' role='search'>
- <input class='search_input' id='s' name='q' onblur='if(this.value==&apos;&apos;)this.value=this.defaultValue;' onfocus='if(this.value==this.defaultValue)this.value=&apos;&apos;' type='text' value='Search and hit'/>
-</form>
--->
-<script type="text/javascript">
-  (function() {
-    var cx = '017270649262638447003:o6vaq9on3vs';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<div class="gcse">
-<gcse:search enableAutoComplete="true"></gcse:search>
-</div>
-<div class='srch_btn' id="gsce_submit" />
-  </div></div>
-
+    
 <nav>
 <?php echo file_get_contents("1_menu/1_menu.html"); ?>
 </nav>
-    
+
+<?php echo file_get_contents("1_menu/2_search.html"); ?>
+     
  </div> 
 </div>
 </div>
+<?php
+// ---------------------------------------------
+?>  
 <div class='clear'/>
 </div>
       <div class='clear'/>

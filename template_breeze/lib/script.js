@@ -355,3 +355,7 @@ var _display_related_posts = function (items, msgs, config) {
         window.goog.comments.loadQueue.push(render);
       }
 };
+
+//---------------------------------------
+
+$('.go-top').click(function(){$('.st-content').animate({scrollTop:0},'slow');$('html, body').animate({scrollTop:0},'slow');return false;});

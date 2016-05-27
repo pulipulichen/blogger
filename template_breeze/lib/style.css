@@ -520,11 +520,14 @@ body .addthis-smartlayers {
 
 
 /**********************************/
+/* 底部區域 */
 
 .site-footer .cloud-label-widget-content .label-size-2,
 .site-footer .cloud-label-widget-content .label-size-1 {
     display:none;
 }
+
+
 
 .site-footer .cloud-label-widget-content .btn {
     float: right;
@@ -532,6 +535,26 @@ body .addthis-smartlayers {
     margin-top: 1em;
 }
 
+/* 20160527網頁寬度低於460時，Buy Me A Coffee跟Hit Count應該分開為左右2欄 */
+@media (max-width: 979px) {
+    div.donation {
+        width: 49.5%;
+        float: left;
+        margin-right: 1%;
+    }
+    
+    .site-footer .cloud-label-widget-content .label-size-3 {
+        display:none;
+    }
+}
+
+/*
+@media (max-width: 460px) {
+    .site-footer .cloud-label-widget-content .label-size-4 {
+        display:none;
+    }
+}
+*/
 
 /**********************************/
 
@@ -1160,13 +1183,13 @@ header > .back-button {
 }
 
 #masthead a[accesskey].accesskey-menu {
-    line-height: 70px;
+    /*line-height: 70px;*/
     float: left;
-    padding-left:5px;
+    /*padding-left:5px;*/
 }
 
 #masthead.fixed-nav a[accesskey].accesskey-menu {
-    line-height: 35px;
+    /*line-height: 35px;*/
 }
 
 .site-footer .container {
@@ -1179,14 +1202,19 @@ header > .back-button {
 
 @media (max-width: 979px) {
     #masthead a[accesskey].accesskey-menu {
-        line-height: 80px;
+        /*line-height: 80px;*/
     }
     
     #masthead.fixed-nav a[accesskey].accesskey-menu {
-        line-height: 55px;
+        /*line-height: 55px;*/
     }
 }
 
+#masthead.fixed-nav li > a.accesskey-menu,
+.navbar .nav > li > a.accesskey-menu {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 /*********************************************/
 /* 20160523 help */
@@ -1236,7 +1264,7 @@ header > .back-button {
 /****************************************/
 /* 20160523 畫面太矮的時候 */
 
-@media (max-height: 650px) {
+@media (max-width: 979px) and (max-height: 650px) {
     #menu-primary {
         max-height: 210px;
         overflow-x: auto;
@@ -1443,4 +1471,17 @@ header > .back-button {
 
 .entry-content a.btn {
     text-decoration: none;
+}
+
+/**********************************************/
+/* 20160527 調整側欄，加上RSS連結 */
+
+#sidebar .widget a.icon {
+    float: right;
+    line-height: 40px;
+    background: #FFFFFF;
+    font-size: 20px;
+    font-weight: normal;
+    padding: 10px 15px 0;
+    color: #292929;
 }

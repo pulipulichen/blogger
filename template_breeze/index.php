@@ -175,9 +175,6 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
     
 </b:section>
 </header>
-
-<a accesskey="U" href="#menu-primary" title="accesskey: menu" class="accesskey-menu"> ::: </a>
-<a accesskey="N" href="#menu-primary" title="accesskey: menu" class="accesskey-menu"></a>
      
 <?php echo file_get_contents("1_menu/2_search.html"); ?>
 
@@ -214,7 +211,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 </style>
 </b:if>
 <div class='span9 main' id='content' role='main'>
-    <a accesskey="C" href="#content" title="accesskey: main section"> ::: </a>
+    <a accesskey="C" href="#content-anchor" title="accesskey: main section" id="content-anchor"> ::: </a>
 <b:section class='main' id='main' showaddelement='no'>
   <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
     <b:includable id='main' var='top'>
@@ -564,6 +561,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
   </div>
 </b:includable>
     <b:includable id='nextprev'>
+        <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
   <div class='blog-pager' id='blog-pager'>
     <nav>
         <ul class="pager">
@@ -620,6 +618,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
   </div>
   <div class='clear'/>
+  </b:if>
 </b:includable>
     <b:includable id='post' var='post'>
 <div class='post'>
@@ -649,19 +648,31 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 <b:else/>
 <data:post.title/>
 
-<div class='meta1'><p><small>  <span><i class='fa fa-clock-o'/> <data:post.timestamp/></span>    <span>  <i class='fa fa-tags'/>       <b:if cond='data:post.labels'>
-                              <span class='label-info'>
-                               
-                                <b:loop values='data:post.labels' var='label'>
-                                  <a expr:href='data:label.url' rel='tag'>
-                                    <data:label.name/>
-                                  </a>
-                                  <b:if cond='data:label.isLast != &quot;true&quot;'>
-                                    ,
-                                  </b:if>
-                                </b:loop>
-                              </span>
-                            </b:if></span><i class='fa fa-comments'/> <data:post.numComments/> Comments</small></p></div>
+<div class='meta1'><p><small>  <span><i class='fa fa-clock-o'/> <data:post.timestamp/></span>    
+            <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
+            <span>  
+                <i class='fa fa-tags'/>       
+                <b:if cond='data:post.labels'>
+                    <span class='label-info'>
+
+                        <b:loop values='data:post.labels' var='label'>
+                            <a expr:href='data:label.url' rel='tag'>
+                                <data:label.name/>
+                            </a>
+                            <b:if cond='data:label.isLast != &quot;true&quot;'>
+                                ,
+                            </b:if>
+                        </b:loop>
+                    </span>
+                </b:if>
+            </span>
+            </b:if>
+            
+            <b:if cond='data:post.allowNewComments'>
+                <i class='fa fa-comments'/> <data:post.numComments/> Comments
+            </b:if>
+        </small>
+    </p></div>
   </b:if></h1>
   <data:post.body/>
 </article></div></div>
@@ -671,6 +682,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 <div class='clear'/>
 
+<b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
 <div class='entry-meta clearfix'>
 <div class='up_arrow'/>
 
@@ -726,8 +738,9 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 </aside>
 </div>
+</b:if>
 
-
+    <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
     <div class='related_posts'>
         <script type='text/javascript'>
           var maxresults=10;
@@ -748,7 +761,8 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
             <div style='clear:both'/>
         </b:if>
     </div>
-
+    </b:if>
+    
 
 </div>
 </b:includable>
@@ -857,7 +871,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
 
 <div class='span3' id='side-bar'>
-    <a accesskey="R" href="#side-bar" title="accesskey: sidebar section"> ::: </a>
+    <a accesskey="R" href="#side-bar-anchor" title="accesskey: sidebar section" id="side-bar-anchor"> ::: </a>
     <div class="sidebar section" id="sidebar">
         <?php echo file_get_contents("2_sidebar/1_sidebar.html"); ?>
     </div>
@@ -869,7 +883,7 @@ echo file_get_contents("0_header/3_scripts.js"); ?>
 
     <div class='site-footer' id='colophon' role='contentinfo'>
         <div class='container'>
-            <a accesskey="B" href="#colophon" title="accesskey: footer section"> ::: </a>
+            <a accesskey="B" href="#footer-anchor" title="accesskey: footer section" id="footer-anchor"> ::: </a>
             <div class='row-fluid' id='footer-body'>
                 <div class="cleanwidget  nopadding span4 bl_html section" id="column1">
                     <?php echo file_get_contents("3_footer/1_col.html") ?>

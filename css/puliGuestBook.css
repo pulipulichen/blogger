@@ -90,3 +90,7 @@
 .puli-guest-book .guest-book-list .guest-book-li.guest-book-li-1 {
 	background-color: white !important;
 }
+
+.puli-guest-book .guest-book-list strong.name a {
+    display: inline;
+}

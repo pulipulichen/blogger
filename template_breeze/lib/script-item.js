@@ -330,15 +330,3 @@ $(function() {
   });
 });
 
-// ------------------------------------------
-// 20160522 如果是留言板頁面，就把頁面做些修改
-
-var _guestbook_url = "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html";
-if (location.href.substr(0, _guestbook_url.length) === _guestbook_url) {
-    $(function () {
-        $("#related-posts").hide();
-        $(".entry-meta.clearfix").hide();    
-        $("#blog-pager-newer-link").css("visibility", "hidden");
-    });
-}
-

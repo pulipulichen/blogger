@@ -28,10 +28,12 @@ $.puliGuestBook({
 jQuery.puliGuestBook = function (config) {
     
     var getParam = function (index, defaultValue) {
-        if (typeof(config[index]) == 'undefined')
+        if (typeof(config[index]) === 'undefined') {
             return defaultValue;
-        else
+        }
+        else {
             return config[index];
+        }
     };
     
     var getBaseLink = function () {
@@ -50,14 +52,14 @@ jQuery.puliGuestBook = function (config) {
         return host;
     };
     
-    var css = getParam('css', 'https://sites.google.com/site/puddingchen35/Home/puliguestbook/puliGuestBook.css');
-    if (jQuery('head link[href="'+css+'"]').length == 0)
+    //var css = getParam('css', 'https://sites.google.com/site/puddingchen35/Home/puliguestbook/puliGuestBook.css');
+    var css = getParam('css', 'https://dl.dropboxusercontent.com/u/717137/blogger/css/puliGuestBook.css');
+    if (jQuery('head link[href="'+css+'"]').length === 0)
         jQuery("<link type='text/css' rel='stylesheet' href='"+css+"' /> ").appendTo(jQuery('head'));
     
     var _container_id = getParam('container', '#puliGuestBook');
     var container = jQuery(_container_id);
-    if (container.length == 0)
-    {
+    if (container.length === 0) {
         var _id = _container_id.substr(1);
         document.write('<div id="' + _id + '">'+'Loading...'+'</div>');
         
@@ -68,18 +70,15 @@ jQuery.puliGuestBook = function (config) {
     var blogID = getParam('blogID', null);
     var postID = getParam('postID', null);
     var url = null;
-    if (blogID == null && postID == null)
-    {    
+    if (blogID === null && postID === null) {    
         url = getParam('url', null);
-        if (url == null)
-        {
+        if (url === null) {
             window.alert('puliGuestBook沒有設定URL');
             return;
         }
         
         
-        if (url.substring(0,7) != 'http://')
-        {
+        if (url.substring(0,7) !== 'http://') {
             var host = location.href;
             
             // by Pudding Chen 20120609
@@ -96,14 +95,12 @@ jQuery.puliGuestBook = function (config) {
         }
         
         var needle = 'default';
-        if (url.substring(url.length - needle.length, url.length) == needle)
-        {
+        if (url.substring(url.length - needle.length, url.length) === needle) {
             url = url.substring(0, url.length - needle.length);
             url = url + 'full?alt=json-in-script&callback=handleGuestbookPulipuli';
         }
     }
-    else
-    {
+    else {
         var host = getBaseLink();
         
         url = host + 'feeds/' + postID + '/comments/full?alt=json-in-script&callback=handleGuestbookPulipuli';
@@ -119,6 +116,7 @@ jQuery.puliGuestBook = function (config) {
     var readMore = getParam('readMore', '閱讀全部的留言');
     var write = getParam('write', '撰寫留言');
     var reload = getParam('reload', '重新讀取');
+    var addLink = getParam('addLink', null);
 
     handleGuestbookPulipuli = function (json) {
 	//document.getElementById("pulipuli_guestbook").innerHTML = '';
@@ -127,7 +125,7 @@ jQuery.puliGuestBook = function (config) {
 	var temp = '<ul id="'+listID+'" class="guest-book-list">';
 	var postshow= listNumber ;
 	var titlelen = '20';
-	var layout = "<span class='date'>%Y%-%M%-%D%</span> <strong class='name'>%authorname%</strong>: %comment%";
+	var layout = "<span class='date'>%Y%-%M%-%D%</span> <strong class='name'>%authorname%</strong>:<br /> %comment%";
     var sortentry = [];
 	try
 	{
@@ -142,10 +140,12 @@ jQuery.puliGuestBook = function (config) {
 	var firstPost = null;
 	for (var i=0, post; post = sortentry[i]; i++) 
 	{
-		if (i == 0)
-			firstPost = post;
-		if (i >= postshow) 
-			break;
+		if (i === 0) {
+                    firstPost = post;
+                }
+		if (i >= postshow) {
+                    break;
+                }
 		var title=post.content.$t;
 			var fulltitle = title.replace("\u003CBR/\u003E", "<br />\n");
 			//var tmp = fulltitle.split('<br />'); fulltitle = tmp.join('&nbsp;\n');
@@ -158,10 +158,10 @@ jQuery.puliGuestBook = function (config) {
 		for (var j = 0; j < title.length; j++)
 		{
 			var temp_char = title.substr(j, 1);
-			if (temp_char == "<")
+			if (temp_char === "<")
 			{
 				var temp_j = title.indexOf(">", j);
-				if (temp_j != -1)
+				if (temp_j !== -1)
 					j = temp_j;
 				continue;
 			}
@@ -172,18 +172,17 @@ jQuery.puliGuestBook = function (config) {
 		var link=post.link[2].href;
 		var title_link = fulltitle;
 		var authorname=post.author[0].name.$t;
-		if (authorname == 'Anonymous')
-			authorname = anonymous;
+		if (authorname === 'Anonymous') {
+                    authorname = anonymous;
+                }
 		
-		if (authorname == adminName && adminPhoto != null)
-		{
+		if (authorname === adminName && adminPhoto !== null) {
 			authorname = '<img src="'+adminPhoto+'" class="admin-photo" border="0" /> ' 
 				+ authorname;
 		}
 			
 		var uri = '';
-		if (typeof(post.author[0].uri) != 'undefined')
-		{
+		if (typeof(post.author[0].uri) !== 'undefined') {
 			uri = post.author[0].uri.$t;
 			authorname = '<a href="'+uri+'" target="_blank">'+authorname+'</a>';
 		}
@@ -196,19 +195,19 @@ jQuery.puliGuestBook = function (config) {
 		var layout_replace = layout.replace("%comment%",title_link).replace("%Y%",y).replace("%M%",m).replace("%D%",d).replace("%authorname%",authorname);
 		
 		var odd = 0;
-		if (i % 2 == 1)
-			odd = 1;
+		if (i % 2 === 1) {
+                    odd = 1;
+                }
 		temp += '<li class="guest-book-li guest-book-li-'+odd+'"><span class="item-title">'+layout_replace+'</span></li>';
 	  }
 	
-	var add_link = '';
+	var add_link = addLink;
 	var rss_link = '';
 	var reload_cmd = '';
 	//if (firstPost != null)
-    if (true)
-	{
+    if (true) {
         var baseLink = null;
-        if (blogID == null && postID == null && firstPost != null)
+        if (blogID === null && postID === null && firstPost !== null)
         {
             link = firstPost.link[0].href;
     		//http://www.blogger.com/feeds/16607461/1187506547871300947/comments/default/5372166020783852457
@@ -224,8 +223,10 @@ jQuery.puliGuestBook = function (config) {
             baseLink = getBaseLink();
         
 		rss_link = baseLink + 'feeds/' + postID + '/comments/default';
-		add_link = 'https://www.blogger.com/comment.g?blogID='+blogID+'&postID='+postID;
-		//https://www.blogger.com/comment.g?blogID=16607461&postID=113544406852218769
+                if (add_link === null) {
+                    add_link = 'https://www.blogger.com/comment.g?blogID='+blogID+'&postID='+postID;
+                }
+                //https://www.blogger.com/comment.g?blogID=16607461&postID=113544406852218769
 		reload_cmd = "jQuery.getScript('"+baseLink+"feeds/"+postID+"/comments/full?alt=json-in-script&callback=handleGuestbookPulipuli')";
 		//$.getScript('http://pulipuli.blogspot.com/feeds/1187506547871300947/comments/full?alt=json-in-script&callback=handleGuestbookPulipuli');
 	}
@@ -243,10 +244,10 @@ jQuery.puliGuestBook = function (config) {
 	
 	
 	temp += '<div class="guestbook-write">'
-		+ ' <a href="'+rss_link+'" style="float:right;margin-right:1em;font-size: 1.5em;line-height: 1em;">'
+		//+ ' <a href="'+rss_link+'" style="float:right;margin-right:1em;font-size: 1.5em;line-height: 1em;">'
                 //+ '<img src="http://3.bp.blogspot.com/_yr4MQB4zDus/Ru35yvgloDI/AAAAAAAABOQ/bbtw-pQhpOk/s200/rss.gif" border="0" />'
-                + '<i class="fa fa-rss-square"></i>'
-                + '</a>'
+                //+ '<i class="fa fa-rss-square"></i>'
+                //+ '</a>'
 		
 		+ ' <a href="'+add_link+'" class="write" target="guestbook_write">'+write+'</a>'
 		+ ' <a class="write" onclick="'+reload_cmd+'">'+reload+'</a>'
@@ -254,7 +255,7 @@ jQuery.puliGuestBook = function (config) {
 	
 	//document.getElementById("pulipuli_guestbook").innerHTML = temp;
     container.html(temp);
-}	//function handleGuestbookPulipuli(json) {
+};	//function handleGuestbookPulipuli(json) {
 
     //http://pulipuli.blogspot.com/feeds/113544406852218769/comments/full?alt=json-in-script&callback=handleGuestbookPulipuli
     //http://pulipuli.blogspot.com/feeds/6921201361608060798/comments/default 

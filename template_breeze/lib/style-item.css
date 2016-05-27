@@ -20,7 +20,7 @@
     
     #sidebar > div.widget {
         float: left;
-        width: calc(33% - 0.8em);
+        width: calc(33% - 0.6em);
         margin-right: 1.2em;
     }
     
@@ -83,7 +83,26 @@
 }
 
 #side-bar {
-    margin-left: 20px;
+    margin-left: 30px;
+}
+
+@media (min-width: 767px) {
+    #side-bar {
+        max-width: 1170px;
+    }
+}
+
+@media (max-width: 1200px) {
+    #side-bar {
+        margin-left: 20px;
+    }
+}
+
+@media (min-width: 979px) and (max-width: 1200px) {
+    #sidebar > div.widget {
+        width: calc(33% - 0.5em);
+        margin-right: 1em;
+    }
 }
 
 body .addthis-smartlayers {
@@ -328,4 +347,14 @@ body .addthis-smartlayers {
     background-color: black;
     color: white;
     padding-left: 10px;
+}
+
+/*************************************/
+/* 20160528 最矮留言高度 */
+#main div.comments#disqus_thread {
+    min-height: 507px;
+}
+
+#main div.comments#comments {
+    min-height: 378px;
 }

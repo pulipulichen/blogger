@@ -13,14 +13,14 @@ if (typeof PULI_UTILS.post === "undefined") {
 
 $(function () {
     $("#srch_btn").click(function () {
-        $("input.gsc-search-button").click();
+        $("#masthead input.gsc-search-button").click();
     });
 });
 
 var menu_search_submit = function (_form) {
     var _query = _form.q.value;
-    $("input.gsc-input").val(_query);
-    $("input.gsc-search-button").click();
+    $("#masthead input.gsc-input").val(_query);
+    $("#masthead input.gsc-search-button").click();
     return false;
 };
 

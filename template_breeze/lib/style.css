@@ -669,7 +669,7 @@ body .addthis-smartlayers {
     margin-top: -15px;
 }
 
-.cse .gsc-control-wrapper-cse, .gsc-control-wrapper-cse {
+.cse .gsc-control-wrapper-cse, #masthead .gsc-control-wrapper-cse {
     width: 200px !important;
 }
 
@@ -688,6 +688,31 @@ body .addthis-smartlayers {
 
 .navbar .nav {
     margin-right: 0;
+}
+
+/*******************************************/
+/* 20160530 文中自訂搜尋 */
+.entry-content .gsib_a {
+  /*padding-left:0;*/
+  padding-top:0;
+}
+
+.entry-content .gsc-input-box {
+  height: auto;
+}
+
+.entry-content .gsc-search-button {
+  display: block !important;
+}
+
+.entry-content input.gsc-search-button {
+    height: 13px;
+    width: 13px;
+    padding: 0;
+    min-width: 0;
+    border-radius: 0.5em;
+    padding: 13px;
+    margin: 0;
 }
 
 /******************************************/

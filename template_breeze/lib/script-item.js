@@ -95,6 +95,11 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
             topId[top] = heading;
             headingTop.push(top);
         }
+        
+        if (headingTop.length === 1) {
+            firstHeading.before("<hr />");
+            return;
+        }
 
         //然後將headingTop排序
         headingTop.sort(function (a, b) {

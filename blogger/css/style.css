@@ -132,9 +132,23 @@
     line-height: 1.5em;
 }
 .about-me .about-link {
-    float: right;
-    margin-bottom: 0.5em;
+    /*float: right;*/
+    /*margin-bottom: 0.5em;*/
 }
+
+#sidebar .about-link .read-more {
+    float: none;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    margin-top: 0;
+}
+
+#sidebar .about-link .social-button-wrapper {
+    margin-top: 4px;
+}
+
 .about-me .social-media {
     margin-top: 0.5em;
     text-align: center;

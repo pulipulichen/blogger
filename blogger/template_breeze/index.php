@@ -58,6 +58,7 @@
 <?php echo file_get_contents("0_header/4_facebook_code.html"); ?>
 <meta name="msvalidate.01" content="09F5F270E3016847B9723E71AEE3FC24" />
 <meta name="baidu-site-verification" content="0XST85Xh5F" />
+<meta name="p:domain_verify" content="102285e6f21741f433c6400b5ec23fa7"/>
 
 <!-- ======================================== -->
 <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script.js"></script>

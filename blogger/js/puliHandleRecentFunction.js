@@ -117,34 +117,42 @@ var puliHandleComments = function ()	{
 	 var titlelen = pHC.titlelen;
 	 var layout = pHC.layout;
 	 var sortentry = json.feed.entry.sort(compareentry);
-		for (var i=0, post; post = sortentry[i]; i++) {
-			if(i>=postshow) break;
-		var title=post.title.$t;
-	  if (titlelen !== "" && title.length > titlelen)
-		title = title.substr(0, titlelen) + "...";
-		var link = "#";
-		if (typeof(post.link[2]) !== "undefined") {
-			link=post.link[2].href;
-		}
-	
-	  title = title.replace("<", "&lt;")
-	  			.replace(">", "&gt;");
-	  
-	  var title_link = '<a href="'+link+'">'+ title +'</a>';
-			var authorname=post.author[0].name.$t;
-			var timestamp=post.published.$t.substr(0,10);
-		var y = timestamp.substr(0, 4);
-		var m = timestamp.substr(5, 2);
-		var d = timestamp.substr(8, 2);
-		
-	  var layout_replace = layout.replace("%comment%",title_link).replace("%Y%",y).replace("%M%",m).replace("%D%",d).replace("%authorname%",authorname);
-	  
-			temp += '<li class="'+pHC.liClass+'">'+layout_replace+'</li>';
-		  }
+        for (var i = 0, post; post = sortentry[i]; i++) {
+            if (i >= postshow) {
+                break;
+            }
+            var title = post.title.$t;
+            if (titlelen !== "" && title.length > titlelen)
+                title = title.substr(0, titlelen) + "...";
+            var link = "#";
+            if (typeof (post.link[2]) !== "undefined") {
+                link = post.link[2].href;
+            }
+
+            title = title.replace("<", "&lt;")
+                    .replace(">", "&gt;");
+
+            if ($.trim(title) === "") {
+                postshow++;
+                continue;
+            }
+            var title_link = '<a href="' + link + '">' + title + '</a>';
+
+
+            var authorname = post.author[0].name.$t;
+            var timestamp = post.published.$t.substr(0, 10);
+            var y = timestamp.substr(0, 4);
+            var m = timestamp.substr(5, 2);
+            var d = timestamp.substr(8, 2);
+
+            var layout_replace = layout.replace("%comment%", title_link).replace("%Y%", y).replace("%M%", m).replace("%D%", d).replace("%authorname%", authorname);
+
+            temp += '<li class="' + pHC.liClass + '">' + layout_replace + '</li>';
+        }   //for (var i = 0, post; post = sortentry[i]; i++) {
 	temp+="</ul>";
 	jQuery("#"+pHC.divID).html(temp);
 	
-	}
+	};
 	
 	pHC.load = function(nodeID)
 	{

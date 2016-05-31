@@ -1,0 +1,77 @@
+#header-inner {
+    width: auto !important;
+    /*padding-left: 60px !important;*/
+    background-position: left top !important;
+    background-image: none !important;
+}
+
+#header-inner .descriptionwrapper {
+    margin-top:5px;
+}
+
+.fixed-nav.affix #header-inner .descriptionwrapper,
+.fixed-nav.affix #header-inner img {
+    display:none;
+
+}
+
+.fixed-nav.affix #header-inner {
+    background-image: none !important;
+}
+
+#sidebar-popular-post .popular-posts > ul > dd {
+    display:none;
+}
+
+#sidebar-popular-post .popular-posts > ul > dd:nth-of-type(1),
+#sidebar-popular-post .popular-posts > ul > dd:nth-of-type(2),
+#sidebar-popular-post .popular-posts > ul > dd:nth-of-type(3),
+#sidebar-popular-post .popular-posts > ul > dd:nth-of-type(4),
+#sidebar-popular-post .popular-posts > ul > dd:nth-of-type(5) {
+    display:block;
+}
+
+.site-footer .cloud-label-widget-content a {
+    color: #CCC;
+}
+
+.entry-image {
+    max-height: 300px;
+}
+
+/* ****************** */
+
+.entry-content {
+    line-height: 200%;
+}
+
+.entry-content > article > p {
+    text-indent: 2em;
+}
+
+.entry-content h4 {
+    font-size: 24pt;
+    color:#BD8A39;
+}
+
+.entry-content h5 {
+    font-size: 20pt;
+    color:#BD8A39;
+}
+
+.entry-content h6 {
+    font-size: 18pt;
+    font-style: italic;
+    color:#BD8A39;
+}
+
+.entry-content hr {
+    border-top: 2px solid #DEB46F;
+    border-bottom: 2px solid #BD8A39;
+}
+
+.entry-content ul {
+
+}
+
+

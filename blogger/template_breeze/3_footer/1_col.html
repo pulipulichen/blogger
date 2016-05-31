@@ -1,0 +1,60 @@
+
+<!--
+<b:section class='cleanwidget  nopadding span4 bl_html' id='column1' preferred='yes'>
+  <b:widget id='Text1' locked='false' title='About us' type='Text'>
+    <b:includable id='main'>
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
+  </b:widget>
+</b:section>
+-->
+
+<div class="widget Text donation">
+    <h2 class="title">Buy Me A Coffee</h2>
+    <div class="widget-content">
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="paypal" 
+              onclick="this.submit()" style="cursor:pointer;">
+            <input type="hidden" name="cmd" value="_s-xclick" />
+            <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----" />
+            <div style="width: 100%;    margin: 0 auto;font-size: 12pt;">
+                <!--
+                <input type="image" src="https://lh3.googleusercontent.com/-kmGazSfZHxQ/VwFfE864o2I/AAAAAAACuUU/428W8WOmSAg/s0/coffee.png" border="0" name="submit" alt="PayPal － 更安全、更簡單的線上付款方式！" style="float:left" />
+                -->
+                <i class="fa fa-paypal" aria-hidden="true" style="float: left;font-size: 40px;display:block; margin-top: 15px; margin-right: 10px;"></i>
+                <div style="padding-top: 5px;    margin-left: 50px;">
+                    如果有幫到您的話，請布丁喝杯咖啡吧！
+  <div style=""><input type="submit" value="OK" class="btn btn-default btn-small" /></div>
+                </div>
+                <img alt="paypal pixel" border="0" src="https://www.paypalobjects.com/zh_TW/i/scr/pixel.gif" width="1" height="1" />
+            </div>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<b:section id='column1-stats' preferred='yes'>
+  <b:widget id='Stats1' locked='false' title='Hit Count' type='Stats'>
+    <b:includable id='main'>
+  <b:if cond='data:title != &quot;&quot;'><h2><data:title/></h2></b:if>
+  <div class='widget-content'>
+    <!-- Content is going to be visible when data will be fetched from server. -->
+    <div expr:id='data:widget.instanceId + &quot;_content&quot;' style='display: none;'>
+      <!-- Counter and image will be injected later via AJAX call. -->
+      <b:if cond='data:showSparkline'>
+        <img alt='Sparkline' expr:id='data:widget.instanceId + &quot;_sparkline&quot;' height='30' width='75'/>
+      </b:if>
+      <span expr:class='&quot;counter-wrapper &quot; + (data:showGraphicalCounter ? &quot;graph-counter-wrapper&quot; : &quot;text-counter-wrapper&quot;)' expr:id='data:widget.instanceId + &quot;_totalCount&quot;'>
+      </span>
+      <b:include name='quickedit'/>
+    </div>
+  </div>
+</b:includable>
+</b:widget>
+</b:section>

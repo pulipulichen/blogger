@@ -133,7 +133,7 @@
 }
 .about-me .about-link {
     /*float: right;*/
-    /*margin-bottom: 0.5em;*/
+    padding-bottom: 1.5em;
 }
 
 /* 20160601 加大About Me的高度 */

@@ -636,7 +636,7 @@
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 <span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
-<script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>#more&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm2(&quot;p<data:post.id/>&quot;,&quot;p<data:post.url/>#more&quot;)</script><b:else/><div class='entry-container'>
+<script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>#more&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm2(&quot;p<data:post.id/>&quot;,&quot;<data:post.url/>#more&quot;)</script><b:else/><div class='entry-container'>
     <div class='entry-content'><article>
     <h1><b:if cond='data:post.link'><a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
 <b:else/>

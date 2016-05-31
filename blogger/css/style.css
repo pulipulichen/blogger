@@ -533,6 +533,9 @@ body .addthis-smartlayers {
     }
 }
 
+.entry-container .entry-content a.more {
+    font-weight: bold;
+}
 
 /**********************************/
 /* 底部區域 */

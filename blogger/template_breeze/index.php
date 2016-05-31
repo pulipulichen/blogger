@@ -66,10 +66,6 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script-item.js"></script>
 </b:if>
-<script type='text/javascript'>//<![CDATA[
-<?php 
-echo file_get_contents("0_header/3_scripts.js"); ?>
-//]]></script>
 <!-- ======================================== -->
 </head>
     

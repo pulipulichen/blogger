@@ -89,34 +89,34 @@ puliHandlePost = function () {
 };
 
 var puliHandleComments = function ()	{
-	var pHC = this;
-	pHC.title = "";
-	pHC.divID = "puliHandleCommentsDiv";
-	pHC.loading = "Loading...";
-	pHC.ulID = "puliHandleCommentsUl";
-	pHC.ulClass = "";
-	pHC.liClass = "puliHandleCom-item-title";
-	pHC.postshow = 10;
-	pHC.titlelen = 20;
-	pHC.layout = "%Y%-%M%-%D% %authorname%<br />%title%";
-	pHC.bloggerName = "pulipuli";
+    var pHC = this;
+    pHC.title = "";
+    pHC.divID = "puliHandleCommentsDiv";
+    pHC.loading = "Loading...";
+    pHC.ulID = "puliHandleCommentsUl";
+    pHC.ulClass = "";
+    pHC.liClass = "puliHandleCom-item-title";
+    pHC.postshow = 10;
+    pHC.titlelen = 20;
+    pHC.layout = "%Y%-%M%-%D% %authorname%<br />%title%";
+    pHC.bloggerName = "pulipuli";
 
-	pHC.compareentry = function(a,b){
-	    order= Date.parse(a.published.$t.replace(/^(\d{4})-(\d{2})-(\d{2})T([0-9:]*)([.0-9]*)(.)(.*)$/,
-  		'$1/$2/$3 $4 GMT')) - Date.parse(b.published.$t.replace(/^(\d{4})-(\d{2})-(\d{2})T([0-9:]*)([.0-9]*)(.)(.*)$/,
-		'$1/$2/$3 $4 GMT'));
-		return 0-order;
-	};
+    pHC.compareentry = function (a, b) {
+        order = Date.parse(a.published.$t.replace(/^(\d{4})-(\d{2})-(\d{2})T([0-9:]*)([.0-9]*)(.)(.*)$/,
+                '$1/$2/$3 $4 GMT')) - Date.parse(b.published.$t.replace(/^(\d{4})-(\d{2})-(\d{2})T([0-9:]*)([.0-9]*)(.)(.*)$/,
+                '$1/$2/$3 $4 GMT'));
+        return 0 - order;
+    };
 
-	pHC.handleComments = function (json) {
-	 var title = '';
-	 if (pHC.title !== '')
-	   title = '<h2>'+pHC.title+'</h2>';
-	 var temp = title + '<ul id="'+pHC.ulID+'">';
-	 var postshow = pHC.postshow;
-	 var titlelen = pHC.titlelen;
-	 var layout = pHC.layout;
-	 var sortentry = json.feed.entry.sort(compareentry);
+    pHC.handleComments = function (json) {
+        var title = '';
+        if (pHC.title !== '')
+            title = '<h2>' + pHC.title + '</h2>';
+        var temp = title + '<ul id="' + pHC.ulID + '">';
+        var postshow = pHC.postshow;
+        var titlelen = pHC.titlelen;
+        var layout = pHC.layout;
+        var sortentry = json.feed.entry.sort(compareentry);
         for (var i = 0, post; post = sortentry[i]; i++) {
             if (i >= postshow) {
                 break;
@@ -149,20 +149,20 @@ var puliHandleComments = function ()	{
 
             temp += '<li class="' + pHC.liClass + '">' + layout_replace + '</li>';
         }   //for (var i = 0, post; post = sortentry[i]; i++) {
-	temp+="</ul>";
-	jQuery("#"+pHC.divID).html(temp);
-	
-	};
-	
-	pHC.load = function(nodeID)
-	{
-		jQuery("#"+nodeID).html('<div id="'+pHC.divID+'"><h2>'+pHC.loading+'</h2></div>');
-		
-		jQuery.getJSON("/feeds/comments/full?alt=json-in-script&callback=?", 
-			function(data){ 
-			  pHC.handleComments(data);
-			});
-		return pHC;
-	};
-	return pHC;
+        temp += "</ul>";
+        jQuery("#" + pHC.divID).html(temp);
+
+    };
+
+    pHC.load = function (nodeID)
+    {
+        jQuery("#" + nodeID).html('<div id="' + pHC.divID + '"><h2>' + pHC.loading + '</h2></div>');
+
+        jQuery.getJSON("/feeds/comments/full?alt=json-in-script&callback=?",
+                function (data) {
+                    pHC.handleComments(data);
+                });
+        return pHC;
+    };
+    return pHC;
 };

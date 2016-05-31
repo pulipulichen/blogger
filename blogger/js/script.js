@@ -359,3 +359,24 @@ var _display_related_posts = function (items, msgs, config) {
 //---------------------------------------
 
 $('.go-top').click(function(){$('.st-content').animate({scrollTop:0},'slow');$('html, body').animate({scrollTop:0},'slow');return false;});
+
+//----------------------------------------
+$(function () {
+    $(".widget h2").wrapInner("<span/>");
+});
+
+// -------------------
+$(function ($) {
+
+    var aboveHeight = $('#leader-wrapper').outerHeight();
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > aboveHeight) {
+            $('#masthead').addClass('fixed-nav').css('top', '0').next()
+                    .css('padding-top', '5px');
+
+        } else {
+            $('#masthead').removeClass('fixed-nav').next()
+                    .css('padding-top', '0');
+        }
+    });
+});

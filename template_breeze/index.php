@@ -34,12 +34,12 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 <?php echo file_get_contents("0_header/2_style.css"); ?>
 <?php echo file_get_contents("0_header/3_custom_style.css"); ?>
 </style>
-<link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/lib/style.css"/>
+<link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style.css"/>
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
-    <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/lib/style-item.css"/>
+    <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-item.css"/>
 </b:if>
-<!-- <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/lib/style-olw.css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-olw.css"/> -->
 
 <?php 
 // 讀取外部檔案
@@ -62,9 +62,9 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
 <meta name="baidu-site-verification" content="0XST85Xh5F" />
 
 <!-- ======================================== -->
-<script type="text/javascript" src="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/lib/script.js"></script>
+<script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script.js"></script>
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
-    <script type="text/javascript" src="https://dl.dropboxusercontent.com/u/717137/blogger/template_breeze/lib/script-item.js"></script>
+    <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script-item.js"></script>
 </b:if>
 <script type='text/javascript'>//<![CDATA[
 <?php 

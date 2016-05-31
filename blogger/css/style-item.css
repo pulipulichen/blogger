@@ -358,14 +358,3 @@ body .addthis-smartlayers {
 #main div.comments#comments {
     min-height: 378px;
 }
-
-/*************************************/
-/* 20160601 加大About Me的高度 */
-#sidebar .about-me h3 {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-}
-
-#sidebar .about-me .description {
-    margin-bottom: 2em;
-}

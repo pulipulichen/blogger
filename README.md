@@ -6,6 +6,7 @@ blogger
 for http://blog.pulipuli.info
 
 ## MEMO
+http://pulipulichen.github.io/blogger/
 http://pulipulichen.github.io/blogger/blogger/
 http://pulipulichen.github.io/blogger/blogger/js/script.js
 http://pulipulichen.github.io/blogger/blogger/css/

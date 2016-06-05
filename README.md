@@ -7,6 +7,8 @@ for http://blog.pulipuli.info
 
 ## MEMO
 http://pulipulichen.github.io/blogger/
+https://github.com/pulipulichen/blogger/tree/gh-pages/posts/2016/06
+
 http://pulipulichen.github.io/blogger/blogger/
 http://pulipulichen.github.io/blogger/blogger/js/script.js
 http://pulipulichen.github.io/blogger/blogger/css/

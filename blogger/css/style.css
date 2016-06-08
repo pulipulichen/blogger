@@ -1194,7 +1194,7 @@ header > .back-button {
 /*********************************/
 /* 20160522 修正導覽列的問題 */
 @media (max-width: 1200px) and (min-width: 979px) {
-    .search-bar .gsc-control-wrapper-cse {
+    #masthead .gsc-control-wrapper-cse {
         width: 130px !important;
     }
     .search-bar {

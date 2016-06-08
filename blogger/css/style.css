@@ -64,7 +64,7 @@
     color: #BD8242;
 }
 
-.entry-content h1 a, #main .index-labels {
+.entry-content h1 a {
     text-decoration: none;
     color: #333;
 }
@@ -1558,5 +1558,10 @@ header > .back-button {
 /**********************************************/
 /* 20160608 首頁的labels */
 #main .index-labels {
-    display: none;
+    display: none;  
+    text-decoration: none;
+    color: #333;
+}
+#main .meta > p > small > span {
+    margin-right: 10px;
 }

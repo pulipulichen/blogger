@@ -1559,9 +1559,12 @@ header > .back-button {
 /* 20160608 首頁的labels */
 #main .index-labels {
     display: none;  
+}
+#main .index-labels a {
     text-decoration: none;
     color: #333;
 }
+
 #main .meta > p > small > span {
     margin-right: 10px;
 }

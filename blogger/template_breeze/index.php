@@ -637,6 +637,22 @@
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 
+    <span expr:id='&quot;l&quot; + data:post.id' class="index-labels"> 
+        <i class='fa fa-tags'/>       
+        <b:if cond='data:post.labels'>
+            <span class='label-info'>
+
+                <b:loop values='data:post.labels' var='label'>
+                    <a expr:href='data:label.url' rel='tag'>
+                        <data:label.name/>
+                    </a>
+                    <b:if cond='data:label.isLast != &quot;true&quot;'>
+                        ,
+                    </b:if>
+                </b:loop>
+            </span>
+        </b:if>
+    </span>
     <span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
     <script type='text/javascript'>
         var x=&quot;<data:post.title/>&quot;
@@ -651,7 +667,7 @@
     <div class='entry-container'>
     <div class='entry-content'><article>
     <h1>
-        <b:if cond='data:post.link'>
+<b:if cond='data:post.link'>
             <a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
             
 <b:else/>

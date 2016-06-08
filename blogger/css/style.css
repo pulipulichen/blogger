@@ -1554,3 +1554,9 @@ header > .back-button {
     padding: 10px 15px 0;
     color: #292929;
 }
+
+/**********************************************/
+/* 20160608 首頁的labels */
+#main .index-labels {
+    display: none;
+}

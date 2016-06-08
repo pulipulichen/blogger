@@ -929,7 +929,7 @@ var posts=4,
 
 //]]></script>
 <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/related-posts.js"></script>
-<!-- jAVASCRIPT -->
+<!-- JAVASCRIPT -->
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script src="//load.sumome.com/" data-sumo-site-id="91b6a5a67cc23845f0765da427a8ac1c0b918c4e9226f12ea32abf1e8110df0c" async="async"></script>
 <script>

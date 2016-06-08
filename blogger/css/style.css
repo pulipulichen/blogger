@@ -64,7 +64,7 @@
     color: #BD8242;
 }
 
-.entry-content h1 a {
+.entry-content h1 a, #main .index-labels {
     text-decoration: none;
     color: #333;
 }

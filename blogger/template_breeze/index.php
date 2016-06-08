@@ -637,7 +637,7 @@
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 
-    <span expr:id='&quot;l&quot; + data:post.id' class="index-labels"> 
+    <span expr:id='&quot;lp&quot; + data:post.id' class="index-labels"> 
         <i class='fa fa-tags'/>       
         <b:if cond='data:post.labels'>
             <span class='label-info'>

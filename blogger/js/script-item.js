@@ -200,7 +200,7 @@ $(function () {
 //----------------------
 
 function pulipuli_related_results_labels_thumbs(e) {
-    console.log(e);
+    //console.log(e);
     if (typeof(e.feed.entry) === "undefined") {
         if ($("#related-posts").hasClass("has-item") === false) {
             $("#related-posts").hide();
@@ -209,6 +209,7 @@ function pulipuli_related_results_labels_thumbs(e) {
     }
     else {
         $("#related-posts").addClass("has-item");
+        $("#related-posts").show();
     }
 
     for (var t = 0; t < e.feed.entry.length; t++) {

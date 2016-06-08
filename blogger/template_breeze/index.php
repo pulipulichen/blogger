@@ -660,7 +660,7 @@
         ,z=&quot;<data:post.author/>&quot;
         ,t=&quot;<data:post.timestamp/>&quot;
         ,u=&quot;<data:post.numComments/>&quot;;
-        rm2(&quot;p<data:post.id/>&quot;,&quot;<data:post.url/>#more&quot;);
+        rm2(&quot;p<data:post.id/>&quot;,&quot;<data:post.url/>&quot;);
     </script>
     
 <b:else/>
@@ -861,7 +861,7 @@
   <div class="comments" id="disqus_thread"></div>
     
   <div class='comments' id='comments'>
-    <a name='comments'/>
+    <a name='comments-anchor' id='comments-anchor'  />
     <h4><data:post.commentLabelFull/>:</h4>
 
     <div class='comments-content'>

@@ -1560,7 +1560,7 @@ header > .back-button {
 #main .index-labels {
     display: none;  
 }
-#main .index-labels a {
+#main .meta .label-info a {
     text-decoration: none;
     color: #333;
 }

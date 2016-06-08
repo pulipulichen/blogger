@@ -1560,7 +1560,8 @@ header > .back-button {
 #main .index-labels {
     display: none;  
 }
-#main .meta .label-info a {
+#main .meta .label-info a,
+#main .meta > p > small > span a{
     text-decoration: none;
     color: #333;
 }
@@ -1568,3 +1569,4 @@ header > .back-button {
 #main .meta > p > small > span {
     margin-right: 10px;
 }
+

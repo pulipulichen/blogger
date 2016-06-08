@@ -636,31 +636,39 @@
 </b:if>
 
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
-<span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
-<script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>#more&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm2(&quot;p<data:post.id/>&quot;,&quot;<data:post.url/>#more&quot;)</script><b:else/><div class='entry-container'>
+
+    <span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
+    <script type='text/javascript'>var x=&quot;<data:post.title/>&quot;,y=&quot;<data:post.url/>#more&quot;,z=&quot;<data:post.author/>&quot;,t=&quot;<data:post.timestamp/>&quot;,u=&quot;<data:post.numComments/>&quot;;rm2(&quot;p<data:post.id/>&quot;,&quot;<data:post.url/>#more&quot;,&quot;<data:post.labels/>&quot;)</script><b:else/><div class='entry-container'>
     <div class='entry-content'><article>
     <h1><b:if cond='data:post.link'><a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
+            
 <b:else/>
+
 <data:post.title/>
 
-<div class='meta1'><p><small>  <span><i class='fa fa-clock-o'/> <data:post.timestamp/></span>    
+<div class='meta1'>
+    <p>
+        <small>  
+            <span>
+                <i class='fa fa-clock-o'/> <data:post.timestamp/>
+            </span>    
             <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
-            <span>  
-                <i class='fa fa-tags'/>       
-                <b:if cond='data:post.labels'>
-                    <span class='label-info'>
+                <span>  
+                    <i class='fa fa-tags'/>       
+                    <b:if cond='data:post.labels'>
+                        <span class='label-info'>
 
-                        <b:loop values='data:post.labels' var='label'>
-                            <a expr:href='data:label.url' rel='tag'>
-                                <data:label.name/>
-                            </a>
-                            <b:if cond='data:label.isLast != &quot;true&quot;'>
-                                ,
-                            </b:if>
-                        </b:loop>
-                    </span>
-                </b:if>
-            </span>
+                            <b:loop values='data:post.labels' var='label'>
+                                <a expr:href='data:label.url' rel='tag'>
+                                    <data:label.name/>
+                                </a>
+                                <b:if cond='data:label.isLast != &quot;true&quot;'>
+                                    ,
+                                </b:if>
+                            </b:loop>
+                        </span>
+                    </b:if>
+                </span>
             </b:if>
             
             <b:if cond='data:post.allowNewComments'>
@@ -669,11 +677,12 @@
         </small>
     </p></div>
   </b:if></h1>
+            
   <data:post.body/>
+  
 </article></div></div>
- 
-</b:if>
 
+</b:if>
 
 <div class='clear'/>
 
@@ -733,9 +742,10 @@
 
 </aside>
 </div>
-</b:if>
+</b:if> <?php /* <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'> */ ?>
 
-    <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
+<?php /* Related Posts */ ?>   
+<b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
     <div class='related_posts'>
         <script type='text/javascript'>
           var maxresults=10;

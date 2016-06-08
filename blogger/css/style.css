@@ -1022,7 +1022,7 @@ body .addthis-smartlayers {
     body > .sumome-share-client-wrapper {
         display: none;
     }
-}
+}   /* @media print { */
 
 /********************/
 @media (max-width: 460px) {
@@ -1106,7 +1106,7 @@ body > div.sumome-share-client-counts a[title="SumoMe"] {
 }
 
 body > div.sumome-share-client-wrapper.sumome-share-client-wrapper-left-page {
-    top: 100px !important;
+    top: 111px !important;
 }
 
 body > div.sumome-share-client-counts div.sumome-share-client-animated {

@@ -1302,6 +1302,16 @@ header > .back-button {
 
 #menu-primary li.help .title {
     display: none;
+
+}
+@media (min-width: 979px) and (max-width: 1200px) {
+    #menu-primary > li.home {
+        width: 75px;
+    }
+    
+    #masthead .gsc-control-wrapper-cse {
+        width: 130px;
+    }
 }
 
 @media (max-width: 979px) {

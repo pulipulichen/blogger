@@ -1589,7 +1589,7 @@ header > .back-button {
 /****************************************/
 /* 20160625 隨機文章 */
 
-#random-posts img {
+#random_posts img {
     border-radius: 10px;
     float: left;
     margin-right: 5px;
@@ -1600,33 +1600,33 @@ header > .back-button {
     transition: all 0.2s linear 0s;
 }
 
-#random-posts img:hover {
+#random_posts img:hover {
     opacity: 0.6;
 }
 
-ul#random-posts {
+ul#random_posts {
     list-style-type: none;
     padding: 0px;
 }
 
-#random-posts a {
+#random_posts a {
     font-size: 12px;
     text-transform: uppercase;
     padding: 0px auto 5px;
 }
 
-#random-posts a:hover {
+#random_posts a:hover {
     text-decoration: none;
 }
 
-.random-summary {
+#random_posts .random-summary {
     font-size: 11px;
     background: none;
     padding: 5px;
     margin-right: 8px;
 }
 
-#random-posts li {
+#random_posts li {
     margin-bottom: 10px;
     border-bottom: 1px solid #EEEEEE;
     padding: 4px;

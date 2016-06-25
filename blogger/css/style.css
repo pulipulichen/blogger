@@ -1615,10 +1615,11 @@ header > .back-button {
     transition: all 0.2s linear 0s;
 }
 
+/*
 #random_posts img:hover {
     opacity: 0.6;
 }
-
+*/
 ul#random_posts {
     list-style-type: none;
     padding: 0px;

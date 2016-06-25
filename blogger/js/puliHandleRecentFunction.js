@@ -25,8 +25,9 @@ puliHandlePost = function () {
 
     pHP.handlePosts = function (json) {
         var title = '';
-        if (pHP.title !== '')
+        if (pHP.title !== '') {
             title = '<h2>' + pHP.title + '</h2>';
+        }
         var temp = title + '<ul id="' + pHP.ulID + '">';
         var postshow = pHP.postshow;
         var titlelen = pHP.titlelen;

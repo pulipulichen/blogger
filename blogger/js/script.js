@@ -88,10 +88,10 @@ PULI_UTILS.is_blogger_fullpage = function()
 {
 	var href_array = location.href.split("/");
 	//var href_array2 = location.href.split("\\");
-	var _is_fulllpage = (href_array.length > 5 && href_array[4] != "label");
-	var _is_file = href_array[0] != "file:";
-	var _is_localhost = (href_array[2] == 'localhost');
-	var _is_localhost_fullpage = (href_array[href_array.length-1] == 'fullpage.html');
+	var _is_fulllpage = (href_array.length > 5 && href_array[4] !== "label");
+	var _is_file = href_array[0] !== "file:";
+	var _is_localhost = (href_array[2] === 'localhost');
+	var _is_localhost_fullpage = (href_array[href_array.length-1] === 'fullpage.html');
 	
 	if (_is_localhost) {
 		if (_is_localhost_fullpage) {
@@ -428,6 +428,16 @@ $(function () {
         for (var i = 0; i < randomposts_number; i++) {
             var entry = json.feed.entry[i];
             var randompoststitle = entry.title.$t;
+            
+            if (randompoststitle.length > 20) {
+                randompoststitle = randompoststitle.substr(0, 20) + "...";
+            }
+            // 20160625 最新標題，把/之前的文字加上粗體
+            if (randompoststitle.indexOf(" / ") > 0) {
+                var _slash_pos = randompoststitle.indexOf(" / ");
+                randompoststitle = "<strong>" + randompoststitle.substr(0, _slash_pos) + "</strong>" + randompoststitle.substr(_slash_pos);
+            }
+            
             if ('content' in entry) {
                 var randompostsnippet = entry.content.$t;
             } else {

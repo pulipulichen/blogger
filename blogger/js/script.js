@@ -389,8 +389,8 @@ $(function () {
     var randomposts_number = 5;
     var randomposts_chars = 110;
     var randomposts_details = true;
-    var randomposts_comments = 'Comments';
-    var randomposts_commentsd = 'Comments Disabled';
+    var randomposts_comments = '留言';
+    var randomposts_commentsd = '';
     var randomposts_current = [];
     var total_randomposts = 0;
     var randomposts_current = new Array(randomposts_number);
@@ -429,10 +429,10 @@ $(function () {
             var entry = json.feed.entry[i];
             var randompoststitle = entry.title.$t;
             if ('content' in entry) {
-                var randompostsnippet = entry.content.$t
+                var randompostsnippet = entry.content.$t;
             } else {
                 if ('summary' in entry) {
-                    var randompostsnippet = entry.summary.$t
+                    var randompostsnippet = entry.summary.$t;
                 } else {
                     var randompostsnippet = "";
                 }
@@ -469,10 +469,18 @@ $(function () {
             _li = _li + '<div><a href="' + randompostsurl + '" rel="nofollow">' + randompoststitle + '</a></div>';
             if (randomposts_details === true) {
                 //document.write('<span><div  class="random-info">' + randomposts_date.substring(8, 10) + '.' + randomposts_date.substring(5, 7) + '.' + randomposts_date.substring(0, 4) + ' - ' + randomposts_commentsnum) + '</div></span>'
-                _li = _li + '<span><div  class="random-info">' + randomposts_date.substring(8, 10) + '.' + randomposts_date.substring(5, 7) + '.' + randomposts_date.substring(0, 4) + ' - ' + randomposts_commentsnum + '</div></span>';
+                
+                _li = _li + '<span><div  class="random-info">(' 
+                        + randomposts_date.substring(0, 4) 
+                        + '-'  + randomposts_date.substring(8, 10)
+                        + '.'  + randomposts_date.substring(5, 7)
+                        
+                        + ') ' + randomposts_commentsnum 
+                        + '</div></span>';
             };
             //document.write('<br/><div class="random-summary">' + randomposts_snippet + '</div><div style="clear:both"></div></li>')
-            _li = _li + '<br/><div class="random-summary">' + randomposts_snippet + '</div><div style="clear:both"></div></li>';
+            //_li = _li + '<br/><div class="random-summary">' + randomposts_snippet + '</div>';
+            _li = _li + '<div style="clear:both"></div></li>';
             _ul.append(_li);
         }
     };

@@ -1593,8 +1593,8 @@ header > .back-button {
     border-radius: 10px;
     float: left;
     margin-right: 5px;
-    width: 75px;
-    height: 75px;
+    max-width: 70px;
+    height: auto;
     background-color: #F5F5F5;
     padding: 3px;
     transition: all 0.2s linear 0s;
@@ -1610,14 +1610,17 @@ ul#random_posts {
 }
 
 #random_posts a {
-    font-size: 12px;
+    /*font-size: 12px;*/
     text-transform: uppercase;
     padding: 0px auto 5px;
+    
 }
 
+/*
 #random_posts a:hover {
     text-decoration: none;
 }
+*/
 
 #random_posts .random-summary {
     font-size: 11px;

@@ -429,13 +429,16 @@ $(function () {
             var entry = json.feed.entry[i];
             var randompoststitle = entry.title.$t;
             
-            if (randompoststitle.length > 20) {
-                randompoststitle = randompoststitle.substr(0, 20) + "...";
+            if (randompoststitle.length > 40) {
+                randompoststitle = randompoststitle.substr(0, 40) + "...";
             }
             // 20160625 最新標題，把/之前的文字加上粗體
             if (randompoststitle.indexOf(" / ") > 0) {
                 var _slash_pos = randompoststitle.indexOf(" / ");
                 randompoststitle = "<strong>" + randompoststitle.substr(0, _slash_pos) + "</strong>" + randompoststitle.substr(_slash_pos);
+            }
+            else {
+                randompoststitle = "<strong>" + randompoststitle + "</strong>";
             }
             
             if ('content' in entry) {

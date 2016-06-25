@@ -47,6 +47,9 @@ puliHandlePost = function () {
                 var _slash_pos = title.indexOf(" / ");
                 title = "<strong>" + title.substr(0, _slash_pos) + "</strong>" + title.substr(_slash_pos);
             }
+            else {
+                title = "<strong>" + title + "</strong>";
+            }
             
             var link = post.link[4].href;
             if (link.substr(link.length - 5, 5) !== ".html") {

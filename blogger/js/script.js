@@ -498,7 +498,7 @@ $(function () {
         }
     };
     
-    console.log("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts");
+    //console.log("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts");
     $.getScript("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts", function () {
         getvalue();
         //for (var i = 0; i < randomposts_number; i++) {
@@ -508,9 +508,9 @@ $(function () {
         
         var _i = 0;
         var _loop = function () {
-            console.log([_i, randomposts_number]);
+            //console.log([_i, randomposts_number]);
             if (_i < randomposts_number) {
-                console.log('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
+                //console.log('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
                 $.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
                 _i++;
                 _loop();

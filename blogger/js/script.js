@@ -424,7 +424,7 @@ $(function () {
         return ranNum;
     };
 
-    var random_posts = function (json) {
+    random_posts = function (json) {
         for (var i = 0; i < randomposts_number; i++) {
             var entry = json.feed.entry[i];
             var randompoststitle = entry.title.$t;
@@ -476,6 +476,8 @@ $(function () {
             _ul.append(_li);
         }
     };
+    
+    console.log("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts");
     $.getScript("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts", function () {
         getvalue();
         //for (var i = 0; i < randomposts_number; i++) {
@@ -486,6 +488,7 @@ $(function () {
         var _i = 0;
         var _loop = function () {
             if (_i < randomposts_number) {
+                console.log('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
                 $.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts', function () {
                     _i++;
                     _loop();

@@ -61,7 +61,9 @@ jQuery.puliGuestBook = function (config) {
     var container = jQuery(_container_id);
     if (container.length === 0) {
         var _id = _container_id.substr(1);
-        document.write('<div id="' + _id + '">'+'Loading...'+'</div>');
+        document.write('<div id="' + _id + '">'
+                //+ 'Loading...'
+                + '</div>');
         
         container = jQuery(_container_id);
     }

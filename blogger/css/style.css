@@ -1581,4 +1581,7 @@ header > .back-button {
     .sumome-stylebufferbottom-shim {
         height: 50px;
     }
+    #footer .go-top {
+        bottom: calc(50px + 1em);
+    }
 }

@@ -1599,7 +1599,9 @@ header > .back-button {
 }
 
 #random_posts dd:hover {
-    border-color: #85CCB1;
+    background:#F8F8F8;
+    border-left:3px solid #F69087;
+    cursor:pointer
 }
 
 #random_posts img {

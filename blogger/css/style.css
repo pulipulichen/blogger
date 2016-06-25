@@ -1589,6 +1589,17 @@ header > .back-button {
 /****************************************/
 /* 20160625 隨機文章 */
 
+.sidebar .widget-content li a {
+    font-size: inherit;
+    color: inherit;
+}
+
+ul#random_posts {
+    list-style-type: none;
+    padding: 0px;
+    padding-bottom: 0.5em;
+}
+
 #random_posts dd {
     line-height: 22px;
     margin: 0;
@@ -1620,11 +1631,6 @@ header > .back-button {
     opacity: 0.6;
 }
 */
-ul#random_posts {
-    list-style-type: none;
-    padding: 0px;
-    padding-bottom: 0.5em;
-}
 
 /*
 #random_posts a {
@@ -1653,3 +1659,12 @@ ul#random_posts {
     border-bottom: 1px solid #EEEEEE;
     padding: 4px;
 }
+
+/*****************************************/
+/* 20160626 小畫面下面about me按鈕錯誤 */
+@media (max-width: 1200px) and (min-width: 979px) {
+    #sidebar .about-link .read-more {
+        padding: 5px;
+        margin-top: 2px;
+    }
+}   /* @media (max-width: 1200px) and (min-width: 979px) { */

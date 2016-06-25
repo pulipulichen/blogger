@@ -446,7 +446,7 @@ $(function () {
                 randomposts_snippet = randompostsnippet.substring(0, whitespace) + "&#133;";
             };
             for (var j = 0; j < entry.link.length; j++) {
-                if ('thr$total' in entry) {
+                if ('thr$total' in entry && entry.thr$total.$t > 0) {
                     var randomposts_commentsnum = entry.thr$total.$t + ' ' + randomposts_comments;
                 } else {
                     randomposts_commentsnum = randomposts_commentsd;
@@ -473,7 +473,7 @@ $(function () {
                 _li = _li + '<span><div  class="random-info">(' 
                         + randomposts_date.substring(0, 4) 
                         + '-'  + randomposts_date.substring(8, 10)
-                        + '.'  + randomposts_date.substring(5, 7)
+                        + '-'  + randomposts_date.substring(5, 7)
                         
                         + ') ' + randomposts_commentsnum 
                         + '</div></span>';
@@ -499,6 +499,7 @@ $(function () {
             if (_i < randomposts_number) {
                 console.log('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
                 $.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts', function () {
+                    console.log([_i, randomposts_number]);
                     _i++;
                     _loop();
                 });

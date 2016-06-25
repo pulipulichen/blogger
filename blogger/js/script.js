@@ -397,7 +397,7 @@ $(function () {
         total_randomposts = json.feed.openSearch$totalResults.$t;
     };
     //document.write('<script type=\"text/javascript\" src=\"/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts\"><\/script>');
-    $.getScript("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts");
+    //$.getScript("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts");
 
     var getvalue = function () {
         for (var i = 0; i < randomposts_number; i++) {
@@ -476,6 +476,6 @@ $(function () {
     getvalue();
     for (var i = 0; i < randomposts_number; i++) {
         //document.write('<script type=\"text/javascript\" src=\"/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[i] + '&max-results=1&callback=random_posts\"><\/script>')
-        $.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[i] + '&max-results=1&callback=random_posts');
+        //$.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[i] + '&max-results=1&callback=random_posts');
     };
 });

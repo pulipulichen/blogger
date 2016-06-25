@@ -1570,3 +1570,15 @@ header > .back-button {
     margin-right: 10px;
 }
 
+/*************************************/
+/* 20160625 小視窗的時候，主要文章的左右兩側，不要加入側邊欄 */
+
+@media (max-width: 480px) {
+    #content-wrapper #primary {
+        padding-left:0px !important;
+        padding-right:0px !important; 
+    }
+    .sumome-stylebufferbottom-shim {
+        height: 50px;
+    }
+}

@@ -384,7 +384,7 @@ $(function ($) {
 // --------------
 // 20160625 隨機文章
 $(function () {
-    return;
+    
     var randomposts_number = 5;
     var randomposts_chars = 110;
     var randomposts_details = true;

@@ -385,6 +385,7 @@ $(function ($) {
 // 20160625 隨機文章
 $(function () {
     
+    var _ul = $("#random_posts");
     var randomposts_number = 5;
     var randomposts_chars = 110;
     var randomposts_details = true;
@@ -472,6 +473,7 @@ $(function () {
             };
             //document.write('<br/><div class="random-summary">' + randomposts_snippet + '</div><div style="clear:both"></div></li>')
             _li = _li + '<br/><div class="random-summary">' + randomposts_snippet + '</div><div style="clear:both"></div></li>';
+            _ul.append(_li);
         }
     };
     $.getScript("/feeds/posts/default?alt=json-in-script&max-results=0&callback=randomposts", function () {

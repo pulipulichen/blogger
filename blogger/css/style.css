@@ -1593,8 +1593,13 @@ header > .back-button {
     padding-bottom: 0.5em;
 }
 
-#PopularPosts1 dd {
+#random_posts dd {
     line-height: 22px;
+    margin: 0;
+    padding: 8px 15px 8px 10px;
+    position: relative;
+    min-height: 55px;
+    border-left: 3px solid transparent;
 }
 
 #random_posts img {

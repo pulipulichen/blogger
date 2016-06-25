@@ -498,11 +498,9 @@ $(function () {
             console.log([_i, randomposts_number]);
             if (_i < randomposts_number) {
                 console.log('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
-                $.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts', function () {
-                    console.log([_i, randomposts_number]);
-                    _i++;
-                    _loop();
-                });
+                $.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[_i] + '&max-results=1&callback=random_posts');
+                _i++;
+                _loop();
             }
         };
         _loop();

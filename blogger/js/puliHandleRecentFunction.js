@@ -33,14 +33,22 @@ puliHandlePost = function () {
         var layout = pHP.layout;
         var sortentry = json.feed.entry.sort(compareentry);
         for (var i = 0, post; post = sortentry[i]; i++) {
-            if (i >= postshow)
+            if (i >= postshow) {
                 break;
+            }
             var title = post.title.$t;
-            if (titlelen !== "" && title.length > titlelen)
+            if (titlelen !== "" && title.length > titlelen) {
                 title = title.substr(0, titlelen) + "...";
+            }
+            
+            // 20160625 最新標題，把/之前的文字加上粗體
+            if (title.indexOf(" / ") > 0) {
+                var _slash_pos = title.indexOf(" / ");
+                title = "<strong>" + title.substr(0, _slash_pos) + "</strong>" + title.substr(_slash_pos);
+            }
+            
             var link = post.link[4].href;
-            if (link.substr(link.length - 5, 5) !== ".html")
-            {
+            if (link.substr(link.length - 5, 5) !== ".html") {
                 //如果擷取到的網址不是html網頁的話
                 var _links = post.link;
                 for (var _l = 0; _l < _links.length; _l++)
@@ -70,21 +78,21 @@ puliHandlePost = function () {
         }
     };
 
-    pHP.load = function (nodeID)
-    {
+    pHP.load = function (nodeID) {
         jQuery("#" + nodeID).html('<div id="' + pHP.divID + '"><h2>' + pHP.loading + '</h2></div>');
 
         var tagname = pHP.tagname;
         if (tagname.substr(0, 3) !== "/-/"
-                && tagname !== "")
+                && tagname !== "") {
             tagname = "/-/" + tagname;
+        }
 
         jQuery.getJSON("/feeds/posts/summary" + tagname + "/?alt=json-in-script&callback=?",
                 function (data) {
                     pHP.handlePosts(data);
                 });
         return pHP;
-    }
+    };
     return pHP;
 };
 

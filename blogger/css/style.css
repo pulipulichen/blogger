@@ -1589,6 +1589,14 @@ header > .back-button {
 /****************************************/
 /* 20160625 隨機文章 */
 
+#random_posts {
+    padding-bottom: 0.5em;
+}
+
+#PopularPosts1 dd {
+    line-height: 22px;
+}
+
 #random_posts img {
     border-radius: 10px;
     float: left;

@@ -462,11 +462,11 @@ $(function () {
             };
             var _li = '';
             //document.write('<li>');
-            _li = _li + '<li>';
+            _li = _li + '<dd>';
             //document.write('<a href="' + randompostsurl + '" rel="nofollow"><img alt="' + randompoststitle + '" src="' + randompoststhumb + '"/></a>');
-            _li = _li + '<a href="' + randompostsurl + '" rel="nofollow"><img alt="' + randompoststitle + '" src="' + randompoststhumb + '"/></a>';
+            _li = _li + '<img alt="' + randompoststitle + '" src="' + randompoststhumb + '"/>';
             //document.write('<div><a href="' + randompostsurl + '" rel="nofollow">' + randompoststitle + '</a></div>');
-            _li = _li + '<div><a href="' + randompostsurl + '" rel="nofollow">' + randompoststitle + '</a></div>';
+            _li = _li + '<a href="' + randompostsurl + '" rel="nofollow" title="' + randomposts_snippet + '">' + randompoststitle + '</a>';
             if (randomposts_details === true) {
                 //document.write('<span><div  class="random-info">' + randomposts_date.substring(8, 10) + '.' + randomposts_date.substring(5, 7) + '.' + randomposts_date.substring(0, 4) + ' - ' + randomposts_commentsnum) + '</div></span>'
                 
@@ -480,7 +480,7 @@ $(function () {
             };
             //document.write('<br/><div class="random-summary">' + randomposts_snippet + '</div><div style="clear:both"></div></li>')
             //_li = _li + '<br/><div class="random-summary">' + randomposts_snippet + '</div>';
-            _li = _li + '<div style="clear:both"></div></li>';
+            _li = _li + '<div style="clear:both"></div></dd>';
             _ul.append(_li);
         }
     };

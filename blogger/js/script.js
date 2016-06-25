@@ -473,7 +473,7 @@ $(function () {
             _li = _li + '<br/><div class="random-summary">' + randomposts_snippet + '</div><div style="clear:both"></div></li>';
         }
     };
-    getvalue();
+    //getvalue();
     for (var i = 0; i < randomposts_number; i++) {
         //document.write('<script type=\"text/javascript\" src=\"/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[i] + '&max-results=1&callback=random_posts\"><\/script>')
         //$.getScript('/feeds/posts/default?alt=json-in-script&start-index=' + randomposts_current[i] + '&max-results=1&callback=random_posts');

@@ -384,8 +384,13 @@ $(function ($) {
 // --------------
 // 20160625 隨機文章
 $(function () {
+    _load_random_posts();
+});
     
+var _load_random_posts = function () {
     var _ul = $("#random_posts");
+    _ul.empty();
+    
     var randomposts_number = 5;
     var randomposts_chars = 110;
     var randomposts_details = true;
@@ -522,6 +527,5 @@ $(function () {
         };
         _loop();
     });
+};
     
-    
-});

@@ -1660,6 +1660,10 @@ ul#random_posts {
     padding: 4px;
 }
 
+#sidebar > .widget > a.icon {
+    cursor: pointer;
+}
+
 /*****************************************/
 /* 20160626 小畫面下面about me按鈕錯誤 */
 @media (max-width: 1200px) and (min-width: 979px) {

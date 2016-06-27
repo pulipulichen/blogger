@@ -66,6 +66,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                     }
                     if (p.html() === "") {
                         p.remove();
+                        console.log('移除囉');
                     }
                 }
             }

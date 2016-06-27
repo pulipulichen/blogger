@@ -109,7 +109,10 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
         }
         
         if (headingTop.length === 1) {
-            firstHeading.before("<hr />");
+            hr = firstHeading.prev().filter('hr');
+            if (hr.length === 0) {
+                firstHeading.before("<hr />");
+            }
             return;
         }
 

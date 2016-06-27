@@ -109,7 +109,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
         }
         
         if (headingTop.length === 1) {
-            hr = firstHeading.prev().filter('hr');
+            hr = firstHeading.prevAll().filter('hr');
             if (hr.length === 0) {
                 firstHeading.before("<hr />");
             }
@@ -192,7 +192,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
         /**
          * 顯示目錄
          */
-        console.log(headingAry.length);
+        //console.log(headingAry.length);
         if (headingAry.length > 1) {
 
             cata_container.append(cataTitle)

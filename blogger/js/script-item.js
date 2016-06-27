@@ -59,14 +59,14 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                 }
                 else {
                     var p = firstHeading.prevAll("p:first");
-                    console.log([p.length, p.html()]);
+                    //console.log([p.length, p.html()]);
                     hr = p.children(':last').filter('hr');
                     if (hr.length > 0) {
                         hr.remove();
                     }
                     if (p.html() === "") {
                         p.remove();
-                        console.log('移除囉');
+                        //console.log('移除囉');
                     }
                 }
             }
@@ -189,7 +189,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
         /**
          * 顯示目錄
          */
-        if (headingAry.length !== 0) {
+        if (headingAry.length > 1) {
 
             cata_container.append(cataTitle)
                     .append(ulObj)

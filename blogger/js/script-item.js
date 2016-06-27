@@ -189,6 +189,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
         /**
          * 顯示目錄
          */
+        console.log(headingAry.length);
         if (headingAry.length > 1) {
 
             cata_container.append(cataTitle)

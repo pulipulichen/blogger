@@ -57,6 +57,13 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                 if (hr.length > 0) {
                     hr.remove();
                 }
+                else {
+                    var p = firstHeading.prevAll("p:first");
+                    hr = p.children(':last').filter('hr');
+                    if (hr.length > 0) {
+                        hr.remove();
+                    }
+                }
             }
 
             //var p = firstHeading.prevAll("p:first");

@@ -1,0 +1,15 @@
+.link {
+    stroke: #666;
+    opacity: 0.6;
+    stroke-width: 1.5px;
+}
+.node circle {
+    stroke: #fff;
+    opacity: 0.6;
+    stroke-width: 1.5px;
+}
+text {
+    font: 7px serif;
+    opacity: 0.6;
+    pointer-events: none;
+}

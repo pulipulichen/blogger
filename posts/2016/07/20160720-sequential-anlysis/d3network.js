@@ -95,16 +95,6 @@ var d3network = function (_config) {
         _i++;
     });
     
-    var labelText = svg.selectAll(".labelText")
-    .data(force.links())
-  .enter().append("text")
-    .attr("class","labelText")
-    .attr("dx",20)
-    .attr("dy",0)
-    .style("fill","red")
-  .append("textPath")
-    .attr("xlink:href",function(d,i) { return "#linkId_" + i;})
-    .text(function(d,i) { return "text for link " + i;});
     // ------------------------
     
     var node = svg.selectAll(".node")

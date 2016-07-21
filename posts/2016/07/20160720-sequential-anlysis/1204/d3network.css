@@ -5,10 +5,14 @@ path.link {
   stroke-width: 1.5px;
 }
 
+.marker {
+    fill: #666;
+}
+
 circle {
   fill: #ccc;
   stroke: #fff;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
 }
 
 text {

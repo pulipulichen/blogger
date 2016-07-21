@@ -84,6 +84,11 @@ function d3network(config) {
 
     var width = config.canvasWidth,
             height = config.canvasHeight;
+    
+    var color = d3.scale.category10();
+    //console.log(color);
+    
+    // ----------------------------------------
 
     var force = d3.layout.force()
             .nodes(d3.values(nodes))
@@ -100,6 +105,7 @@ function d3network(config) {
 
     if (enableDirection === true) {
         var calMarkerSize = function (width) {
+            return 6;
 //            width = Math.sqrt(width) + config.arrowSizeMin;
 ////            //width = width / 3;
 //            console.log([width, config.arrowMaxSize]);
@@ -123,12 +129,16 @@ function d3network(config) {
         };
         
         var calMarkerRefX = function (width) {
+            return config.nodeR + 10;
             console.log(width);
-            return 0;
-            return config.nodeR + 15 - (width * (config.nodeR + 10) );
+            //return 0;
+            //return 1.5;
+            //return config.nodeR + 10 - (width * (config.nodeR) );
+            return config.nodeR*2 - Math.sqrt(config.arrowDefaultSize);
         };
         
         var calMarkerRefY = function (width) {
+            return -1.5;
             console.log(width);
             //return config.nodeR + 15 - (width * (config.nodeR + 10) );
             return 0;
@@ -161,6 +171,7 @@ function d3network(config) {
                     return calMarkerSize(adjStrWidth[i]);
                     //return 6;
                 })
+                .style("stroke-width", function (d, i) {return Math.sqrt(adjStrWidth[i])})
                 .attr("orient", "auto")
                 .attr("class", "marker")
                 .append("svg:path")
@@ -210,6 +221,9 @@ function d3network(config) {
             .enter().append("g")
             .attr("class", "node")
             .call(force.drag)
+            .on("mouseover", function (d,i) {
+                console.log(d);
+            })
             .on("click", function (d) {
                 //console.log(d);
                 if (typeof(d.nodeClick) === "function") {
@@ -217,17 +231,19 @@ function d3network(config) {
                 }
             });
 
-// add the nodes
+    // add the nodes
     node.append("circle")
-            .attr("r", config.nodeR);
+            .attr("r", config.nodeR)
+            .style("fill", function (d, i) { return color(i); });
 
-// add the text 
+    // add the text 
     node.append("text")
             .attr("x", config.nodeR + 2)
             .attr("dy", ".65em")
             .text(function (d) {
                 return d.name;
             })
+            .style("fill", function (d,i) { return color(i);})
             .on("click", function (d) {
                 console.log(d);
                 if (typeof(d.nodeClick) === "function") {
@@ -235,7 +251,7 @@ function d3network(config) {
                 }
             });
 
-// add the curvy lines
+    // add the curvy lines
     function tick() {
         path.attr("d", function (d) {
             var dx = d.target.x - d.source.x,
@@ -285,8 +301,10 @@ function d3network(config) {
 //                y = y + base;
 //            }
             
-            var x =  ((dr - config.nodeR) * dx) / dr + d.source.x - config.nodeR;
-            var y =  ((dr - config.nodeR ) * dy) / dr + d.source.y - config.nodeR;
+            //var x =  ((dr - config.nodeR) * dx) / dr + d.source.x - config.nodeR;
+            //var y =  ((dr - config.nodeR ) * dy) / dr + d.source.y - config.nodeR;
+            var x = d.target.x;
+            var y = d.target.y;
             
             return "M" +
                     d.source.x + "," +

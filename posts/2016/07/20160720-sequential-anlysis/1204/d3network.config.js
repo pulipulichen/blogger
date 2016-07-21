@@ -12,6 +12,8 @@ config.strokeWidthMin = 0.1;
 config.arrowMaxSize = 0.2;
 config.arrowDefaultSize = 12;
 config.linkDistance = 150;
+config.rectWidth = 100;
+config.rectHeight = 60;
 
 config.nodeR = 10;
 

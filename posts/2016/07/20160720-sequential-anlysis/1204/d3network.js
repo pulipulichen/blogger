@@ -222,7 +222,20 @@ function d3network(config) {
             .attr("class", "node")
             .call(force.drag)
             .on("mouseover", function (d,i) {
-                console.log(d);
+                d3.select(this).select(".d3-tip").transition()
+                    .duration(750)
+                    .attr("opacity", 1);
+                d3.select(this).select(".d3-tip-text").transition()
+                    .duration(750)
+                    .attr("opacity", 1);
+            })
+            .on("mouseout", function (d,i) {
+                d3.select(this).select(".d3-tip").transition()
+                    .duration(750)
+                    .attr("opacity", 0);
+                d3.select(this).select(".d3-tip-text").transition()
+                    .duration(750)
+                    .attr("opacity", 0);
             })
             .on("click", function (d) {
                 //console.log(d);
@@ -234,23 +247,88 @@ function d3network(config) {
     // add the nodes
     node.append("circle")
             .attr("r", config.nodeR)
-            .style("fill", function (d, i) { return color(i); });
+            .style("fill", function (d, i) { return color(i); })
+            .on("mouseover", function () {
+                d3.select(this).transition()
+                    .duration(750)
+                    .attr("r", config.nodeR*2);
+            })
+            .on("mouseout", function () {
+                d3.select(this).transition()
+                    .duration(750)
+                    .attr("r", config.nodeR);
+            });
 
     // add the text 
     node.append("text")
-            .attr("x", config.nodeR + 2)
-            .attr("dy", ".65em")
+            .attr("x", function (d, i) {
+                if (d.name.length === 1) {
+                    return config.nodeR * 0.5 * -1;
+                }
+                return config.nodeR + 2;
+            })
+            .attr("dy", function (d,i) {
+                if (d.name.length === 1) {
+                    return config.nodeR * 0.5;
+                }
+                return ".65em";
+            })
             .text(function (d) {
                 return d.name;
             })
-            .style("fill", function (d,i) { return color(i);})
+            .style("fill", function (d,i) { 
+                if (d.name.length === 1) {
+                    return "#FFF";
+                }
+                return color(i);
+            })
             .on("click", function (d) {
                 console.log(d);
                 if (typeof(d.nodeClick) === "function") {
                     d.nodeClick();
                 }
             });
-
+    
+    var rectWidth = 100;
+    var rectHeight = 60;
+    var rect = node.append("rect")
+            //.attr("opacity", 0)
+            .attr("class", "d3-tip")
+            .attr("x", function (d, i) {
+                return 0 - (rectWidth / 2);
+            })
+            .attr("y", function (d,i) {
+                return 0 - (config.nodeR * 2) - rectHeight;
+            })
+            .style("fill", "#000")
+            .style("stroke", "#FFF")
+            .attr("width", rectWidth)
+            .attr("height", rectHeight);
+    
+    var rectText = node.append("text")
+                .attr("class", "d3-tip-text")
+                .attr("x", function (d, i) {
+                    //return 0 - (rectWidth / 2) + 2;
+                    return 0;
+                })
+                .attr("y", function (d,i) {
+                    return 0 - (config.nodeR * 2) - rectHeight + 12;
+                 })
+                .style("fill", "#FFF")
+                //.style("stroke", "#000")
+                .attr("width", rectWidth)
+                .style("text-anchor", "middle")
+                //.attr("alignment-baseline", "center")
+                .each(function (d, i) {
+                    // http://stackoverflow.com/questions/19447321/how-to-linebreak-an-svg-text-in-javascript
+                     d3.select(this).append("tspan")
+                    .attr("dy", 10)
+                     .html(d.name + "<br/>1aaaa<br/>1aaaa");
+                    d3.select(this).append("tspan")
+                            .attr("dy", 10)
+                        .html(d.name + "<br/>1aaaa<br/>1aaaa");
+                });
+            
     // add the curvy lines
     function tick() {
         path.attr("d", function (d) {

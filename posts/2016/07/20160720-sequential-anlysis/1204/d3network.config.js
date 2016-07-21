@@ -1,10 +1,40 @@
 
 var config = {};
+
+// @var 使用箭頭 true || false
+config.enableDirection = true;
+
+config.canvasWidth = 960;
+config.canvasHeight = 960;
+
+config.strokeWidthMax = 0.5;
+config.strokeWidthMin = 0.1;
+config.arrowMaxSize = 0.2;
+config.arrowDefaultSize = 6;
+config.linkDistance = 150;
+
+config.nodeR = 10;
+
 config.links = [
-    {"source":"Harry","target":"Sally","value":"1.2", label: "h>s"},
-    {"source":"Sally","target":"Harry","value":"32", label: ""},
-   /* {"source":"Harry","target":"Mario","value":"1.3"},
-    {"source":"Sarah","target":"Alice","value":"0.2"},
+    {
+        "source":"Harry",
+        "target":"Sally",
+        targetClick: function () {
+            //alert("clickTarget");
+        },
+        sourceClick: function () {
+            //alert("clickSource");
+        },
+        "value":1.2, 
+        label: "h>s", 
+        linkClick: function () {
+            //console.log("aaa");
+            //alert("aaa");
+        }
+    },
+    {"source":"Sally","target":"Harry","value":1, label: ""},
+    //{"source":"Harry","target":"Mario","value":1.3}
+    /*{"source":"Sarah","target":"Alice","value":"0.2"},
     {"source":"Eveie","target":"Alice","value":"0.5"},
     {"source":"Peter","target":"Alice","value":"1.6"},
     {"source":"Mario","target":"Alice","value":"0.4"},

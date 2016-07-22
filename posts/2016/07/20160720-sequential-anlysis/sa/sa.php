@@ -3,6 +3,18 @@
 class sa {
     
     /**
+     * 序列編碼
+     * @var string 
+     */
+    var $obs;
+    
+    /**
+     * 序列編碼 轉換成陣列
+     * @var array
+     */
+    var $config_obs_array = array();
+    
+    /**
      * 編碼次數
      * @var int 
      */
@@ -21,10 +33,17 @@ class sa {
     var $breaks; //片段次數
     
     /**
-     * 編碼可否重複
-     * @var boolean 
+     *是否允許相同編碼重複
+     * @var boolean
      */
-    var $repeatable;    // 編碼可否重複
+    //var $allow_same_adjacent_codes = true;
+    
+    /**
+     * 是否縮減重複編碼
+     * true, false, auto
+     * @var string 
+     */
+    var $repeatable = TRUE;    // 編碼可否重複
     
     /**
      * 編碼列表
@@ -114,10 +133,16 @@ class sa {
     var $last_ns_message;   //建議最少編碼轉換樣本數量表 訊息
 
     /**
-     * 期望值列表...?
+     * 編碼轉換期望頻率表 (不顯示的)
      * @var array
      */
     var $exp_pos_list;  // 期望值列表...?
+    
+    /**
+     * 調整後殘差表(Z分數)
+     * @var array 
+     */
+    var $z_table;
 
     /**
      * 有顯著結果的列表
@@ -128,291 +153,341 @@ class sa {
     // ------------------------------------------------------
 
     /**
-     * @var $obs 觀察序列
-     * @var $codes 觀察編碼
-     * @var $repeatable 可否重複
+     * 序列分析工具
+     * @var {string} $obs 觀察序列字串
+     * @var {string} $codes 欲觀察觀察編碼
+     * @var {string} $repeatable 可否重複: 'true', 'false', 'auto'
+     * @var {boolean} $first_order
      */
-    function __construct($obs = NULL, $codes = "", $repeatable = 'true', $first_order = TRUE, $lag = 2) {
+    function __construct($obs = NULL, $codes = "", $repeatable = FALSE, $first_order = TRUE) {
 
+        // 只能計算2 lag，不能再多了
+        $lag = 2;
+        
         if (is_null($obs)) {
             $obs = $this->sa_create_temp_obs();
         }
-
-        $n = 0;    //總coding次數
-        $ns = 0;   //序列次數
-        $breaks = 1;    //斷片次數
-
+        
+        //$obs = "aba";
+        //$obs = 'BCAAABBCBCAC';
+        //$obs = 'ABABCBACBCAC';
+        //$obs = "BAAC";
+        //$obs = "BAC";
+        $repeatable = FALSE;
+        //$allow_same_adjacent_codes = FALSE;
+        //$first_order = FALSE;
+        
         $code_list = [];    //包含的coding
         $code_f = [];    //頻率
-        $seq_f = [];    //每種序列發生的頻率
 
         //取得參數
         $config_obs = $obs;
         if ($config_obs === '') {
             return;
         }
-
+        
+        $this->obs = $obs;
+        
         $config_codes = $codes;
-        $config_repeatable = $repeatable;
-
-        //var _first_order = $;
-        //var _lag = $.trim($('.sa-config [name="lag"]').attr('value'));
 
         //設定code
         if ($config_codes != '') {
             //var _last_code = null;
             for ($i = 0; $i < strlen($config_codes); $i++)
             {
-                $code = substr($config_codes, _i, 1);
+                $code = substr($config_codes, $i, 1);
 
-                $code_list[] = _code;
+                $code_list[] = $code;
                 $code_f[$code] = 0;
             }
         }
 
-        $config_obs_array = $this->sa_convert_obs($config_obs);
-
-        //開始跑所有的觀察樣本
-        $last_event = NULL;
-        $event = NULL;
-        for ($i = 0; $i < count($config_obs_array); $i++)
-        {
-            $events = $config_obs_array[$i];
-            //先處理_n跟_breaks
-            if (count($events) > 0)
-            {
-                if ($config_repeatable === 'false')
-                {
-                    if ($last_event !== $event)
-                    {
-                        $n++;
-                    }
-                }
-                else {
-                    $n++;
-                }
-
-                $ns_plus = false;
-                for ($j = 0; $j < count($events); $j++)
-                {
-                    $event = $events[$j];
-                    //檢查加入code list
-
-                    if ($config_codes == '' && in_array($event, $code_list) == FALSE) {
-                        $code_list[] = $event;
-                    }
-
-                    //初始化code f
-                    if (isset($code_f[$event]) === FALSE) {
-                        $code_f[$event] = 0;
-                    }
-
-                    //計算編碼頻率_code_f
-                    if ($config_repeatable === 'false') {
-                        if ($last_event !== $event) {
-                            $code_f[$event]++;
-                        }
-                    }
-                    else {
-                        $code_f[$event]++;
-                    }
-
-                    $last_event = $event;
-
-                    $next_event = array();
-                    $break_detect = FALSE;
-                    // 20160721-1626 整理到這裡
-
-                    if ($i < count($config_obs_array) - ($lag - 1)) {
-                        for ($l = 0; $l < $lag - 1; $l++) {
-                            $pos = $l + $i + 1;
-                            $n_event = $config_obs_array[$pos];
-
-                            if (count($n_event) > 0) {
-                                $next_event[] = $n_event;
-                            }
-                            else {
-                                $break_detect = true;
-                                break;
-                            }
-                        } //for (var _l = 0; _l < _lag - 1; _l++)
-                        if ($break_detect === TRUE) {
-                            continue;
-                        }
-                    } // if (_i < _config_obs_array.length - (_lag - 1))
-
-                    //接下來要組成不同的數列
-                    $seq_array = array();
-                    if (count($next_event) > 0) {
-                        $seq_array = array($event);
-                        $seq_name;
-                        for ($ni = 0; $ni < count($next_event); $ni++) {
-                            $n_event = $next_event[$ni];
-
-                            $prev_seq = $seq_array;
-                            $seq_array = array();
-                            for ($e = 0; $e < count($n_event); $e++) {
-                                $event = $n_event[$e];
-                                for ($p = 0; $p < count($prev_seq); $p++) {
-                                    $p_seq = $prev_seq[$p];
-                                    $last_p_seq = substr($p_seq, count($p_seq)-1, 1);
-
-                                    //判斷是否是_repeatable
-                                    if ($last_p_seq == $event) {
-                                        if ($config_repeatable == 'auto') {
-                                            $repeatable = true;
-                                        }
-                                        else if ($config_repeatable === 'false') {
-                                            continue;
-                                        }
-                                    }
-
-                                    $seq_name = $p_seq . $event;
-                                    $seq_array[] = $seq_name;
-                                }
-                            } //for (var _e = 0; _e < _n_event.length; _e++)
-                        } //for (var _ni = 0; _ni < _next_event.length; _ni++)
-                    } 
-
-                    if (count($seq_array) > 0 && $break_detect === FALSE) {
-                        if ($ns_plus === false) {
-                            $ns++;
-                            $ns_plus = true;    
-                        }
-
-                        $seq_f_last = null;
-                        foreach ($seq_array AS $s => $seq_name) {
-                            //var _seq_name = _seq_array[_s];
-                            if (isset($seq_f[$seq_name]) === false) {
-                                $seq_f[$seq_name] = 0;
-                            }
-
-                            //重複的阻止設計
-                            if ($config_repeatable === 'false'
-                                    && $seq_name == $seq_f_last) {
-                               continue;
-                            }
-                            else {
-                                $seq_f_last = $seq_name;
-                            }
-
-                            $seq_f[$seq_name]++;
-                        }   
-                    }
-                }     //for (var _j = 0; _j < _events.length; _j++)       
-            }    //if (_events.length > 0)
-            else {
-                $breaks++;
-            }
-        }    //for (var _i = 0; _i < _config_obs_array.length; _i++)
-
-        // 20160722 1507 測試用
-        //print_r(array($n, $ns, $breaks, $code_list, $code_f, $seq_f, $repeatable, $first_order, $lag));
-        
-        $this->n = $n;
-        $this->ns = $ns;
-        $this->breaks = $breaks;
-        $this->code_list = $code_list;
         $this->code_f = $code_f;
-        $this->seq_f = $seq_f;
+        $this->config_codes = $config_codes;
+        $this->code_list = $code_list;
+        
+        //$this->allow_same_adjacent_codes = $allow_same_adjacent_codes;
         $this->repeatable = $repeatable;
         $this->first_order = $first_order;
         $this->lag = $lag;
         
         
-        $this->sa_draw_table();
-    }   //end of function __construct(
-    
-    
-
-function sa_convert_obs($obs) {
-    
-    $output = array();
-    
-    $break_list = array(' ', '\t', '\n');
-    
-    for ($i = 0; $i < strlen($obs); $i++) {
-        $code = substr($obs, $i, 1);
+        $this->sa_convert_obs();
+        $this->cal_frequency();
         
-        if (in_array($code, $break_list) === true) {
-            $output[] = array();
-        }
-        else if ($code == '(') {
-            $multi_code = array();
-            $i++;
-            while (substr($obs, $i, 1) !== ')') {
-                $code = substr($obs, $i, 1);
-                $multi_code[] = $code;
-                $i++; 
-            }
-            $output[] = $multi_code;
+        
+        // 20160722 1507 測試用
+        print_r(array(
+            $this->n, 
+            $this->ns, 
+            $this->breaks, 
+            $this->seq_f,
+            $this->code_list
+                ));
+        //return;
+
+        $this->calc_code_list_string();
+        
+        //print_r($this->code_list_string);
+
+        $this->create_lag_list($this->lag);
+        //return;
+
+        $this->cal_sf();
+
+        // 只是畫表格而已，不使用
+        //create_obs_seq_pos_table(_f_table).appendTo(_sa_result);    
+        $this->create_obs_seq_pos_table();
+
+        // 20160722 1356 整理到這裡
+        // -------------------------------------
+
+        if ($this->first_order === TRUE) {
+            $this->create_obs_f_table();
+            $this->create_exp_pos_1_table();
         }
         else {
-            $output[] = array($code);
+            $this->create_exp_pos_0_table();
         }
-    }
-    return $output;
-}   // end of function sa_convert_obs(
-// 16:48 整理到這裡
 
-function sa_draw_table() {
-    
-    // 顯示編碼列表
-    $code_list_string = '';
-    foreach ($this->code_list AS $c) {
-        if ($code_list_string !== '') {
-            $code_list_string .= ', ';
-        }
-        $code_list_string += $c;
-    }
-    
-    //_code_list_div.find('span').html(_code_list_string);
-    $this->code_list_string = $code_list_string;
-    
-    $this->create_lag_list($this->lag);
-    
-    $this->cal_sf();
-    
-    // 只是畫表格而已，不使用
-    //create_obs_seq_pos_table(_f_table).appendTo(_sa_result);    
-    $this->create_obs_seq_pos_table();
-    
-    // 20160722 1356 整理到這裡
-    // -------------------------------------
+        // 20160722 1419 整理到這裡
+        // --------------------------------------------
+        // 20160722 1457 開始繼續整理
 
-    //var _exp_pos_table;
-    //if (_first_order == true) {
-    if ($this->first_order === TRUE) {
-        //var _obs_f_table = create_obs_f_table(_n, _code_list, _code_f).appendTo(_sa_result);
-        $this->create_obs_f_table();
+        $this->create_exp_f_table();
+        $this->create_last_ns_table();
+
+        // 20160722 1610 繼續整理
+        // --------------------------------------------
+        $this->cal_exp_pos_list();
+
+        // 20160722 1623 整理到這裡
+        // -------------------------------------
+
+        // 最後步驟
+        $this->cal_sign_result();
+    }   //end of function __construct(
+    
+    /**
+     * 將觀察序列字串轉換成陣列
+     */
+    function sa_convert_obs() {
+
+        $obs = $this->obs;
+        //print_r($obs);
         
-        //_exp_pos_table = create_exp_pos_1_table(_n, _code_list, _code_f, _repeatable, _lag, _lag_list).appendTo(_sa_result);
-        $this->create_exp_pos_1_table();
-    }
-    else
-    {
-        //_exp_pos_table = create_exp_pos_0_table(_n, _code_list, _code_f, _repeatable, _lag, _lag_list).appendTo(_sa_result);
-        $this->create_exp_pos_0_table();
-    }
+        $output = array();
 
-    // 20160722 1419 整理到這裡
-    // --------------------------------------------
-    // 20160722 1457 開始繼續整理
+        $break_list = array(' ', '\t', '\n');
 
-    $this->create_exp_f_table();
-    $this->create_last_ns_table();
+        for ($i = 0; $i < strlen($obs); $i++) {
+            $code = substr($obs, $i, 1);
 
-    // 20160722 1610 繼續整理
-    // --------------------------------------------
-    $this->cal_exp_pos_list();
+            if (in_array($code, $break_list) === true) {
+                $output[] = array();
+            }
+            else if ($code == '(') {
+                $multi_code = array();
+                $i++;
+                while (substr($obs, $i, 1) !== ')') {
+                    $code = substr($obs, $i, 1);
+                    $multi_code[] = $code;
+                    $i++; 
+                }
+                $output[] = $multi_code;
+            }
+            else {
+                $output[] = array($code);
+            }
+        }
+        //return $output;
+
+        //print_r($output);
+        $this->config_obs_array = $output;
+    }   // end of function sa_convert_obs(
+    // 16:48 整理到這裡
     
-    // 20160722 1623 整理到這裡
-    // -------------------------------------
+    /**
+     * 計算頻率
+     */
+    function cal_frequency() {
+        $config_repeatable = $this->repeatable;
+        
+        $n = 0;    //總coding次數
+        $ns = 0;   //序列次數
+        $breaks = 1;    //斷片次數
+        
+        $seq_f = [];    //每種序列發生的頻率
 
-    // 最後步驟
-    $this->cal_sign_result();
+        //開始跑所有的觀察樣本
+        $last_event = TRUE;
+        $event = FALSE;
+        
+        $config_codes = $this->config_codes;
+        $code_list = $this->code_list;
+        $config_obs_array = $this->config_obs_array;
+        $lag = $this->lag;
+        
+        
+        //$proc_first_event = true;
+        //print_r($this->config_obs_array);
+        
+        
+        for ($i = 0; $i < count($this->config_obs_array); $i++) {
+            
+            // 考慮到同一時間點可能有多個事件，所以$events是複數
+            $events = $this->config_obs_array[$i];
+            
+            //先處理_n跟_breaks
+            if (count($events) === 0) {
+                $breaks++;
+                continue;
+            }
+            
+            if ($config_repeatable === FALSE) {
+                if ($last_event !== $event) {
+                    $n++;
+                }
+            }
+            else {
+                $n++;
+            }
 
-}
+            $ns_plus = false;
+            for ($j = 0; $j < count($events); $j++)
+            {
+                $event = $events[$j];
+                //檢查加入code list
+
+                if ($config_codes == '' && in_array($event, $code_list) == FALSE) {
+                    $code_list[] = $event;
+                }
+
+                //初始化code f
+                if (isset($code_f[$event]) === FALSE) {
+                    $code_f[$event] = 0;
+                }
+
+                //計算編碼頻率_code_f
+                if ($config_repeatable === FALSE) {
+                    if ($last_event !== $event) {
+                        $code_f[$event]++;
+                    }
+                }
+                else {
+                    $code_f[$event]++;
+                }
+
+                $last_event = $event;
+
+                $next_event = array();
+                $break_detect = FALSE;
+                // 20160721-1626 整理到這裡
+
+                // 如果實際上的數目小於$lag，則很快停止計算
+                if ($i < count($config_obs_array) - ($lag - 1)) {
+                    for ($l = 0; $l < $lag - 1; $l++) {
+                        $pos = $l + $i + 1;
+                        $n_event = $config_obs_array[$pos];
+
+                        if (count($n_event) > 0) {
+                            $next_event[] = $n_event;
+                        }
+                        else {
+                            $break_detect = true;
+                            break;
+                        }
+                    } //for (var _l = 0; _l < _lag - 1; _l++)
+                    if ($break_detect === TRUE) {
+                        continue;
+                    }
+                } // if (_i < _config_obs_array.length - (_lag - 1))
+
+                //接下來要組成不同的數列
+                $seq_array = array();
+                if (count($next_event) > 0) {
+                    $seq_array = array($event);
+                    $seq_name;
+                    for ($ni = 0; $ni < count($next_event); $ni++) {
+                        $n_event = $next_event[$ni];
+
+                        $prev_seq = $seq_array;
+                        $seq_array = array();
+                        for ($e = 0; $e < count($n_event); $e++) {
+                            $event = $n_event[$e];
+                            for ($p = 0; $p < count($prev_seq); $p++) {
+                                $p_seq = $prev_seq[$p];
+                                $last_p_seq = substr($p_seq, count($p_seq)-1, 1);
+
+                                //判斷是否是_repeatable
+                                if ($last_p_seq == $event) {
+//                                    if ($config_repeatable == 'auto') {
+//                                        $this->repeatable = true;
+//                                    }
+                                    if ($config_repeatable === FALSE) {
+                                        continue;
+                                    }
+                                }
+
+                                $seq_name = $p_seq . $event;
+                                $seq_array[] = $seq_name;
+                            }
+                        } //for (var _e = 0; _e < _n_event.length; _e++)
+                    } //for (var _ni = 0; _ni < _next_event.length; _ni++)
+                } 
+
+                if (count($seq_array) > 0 && $break_detect === FALSE) {
+                    if ($ns_plus === false) {
+                        $ns++;
+                        $ns_plus = true;    
+                    }
+
+                    $seq_f_last = null;
+                    foreach ($seq_array AS $s => $seq_name) {
+                        //var _seq_name = _seq_array[_s];
+                        if (isset($seq_f[$seq_name]) === false) {
+                            $seq_f[$seq_name] = 0;
+                        }
+
+                        //重複的阻止設計
+                        if ($config_repeatable === FALSE
+                                && $seq_name == $seq_f_last) {
+                           continue;
+                        }
+                        else {
+                            $seq_f_last = $seq_name;
+                        }
+
+                        $seq_f[$seq_name]++;
+                    }   
+                }
+            }     //for (var _j = 0; _j < _events.length; _j++)      
+        }    //for (var _i = 0; _i < _config_obs_array.length; _i++)
+        
+        
+        $this->n = $n;
+        $this->ns = $ns;
+        $this->breaks = $breaks;
+        
+        $this->seq_f = $seq_f;
+        $this->code_list = $code_list;
+        $this->code_f = $code_f;
+    }
+    
+    function calc_code_list_string() {
+        
+        // 顯示編碼列表
+        $code_list_string = '';
+        foreach ($this->code_list AS $c) {
+            if ($code_list_string !== '') {
+                $code_list_string .= ', ';
+            }
+            $code_list_string += $c;
+        }
+
+        //_code_list_div.find('span').html(_code_list_string);
+        $this->code_list_string = $code_list_string;
+    }
 
     /**
      * 建立標籤列表
@@ -429,7 +504,7 @@ function sa_draw_table() {
         else {
             $new_lag_list = array();
 
-            foreach ($this->lag_list AS $i => $lag_name) {
+            foreach ($lag_list AS $lag_name) {
                 //var _lag_name = _lag_list[_i];
 
                 foreach ($this->code_list AS $code) {
@@ -603,11 +678,15 @@ function create_exp_pos_1_table() {
                 }
                     
                 $p = 0;
-                if ($this->repeatable === 'true') {
+                if ($this->repeatable === TRUE) {
                     $p = $f / $n;
                 }
                 else {
                     $p = $f / ($n - $row_code_f);
+                }
+                
+                if ($row_code === "P" && $col_code === "G") {
+                    print_r(array($row_code_f, $n, $f));
                 }
                 
                 $exp_pos = $exp_pos * $p;
@@ -637,11 +716,15 @@ function create_exp_pos_0_table() {
     $lag = $this->lag; 
     $lag_list = $this->lag_list;
     
-    $exp_pos = (1 / count($code_list));
-
-    for ($i = 0; $i < $lag - 1; $i++) {
-        $exp_pos = $exp_pos * $exp_pos;
-    }
+    
+    //print_r($code_list);
+//    $exp_pos = (1 / count($code_list));
+//
+//    for ($i = 0; $i < $lag - 1; $i++) {
+//        $exp_pos = $exp_pos * $exp_pos;
+//    }
+    // 20160723 修正zero-order的算法
+    $exp_pos = 1 / (count($code_list) * (count($code_list) - 1) );
     
     $exp_table = array();
     foreach ($code_list AS $i => $row_code) {
@@ -851,8 +934,47 @@ function create_last_ns_table() {
             }
             $z_table[$row_code] = $z_row;
         }
+        
+        $this->z_table = $z_table;
 
         $this->sign_result = $sign_result;
     }
 
+    /**
+     * 描繪表格
+     * @param {string} $table
+     * @return string
+     */
+    static function table_draw($table) {
+        $html = '<table border="1">';
+        
+        $thead_th = array();
+        
+        $first_tr = true;
+        $tbody = "<tbody>";
+        foreach ($table AS $row_code => $row) {
+            
+            $tr = "<tr>";
+            $tr .= "<th>" . $row_code . "</th>";
+            foreach ($row AS $col_code => $cell) {
+                if ($first_tr === TRUE) {
+                    $thead_th[] = $col_code;
+                }
+                $tr .= "<td>" . $cell . "</td>";
+            }
+            $tr .= "</tr>";
+            $tbody .= $tr;
+            $first_tr = false;
+        }
+        $tbody .= "</tbody>";
+        
+        $thead = "<thead><th>&nbsp;</th>";
+        foreach ($thead_th AS $th) {
+            $thead .= "<th>" . $th . "</th>";
+        }
+        $thead .= "</thead>";
+        
+        $html .= $thead . $tbody . "</table>";
+        return $html;
+    }
 }   //  class sa {

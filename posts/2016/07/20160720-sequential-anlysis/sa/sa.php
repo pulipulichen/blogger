@@ -2,43 +2,137 @@
 
 class sa {
     
+    /**
+     * 編碼次數
+     * @var int 
+     */
     var $n;  // 編碼次數
+    
+    /**
+     * 序列次數
+     * @var int 
+     */
     var $ns;     // 序列次數
+    
+    /**
+     * 片段次數
+     * @var int 
+     */
     var $breaks; //片段次數
+    
+    /**
+     * 編碼可否重複
+     * @var boolean 
+     */
     var $repeatable;    // 編碼可否重複
+    
+    /**
+     * 編碼列表
+     * @var array 
+     */
     var $code_list; // 編碼列表
+    
+    /**
+     * 編碼列表頻率
+     * @var array 
+     */
     var $code_f;    // 編碼列表頻率
+    
+    /**
+     * 序列頻率
+     * @var array 
+     */
     var $seq_f; // 序列頻率
+    
+    /**
+     * 觀察序列長度 
+     * @var int 
+     */
     var $lag;   // 觀察序列長度
     
-    // 期望機率模型
-    // First-order model：從觀察樣本中推估機率期望值。 
-    // Zero-order model：設定每種編碼的機率期望值均相等。
+    /**
+     * 期望機率模型
+     * 
+     * First-order model：從觀察樣本中推估機率期望值。 
+     * Zero-order model：設定每種編碼的機率期望值均相等。
+     * @var boolean 
+     */
     var $first_order;   
     
+    /**
+     * 編碼列表
+     * @var string
+     */
     var $code_list_string;  // 編碼列表
     
+    /**
+     * 標籤列表
+     * @var array 
+     */
     var $lag_list;  // 標籤列表
     
+    /**
+     * 編碼轉換頻率表 sequence frequency
+     * @var array
+     */
     var $sf = array();  //編碼轉換頻率表 sequence frequency
+    
+    /**
+     * 編碼轉換頻率表 sequence frequency
+     * @var array
+     */
     var $pos_list = array();    // 編碼轉換機率表
+    
+    /**
+     * 編碼頻率與機率表
+     * @var array
+     */
     var $sf_pos_list = array();    // 編碼頻率與機率表
-    var $exp_pos_table; // 編碼轉換期望機率表(first-order model)
+    
+    /**
+     * 編碼轉換期望機率表
+     * @var array
+     */
+    var $exp_pos_table; // 編碼轉換期望機率表
+    
+    /**
+     * 編碼轉換期望頻率表
+     * @var array
+     */
     var $exp_f_table;    //編碼轉換期望頻率表
 
+    /**
+     * 建議最少編碼轉換樣本數量表
+     * @var array
+     */
     var $last_ns_table; //建議最少編碼轉換樣本數量表
+    
+    /**
+     * 建議最少編碼轉換樣本數量表 訊息
+     * @var string
+     */
     var $last_ns_message;   //建議最少編碼轉換樣本數量表 訊息
 
+    /**
+     * 期望值列表...?
+     * @var array
+     */
     var $exp_pos_list;  // 期望值列表...?
 
+    /**
+     * 有顯著結果的列表
+     * @var array
+     */
     var $sign_result;   // 有顯著結果的列表
+    
+    // ------------------------------------------------------
 
     /**
      * @var $obs 觀察序列
      * @var $codes 觀察編碼
      * @var $repeatable 可否重複
      */
-    function __construct($obs = NULL, $codes = "", $repeatable = 'true', $first_order = TRUE, $lag = 3) {
+    function __construct($obs = NULL, $codes = "", $repeatable = 'true', $first_order = TRUE, $lag = 2) {
 
         if (is_null($obs)) {
             $obs = $this->sa_create_temp_obs();
@@ -298,26 +392,25 @@ function sa_draw_table() {
     else
     {
         //_exp_pos_table = create_exp_pos_0_table(_n, _code_list, _code_f, _repeatable, _lag, _lag_list).appendTo(_sa_result);
-        $this->create_exp_pos_0_table($n, $code_list, $code_f, $repeatable, $lag, $lag_list);
+        $this->create_exp_pos_0_table();
     }
 
     // 20160722 1419 整理到這裡
     // --------------------------------------------
     // 20160722 1457 開始繼續整理
 
-    //$this->create_exp_f_table(_exp_pos_table, _ns).appendTo(_sa_result);
-    //$this->create_last_ns_table(_exp_pos_table, _ns, _code_list).appendTo(_sa_result);
-    $this->create_exp_f_table($this->exp_pos_table, $ns);
-    $this->create_last_ns_table($this->exp_pos_table, $ns, $code_list);
+    $this->create_exp_f_table();
+    $this->create_last_ns_table();
 
     // 20160722 1610 繼續整理
     // --------------------------------------------
-    $this->cal_exp_pos_list($first_order, $code_list, $lag);
+    $this->cal_exp_pos_list();
     
     // 20160722 1623 整理到這裡
     // -------------------------------------
 
-    $this->cal_sign_result($code_list, $code_f, $lag_list, $seq_f);
+    // 最後步驟
+    $this->cal_sign_result();
 
 }
 
@@ -352,9 +445,13 @@ function sa_draw_table() {
         $this->lag_list = $lag_list;
     }
     
-    
-
+    /**
+     * 計算序列頻率
+     */
     function cal_sf() {
+        
+        $seq_f = $this->seq_f;
+        
         foreach ($this->code_list AS $i => $row_code)
         {
             $sf_total = 0;
@@ -366,7 +463,7 @@ function sa_draw_table() {
 
                 $sf = 0;
 
-                if (isset($this->seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
+                if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
                     $sf = $seq_f[$seq_name];
                 }
 
@@ -531,7 +628,14 @@ function create_exp_pos_1_table() {
  * $this->exp_table = $exp_table;
  * 20160722 1456 整理完畢
  */
-function create_exp_pos_0_table($n, $code_list, $code_f, $repeatable, $lag, $lag_list) {
+function create_exp_pos_0_table() {
+    
+    //$n = $this->n; 
+    $code_list = $this->code_list; 
+    $code_f = $this->code_f; 
+    //$repeatable = $this->repeatable; 
+    $lag = $this->lag; 
+    $lag_list = $this->lag_list;
     
     $exp_pos = (1 / count($code_list));
 
@@ -565,13 +669,14 @@ function create_exp_pos_0_table($n, $code_list, $code_f, $repeatable, $lag, $lag
  * var $exp_f_table;    //編碼轉換期望頻率表
  * 20160722 1552 整理完成
  */
-function create_exp_f_table($exp_pos_table, $ns) {
+function create_exp_f_table() {
     
     //var _exp_f_table = _exp_pos_table.clone();
     //_exp_f_table.find('caption').html('編碼轉換期望頻率表');
     
     //var _td_list = _exp_f_table.find('td');
     $exp_f_table = $this->exp_pos_table;
+    $ns = $this->ns;
     
     //for ($i = 0; $i < count($td_list); $i++) {
     foreach ($exp_f_table AS $row_code => $row) {
@@ -597,9 +702,10 @@ function create_exp_f_table($exp_pos_table, $ns) {
  * 20160722 1553 開始整理 - 整理完成
  * var $last_ns_table; //建議最少編碼轉換樣本數量表
  */
-function create_last_ns_table($exp_pos_table, $ns, $code_list) {
+function create_last_ns_table() {
 
     $last_ns_table = $this->exp_pos_table;
+    $ns = $this->ns;
     //_table.find('caption').html('建議最少編碼轉換樣本數量表');
     
     //var _td_list = _table.find('td');
@@ -652,7 +758,11 @@ function create_last_ns_table($exp_pos_table, $ns, $code_list) {
         return $temp;
     }
     
-    function cal_exp_pos_list($first_order, $code_list, $lag) {
+    function cal_exp_pos_list() {
+        
+        $first_order = $this->first_order;
+        $code_list = $this->code_list; 
+        $lag = $this->lag;
 
         //var _exp_pos_list = [];
         $exp_pos_list = array();
@@ -671,8 +781,7 @@ function create_last_ns_table($exp_pos_table, $ns, $code_list) {
                 }
             }
         } 
-        else
-        {
+        else {
             $exp_pos = (1 / count($code_list));
             for ($i = 0; $i < $lag - 1; $i++) {
                 $exp_pos = $exp_pos * $exp_pos;
@@ -687,12 +796,17 @@ function create_last_ns_table($exp_pos_table, $ns, $code_list) {
 
         // 注意，列表被我改成table了
         $this->exp_pos_list = $exp_pos_list;
-    }
+    }   // function cal_exp_pos_list() {
     
-    function cal_sign_result($code_list, $code_f, $lag_list, $seq_f) {
+    function cal_sign_result() {
+        
+        $code_list = $this->code_list;
+        $code_f = $this->code_f;
+        $lag_list = $this->lag_list;
+        $seq_f = $this->seq_f;
+        $ns = $this->ns;
+        
         $sign_result = array();    //有顯著結果的列表
-
-        //$e = 0;
 
         $z_table = array();
 

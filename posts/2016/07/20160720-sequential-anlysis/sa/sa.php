@@ -288,12 +288,12 @@ function sa_draw_table() {
 
     //var _exp_pos_table;
     //if (_first_order == true) {
-    if ($first_order === TRUE) {
+    if ($this->first_order === TRUE) {
         //var _obs_f_table = create_obs_f_table(_n, _code_list, _code_f).appendTo(_sa_result);
-        $this->create_obs_f_table($n, $code_f);
+        $this->create_obs_f_table();
         
         //_exp_pos_table = create_exp_pos_1_table(_n, _code_list, _code_f, _repeatable, _lag, _lag_list).appendTo(_sa_result);
-        $this->create_exp_pos_1_table($n, $code_f, $repeatable, $lag, $lag_list);
+        $this->create_exp_pos_1_table();
     }
     else
     {
@@ -449,39 +449,24 @@ function create_obs_seq_pos_table() {
  * 編碼頻率與機率表
  * 20160722 1420 開始整理
  */
-function create_obs_f_table($n, $code_list, $code_f) {
-    
-    //var _table = $('<div class="sa-div"><table align="center" border="1" cellpadding="5" class="sa-table sa-result"><caption>編碼頻率與機率表</caption><thead></thead><tbody></tbody></table></div>');
-    
-    //var _thead = _table.find('thead:first');
-    //var _thead_tr = $('<tr></tr>').appendTo(_thead);
-    //$('<th>&nbsp;</th>').appendTo(_thead_tr);
-    //$('<th>頻率</th>').appendTo(_thead_tr);
-    //$('<th>機率(=頻率/'+_n+')</th>').appendTo(_thead_tr);
+function create_obs_f_table() {
     
     $sf_pos_list = array();
 
-    //var _tbody = _table.find('tbody:first');
-    //for (var _i in _code_list) {
-    foreach ($code_list AS $i => $row_code) {
-        //var _row_code = _code_list[_i];
-        
-        //var _row_tr = $('<tr><th>' + _row_code + '</th></tr>').appendTo(_tbody);
+    $code_f = $this->code_f;
+    $n = $this->n;
+    
+    foreach ($this->code_list AS $row_code) {
         
         $cf = 0;
-        if (is_int($code_f[$row_code])) {
+        if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
             $cf = $code_f[$row_code];
         }
 
         $sf_pos_list[$row_code]["sf"] = $cf;
-        //$('<td></td>').html(_cf).appendTo(_row_tr);
-
         $sf_pos_list[$row_code]["pos"] = ($cf / $n);
-        //$('<td></td>').html((_cf / _n)).appendTo(_row_tr);
     }
     $this->sf_pos_list = $sf_pos_list;
-    
-    //return _table;
 }
 
 /**
@@ -489,24 +474,21 @@ function create_obs_f_table($n, $code_list, $code_f) {
  * 編碼轉換期望機率表(first-order model)
  * 20160722 1435 開始整理
  */
-function create_exp_pos_1_table($n, $code_f, $repeatable, $lag) {
+function create_exp_pos_1_table() {
 
     $exp_table = array();
+    $code_f = $this->code_f;
+    $n = $this->n;
 
-    //for (var _i in _code_list)
-    foreach ($this->code_list AS $i => $row_code) {
-        
-        //var _row_code = _code_list[_i];
-        
-        //var _row_tr = $('<tr><th>' + _row_code + '</th></tr>').appendTo(_tbody);
+    foreach ($this->code_list AS $row_code) {
         
         $cf = 0;
-        if (is_int($code_f[$row_code])) {
+        if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
             $cf = $code_f[$row_code];
         }
         
         $exp_row = array();
-        //for (var _j in _lag_list)
+        
         foreach ($this->lag_list AS $j => $col_code) {
 
             //var _col_code = _lag_list[_j];
@@ -523,8 +505,8 @@ function create_exp_pos_1_table($n, $code_f, $repeatable, $lag) {
                     $f = $code_f[$col_c];
                 }
                     
-                $p;
-                if ($repeatable === 'true') {
+                $p = 0;
+                if ($this->repeatable === 'true') {
                     $p = $f / $n;
                 }
                 else {
@@ -534,7 +516,6 @@ function create_exp_pos_1_table($n, $code_f, $repeatable, $lag) {
                 $exp_pos = $exp_pos * $p;
             }
             
-            //var _td = $('<td></td>').attr("exp_pos", _exp_pos).html(_exp_pos.toFixed(2)).appendTo(_row_tr);
             $exp_row[$col_code] = $exp_pos;
         }
 
@@ -542,7 +523,7 @@ function create_exp_pos_1_table($n, $code_f, $repeatable, $lag) {
     }
     
     $this->exp_pos_table = $exp_table;
-    //return _table;
+    
 }   //  function create_exp_pos_1_table($n, $code_list, $code_f, $repeatable, $lag, $lag_list) {
 
 /**
@@ -558,31 +539,8 @@ function create_exp_pos_0_table($n, $code_list, $code_f, $repeatable, $lag, $lag
         $exp_pos = $exp_pos * $exp_pos;
     }
     
-    //var _table = $('<div class="sa-div"><table align="center" border="1" cellpadding="5" class="sa-table sa-result"><caption>編碼轉換期望機率表(zero-order model)</caption><thead></thead><tbody></tbody></table></div>');
-    
-    /*
-    var _thead = _table.find('thead:first');
-    var _thead_tr = $('<tr></tr>').appendTo(_thead);
-    $('<th>&nbsp;</th>').appendTo(_thead_tr);
-    for (var _i in _lag_list)
-    {
-        var _code = _lag_list[_i];
-        
-        $('<th></th>')
-            .html(_code)
-            .appendTo(_thead_tr);
-    }
-        
-    var _tbody = _table.find('tbody:first');
-    */
-
-    //for (var _i in _code_list)
     $exp_table = array();
     foreach ($code_list AS $i => $row_code) {
-        //var _row_code = _code_list[_i];
-        
-        //var _row_tr = $('<tr><th>' + _row_code + '</th></tr>').appendTo(_tbody);
-        
         $cf = 0;
 
         if (is_int($code_f[$row_code])) {
@@ -663,36 +621,17 @@ function create_last_ns_table($exp_pos_table, $ns, $code_list) {
 
                 $last_ns = 9 / ($exp_pos * (1 - $exp_pos));
                 
-                //var _last_ns_dis = _last_ns.toFixed(2);
                 $last_ns_dis = $last_ns;
                 
-                //_td_list.eq(_i).html(_last_ns_dis);
                 $last_ns_table[$row_code][$col_code] = $last_ns_dis;
                 
-                // 超越數量有顯著性的特徵 class
-                //if ($last_ns > $ns) {
-                //    _td_list.eq(_i).addClass('sign');
-                //}
-                
-                //if ($max_ns === 0) {
-                //    $max_ns = $last_ns;
-                //}
-                //else if (_max_ns < _last_ns) {
-                //    _max_ns = _last_ns.toFixed(2);
-                //}
                 $max_ns = $last_ns;
             }
             else {
-                //_td_list.eq(_i).html('-');
                 $last_ns_table[$row_code][$col_code] = NULL;
             }
         }
     }
-    
-    //var _cols = (_td_list.length / _code_list.length) + 1;
-    
-    //var _tfoot;
-    
     if ($ns < $max_ns) {
         //_tfoot = $('<tfoot><tr><td colspan="'+_cols+'" style="color:red;">&#8251; 目前您的樣本數為'+_ns+'&#65292;未達建議最少個編碼轉換樣本數'+_max_ns+'個</td></tr></tfoot>')
         $this->last_ns_message = '目前您的樣本數為' . $ns . '&#65292;未達建議最少個編碼轉換樣本數' . $max_ns . '個';
@@ -759,10 +698,6 @@ function create_last_ns_table($exp_pos_table, $ns, $code_list) {
 
         foreach ($code_list AS $i => $row_code) {
 
-            //var _row_code = _code_list[_i];
-
-            //var _row_tr = $('<tr><th>' + _row_code + '</th></tr>').appendTo(_z_tbody);
-
             $cf = 0;
 
             if (is_int($code_f[$row_code])) {
@@ -790,11 +725,6 @@ function create_last_ns_table($exp_pos_table, $ns, $code_list) {
                     $z = 0;
                 }
 
-                //_z = _z.toFixed(2);
-
-
-                //var _td = $('<td></td>').html('z: '+ _z + 'ns:' + _ns+ 'exp_f:' + (_ns*_exp_pos) + 'exp: ' + _exp_pos+ 'row: ' + _row_code_pos+ 'col: ' + _col_code_pos).appendTo(_row_tr);
-                //var _td = $('<td></td>').html(_z).appendTo(_row_tr);
                 $z_row[$col_code] = $z;
 
                 if ($z > 1.96) {

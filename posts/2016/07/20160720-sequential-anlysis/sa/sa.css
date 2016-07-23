@@ -1,0 +1,33 @@
+
+.sa-table caption {
+ font-weight: bold;
+ text-align:left;
+}
+.sa-table th, .sa-table td {
+    vertical-align: top;
+}
+.sa-config.sa-table th {
+    text-align:right;
+}
+
+.sa-table thead th {
+    text-align:center;
+}
+
+.sa-table .textarea {
+    width: 90%;
+}
+.sa-table .sign {
+    font-weight:bold;
+    color:red;
+}
+.sa-table.sa-result td {
+    text-align:center;
+}
+.sa-div {
+    margin-bottom: 1em;
+}
+.sa-div {
+ max-width: 640px;
+ overflow-x: auto;
+}

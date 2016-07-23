@@ -164,6 +164,9 @@ class sa {
         // 只能計算2 lag，不能再多了
         $lag = 2;
         
+        $obs = trim($obs);
+        $codes = trim($codes);
+        
         if (is_null($obs)) {
             $obs = $this->sa_create_temp_obs();
         }
@@ -175,7 +178,7 @@ class sa {
         //$obs = "BAC";
         $repeatable = FALSE;
         //$allow_same_adjacent_codes = FALSE;
-        //$first_order = FALSE;
+        $first_order = FALSE;
         
         $code_list = [];    //包含的coding
         $code_f = [];    //頻率
@@ -332,7 +335,6 @@ class sa {
         //$proc_first_event = true;
         //print_r($this->config_obs_array);
         
-        
         for ($i = 0; $i < count($this->config_obs_array); $i++) {
             
             // 考慮到同一時間點可能有多個事件，所以$events是複數
@@ -341,6 +343,7 @@ class sa {
             //先處理_n跟_breaks
             if (count($events) === 0) {
                 $breaks++;
+                $last_event = FALSE;
                 continue;
             }
             

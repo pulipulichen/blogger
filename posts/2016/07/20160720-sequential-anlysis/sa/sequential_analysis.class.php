@@ -187,15 +187,6 @@ class Sequential_analysis {
             $codes = "USTPG";
         }
         
-        //$obs = "aba";
-        //$obs = 'BCAAABBCBCAC';
-        //$obs = 'ABABCBACBCAC';
-        //$obs = "BAAC";
-        //$obs = "BAC";
-        //$repeatable = FALSE;
-        //$allow_same_adjacent_codes = FALSE;
-        //$first_order = FALSE;
-        
         $code_list = [];    //包含的coding
         $code_f = [];    //頻率
 
@@ -225,9 +216,7 @@ class Sequential_analysis {
         $this->config_codes = $config_codes;
         $this->code_list = $code_list;
         
-        //$this->allow_same_adjacent_codes = $allow_same_adjacent_codes;
         $this->repeatable = $repeatable;
-        //$this->first_order = $first_order;
         $this->lag = $lag;
         
         
@@ -246,48 +235,13 @@ class Sequential_analysis {
         //return;
 
         $this->calc_code_list_string();
-        
-        //print_r($this->code_list_string);
 
-//        if ($this->lag < 3) {
-//            $this->lag_list = $this->code_list;
-//        }
-//        else {
-//            $this->create_lag_list($this->lag);
-//        }
-        //return;
         $this->create_martix_lag_list();
 
         $this->cal_sf_total();
 
         // 只是畫表格而已，不使用
-        //create_obs_seq_pos_table(_f_table).appendTo(_sa_result);    
         $this->create_obs_seq_pos_table();
-
-        // 20160722 1356 整理到這裡
-        // -------------------------------------
-
-//        if ($this->first_order === TRUE) {
-//            $this->create_obs_f_table();
-//            $this->create_exp_pos_1_table();
-//        }
-//        else {
-//            $this->create_exp_pos_0_table();
-//        }
-
-        // 20160722 1419 整理到這裡
-        // --------------------------------------------
-        // 20160722 1457 開始繼續整理
-
-        //$this->create_exp_f_table();
-        //$this->create_last_ns_table();
-
-        // 20160722 1610 繼續整理
-        // --------------------------------------------
-        //$this->cal_exp_pos_list();
-
-        // 20160722 1623 整理到這裡
-        // -------------------------------------
 
         // 最後步驟
         $this->cal_sign_result();

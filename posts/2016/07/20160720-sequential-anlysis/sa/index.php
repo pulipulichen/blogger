@@ -5,7 +5,7 @@
 
 //echo (10 - (30*0.278) ) / sqrt( 30 * 0.278 * (1-0.278) * (1-0.236) );
 //echo (10 - (30*0.27835051546392 ) ) / sqrt( 30 * 0.27835051546392  * (1-0.27835051546392 ) * (1-0.23622047244094 ) );
-
+/*
 $obs = "";
 for ($i = 0; $i < 10; $i++) {
     $obs .= "PG ";
@@ -25,6 +25,7 @@ for ($i = 0; $i < 4; $i++) {
 for ($i = 0; $i < 15; $i++) {
     $obs .= "SUT";
 }
+*/
 //$obs .= "ST";
 $obs = "USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG";
 //echo strlen($obs);

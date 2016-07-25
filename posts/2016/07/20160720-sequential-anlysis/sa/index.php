@@ -32,7 +32,12 @@ $obs = "USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPG
 
 
 include_once 'sequential_analysis.class.php';
-$sa = new Sequential_analysis($obs, "USTPG", FALSE);
+//$sa = new Sequential_analysis($obs, "USTPG", FALSE, 2);
+//$sa = new Sequential_analysis("PGTPGTPGT");
+$sa = new Sequential_analysis();
+
+//print_r($sa->position_frequency);
+//echo Sequential_analysis::table_draw($sa->position_frequency);
 
 echo "\n <h2>編碼序列</h2> \n";
 echo $sa->obs;
@@ -43,6 +48,10 @@ print_r($sa->lag_list);
 echo "\n <h2>編碼轉換頻率表</h2> \n";
 //print_r($sa->sf);
 echo Sequential_analysis::table_draw($sa->sf);
+
+echo "\n <h2>編碼出現頻率表</h2>\n";
+//print_r($sa->pos_list);
+echo Sequential_analysis::table_draw($sa->code_f);
 
 echo "\n <h2>編碼轉換頻率表</h2>\n";
 //print_r($sa->pos_list);
@@ -71,7 +80,7 @@ echo Sequential_analysis::table_draw($sa->pos_list);
 foreach ($sa->z_table AS $model => $value) {
     echo "\n <h2>調整後殘差表(Z分數) (".$model.")</h2>\n";
     //print_r($sa->z_table);
-    echo Sequential_analysis::table_draw($sa->z_table[$model]);
+    echo Sequential_analysis::table_draw($sa->z_table[$model], true);
 
     echo "\n <h2>顯著編碼轉換 (".$model.")</h2>\n";
     print_r($sa->sign_result[$model]);

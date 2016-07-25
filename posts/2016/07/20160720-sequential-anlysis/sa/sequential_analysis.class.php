@@ -164,10 +164,10 @@ class Sequential_analysis {
      * @param {string} $codes 欲觀察觀察編碼
      * @param {boolean} $repeatable 可否重複: true false
      */
-    function __construct($obs = NULL, $codes = "", $repeatable = FALSE) {
+    function __construct($obs = "", $codes = "", $repeatable = FALSE, $lag = 2) {
 
         // 只能計算2 lag，不能再多了
-        $lag = 4;
+        //$lag = 4;
         
         $obs = trim($obs);
         if (is_string($codes)) {
@@ -181,8 +181,10 @@ class Sequential_analysis {
             $codes = $codes_string;
         }
         
-        if (is_null($obs)) {
+        if ($obs === "") {
             $obs = $this->sa_create_temp_obs();
+            //$obs = $this->sa_create_temp_obs2();
+            //$codes = "USTPG";
         }
         
         //$obs = "aba";
@@ -247,13 +249,14 @@ class Sequential_analysis {
         
         //print_r($this->code_list_string);
 
-        if ($this->lag < 3) {
-            $this->lag_list = $this->code_list;
-        }
-        else {
-            $this->create_lag_list($this->lag);
-        }
+//        if ($this->lag < 3) {
+//            $this->lag_list = $this->code_list;
+//        }
+//        else {
+//            $this->create_lag_list($this->lag);
+//        }
         //return;
+        $this->create_martix_lag_list();
 
         $this->cal_sf_total();
 
@@ -480,7 +483,10 @@ class Sequential_analysis {
                             $seq_f_last = $seq_name;
                         }
 
+                        // 加入序列中
                         $seq_f[$seq_name]++;
+                        
+                        $this->calc_position_frequency($seq_name);
                     }   
                 }
             }     //for (var _j = 0; _j < _events.length; _j++)      
@@ -494,6 +500,22 @@ class Sequential_analysis {
         $this->seq_f = $seq_f;
         $this->code_list = $code_list;
         $this->code_f = $code_f;
+    }
+    
+    var $position_frequency = array();
+    
+    function calc_position_frequency($seq_name) {
+        for ($i = 0; $i < strlen($seq_name); $i++) {
+            $code = substr($seq_name, $i, 1);
+            if (isset($this->position_frequency[$code]) === FALSE) {
+                $this->position_frequency[$code] = array();
+            }
+            if (isset($this->position_frequency[$code][$i]) === FALSE) {
+                $this->position_frequency[$code][$i] = 0;
+            }
+            $this->position_frequency[$code][$i]++;
+            //echo $code.$i . "-";
+        }
     }
     
     function calc_code_list_string() {
@@ -520,34 +542,39 @@ class Sequential_analysis {
             $lag_list = $this->code_list;
         }
 
-//        if ($this->lag < 3) {
-//            //return $lag_list;
-//        }
-//        else {
-            $new_lag_list = array();
-            //print_r($lag_list);
-            //return;
-            
-            foreach ($lag_list AS $lag_name) {
-                //var _lag_name = _lag_list[_i];
+        $new_lag_list = array();
 
-                foreach ($lag_list AS $code) {
-                    $name = $lag_name . $code;
-                    $new_lag_list[] = $name;
-                }
-            }
+        foreach ($lag_list AS $lag_name) {
+            //var _lag_name = _lag_list[_i];
 
-            $new_lag = $lag - 1;
-            if ($new_lag > 1) {
-                $lag_list = $this->create_lag_list($new_lag, $new_lag_list);
+            foreach ($lag_list AS $code) {
+                $name = $lag_name . $code;
+                $new_lag_list[] = $name;
             }
-            else {
-                return $lag_list;
-            }
-//        }
+        }
+
+        $new_lag = $lag - 1;
+        if ($new_lag > 1) {
+            $lag_list = $this->create_lag_list($new_lag, $new_lag_list);
+        }
+        else {
+            return $lag_list;
+        }
         
         $this->lag_list = $lag_list;
-        //print_r($this->lag_list);
+    }
+    
+    function create_martix_lag_list($name = "") {
+        if (strlen($name) === ($this->lag - 1)) {
+            $this->lag_list[] = $name;
+        }
+        else {
+            foreach ($this->code_list AS $code) {
+                $new_name = $name . $code;
+                //echo $name . "-";
+                $this->create_martix_lag_list($new_name);
+            }
+        }
     }
     
     var $col_total = array();
@@ -558,7 +585,7 @@ class Sequential_analysis {
     function cal_sf_total() {
         
         $seq_f = $this->seq_f;
-        print_r($this->lag_list);
+        //print_r($this->lag_list);
         foreach ($this->code_list AS $i => $row_code)
         {
             $sf_total = 0;
@@ -752,6 +779,7 @@ function create_exp_pos_1_table() {
  * 編碼轉換期望機率表(zero-order model)
  * $this->exp_table = $exp_table;
  * 20160722 1456 整理完畢
+ * @deprecated since version 20160725 不使用了
  */
 function create_exp_pos_0_table() {
     
@@ -831,6 +859,7 @@ function create_exp_f_table() {
  * (其實可以省略啦)
  * 20160722 1553 開始整理 - 整理完成
  * var $last_ns_table; //建議最少編碼轉換樣本數量表
+ * @deprecated since version 20160725 不使用
  */
 function create_last_ns_table() {
 
@@ -888,6 +917,11 @@ function create_last_ns_table() {
         return $temp;
     }
     
+    function sa_create_temp_obs2() {
+        $temp = 'USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG';
+        return $temp;
+    }
+    
     /**
      * @deprecated 20160725 不採用，因為z-score的計算方式不一樣了
      */
@@ -937,7 +971,7 @@ function create_last_ns_table() {
         $this->cal_z_score_zero_order();
         $this->cal_z_score_code_frequencies();
         $this->cal_z_score_joint_frequency();
-        $this->cal_z_score_transitional_probability();
+        //$this->cal_z_score_transitional_probability();
         $this->cal_z_score_allison_liker();
         //$this->cal_z_score_allison_liker2();
         
@@ -961,8 +995,7 @@ function create_last_ns_table() {
         foreach ($code_list AS $row_code) {
 
             $cf = 0;
-
-            if (is_int($code_f[$row_code])) {
+            if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
                 $cf = $code_f[$row_code];
             }
 
@@ -1024,8 +1057,7 @@ function create_last_ns_table() {
         foreach ($code_list AS $row_code) {
 
             $cf = 0;
-
-            if (is_int($code_f[$row_code])) {
+            if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
                 $cf = $code_f[$row_code];
             }
 
@@ -1045,28 +1077,40 @@ function create_last_ns_table() {
 
                 //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
                 // p -> g
-                $pp = 0;
-                if (isset($this->sf[$row_code]) && isset($this->sf[$row_code]["total"])) {
-                    $pp = $this->sf[$row_code]["total"] / $this->ns;
-                }
-                $fg = 0;
-                //if (isset($this->sf[$col_code]) && $this->sf[$col_code]["total"]) {
-                //    $fg = $this->sf[$col_code]["total"];
+                //$pp = 0;
+                //if (isset($this->sf[$row_code]) && isset($this->sf[$row_code]["total"])) {
+                //    $pp = $this->sf[$row_code]["total"] / $this->ns;
                 //}
-                $fg = $this->sf["col_total"][$col_code];
+                $pp = ($this->code_f[$row_code] / $this->ns);
+                //echo $pp . "+";
                 
+                $exp_pos = $this->_calc_prop_targets($col_code, $row_code, TRUE, $pp);
+         
+//                if (isset($this->sf[$col_code]) && $this->sf[$col_code]["total"]) {
+//                    $fg = $this->sf[$col_code]["total"];
+//                }
+//                if ($row_code === "P" && $col_code === "G") {
+//                    echo $exp_pos . "!!!";
+//                }
+//                //$fg = $this->sf["col_total"][$col_code];
+//                
+//                
+//                if ($this->repeatable === true) {
+//                    $exp_pos = $pp * ($fg / $this->ns);
+//                }
+//                else {
+//                    $exp_pos = $pp * ($fg / ($this->ns - $this->sf[$row_code]["total"]));
+//                }
                 
-                if ($this->repeatable === true) {
-                    $exp_pos = $pp * ($fg / $this->ns);
-                }
-                else {
-                    $exp_pos = $pp * ($fg / ($this->ns - $this->sf[$row_code]["total"]));
-                }
                 
                 //echo $pp."-".$fg . "|";
                 
-                if ($exp_pos > 0) {
+                
+                
+                if ($ns * $exp_pos * ( 1 - $exp_pos) > 0) {
                     $z = ($sf - ($ns * $exp_pos)) / sqrt($ns * $exp_pos * ( 1 - $exp_pos) );
+                    //echo $z;
+                    // 正確解答 P->G: 0.71371376594677
                 }
                 else {
                     $z = 0;
@@ -1108,8 +1152,7 @@ function create_last_ns_table() {
         foreach ($code_list AS $row_code) {
 
             $cf = 0;
-
-            if (is_int($code_f[$row_code])) {
+            if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
                 $cf = $code_f[$row_code];
             }
 
@@ -1127,18 +1170,24 @@ function create_last_ns_table() {
                 }
 
                 //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
-                $fg = $this->sf["col_total"][$col_code];
-                if ($this->repeatable === true) {
-                    $pg = ($fg / $this->ns);
-                }
-                else {
-                    $pg = ($fg / ($this->ns - $this->sf[$row_code]['total']) );
-                }
-                $fp = $this->sf[$row_code]['total'];
-                $exp_pos = ($fp / $this->ns) * $pg;
+//                $fg = $this->sf["col_total"][$col_code];
+//                
+//                if ($this->repeatable === true) {
+//                    $pg = ($fg / $this->ns);
+//                }
+//                else {
+//                    $pg = ($fg / ($this->ns - $this->sf[$row_code]['total']) );
+//                }
+                $pg = $this->_calc_prop_targets($col_code, $row_code);
                 
-                if ($fp > 0 && $pg > 0 && ($fp * $pg * ( 1 - $pg)) > 0) {
+                //$fp = $this->sf[$row_code]['total'];
+                $fp = $this->code_f[$row_code];
+                //$exp_pos = ($fp / $this->ns) * $pg;
+                
+                if (($fp * $pg * ( 1 - $pg)) > 0) {
                     $z = ($sf - ($fp * $pg)) / sqrt($fp * $pg * ( 1 - $pg) );
+                    
+                    // 正確解答： P->G: 0.67193684090529
                 }
                 else {
                     $z = 0;
@@ -1173,6 +1222,50 @@ function create_last_ns_table() {
         $this->sign_result["joint_frequency"] = $sign_result;
     }
     
+    function _calc_prop_targets($col_code, $row_code, $pos_first = FALSE, $prop = 1) {
+        //echo $col_code."+";
+        for ($i = 0; $i < strlen($col_code); $i++) {
+            $code = substr($col_code, $i, 1);
+            $prev_code = $row_code;
+            if ($i > 0) {
+                $prev_code = substr($col_code, ($i-1), 1);
+            }
+
+            $fg = 0;
+            $p = 0;
+            
+            if ($pos_first === FALSE) {
+                $p = $i+1;
+                if (isset($this->position_frequency[$code][($p)])) {
+                    $fg = $this->position_frequency[$code][($p)];
+                }
+            }
+            else {
+                $fg = $this->code_f[$code];
+            }
+            
+//            if ($pos_first === FALSE) {
+//                $p = $i+1;
+//            }
+//            if (isset($this->position_frequency[$code][($p)])) {
+//                $fg = $this->position_frequency[$code][($p)];
+//            }
+                
+//            if ($row_code === "P" && $col_code === "G" && $pos_first === TRUE) {
+//                echo $fg . "+" . $p . "---";
+//            }
+            
+            if ($this->repeatable === true) {
+                $prop = $prop * ($fg / $this->ns);
+            }
+            else {
+                //$prop = $prop * ($fg / ($this->ns - $this->sf[$prev_code]["total"]));
+                $prop = $prop * ($fg / ($this->ns - $this->code_f[$prev_code]));
+            }
+        }
+        return $prop;
+    } 
+    
     /**
      * @deprecated since version 20160725 等同於joint_frequency
      */
@@ -1190,8 +1283,7 @@ function create_last_ns_table() {
         foreach ($code_list AS $row_code) {
 
             $cf = 0;
-
-            if (is_int($code_f[$row_code])) {
+            if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
                 $cf = $code_f[$row_code];
             }
 
@@ -1268,8 +1360,7 @@ function create_last_ns_table() {
         foreach ($code_list AS $row_code) {
 
             $cf = 0;
-
-            if (is_int($code_f[$row_code])) {
+            if (isset($code_f[$row_code]) && is_int($code_f[$row_code])) {
                 $cf = $code_f[$row_code];
             }
 
@@ -1289,22 +1380,26 @@ function create_last_ns_table() {
                 $fpg = $sf;
 
                 //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
-                $fg = $this->sf["col_total"][$col_code];
                 $fp = $this->sf[$row_code]['total'];
-                if ($this->repeatable === true) {
-                    $pg = ($fg / $this->ns);
-                }
-                else {
-                    $pg = ($fg / ($this->ns - $fp) );
-                }
+                
+//                $fg = $this->sf["col_total"][$col_code];
+//                if ($this->repeatable === true) {
+//                    $pg = ($fg / $this->ns);
+//                }
+//                else {
+//                    $pg = ($fg / ($this->ns - $fp) );
+//                }
+                $pg = $this->_calc_prop_targets($col_code, $row_code);
                 
                 $pp = ($fp / $this->ns);
                 //$pt = $pp;
                 //$exp_pos = $pp * $pg;
                 
                 
-                if ($fp > 0 && $pg > 0 && $pp > 0 && ( $fp * $pg * (1-$pg) * (1-$pp) ) > 0) {
+                if (( $fp * $pg * (1-$pg) * (1-$pp) ) > 0) {
                     $z = ($fpg - ($fp * $pg)) / sqrt( $fp * $pg * (1-$pg) * (1-$pp) );
+                    
+                    // 正確解答：P->G: 0.76885500628616
                 }
                 else {
                     $z = 0;
@@ -1460,7 +1555,7 @@ function create_last_ns_table() {
      * @param {string} $table
      * @return string
      */
-    static function table_draw($table) {
+    static function table_draw($table, $show_sig = FALSE) {
         $html = '<table border="1">';
         
         $thead_th = array();
@@ -1471,11 +1566,29 @@ function create_last_ns_table() {
             
             $tr = "<tr>";
             $tr .= "<th>" . $row_code . "</th>";
-            foreach ($row AS $col_code => $cell) {
-                if ($first_tr === TRUE) {
-                    $thead_th[] = $col_code;
+            
+            if (is_array($row)) {
+                foreach ($row AS $col_code => $cell) {
+                    if ($first_tr === TRUE) {
+                        $thead_th[] = $col_code;
+                    }
+
+                    if ($show_sig === TRUE && $cell > 1.96) {
+                        $tr .= "<td style='color:red;'>" . $cell . "</td>";
+                    }
+                    else {
+                        $tr .= "<td>" . $cell . "</td>";
+                    }
                 }
-                $tr .= "<td>" . $cell . "</td>";
+            }
+            else {
+                $cell = $row;
+                if ($show_sig === TRUE && $cell > 1.96) {
+                    $tr .= "<td style='color:red;'>" . $cell . "</td>";
+                }
+                else {
+                    $tr .= "<td>" . $cell . "</td>";
+                }
             }
             $tr .= "</tr>";
             $tbody .= $tr;

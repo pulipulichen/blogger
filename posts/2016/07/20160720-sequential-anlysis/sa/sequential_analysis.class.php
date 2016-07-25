@@ -1,6 +1,6 @@
 <?php
 
-class sa {
+class Sequential_analysis {
     
     /**
      * 序列編碼
@@ -154,17 +154,32 @@ class sa {
 
     /**
      * 序列分析工具
-     * @var {string} $obs 觀察序列字串
-     * @var {string} $codes 欲觀察觀察編碼
-     * @var {string} $repeatable 可否重複: 'true', 'false', 'auto'
+     * 
+     * 使用範例
+     * include_once 'sequential_analysis.class.php';
+     * $sa = new Sequential_analysis("ABABCBCA", "ABC", FALSE);
+     * print_r($sa->export_sign_result("allison_liker"));
+     * 
+     * @param {string} $obs 觀察序列字串
+     * @param {string} $codes 欲觀察觀察編碼
+     * @param {boolean} $repeatable 可否重複: true false
      */
     function __construct($obs = NULL, $codes = "", $repeatable = FALSE) {
 
         // 只能計算2 lag，不能再多了
-        $lag = 2;
+        $lag = 4;
         
         $obs = trim($obs);
-        $codes = trim($codes);
+        if (is_string($codes)) {
+            $codes = trim($codes);
+        }
+        else if (is_array($codes)) {
+            $codes_string = "";
+            foreach ($codes AS $c) {
+                $codes_string .= $c;
+            }
+            $codes = $codes_string;
+        }
         
         if (is_null($obs)) {
             $obs = $this->sa_create_temp_obs();
@@ -232,7 +247,12 @@ class sa {
         
         //print_r($this->code_list_string);
 
-        $this->create_lag_list($this->lag);
+        if ($this->lag < 3) {
+            $this->lag_list = $this->code_list;
+        }
+        else {
+            $this->create_lag_list($this->lag);
+        }
         //return;
 
         $this->cal_sf_total();
@@ -500,26 +520,34 @@ class sa {
             $lag_list = $this->code_list;
         }
 
-        if ($this->lag < 3) {
-            //return $lag_list;
-        }
-        else {
+//        if ($this->lag < 3) {
+//            //return $lag_list;
+//        }
+//        else {
             $new_lag_list = array();
-
+            //print_r($lag_list);
+            //return;
+            
             foreach ($lag_list AS $lag_name) {
                 //var _lag_name = _lag_list[_i];
 
-                foreach ($this->code_list AS $code) {
+                foreach ($lag_list AS $code) {
                     $name = $lag_name . $code;
                     $new_lag_list[] = $name;
                 }
             }
 
             $new_lag = $lag - 1;
-            $lag_list = $this->create_lag_list($new_lag, $new_lag_list);
-        }
-        //return $lag_list;
+            if ($new_lag > 1) {
+                $lag_list = $this->create_lag_list($new_lag, $new_lag_list);
+            }
+            else {
+                return $lag_list;
+            }
+//        }
+        
         $this->lag_list = $lag_list;
+        //print_r($this->lag_list);
     }
     
     var $col_total = array();
@@ -530,14 +558,14 @@ class sa {
     function cal_sf_total() {
         
         $seq_f = $this->seq_f;
-        
+        print_r($this->lag_list);
         foreach ($this->code_list AS $i => $row_code)
         {
             $sf_total = 0;
 
             $sf_table =  array();
-            foreach ($this->lag_list AS $j => $col_code)
-            {
+            
+            foreach ($this->lag_list AS $col_code) {
                 $seq_name = $row_code . $col_code;
 
                 $sf = 0;
@@ -1003,6 +1031,7 @@ function create_last_ns_table() {
 
             $z_row = array();
             foreach ($lag_list AS $col_code) {
+                //echo $row_code . "-" . $col_code . "|";
 
                 //var _col_code = _code_list[_j];
 
@@ -1016,16 +1045,32 @@ function create_last_ns_table() {
 
                 //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
                 // p -> g
-                $pp = $this->sf[$row_code]["total"] / $this->ns;
-                $fg = $this->sf[$col_code]["total"];
+                $pp = 0;
+                if (isset($this->sf[$row_code]) && isset($this->sf[$row_code]["total"])) {
+                    $pp = $this->sf[$row_code]["total"] / $this->ns;
+                }
+                $fg = 0;
+                //if (isset($this->sf[$col_code]) && $this->sf[$col_code]["total"]) {
+                //    $fg = $this->sf[$col_code]["total"];
+                //}
+                $fg = $this->sf["col_total"][$col_code];
+                
+                
                 if ($this->repeatable === true) {
                     $exp_pos = $pp * ($fg / $this->ns);
                 }
                 else {
                     $exp_pos = $pp * ($fg / ($this->ns - $this->sf[$row_code]["total"]));
                 }
-
-                $z = ($sf - ($ns * $exp_pos)) / sqrt($ns * $exp_pos * ( 1 - $exp_pos) );
+                
+                //echo $pp."-".$fg . "|";
+                
+                if ($exp_pos > 0) {
+                    $z = ($sf - ($ns * $exp_pos)) / sqrt($ns * $exp_pos * ( 1 - $exp_pos) );
+                }
+                else {
+                    $z = 0;
+                }
 
 //                if (is_float($z) === FALSE) {
 //                    $z = 0;
@@ -1092,7 +1137,12 @@ function create_last_ns_table() {
                 $fp = $this->sf[$row_code]['total'];
                 $exp_pos = ($fp / $this->ns) * $pg;
                 
-                $z = ($sf - ($fp * $pg)) / sqrt($fp * $pg * ( 1 - $pg) );
+                if ($fp > 0 && $pg > 0 && ($fp * $pg * ( 1 - $pg)) > 0) {
+                    $z = ($sf - ($fp * $pg)) / sqrt($fp * $pg * ( 1 - $pg) );
+                }
+                else {
+                    $z = 0;
+                }
                 
 //                if ($row_code === "P" && $col_code === "G") {
 //                    echo "----" . (10 - (30*0.278) ) / sqrt( 30 * 0.278 * (1-0.278) ) . "---";
@@ -1168,9 +1218,18 @@ function create_last_ns_table() {
                 $fp = $this->sf[$row_code]['total'];
                 $pp = ($fp / $this->ns);
                 $exp_pos = $pp * $pg;
-                $pgp = ($sf / $fp);
                 
-                $z = ($pgp - $pg) / sqrt(($pg * (1-$pg)) / (($this->ns) * $pp) );
+                $pgp = 0;
+                if ($fp > 0) {
+                    $pgp = ($sf / $fp);
+                }
+                
+                if ($pg > 0 && $pp > 0 && ($pg * (1-$pg)) / (($this->ns) * $pp) > 0) {
+                    $z = ($pgp - $pg) / sqrt(($pg * (1-$pg)) / (($this->ns) * $pp) );
+                }
+                else {
+                    $z = 0;
+                }
 //                if ($row_code === "P" && $col_code === "G") {
 //                    echo "----" . ((0.333 - 0.278 ) / sqrt( (0.278 * (1 - 0.278)) / (127*0.236) )) . "---";
 //                    echo "----" . ((0.33333333333333  - 0.27835051546392 ) / sqrt( (0.27835051546392  * (1 - 0.27835051546392)) / (127*0.23622047244094 ) )) . "---";
@@ -1244,12 +1303,17 @@ function create_last_ns_table() {
                 //$exp_pos = $pp * $pg;
                 
                 
-                $z = ($fpg - ($fp * $pg)) / sqrt( $fp * $pg * (1-$pg) * (1-$pp) );
-                if ($row_code === "P" && $col_code === "G") {
+                if ($fp > 0 && $pg > 0 && $pp > 0 && ( $fp * $pg * (1-$pg) * (1-$pp) ) > 0) {
+                    $z = ($fpg - ($fp * $pg)) / sqrt( $fp * $pg * (1-$pg) * (1-$pp) );
+                }
+                else {
+                    $z = 0;
+                }
+                //if ($row_code === "P" && $col_code === "G") {
                     //echo (10 - (30*0.278) ) / sqrt( 30 * 0.278 * (1-0.278) * (1-0.236) ) . '-------';
                     //echo (10 - (30*0.27835051546392 ) ) / sqrt( 30 * 0.27835051546392  * (1-0.27835051546392 ) * (1-0.23622047244094 ) ) . '-------';
-                    print_r(array($fpg, $fp, $pg, $fg, $pg, $pg, $pp, $z));
-                }
+                //    print_r(array($fpg, $fp, $pg, $fg, $pg, $pg, $pp, $z));
+                //}
 
 //                if (is_float($z) === FALSE) {
 //                    $z = 0;
@@ -1353,6 +1417,43 @@ function create_last_ns_table() {
 
         $this->sign_result["allison_liker2"] = $sign_result;
     }
+    
+    /**
+     * 輸出顯著的序列轉換結果
+     * 
+     * $sa->export_sign_result("allison_liker")
+     * @param {String|NULL} $target_model
+     * @return array
+     */
+    function export_sign_result($target_model = NULL) {
+        $export = array();
+        
+        foreach ($this->sign_result AS $model => $results) {
+            if (count($results) > 0) {
+                $ary = array();
+                foreach ($results AS $seq => $z) {
+                    $ary[] = array(
+                        "source" => substr($seq, 0, 1),
+                        "target" => substr($seq, 1, 1),
+                        "value" => $z,
+                        "label" => round($z, 2)
+                    );
+                }
+                $export[$model] = $ary;
+            }
+        }
+        
+        if (is_null($target_model) === FALSE) {
+            if (isset($export[$target_model])) {
+                $export = $export[$target_model];
+            }
+            else {
+                $export = array();
+            }
+        }
+        
+        return $export;
+    }
 
     /**
      * 描繪表格
@@ -1391,5 +1492,7 @@ function create_last_ns_table() {
         $html .= $thead . $tbody . "</table>";
         return $html;
     }
+    
+    
     
 }   //  class sa {

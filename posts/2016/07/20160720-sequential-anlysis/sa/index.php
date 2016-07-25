@@ -1,7 +1,8 @@
 <?php
 
 include_once 'sequential_analysis.class.php';
-$sa = new Sequential_analysis($obs, "USTPG", FALSE, 2);
+$obs = 'USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG';
+$sa = new Sequential_analysis($obs);
 
 echo "\n <h2>編碼序列</h2> \n";
 echo $sa->obs;

@@ -76,7 +76,7 @@ class sa {
      * Zero-order model：設定每種編碼的機率期望值均相等。
      * @var boolean 
      */
-    var $first_order;   
+    //var $first_order;   
     
     /**
      * 編碼列表
@@ -112,25 +112,25 @@ class sa {
      * 編碼轉換期望機率表
      * @var array
      */
-    var $exp_pos_table; // 編碼轉換期望機率表
+    //var $exp_pos_table; // 編碼轉換期望機率表
     
     /**
      * 編碼轉換期望頻率表
      * @var array
      */
-    var $exp_f_table;    //編碼轉換期望頻率表
+    //var $exp_f_table;    //編碼轉換期望頻率表
 
     /**
      * 建議最少編碼轉換樣本數量表
      * @var array
      */
-    var $last_ns_table; //建議最少編碼轉換樣本數量表
+    //var $last_ns_table; //建議最少編碼轉換樣本數量表
     
     /**
      * 建議最少編碼轉換樣本數量表 訊息
      * @var string
      */
-    var $last_ns_message;   //建議最少編碼轉換樣本數量表 訊息
+    //var $last_ns_message;   //建議最少編碼轉換樣本數量表 訊息
 
     /**
      * 編碼轉換期望頻率表 (不顯示的)
@@ -139,13 +139,13 @@ class sa {
     var $exp_pos_list;  // 期望值列表...?
     
     /**
-     * 調整後殘差表(Z分數)
+     * 調整後殘差表(Z分數) code_frequencies
      * @var array 
      */
     var $z_table;
 
     /**
-     * 有顯著結果的列表
+     * 有顯著結果的列表 code_frequencies
      * @var array
      */
     var $sign_result;   // 有顯著結果的列表
@@ -157,9 +157,8 @@ class sa {
      * @var {string} $obs 觀察序列字串
      * @var {string} $codes 欲觀察觀察編碼
      * @var {string} $repeatable 可否重複: 'true', 'false', 'auto'
-     * @var {boolean} $first_order
      */
-    function __construct($obs = NULL, $codes = "", $repeatable = FALSE, $first_order = TRUE) {
+    function __construct($obs = NULL, $codes = "", $repeatable = FALSE) {
 
         // 只能計算2 lag，不能再多了
         $lag = 2;
@@ -176,9 +175,9 @@ class sa {
         //$obs = 'ABABCBACBCAC';
         //$obs = "BAAC";
         //$obs = "BAC";
-        $repeatable = FALSE;
+        //$repeatable = FALSE;
         //$allow_same_adjacent_codes = FALSE;
-        $first_order = FALSE;
+        //$first_order = FALSE;
         
         $code_list = [];    //包含的coding
         $code_f = [];    //頻率
@@ -211,7 +210,7 @@ class sa {
         
         //$this->allow_same_adjacent_codes = $allow_same_adjacent_codes;
         $this->repeatable = $repeatable;
-        $this->first_order = $first_order;
+        //$this->first_order = $first_order;
         $this->lag = $lag;
         
         
@@ -220,13 +219,13 @@ class sa {
         
         
         // 20160722 1507 測試用
-        print_r(array(
-            $this->n, 
-            $this->ns, 
-            $this->breaks, 
-            $this->seq_f,
-            $this->code_list
-                ));
+//        print_r(array(
+//            $this->n, 
+//            $this->ns, 
+//            $this->breaks, 
+//            $this->seq_f,
+//            $this->code_list
+//                ));
         //return;
 
         $this->calc_code_list_string();
@@ -236,7 +235,7 @@ class sa {
         $this->create_lag_list($this->lag);
         //return;
 
-        $this->cal_sf();
+        $this->cal_sf_total();
 
         // 只是畫表格而已，不使用
         //create_obs_seq_pos_table(_f_table).appendTo(_sa_result);    
@@ -245,24 +244,24 @@ class sa {
         // 20160722 1356 整理到這裡
         // -------------------------------------
 
-        if ($this->first_order === TRUE) {
-            $this->create_obs_f_table();
-            $this->create_exp_pos_1_table();
-        }
-        else {
-            $this->create_exp_pos_0_table();
-        }
+//        if ($this->first_order === TRUE) {
+//            $this->create_obs_f_table();
+//            $this->create_exp_pos_1_table();
+//        }
+//        else {
+//            $this->create_exp_pos_0_table();
+//        }
 
         // 20160722 1419 整理到這裡
         // --------------------------------------------
         // 20160722 1457 開始繼續整理
 
-        $this->create_exp_f_table();
-        $this->create_last_ns_table();
+        //$this->create_exp_f_table();
+        //$this->create_last_ns_table();
 
         // 20160722 1610 繼續整理
         // --------------------------------------------
-        $this->cal_exp_pos_list();
+        //$this->cal_exp_pos_list();
 
         // 20160722 1623 整理到這裡
         // -------------------------------------
@@ -523,10 +522,12 @@ class sa {
         $this->lag_list = $lag_list;
     }
     
+    var $col_total = array();
+    
     /**
      * 計算序列頻率
      */
-    function cal_sf() {
+    function cal_sf_total() {
         
         $seq_f = $this->seq_f;
         
@@ -544,24 +545,34 @@ class sa {
                 if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
                     $sf = $seq_f[$seq_name];
                 }
-
-                if ($sf === 0) {
-                   $sf = "0";
+                
+                if (isset($this->col_total[$col_code]) === false) {
+                    $this->col_total[$col_code] = 0;                    
                 }
+                $this->col_total[$col_code] = $this->col_total[$col_code] + $sf;
+                //echo $row_code;
+
+                //if ($sf === 0) {
+                //   $sf = "0";
+                //}
+                
 
                 $sf_table[$col_code] = $sf;
                 $sf_total = intval($sf) + intval($sf_total);
             }
+            
+            
 
-            if ($sf_total === 0) {
-                $sf_total = '0';
-            }
+            //if ($sf_total === 0) {
+            //    $sf_total = '0';
+            //}
 
             //$('<td class="sf-total"></td>').html(_sf_total).appendTo(_row_tr);
             //$this->sf_total[$row_code] = $sf_total;
             $sf_table["total"] = $sf_total;
             $this->sf[$row_code] = $sf_table;
         }
+        $this->sf["col_total"] = $this->col_total;
     }
 
 /**
@@ -579,6 +590,10 @@ function create_obs_seq_pos_table() {
     //for (var _i = 0; _i < _tr_list.length; _i++)
     foreach ($this->sf AS $row_code => $row)
     {
+        if ($row_code === "col_total") {
+            continue;
+        }
+        
         //var _tr = _tr_list.eq(_i);
         //var _sf_total = parseInt(_tr.find('.sf-total').html());
         $sf_total = $row['total'];
@@ -688,9 +703,9 @@ function create_exp_pos_1_table() {
                     $p = $f / ($n - $row_code_f);
                 }
                 
-                if ($row_code === "P" && $col_code === "G") {
-                    print_r(array($row_code_f, $n, $f));
-                }
+//                if ($row_code === "P" && $col_code === "G") {
+//                    print_r(array($row_code_f, $n, $f));
+//                }
                 
                 $exp_pos = $exp_pos * $p;
             }
@@ -754,6 +769,7 @@ function create_exp_pos_0_table() {
  * 編碼轉換期望頻率表
  * var $exp_f_table;    //編碼轉換期望頻率表
  * 20160722 1552 整理完成
+ * @deprecated since version 20160725 不採用，因為期望值計算方式結合了
  */
 function create_exp_f_table() {
     
@@ -844,6 +860,10 @@ function create_last_ns_table() {
         return $temp;
     }
     
+    /**
+     * @deprecated 20160725 不採用，因為z-score的計算方式不一樣了
+     */
+    /*
     function cal_exp_pos_list() {
         
         $first_order = $this->first_order;
@@ -883,9 +903,23 @@ function create_last_ns_table() {
         // 注意，列表被我改成table了
         $this->exp_pos_list = $exp_pos_list;
     }   // function cal_exp_pos_list() {
-    
+    */
     function cal_sign_result() {
         
+        $this->cal_z_score_zero_order();
+        $this->cal_z_score_code_frequencies();
+        $this->cal_z_score_joint_frequency();
+        $this->cal_z_score_transitional_probability();
+        $this->cal_z_score_allison_liker();
+        //$this->cal_z_score_allison_liker2();
+        
+    }
+    
+    /**
+     * 平均編碼出現頻率
+     * Zero-order Model
+     */
+    function cal_z_score_zero_order() {
         $code_list = $this->code_list;
         $code_f = $this->code_f;
         $lag_list = $this->lag_list;
@@ -896,7 +930,7 @@ function create_last_ns_table() {
 
         $z_table = array();
 
-        foreach ($code_list AS $i => $row_code) {
+        foreach ($code_list AS $row_code) {
 
             $cf = 0;
 
@@ -905,7 +939,7 @@ function create_last_ns_table() {
             }
 
             $z_row = array();
-            foreach ($lag_list AS $j => $col_code) {
+            foreach ($lag_list AS $col_code) {
 
                 //var _col_code = _code_list[_j];
 
@@ -917,13 +951,14 @@ function create_last_ns_table() {
                     $sf = $seq_f[$seq_name];
                 }
 
-                $exp_pos = $this->exp_pos_list[$row_code][$col_code];
-
+                $exp_pos = 1 / ((count($this->code_list) * (count($this->code_list) - 1)));
+                //echo $exp_pos;
+                
                 $z = ($sf - ($ns * $exp_pos)) / sqrt($ns * $exp_pos * ( 1 - $exp_pos) );
 
-                if (is_float($z) === FALSE) {
-                    $z = 0;
-                }
+//                if (is_float($z) === FALSE) {
+//                    $z = 0;
+//                }
 
                 $z_row[$col_code] = $z;
 
@@ -938,9 +973,385 @@ function create_last_ns_table() {
             $z_table[$row_code] = $z_row;
         }
         
-        $this->z_table = $z_table;
+        $this->z_table["zero_order"] = $z_table;
 
-        $this->sign_result = $sign_result;
+        $this->sign_result["zero_order"] = $sign_result;
+    }
+    
+    /**
+     * 單看編碼出現頻率
+     * First-order Model
+     */
+    function cal_z_score_code_frequencies() {
+        $code_list = $this->code_list;
+        $code_f = $this->code_f;
+        $lag_list = $this->lag_list;
+        $seq_f = $this->seq_f;
+        $ns = $this->ns;
+        
+        $sign_result = array();    //有顯著結果的列表
+
+        $z_table = array();
+
+        foreach ($code_list AS $row_code) {
+
+            $cf = 0;
+
+            if (is_int($code_f[$row_code])) {
+                $cf = $code_f[$row_code];
+            }
+
+            $z_row = array();
+            foreach ($lag_list AS $col_code) {
+
+                //var _col_code = _code_list[_j];
+
+                $seq_name = $row_code . $col_code;
+
+                $sf = 0;
+
+                if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
+                    $sf = $seq_f[$seq_name];
+                }
+
+                //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
+                // p -> g
+                $pp = $this->sf[$row_code]["total"] / $this->ns;
+                $fg = $this->sf[$col_code]["total"];
+                if ($this->repeatable === true) {
+                    $exp_pos = $pp * ($fg / $this->ns);
+                }
+                else {
+                    $exp_pos = $pp * ($fg / ($this->ns - $this->sf[$row_code]["total"]));
+                }
+
+                $z = ($sf - ($ns * $exp_pos)) / sqrt($ns * $exp_pos * ( 1 - $exp_pos) );
+
+//                if (is_float($z) === FALSE) {
+//                    $z = 0;
+//                }
+
+                $z_row[$col_code] = $z;
+
+                if ($z > 1.96) {
+                    //_td.addClass('sign');
+
+                    $sign_result[$seq_name] = $z;
+                }   
+
+                //_e++;
+            }
+            $z_table[$row_code] = $z_row;
+        }
+        
+        $this->z_table["code_frequencies"] = $z_table;
+
+        $this->sign_result["code_frequencies"] = $sign_result;
+    }
+    
+    function cal_z_score_joint_frequency() {
+        $code_list = $this->code_list;
+        $code_f = $this->code_f;
+        $lag_list = $this->lag_list;
+        $seq_f = $this->seq_f;
+        $ns = $this->ns;
+        
+        $sign_result = array();    //有顯著結果的列表
+
+        $z_table = array();
+
+        foreach ($code_list AS $row_code) {
+
+            $cf = 0;
+
+            if (is_int($code_f[$row_code])) {
+                $cf = $code_f[$row_code];
+            }
+
+            $z_row = array();
+            foreach ($lag_list AS $col_code) {
+
+                //var _col_code = _code_list[_j];
+
+                $seq_name = $row_code . $col_code;
+
+                $sf = 0;
+
+                if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
+                    $sf = $seq_f[$seq_name];
+                }
+
+                //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
+                $fg = $this->sf["col_total"][$col_code];
+                if ($this->repeatable === true) {
+                    $pg = ($fg / $this->ns);
+                }
+                else {
+                    $pg = ($fg / ($this->ns - $this->sf[$row_code]['total']) );
+                }
+                $fp = $this->sf[$row_code]['total'];
+                $exp_pos = ($fp / $this->ns) * $pg;
+                
+                $z = ($sf - ($fp * $pg)) / sqrt($fp * $pg * ( 1 - $pg) );
+                
+//                if ($row_code === "P" && $col_code === "G") {
+//                    echo "----" . (10 - (30*0.278) ) / sqrt( 30 * 0.278 * (1-0.278) ) . "---";
+//                    echo "---" . (10 - (30*0.27835051546392 ) ) / sqrt( 30 * 0.27835051546392  * (1-0.27835051546392 )) . "---";
+//                    print_r(array("聯合頻率算法:
+//joint_frequency", $sf, $fp, $pg, $fp, $this->ns, $z));
+//                }
+
+//                if (is_float($z) === FALSE) {
+//                    $z = 0;
+//                }
+
+                $z_row[$col_code] = $z;
+
+                if ($z > 1.96) {
+                    //_td.addClass('sign');
+
+                    $sign_result[$seq_name] = $z;
+                }   
+
+                //_e++;
+            }
+            $z_table[$row_code] = $z_row;
+        }
+        
+        $this->z_table["joint_frequency"] = $z_table;
+
+        $this->sign_result["joint_frequency"] = $sign_result;
+    }
+    
+    /**
+     * @deprecated since version 20160725 等同於joint_frequency
+     */
+    function cal_z_score_transitional_probability() {
+        $code_list = $this->code_list;
+        $code_f = $this->code_f;
+        $lag_list = $this->lag_list;
+        $seq_f = $this->seq_f;
+        $ns = $this->ns;
+        
+        $sign_result = array();    //有顯著結果的列表
+
+        $z_table = array();
+
+        foreach ($code_list AS $row_code) {
+
+            $cf = 0;
+
+            if (is_int($code_f[$row_code])) {
+                $cf = $code_f[$row_code];
+            }
+
+            $z_row = array();
+            foreach ($lag_list AS $col_code) {
+
+                //var _col_code = _code_list[_j];
+
+                $seq_name = $row_code . $col_code;
+
+                $sf = 0;
+
+                if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
+                    $sf = $seq_f[$seq_name];
+                }
+
+                //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
+                if ($this->repeatable === true) {
+                    $pg = ($this->sf["col_total"][$col_code] / $this->ns);
+                }
+                else {
+                    $pg = ($this->sf["col_total"][$col_code] / ($this->ns - $this->sf[$row_code]['total']) );
+                }
+                $fp = $this->sf[$row_code]['total'];
+                $pp = ($fp / $this->ns);
+                $exp_pos = $pp * $pg;
+                $pgp = ($sf / $fp);
+                
+                $z = ($pgp - $pg) / sqrt(($pg * (1-$pg)) / (($this->ns) * $pp) );
+//                if ($row_code === "P" && $col_code === "G") {
+//                    echo "----" . ((0.333 - 0.278 ) / sqrt( (0.278 * (1 - 0.278)) / (127*0.236) )) . "---";
+//                    echo "----" . ((0.33333333333333  - 0.27835051546392 ) / sqrt( (0.27835051546392  * (1 - 0.27835051546392)) / (127*0.23622047244094 ) )) . "---";
+//                    print_r(array($pgp, $pg, $this->ns, $pp, $z));
+//                }
+
+                $z_row[$col_code] = $z;
+
+                if ($z > 1.96) {
+                    //_td.addClass('sign');
+
+                    $sign_result[$seq_name] = $z;
+                }   
+
+                //_e++;
+            }
+            $z_table[$row_code] = $z_row;
+        }
+        
+        $this->z_table["transitional_probability"] = $z_table;
+
+        $this->sign_result["transitional_probability"] = $sign_result;
+    }
+    
+    function cal_z_score_allison_liker() {
+        $code_list = $this->code_list;
+        $code_f = $this->code_f;
+        $lag_list = $this->lag_list;
+        $seq_f = $this->seq_f;
+        $ns = $this->ns;
+        
+        $sign_result = array();    //有顯著結果的列表
+
+        $z_table = array();
+
+        foreach ($code_list AS $row_code) {
+
+            $cf = 0;
+
+            if (is_int($code_f[$row_code])) {
+                $cf = $code_f[$row_code];
+            }
+
+            $z_row = array();
+            foreach ($lag_list AS $col_code) {
+
+                //var _col_code = _code_list[_j];
+
+                $seq_name = $row_code . $col_code;
+
+                $sf = 0;
+
+                if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
+                    $sf = $seq_f[$seq_name];
+                }
+                
+                $fpg = $sf;
+
+                //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
+                $fg = $this->sf["col_total"][$col_code];
+                $fp = $this->sf[$row_code]['total'];
+                if ($this->repeatable === true) {
+                    $pg = ($fg / $this->ns);
+                }
+                else {
+                    $pg = ($fg / ($this->ns - $fp) );
+                }
+                
+                $pp = ($fp / $this->ns);
+                //$pt = $pp;
+                //$exp_pos = $pp * $pg;
+                
+                
+                $z = ($fpg - ($fp * $pg)) / sqrt( $fp * $pg * (1-$pg) * (1-$pp) );
+                if ($row_code === "P" && $col_code === "G") {
+                    //echo (10 - (30*0.278) ) / sqrt( 30 * 0.278 * (1-0.278) * (1-0.236) ) . '-------';
+                    //echo (10 - (30*0.27835051546392 ) ) / sqrt( 30 * 0.27835051546392  * (1-0.27835051546392 ) * (1-0.23622047244094 ) ) . '-------';
+                    print_r(array($fpg, $fp, $pg, $fg, $pg, $pg, $pp, $z));
+                }
+
+//                if (is_float($z) === FALSE) {
+//                    $z = 0;
+//                }
+
+                $z_row[$col_code] = $z;
+
+                if ($z > 1.96) {
+                    //_td.addClass('sign');
+
+                    $sign_result[$seq_name] = $z;
+                }   
+
+                //_e++;
+            }
+            $z_table[$row_code] = $z_row;
+        }
+        
+        $this->z_table["allison_liker"] = $z_table;
+
+        $this->sign_result["allison_liker"] = $sign_result;
+    }
+    
+    /**
+     * @deprecated since version 20160725 等同於allison liker
+     */
+    function cal_z_score_allison_liker2() {
+        $code_list = $this->code_list;
+        $code_f = $this->code_f;
+        $lag_list = $this->lag_list;
+        $seq_f = $this->seq_f;
+        $ns = $this->ns;
+        
+        $sign_result = array();    //有顯著結果的列表
+
+        $z_table = array();
+
+        foreach ($code_list AS $row_code) {
+
+            $cf = 0;
+
+            if (is_int($code_f[$row_code])) {
+                $cf = $code_f[$row_code];
+            }
+
+            $z_row = array();
+            foreach ($lag_list AS $col_code) {
+
+                //var _col_code = _code_list[_j];
+
+                $seq_name = $row_code . $col_code;
+
+                $sf = 0;
+
+                if (isset($seq_f[$seq_name]) && is_int($seq_f[$seq_name])) {
+                    $sf = $seq_f[$seq_name];
+                }
+                $fpg = $sf;
+
+                //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
+                $fg = $this->sf["col_total"][$col_code];
+                $fp = $this->sf[$row_code]['total'];
+                if ($this->repeatable === true) {
+                    $pg = ($fg / $this->ns);
+                }
+                else {
+                    $pg = ($fg / ($this->ns - $fp) );
+                }
+                
+                $pp = ($fp / $this->ns);
+                //$pt = $pp;
+                //$exp_pos = $pp * $pg;
+                
+                
+                //$z = ($fpg - ($fp * $pg)) / sqrt( $fp * $pg * (1-$pg) * (1-$pp) );
+                $pgp = ($sf / $fp);
+                
+                $z = ($pgp - $pg) / sqrt( ($pg * (1-$pg) * (1-$pp)) / ($this->ns * $pp) ) ;
+                //if ($row_code === "P" && $col_code === "G") {
+                //    print_r(array($fpg, $fp, $pg, $fg, $pg, $pg, $pp, $z));
+                //}
+
+//                if (is_float($z) === FALSE) {
+//                    $z = 0;
+//                }
+
+                $z_row[$col_code] = $z;
+
+                if ($z > 1.96) {
+                    //_td.addClass('sign');
+
+                    $sign_result[$seq_name] = $z;
+                }   
+
+                //_e++;
+            }
+            $z_table[$row_code] = $z_row;
+        }
+        
+        $this->z_table["allison_liker2"] = $z_table;
+
+        $this->sign_result["allison_liker2"] = $sign_result;
     }
 
     /**
@@ -980,4 +1391,5 @@ function create_last_ns_table() {
         $html .= $thead . $tbody . "</table>";
         return $html;
     }
+    
 }   //  class sa {

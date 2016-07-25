@@ -27,14 +27,14 @@ for ($i = 0; $i < 15; $i++) {
 }
 */
 //$obs .= "ST";
-$obs = "USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG";
+//$obs = "USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG";
 //echo strlen($obs);
 
 
 include_once 'sequential_analysis.class.php';
-//$sa = new Sequential_analysis($obs, "USTPG", FALSE, 2);
+$sa = new Sequential_analysis($obs, "USTPG", FALSE, 2);
 //$sa = new Sequential_analysis("PGTPGTPGT");
-$sa = new Sequential_analysis();
+//$sa = new Sequential_analysis();
 
 //print_r($sa->position_frequency);
 //echo Sequential_analysis::table_draw($sa->position_frequency);

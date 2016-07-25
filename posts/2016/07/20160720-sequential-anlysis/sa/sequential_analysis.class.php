@@ -182,9 +182,9 @@ class Sequential_analysis {
         }
         
         if ($obs === "") {
-            $obs = $this->sa_create_temp_obs();
-            //$obs = $this->sa_create_temp_obs2();
-            //$codes = "USTPG";
+            //$obs = $this->sa_create_temp_obs();
+            $obs = $this->sa_create_temp_obs2();
+            $codes = "USTPG";
         }
         
         //$obs = "aba";

@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * 使用範例
+ * include_once 'sequential_analysis.class.php';
+ * $obs = "ABABCBCA";   // 觀察序列
+ * $codes = "ABS";      // 觀察編碼
+ * $repeatable = FALSE; // 可否重複
+ * $lag = 2;            // 觀察序列長度
+ * $sa = new Sequential_analysis($obs, $codes, $repeatable, $lag);
+ * print_r($sa->export_sign_result("allison_liker"));
+ */
 class Sequential_analysis {
     
     /**

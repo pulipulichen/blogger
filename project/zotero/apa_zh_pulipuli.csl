@@ -352,6 +352,8 @@
         </choose>
       </else>
     </choose>
+    <text variable="ISBN" prefix="（ISBN：" suffix="）"/>
+    <text variable="note" prefix="（" suffix="）"/>
   </macro>
 
   
@@ -410,7 +412,7 @@
         <text type="report thesis" variable="genre" prefix="[" suffix="]"/>
       </else-if>
       <else-if type="book thesis motion_picture report song manuscript speech" match="any">
-        <text macro="title-zh-italic" font-style="italic"/>
+        <text macro="title-zh-italic"/>
       </else-if>
       <else>
         <text variable="title"/>
@@ -421,9 +423,13 @@
     <text macro="locators-books-zh" />
   </macro>
 
+  <!---->
+
   <macro name="title-zh-italic">
     <text variable="title" font-style="italic"/>
   </macro>
+
+    
   
   <!---->
   
@@ -498,7 +504,7 @@
       </else-if>
     </choose>
   </macro>
-  
+
   <!---->
   
   <macro name="event">
@@ -798,8 +804,10 @@
          </group>
       </if>
     </choose>
-  </macro>
   
+  
+  </macro>
+
   <!---->
   
   <macro name="citation-locator">
@@ -825,6 +833,10 @@
       <text variable="locator" prefix="頁 "/>
     </group>
   </macro>
+
+
+  
+
   <!---->
   
   <macro name="container">

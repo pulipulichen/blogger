@@ -358,13 +358,15 @@ var _display_related_posts = function (items, msgs, config) {
     // 為每個回覆後面加上
     var _reply_link = $('<a kind="i" href="javascript:;" target="_self" o="r">回覆</a>').click(function () {
         $(this).parents(".comment-replies").prev().find('a[o="r"]:first').click();
-        location.href = "#commentsHolder";
+        var _top = $("#comment-editor:first").offset().top;
+        window.scrollTo(0, _top);
     });
     
     var _div = $(".comment-replies ol li.comment div.comment-replies");
     for (var _i = 0; _i < _div.length; _i++) {
         _div.eq(_i).append(_reply_link.clone(true));
     }
+    console.log(_div.length);
 };
 
 //---------------------------------------

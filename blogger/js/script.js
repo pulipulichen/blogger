@@ -345,15 +345,26 @@ var _display_related_posts = function (items, msgs, config) {
         }
       };
 
-      // render now, or queue to render when library loads:
-      if (window.goog && window.goog.comments) {
+    // render now, or queue to render when library loads:
+    if (window.goog && window.goog.comments) {
         render();
-      } else {
+    } else {
         window.goog = window.goog || {};
         window.goog.comments = window.goog.comments || {};
         window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
         window.goog.comments.loadQueue.push(render);
-      }
+    }
+    
+    // 為每個回覆後面加上
+    var _reply_link = $('<a kind="i" href="javascript:;" target="_self" o="r">回覆</a>').click(function () {
+        $(this).parents(".comment-replies").prev().find('a[o="r"]:first').click();
+        location.href = "#commentsHolder";
+    });
+    
+    var _div = $(".comment-replies ol li.comment div.comment-replies");
+    for (var _i = 0; _i < _div.length; _i++) {
+        _div.eq(_i).append(_reply_link.clone(true));
+    }
 };
 
 //---------------------------------------
@@ -361,6 +372,7 @@ var _display_related_posts = function (items, msgs, config) {
 $('.go-top').click(function(){$('.st-content').animate({scrollTop:0},'slow');$('html, body').animate({scrollTop:0},'slow');return false;});
 
 //----------------------------------------
+
 $(function () {
     $(".widget h2").wrapInner("<span/>");
 });

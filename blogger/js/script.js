@@ -344,7 +344,7 @@ var _display_related_posts = function (items, msgs, config) {
             window.goog.comments.render(holder, provider);
         }
         
-        var _div = $(".comment-replies ol li.comment div.comment-replies");
+        var _div = $(".comment-replies ol li.comment span.comment-actions:first");
         for (var _i = 0; _i < _div.length; _i++) {
             _div.eq(_i).append(_reply_link.clone(true));
         }

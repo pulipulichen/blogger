@@ -364,7 +364,7 @@ var _display_related_posts = function (items, msgs, config) {
     // 為每個留言後面加上回覆
     var _reply_link = $('<a kind="i" href="javascript:;" target="_self" o="r">回覆</a>').click(function () {
         $(this).parents(".comment-replies").prev().find('a[o="r"]:first').click();
-        var _top = $("#comment-editor:first").offset().top;
+        var _top = $("#comment-editor:first").offset().top - $("#masthead .container:first").height();
         window.scrollTo(0, _top);
     });
     

@@ -338,12 +338,18 @@ var _display_related_posts = function (items, msgs, config) {
         'messages': msgs
       };
 
-      var render = function() {
+    var render = function() {
         if (window.goog && window.goog.comments) {
-          var holder = document.getElementById('comment-holder');
-          window.goog.comments.render(holder, provider);
+            var holder = document.getElementById('comment-holder');
+            window.goog.comments.render(holder, provider);
         }
-      };
+        
+        var _div = $(".comment-replies ol li.comment div.comment-replies");
+        for (var _i = 0; _i < _div.length; _i++) {
+            _div.eq(_i).append(_reply_link.clone(true));
+        }
+        console.log(_div.length);
+    };
 
     // render now, or queue to render when library loads:
     if (window.goog && window.goog.comments) {
@@ -355,18 +361,13 @@ var _display_related_posts = function (items, msgs, config) {
         window.goog.comments.loadQueue.push(render);
     }
     
-    // 為每個回覆後面加上
+    // 為每個留言後面加上回覆
     var _reply_link = $('<a kind="i" href="javascript:;" target="_self" o="r">回覆</a>').click(function () {
         $(this).parents(".comment-replies").prev().find('a[o="r"]:first').click();
         var _top = $("#comment-editor:first").offset().top;
         window.scrollTo(0, _top);
     });
     
-    var _div = $(".comment-replies ol li.comment div.comment-replies");
-    for (var _i = 0; _i < _div.length; _i++) {
-        _div.eq(_i).append(_reply_link.clone(true));
-    }
-    console.log(_div.length);
 };
 
 //---------------------------------------

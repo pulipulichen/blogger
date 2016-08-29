@@ -5,6 +5,7 @@
 
 .entry-content > article > p {
     text-indent: 2em;
+    text-align: justify;
 }
 
 .entry-content h4 {

@@ -249,6 +249,10 @@ body .addthis-smartlayers {
         line-height: 1.5rem;
     }
     
+    .entry-content > article > p {
+        text-indent: 1em;
+    }
+    
     /*#main .entry-content > article > p > a[href$=".png"]:first-of-type img {
         max-height: 300px;
     }*/

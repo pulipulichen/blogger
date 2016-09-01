@@ -1221,7 +1221,7 @@ function create_last_ns_table() {
             if ($this->repeatable === true) {
                 $prop = $prop * ($fg / $this->ns);
             }
-            else {
+            else if (($this->ns - $this->code_f[$prev_code]) > 0) {
                 //$prop = $prop * ($fg / ($this->ns - $this->sf[$prev_code]["total"]));
                 $prop = $prop * ($fg / ($this->ns - $this->code_f[$prev_code]));
             }
@@ -1343,6 +1343,7 @@ function create_last_ns_table() {
                 $fpg = $sf;
 
                 //$exp_pos = $this->exp_pos_list[$row_code][$col_code];
+                
                 $fp = $this->sf[$row_code]['total'];
                 
 //                $fg = $this->sf["col_total"][$col_code];
@@ -1360,7 +1361,28 @@ function create_last_ns_table() {
                 
                 
                 if (( $fp * $pg * (1-$pg) * (1-$pp) ) > 0) {
+                    if ($row_code === "C" && $col_code === "B") {
+                        print_r(array(
+                            "fpg" => $fpg,
+                            "fp" => $fp,
+                            "pg" => $pg,
+                            "pp" => $pp
+                        ));
+                    }
+                
+                    
                     $z = ($fpg - ($fp * $pg)) / sqrt( $fp * $pg * (1-$pg) * (1-$pp) );
+                    if ($row_code === "C" && $col_code === "B") {
+                        print_r(array(
+                            "fpg" => $fpg,
+                            "fp" => $fp,
+                            "pg" => $pg,
+                            "pp" => $pp,
+                            "母" => sqrt( $fp * $pg * (1-$pg) * (1-$pp) ),
+                            "公" => ($fpg - ($fp * $pg)),
+                            "z" => $z
+                        ));
+                    }
                     
                     // 正確解答：P->G: 0.76885500628616
                 }

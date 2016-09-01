@@ -1,8 +1,13 @@
 <?php
 
+//echo ((1-2*0.44)/(sqrt(2* (4/9) *(1- (4/9))*(1- (2/9)))));
+//echo (sqrt(2* (4/9) *(1- (4/9))*(1- (2/9))));
+//echo (1-2*0.44);
+
 include_once 'sequential_analysis.class.php';
 $obs = 'USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG';
-$sa = new Sequential_analysis($obs);
+//$obs = 'ABBCBBCAAC';
+$sa = new Sequential_analysis($obs, "", true);
 
 echo "\n <h2>編碼序列</h2> \n";
 echo $sa->obs;

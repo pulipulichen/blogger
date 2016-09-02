@@ -32,7 +32,7 @@ $sa = new Sequential_analysis($obs, "", $repeatable);
 echo "\n <h2>編碼序列</h2> \n";
 echo $sa->obs;
 
-echo "\n <h2>標籤列表</h2> \n";
+echo "\n <h2>編碼標籤列表</h2> \n";
 print_r($sa->lag_list);
 
 echo "\n <h2>編碼轉換頻率表</h2> \n";

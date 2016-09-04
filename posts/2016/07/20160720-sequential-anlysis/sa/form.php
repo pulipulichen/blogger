@@ -3,11 +3,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Lag Sequential Analysis Tool</title>
+<style type="text/css">
+body {
+    background-color: transparent !important;
+    padding: 1em !important;
+}
+
+body > div:first-of-type {
+    display: none !important;
+}
+body button {
+    line-height: normal;
+}
+
+</style>
 </head>
 
 <body>
     <h1>Lag Sequential Analysis Tool</h1>
-    <a target="_blank" href="https://github.com/pulipulichen/blogger/tree/gh-pages/posts/2016/07/20160720-sequential-anlysis/sa">source code</a>
+    <a target="_blak" href="https://github.com/pulipulichen/blogger/tree/gh-pages/posts/2016/07/20160720-sequential-anlysis/sa">source code</a>
+    <a target="_blak" href="http://blog.pulipuli.info/2015/06/coding-result-to-sequence-convertor.html">編碼結果轉序列編碼工具 code</a>
+    
     <form action="form.php" method="post">
         <textarea name="obs" style="width: 100%;height: 10em;"><?php if (isset($_POST["obs"])) echo $_POST["obs"]; ?></textarea>
         <div style="text-align: center;">

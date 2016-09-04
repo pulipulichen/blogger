@@ -179,6 +179,11 @@ class Sequential_analysis {
         //$lag = 4;
         
         $obs = trim($obs);
+        
+        // 把換行取代為空格
+        $obs = str_replace("\r", " ", $obs);
+        $obs = str_replace("\n", " ", $obs);
+        
         if (is_string($codes)) {
             $codes = trim($codes);
         }

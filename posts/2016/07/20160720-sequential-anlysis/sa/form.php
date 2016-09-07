@@ -9,7 +9,9 @@ body {
     padding: 1em !important;
 }
 
-body > div:first-of-type {
+body > div:first-of-type,
+body > div#bdv_DSK_top1,
+iframe {
     display: none !important;
 }
 body button {
@@ -17,6 +19,15 @@ body button {
 }
 
 </style>
+<script src="jquery-3.1.0.min.js"></script>
+<script>
+$(function () {
+    $("#example").click(function () {
+        $("textarea[name='obs']").val('USPTPTPGTPTGTPGTGPTPGTGPSTPTGTSPGPSUSTPTGTUTSPGPSGTPTGPGSUSTUTSPSGTPTGPGSUSTUTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPGUSUTUPUGSTSPSGTPTGPG');
+        $("input[name='repeatable']").attr("checked", "checked");
+        $("button[type='submit']").click();
+    });
+})</script>
 </head>
 
 <body>
@@ -32,6 +43,7 @@ body button {
             </label>
         </div>
         <div style="text-align: center;">
+            <button type="button" style="font-size: 3em;" id="example">EXAMPLE</button>
             <button type="submit" style="font-size: 3em;">SUBMIT</button>
         </div>
     </form>

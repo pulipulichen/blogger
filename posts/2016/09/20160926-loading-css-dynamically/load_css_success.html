@@ -1,0 +1,18 @@
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+</head>
+<body>
+    這是錯誤的例子：CSS沒有正常載入，文字還是黑色的。
+    <script>
+        $(function () {
+            var _link = $('<link href="style.css" type="text/css" rel="stylesheet" />');
+            
+            // 提前修改link屬性
+            _link.attr("title", "global");
+            
+            _link.appendTo("head");
+        });
+    </script>
+</body>
+</html>

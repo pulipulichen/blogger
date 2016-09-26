@@ -546,8 +546,8 @@ body .addthis-smartlayers {
     
     /*********************/
     /* 20160926 修正小視窗底下按鈕沒有置中的問題 */
-    #main .post > .entry-meta.clearfix > .pull-left > .read-more,
-    #main .post > .entry-meta.clearfix > .pull-left > span > a {
+    #main .post > .entry-meta.clearfix > aside .pull-left > .read-more,
+    #main .post > .entry-meta.clearfix > aside > .pull-left > span > a {
         float: none;
     }
     #main .post > .entry-meta.clearfix > .pull-left > span > a {
@@ -1687,7 +1687,7 @@ ul#random_posts {
 
 /*************************************/
 /* 20160926 快速編輯 */
-#main .post > .entry-meta.clearfix > .pull-left > .item-control.blog-admin a {
+#main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
     display: block;
     float: left;
     border-radius: 3px;

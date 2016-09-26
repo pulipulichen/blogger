@@ -546,11 +546,17 @@ body .addthis-smartlayers {
     
     /*********************/
     /* 20160926 修正小視窗底下按鈕沒有置中的問題 */
+    #main .post > .entry-meta.clearfix > aside > .pull-left {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+    
     #main .post > .entry-meta.clearfix > aside > .pull-left > .read-more,
-    #main .post > .entry-meta.clearfix > aside > .pull-left > span > a {
+    #main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
         float: none;
     }
-    #main .post > .entry-meta.clearfix > aside > .pull-left > span > a {
+    #main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
         margin-left: 0;
     }
 }

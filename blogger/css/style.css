@@ -555,6 +555,7 @@ body .addthis-smartlayers {
     #main .post > .entry-meta.clearfix > aside > .pull-left > .read-more,
     #main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
         float: none;
+        width: 42%;
     }
     #main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
         margin-left: 0;

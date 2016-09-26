@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?php 
+$enable_olw_mode = TRUE;
+?><?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
@@ -37,7 +39,10 @@
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-item.css"/>
 </b:if>
-<!-- <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-olw.css"/> -->
+<?php if ($enable_olw_mode) { ?>
+<link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-item.css"/>
+<link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-olw.css"/>
+<?php } ?>
 
 <?php 
 // 讀取外部檔案
@@ -65,6 +70,9 @@
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script-item.js"></script>
 </b:if>
+<?php if ($enable_olw_mode) { ?>
+<script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script-item.js"></script>
+<?php } ?>
 <!-- ======================================== -->
 </head>
     
@@ -637,6 +645,7 @@
 </b:if>
 </b:if>
 
+<?php if ($enable_olw_mode === FALSE) { ?>
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
 
     <span expr:id='&quot;lp&quot; + data:post.id' class="index-labels"> 
@@ -673,7 +682,7 @@
             <a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
             
 <b:else/>
-
+<?php } ?>
 <data:post.title/>
 
 <div class='meta1'>
@@ -711,8 +720,9 @@
   <data:post.body/>
   
 </article></div></div>
-
+<?php if ($enable_olw_mode === FALSE) { ?>
 </b:if>
+<?php } ?>
 
 <div class='clear'/>
 

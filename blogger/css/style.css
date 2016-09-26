@@ -543,6 +543,16 @@ body .addthis-smartlayers {
         padding: 50px;
         padding-right: 20px;
     }
+    
+    /*********************/
+    /* 20160926 修正小視窗底下按鈕沒有置中的問題 */
+    #main .post > .entry-meta.clearfix > .pull-left > .read-more,
+    #main .post > .entry-meta.clearfix > .pull-left > span > a {
+        float: none;
+    }
+    #main .post > .entry-meta.clearfix > .pull-left > span > a {
+        margin-left: 0;
+    }
 }
 
 .entry-container .entry-content > p {
@@ -1673,3 +1683,22 @@ ul#random_posts {
         margin-top: 2px;
     }
 }   /* @media (max-width: 1200px) and (min-width: 979px) { */
+
+
+/*************************************/
+/* 20160926 快速編輯 */
+#main .post > .entry-meta.clearfix > .pull-left > .item-control.blog-admin a {
+    display: block;
+    float: left;
+    border-radius: 3px;
+    font-size: 13px;
+    padding: 7px 20px;
+    background: #333;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid #1D1D1D;
+    margin-top: 13px;
+    margin-bottom: 12px;
+    margin-left: 1em;
+}

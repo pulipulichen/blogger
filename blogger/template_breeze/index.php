@@ -671,8 +671,7 @@
     <div class='entry-content'><article>
     <h1>
 <b:if cond='data:post.link'>
-            <a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
-            
+    <a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
 <b:else/>
 
 <data:post.title/>
@@ -703,8 +702,12 @@
             </b:if>
             
             <b:if cond='data:post.allowNewComments'>
-                <i class='fa fa-comments'/> <data:post.numComments/> Comments
+                <span>
+                    <i class='fa fa-comments'/> <data:post.numComments/> Comments
+                </span>
             </b:if>
+            
+            <b:include data='post' name='postQuickEdit'/>
         </small>
     </p></div>
   </b:if></h1>
@@ -723,8 +726,11 @@
 
 <aside>
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
- <div class='pull-left'> <a class='read-more' expr:href='data:post.url + &quot;#more&quot;'>Read More</a>
-  </div></b:if>
+    <div class='pull-left'>
+        <a class='read-more' expr:href='data:post.url + &quot;#more&quot;'>Read More</a>
+        <b:include data='post' name='postQuickEdit'/>
+    </div>
+</b:if>
  
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
@@ -806,7 +812,9 @@
   <b:if cond='data:post.editUrl'>
     <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
       <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg'>
-        <img alt='' class='icon-action' height='18' src='//img2.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
+        <!-- <img alt='' class='icon-action' height='18' src='//img2.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/> -->
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        Edit Post
       </a>
     </span>
   </b:if>

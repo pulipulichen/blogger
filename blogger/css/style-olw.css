@@ -134,6 +134,7 @@ body {
     white-space: normal;
     font-size: 0.8em;
     line-height: 1.15em;
+    display: block;
 }
 
 #main .post > SPAN > DIV > DIV p > code {

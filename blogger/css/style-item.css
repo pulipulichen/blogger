@@ -10,7 +10,7 @@
     word-wrap: break-word;
 }
 
-#main .entry-content > article > code {
+#main .entry-content > article code {
     display: block;
 }
 

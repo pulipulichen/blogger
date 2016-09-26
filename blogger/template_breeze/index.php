@@ -811,7 +811,7 @@
     <b:includable id='postQuickEdit' var='post'>
   <b:if cond='data:post.editUrl'>
     <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
-      <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg'>
+      <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg' target='_blank'>
         <!-- <img alt='' class='icon-action' height='18' src='//img2.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/> -->
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
         Edit Post

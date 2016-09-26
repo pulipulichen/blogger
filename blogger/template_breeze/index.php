@@ -37,7 +37,6 @@
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-item.css"/>
 </b:if>
-<link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-olw.css"/>
 
 <?php 
 // 讀取外部檔案
@@ -66,6 +65,8 @@
     <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/script-item.js"></script>
 </b:if>
 <!-- ======================================== -->
+
+<!-- <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-olw.css"/> -->
 </head>
     
     

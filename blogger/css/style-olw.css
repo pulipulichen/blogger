@@ -1,5 +1,6 @@
 body {
     background: url("http://pulipulichen.github.io/blogger/blogger/img/pattern5.png") repeat scroll 0 0 transparent;
+    font-family: 微軟正黑體;
 }
 
 #content-wrapper {
@@ -96,6 +97,7 @@ body {
 #main .post > SPAN > DIV > DIV > h1 a {
     text-decoration: none;
     color: #333;
+    font-family: 微軟正黑體;
 }
 
 #main .post > SPAN > DIV > DIV > table,

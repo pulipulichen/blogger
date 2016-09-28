@@ -375,7 +375,7 @@
       this.$lightbox.find('.lb-caption')
         .html(this.album[this.currentImageIndex].title)
         .fadeIn('fast')
-        .find('a').on('click', function(event) {
+        .find('a:not(.lb-nav)').on('click', function(event) {
           if ($(this).attr('target') !== undefined) {
             window.open($(this).attr('href'), $(this).attr('target'));
           } else {

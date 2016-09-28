@@ -36,6 +36,7 @@
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-item.css"/>
+    <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/jquery-lightbox-dark.css"/>
 </b:if>
 
 <?php 
@@ -969,30 +970,13 @@
 </div>
 </div>
 
-
-
-
-<script type='text/javascript'>//<![CDATA[
-var posts=4,
-    num=5,
-    previous="&#171;",
-    next="&#187;";
-
-//]]></script>
-<script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/related-posts.js"></script>
 <!-- JAVASCRIPT -->
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script src="//load.sumome.com/" data-sumo-site-id="91b6a5a67cc23845f0765da427a8ac1c0b918c4e9226f12ea32abf1e8110df0c" async="async"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/google-analytics.js"></script>
 
-  ga('create', 'UA-37178375-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+    <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/related-posts.js"></script>
+    <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/jquery-lightbox-dark.js"></script>
+</b:if>
 </body>
 </html>

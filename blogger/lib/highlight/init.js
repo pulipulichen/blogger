@@ -3,7 +3,12 @@
  * @author https://highlightjs.org/usage/ 20160928
  */
 $(function(){
-    $("article code").wrap("<pre></pre>");
+    $("article code").each(function (_i, _code) {
+        _code = $(_code);
+        if (_code.parent().filter("pre") === 0) {
+            _code.wrap("<pre></pre>");
+        }
+    });
     
     $("head").append($("<link />").attr({
         rel: "stylesheet",

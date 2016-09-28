@@ -1,7 +1,7 @@
 $(function(){
     $.each($("article a:has(img)"), function(_i){
         var _title = "image";
-        if ($(this).hasAttr("title")) {
+        if ($(this).attr("title") !== undefined) {
             _title = $(this).hasAttr("title");
         }
         _title = _title + _i;

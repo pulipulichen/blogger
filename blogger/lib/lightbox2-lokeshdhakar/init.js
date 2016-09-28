@@ -1,3 +1,7 @@
+/**
+ * 
+ * @author http://lokeshdhakar.com/projects/lightbox2/#getting-started 20160928
+ */
 $(function(){
     $.each($("article a:has(img)"), function(_i){
         var _title = "image";
@@ -20,5 +24,15 @@ $(function(){
         //media: "screen"
     }));
     
-    $.getScript("//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/js/lightbox.js");
+    $.getScript("//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/js/lightbox.js", function () {
+        lightbox.option({
+            'disableScrolling': true
+        });
+        $("#lightboxOverlay .lb-nav").click(function () {
+            var _src = $(this).prev().attr("src");
+            if (_src !== undefined) {
+                window.open(_src);
+            }
+        });
+    });
 });

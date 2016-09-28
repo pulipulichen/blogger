@@ -976,6 +976,12 @@
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/related-posts.js"></script>
     <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/init.js"></script>
+    
+    <link rel="stylesheet" href="//pulipulichen.github.io/blogger/blogger/lib/highlight/default.min.css">
+    <script src="//pulipulichen.github.io/blogger/blogger/lib/highlight/highlight.min.js"></script>
+    <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    </script>
 </b:if>
 </body>
 </html>

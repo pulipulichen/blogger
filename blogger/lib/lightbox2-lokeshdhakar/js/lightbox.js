@@ -214,6 +214,7 @@
 
     this.disableKeyboardNav();
     var $image = this.$lightbox.find('.lb-image');
+    var $container = this.$lightbox.find('.lb-container');
 
     this.$overlay.fadeIn(this.options.fadeDuration);
 
@@ -234,7 +235,7 @@
       var windowWidth;
 
       $image.attr('src', self.album[imageNumber].link);
-      this.$lightbox.find('.lb-container').attr('src', self.album[imageNumber].link);
+      $container.attr('src', self.album[imageNumber].link);
 
       $preloader = $(preloader);
 

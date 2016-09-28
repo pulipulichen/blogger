@@ -348,7 +348,7 @@ var _display_related_posts = function (items, msgs, config) {
         for (var _i = 0; _i < _div.length; _i++) {
             _div.eq(_i).append(_reply_link.clone(true));
         }
-        console.log(_div.length);
+        //console.log(_div.length);
     };
 
     // render now, or queue to render when library loads:

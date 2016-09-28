@@ -1149,9 +1149,9 @@ body > div.sumome-share-client-counts div.sumome-share-client-animated {
 
 #footer .go-top a {
     background-color: #B58231;
-    -moz-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
-    -webkit-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
-    box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+    -moz-box-shadow: 2px 2px 3px rgba(20%,20%,40%,0.5);
+    -webkit-box-shadow:2px 2px 3px rgba(20%,20%,40%,0.5);
+    box-shadow:2px 2px 3px rgba(20%,20%,40%,0.5);
 }
 
 @media (max-height: 320px) {

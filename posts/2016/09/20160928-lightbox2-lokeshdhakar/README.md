@@ -1,0 +1,1 @@
+Source code from: https://github.com/lokesh/lightbox2

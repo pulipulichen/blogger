@@ -1,5 +1,5 @@
 /**
- * 
+ * 加入圖片的lightbox
  * @author http://lokeshdhakar.com/projects/lightbox2/#getting-started 20160928
  */
 $(function(){
@@ -24,7 +24,7 @@ $(function(){
         //media: "screen"
     }));
     
-    $.getScript("//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/js/lightbox.js", function () {
+    $.getScript("//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/js/lightbox.min.js", function () {
         lightbox.option({
             'disableScrolling': true
         });

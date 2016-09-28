@@ -139,6 +139,10 @@ body {
     display: block;
 }
 
+#main .post > SPAN > DIV > DIV pre {
+    font-size: 1em;
+}
+
 #main .post > SPAN > DIV > DIV p > code {
     text-indent: 0;
 }

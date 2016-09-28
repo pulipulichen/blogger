@@ -373,6 +373,10 @@ body .addthis-smartlayers {
     text-indent: 0;
 }
 
+#main .entry-content > article pre {
+    font-size: 1em;
+}
+
 #main .entry-content > article code {
     font-size: 1em;
     line-height: 1.5em;

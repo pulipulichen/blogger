@@ -5,7 +5,7 @@
 $(function(){
     $("article code").each(function (_i, _code) {
         _code = $(_code);
-        if (_code.parent().filter("pre") === 0) {
+        if (_code.parent().filter("pre").length === 0) {
             _code.wrap("<pre></pre>");
         }
     });

@@ -16,7 +16,7 @@ $(function(){
     $("head").append($("<link />").attr({
         rel: "stylesheet",
         type: "text/css",
-        href: "//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/css/jquery.lightbox-0.5.css"
+        href: "//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/css/lightbox.min.css"
         //media: "screen"
     }));
     

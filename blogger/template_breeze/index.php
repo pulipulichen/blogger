@@ -975,7 +975,7 @@
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/related-posts.js"></script>
-    <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/jquery-lightbox-2010/init.js"></script>
+    <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/lib/lightbox2-lokeshdhakar/init.js"></script>
 </b:if>
 </body>
 </html>

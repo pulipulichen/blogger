@@ -28,8 +28,9 @@ $(function(){
         lightbox.option({
             'disableScrolling': true
         });
-        $("#lightboxOverlay .lb-nav").click(function () {
-            var _src = $(this).prev().attr("src");
+        $("#lightboxOverlay .lb-container").click(function () {
+            var _src = $(this).find("img:first").attr("src");
+            console.log(_src);
             if (_src !== undefined) {
                 window.open(_src);
             }

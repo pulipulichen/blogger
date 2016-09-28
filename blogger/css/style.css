@@ -1145,6 +1145,9 @@ body > div.sumome-share-client-counts div.sumome-share-client-animated {
     right: 1em;
     bottom: 1em;
     z-index: 999;
+    -moz-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+    -webkit-box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
+    box-shadow:4px 4px 3px rgba(20%,20%,40%,0.5);
 }
 
 #footer .go-top a {

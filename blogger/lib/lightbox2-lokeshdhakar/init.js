@@ -29,7 +29,7 @@ $(function(){
             'disableScrolling': true
         });
         $("#lightbox .lb-nav").click(function () {
-            var _src = $(this).find("img:first").attr("src");
+            var _src = $(this).prev().attr("src");
             //console.log(_src);
             if (_src !== undefined) {
                 window.open(_src);

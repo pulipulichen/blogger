@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+
+<body>
+<script type="text/javascript">
+var _data = {
+    1: {
+        2: {
+            1: 15,
+            3: 6
+        },
+        3: {
+            1: 10,
+            2: 9
+        }
+    },
+    2: {
+        1: {
+            2: 12,
+            3: 8
+        },
+        3: {
+            1: 9,
+            2: 12
+        }
+    },
+    3: {
+        1: {
+            2: 8,
+            3: 11
+        },
+        2: {
+            1: 5,
+            3: 15
+        }
+    }
+};
+
+var _output = "";
+for (var _l0 = 1; _l0 < 4; _l0++) {
+    for (var _l1 = 1; _l1 < 4; _l1++) {
+        if (typeof(_data[_l0][_l1]) === "undefined") {
+            continue;
+        }
+
+        for (var _l2 = 1; _l2 < 4; _l2++) {
+            if (typeof(_data[_l0][_l1][_l2]) === "undefined") {
+                continue;
+            }
+
+            var _line = _l0 + "," + _l1 + "," + _l2;
+            var _loop = _data[_l0][_l1][_l2];
+            for (var _l = 0; _l < _loop; _l++) {
+                _output = _output + _line + "<br />\n";
+            }
+        }
+    }
+}
+
+_output = "lag0,lag1,lag2<br />\n" + _output;
+
+document.write(_output);
+
+</script>
+
+
+</body>
+</html>

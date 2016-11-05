@@ -9,7 +9,7 @@
 	"inRepository": true,
 	"translatorType": 4,
 	"browserSupport": "gcs",
-	"lastUpdated": "2016-11-05 12:45:46"
+	"lastUpdated": "2016-11-05 13:29:38"
 }
 
 /*
@@ -219,15 +219,18 @@ function scrape(ids, doc, url, itemInfo) {
 			
 			//newItem.attachments.push("http://cnki.sris.com.tw/kcms/download.aspx?filename=3M1Z0VUtkUIBDaaBlWTNnM6R2U5YUemJnZrZmY6pHN11kTMNmW0EGU5d2ZuBHZ4Z0dF5kWrRXQSVVb=0zbs5EbrIVRDlldilTS2cTMYhWY5BzUTRkcCtmSZ1WYKtkNslDehx0TDBnerZTNxM0S5gWVGp3LQh&tablename=CJFD2012&dflag=pdfdown");
 			
-			var _attachment_url = ZU.xpathText(doc, '//div[@id="QK_nav"]/ul/li[contains(@class,"pdf")]/a/@href');
-			_attachment_url = _attachment_url.trim();
-			_attachment_url = "http://cnki.sris.com.tw" + _attachment_url;
-			//newItem.notes.push(_attachment_url);
-			newItem.attachments.push({
-				url: _attachment_url,
-				title: newItem.title,
-				type: "application/pdf"
-			});
+			var _has_pdf = ZU.xpathText(doc, '//div[@id="QK_nav"]/ul/li[contains(@class,"pdfD")]');
+			if (_has_pdf === null) {
+				var _attachment_url = ZU.xpathText(doc, '//div[@id="QK_nav"]/ul/li[contains(@class,"pdf")]/a/@href');
+				_attachment_url = _attachment_url.trim();
+				_attachment_url = "http://cnki.sris.com.tw" + _attachment_url;
+				//newItem.notes.push(_attachment_url);
+				newItem.attachments.push({
+					url: _attachment_url,
+					title: newItem.title,
+					type: "application/pdf"
+				});
+			}
 			
 			newItem.attachments.push({
 				url: url,

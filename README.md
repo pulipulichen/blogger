@@ -14,3 +14,4 @@ http://pulipulichen.github.io/blogger/blogger/js/script.js
 http://pulipulichen.github.io/blogger/blogger/css/
 
 http://pulipulichen.github.io/blogger/posts/2016/10/FastStone Capture v5.3.exe
+http://pulipulichen.github.io/blogger/posts/zotero/CNKI.sris.com.tw.js

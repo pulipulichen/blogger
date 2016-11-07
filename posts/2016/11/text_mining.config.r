@@ -23,9 +23,9 @@ filter.term.min.length <- 2 # 最小詞彙長度
 filter.term.min.freq <- 3 # 詞彙最少頻率
 
 # 資料庫設定
-db.host <- "192.168.11.50" # 資料庫主機位置
+db.host <- "192.168.56.152" # 資料庫主機位置
 db.port <- 5432 # 資料庫連接埠
-db.user <- "kals" # 資料庫登入帳號
+db.user <- "postgres" # 資料庫登入帳號
 db.password <- "password" # 資料庫登入密碼
 db.name <- "text_mining" # 資料庫名稱
 

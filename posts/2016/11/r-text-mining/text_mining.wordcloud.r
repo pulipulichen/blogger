@@ -1,5 +1,5 @@
 # 詞頻查詢
-sql.term_freq <- "SELECT term, sum(freq) AS sum FROM term_freq GROUP BY term ORDER BY sum DESC"
+sql.term_freq <- "SELECT word, freq FROM view_term_freq_sum"
 wordcloud.min.freq <- 10 # 文字雲顯示最小文字頻率
 
 # 資料庫設定

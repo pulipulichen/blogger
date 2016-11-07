@@ -13,6 +13,11 @@ con <- dbConnect(drv, dbname = db.name,
 
 # 資料庫查詢
 db.content <- dbGetQuery(con, sql.content)
+
+# 如果有文本資料的話
+if (length(colnames(db.content)) > 0) {
+
+# 查詢其他資料
 db.newwords <-dbGetQuery(con, sql.newwords)
 db.stopwords <- dbGetQuery(con, sql.stopwords)
 
@@ -117,4 +122,6 @@ if (is.object(tdm) == TRUE) {
             }
         }
     }
-}
+} # if (is.object(tdm) == TRUE) {
+
+} # if (length(colnames(db.content)) > 0) {

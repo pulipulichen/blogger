@@ -1,4 +1,4 @@
-# 文本查詢
+# 文本查詢，至少要查詢doc_id跟fulltext兩個欄位
 sql.content <- "SELECT doc_id, fulltext FROM doc"
 
 # 新詞查詢

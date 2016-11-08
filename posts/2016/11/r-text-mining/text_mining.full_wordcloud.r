@@ -1,4 +1,37 @@
-# 引用套件，請先確認套件已經安裝
+# 文本查詢，至少要查詢doc_id跟fulltext兩個欄位
+sql.content <- "SELECT doc_id, fulltext FROM doc"
+
+# 新詞查詢
+sql.newwords <- "SELECT term FROM new_word"
+
+# 停用字查詢
+sql.stopwords <- "SELECT term FROM stop_word"
+
+# 過濾器設定
+library("XML")
+filter.xpath.enable <- TRUE # 是否使用xpath過濾
+filter.xpath <- "/html/body" # xpath
+filter.xpath.type <- xmlValue # xpath類型
+
+filter.removePunctuation <- TRUE # 是否清除標點符號
+filter.removeNumbers <- TRUE # 是否清除數字
+filter.removeEnglish <- FALSE # 是否清除英文
+
+filter.speech.enable <- TRUE # 是否使用詞性過濾
+filter.speech <- c("n"); # 詞性設定，n表示名詞
+
+filter.term.min.length <- 2 # 最小詞彙長度
+filter.term.min.freq <- 3 # 詞彙最少頻率
+
+# 資料庫設定
+db.host <- "192.168.56.152" # 資料庫主機位置
+db.port <- 5432 # 資料庫連接埠
+db.user <- "postgres" # 資料庫登入帳號
+db.password <- "password" # 資料庫登入密碼
+db.name <- "text_mining" # 資料庫名稱
+
+# =================================
+# 引用套件，請事先確認套件都有正常安裝
 library("RPostgreSQL") # PostgreSQL資料庫連線需要的套件
 library("tm") # 文本探勘工具
 library("tmcn") # 文本探勘中文包
@@ -16,7 +49,7 @@ con <- dbConnect(drv, dbname = db.name,
 db.content <- dbGetQuery(con, sql.content)
 
 # 如果有文本資料的話
-if (length(colnames(db.content)) > 0) {
+#if (length(colnames(db.content)) > 0) {
 
 # 查詢其他資料
 db.newwords <-dbGetQuery(con, sql.newwords)
@@ -32,10 +65,8 @@ df.speech <- list()
 
 # HTML的body抽取處理
 if (filter.xpath.enable == TRUE) {
-    tryCatch({
-        html <- htmlParse(db.content[,2], encoding="utf8")
-        db.content[,2] <- xpathSApply(html, filter.xpath, filter.xpath.type)
-    })
+    html <- htmlParse(db.content[,2], encoding="utf8")
+    db.content[,2] <- xpathSApply(html, filter.xpath, filter.xpath.type)
 }
 
 # 要輸入的文本
@@ -100,29 +131,20 @@ if (is.object(tdm) == TRUE) {
 
     m1 <- as.matrix(tdm) # 詞彙分佈儲存在m1裡面
 
-    # 儲存結果之前先清除該文本的詞頻資料
-    where_sql <- ""
-    for (doc_id in colnames(m1)) {
-        if (where_sql != "") {
-            where_sql <- paste0(where_sql, ' OR')
-        }
-        where_sql <- paste0(where_sql,  " ",db.term_freq.field_name.doc_id," = '",doc_id, "'")
-    }
-    if (where_sql != "") {
-        sql.term_freq.delete.docs = paste0("DELETE FROM ",db.term_freq.table_name," WHERE ", where_sql)
-        dbSendQuery(con, sql.term_freq.delete.docs)
-    }
 
-    # 儲存詞頻結果，寫入資料庫
-    for (doc_id in colnames(m1)) {
-        for (term in rownames(m1)) {
-            freq = m1[term,doc_id]
-            if (freq > 0 && freq > filter.term.min.freq) {
-                sql.term_freq.insert = paste0("INSERT INTO term_freq (",db.term_freq.field_name.doc_id,",",db.term_freq.field_name.term,",",db.term_freq.field_name.speech,",",db.term_freq.field_name.freq,") VALUES ('", doc_id, "', '",term,"', '",df.speech[term],"', ",freq,")")
-                dbSendQuery(con, sql.term_freq.insert)
-            }
-        }
-    }
+    # ==========================
+    # 文字雲執行部分
+
+    # 引用函式
+    library("wordcloud") # 文字雲繪圖工具
+
+    # 製作文字雲
+    v <- sort(rowSums(m1), decreasing = TRUE)
+    d <- data.frame(word = names(v), freq = v)
+    wordcloud(d$word, d$freq, min.freq = filter.term.min.freq, random.order = F, ordered.colors = F, 
+        colors = rainbow(length(row.names(m1))))
+
+
 } # if (is.object(tdm) == TRUE) {
 
-} # if (length(colnames(db.content)) > 0) {
+#} # if (length(colnames(db.content)) > 0) {

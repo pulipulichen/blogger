@@ -17,7 +17,7 @@ db.name <- "text_mining" # 資料庫名稱
 
 # 引用套件，請先確認套件已經安裝
 library("RPostgreSQL") # PostgreSQL資料庫連線需要的套件
-library("wordcloud") # 文字雲繪圖工具
+library("wordcloud2") # 文字雲繪圖工具
 
 # 資料庫連接
 drv <- dbDriver("PostgreSQL")
@@ -32,8 +32,6 @@ db.term_freq <- dbGetQuery(con, sql.term_freq)
 if (length(colnames(db.term_freq)) > 0) {
 
 # 製作文字雲
-d <- data.frame(word = db.term_freq[,1], freq = db.term_freq[,2])
-wordcloud(d$word, d$freq, min.freq = wordcloud.min.freq, random.order = F, ordered.colors = F, 
-    colors = rainbow(length(row.names(db.term_freq))))
+wordcloud2(db.term_freq, size = 1)
 
 } #if (length(colnames(db.term_freq)) > 0) {

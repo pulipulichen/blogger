@@ -37,7 +37,6 @@ library("tm") # 文本探勘工具
 library("tmcn") # 文本探勘中文包
 library("Rwordseg") # 中文斷詞工具
 library("XML") # XML處理工具
-library("parallelsugar") # 新版Rwordseg會用到mclapply()
 
 # 資料庫連接
 drv <- dbDriver("PostgreSQL")

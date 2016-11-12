@@ -401,6 +401,7 @@ body .addthis-smartlayers {
     padding: 0.5em;
     background-color: #CE8A42;
     color: white !important;
+    display: inline-block;
 }
 
 .entry-content .puli-toc a {

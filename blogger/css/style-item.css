@@ -253,7 +253,7 @@ body .addthis-smartlayers {
         text-indent: 1em;
     }
     
-    .entry-content > article > p > a.lightbox-group {
+    .entry-content > article > p:not(:first-of-type) > a.lightbox-group {
         display: inline-block;
         text-indent: -1em;
         text-align: center;

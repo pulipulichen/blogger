@@ -1119,7 +1119,8 @@ body .addthis-smartlayers {
     #content-wrapper {
         padding-top: 50px !important;
     }
-    #masthead.fixed-nav.affix #header-inner {
+    
+    #masthead.fixed-nav.affix #header-inner .descriptionwrapper {
         display: none;
     }
     

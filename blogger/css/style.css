@@ -1127,10 +1127,10 @@ body .addthis-smartlayers {
     
     #main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
         width: 100%;
-        margin-left: 0;
+        margin-left: 0 !important;
         margin-right: 0;
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
         text-align: center;
     }
     

@@ -1095,6 +1095,7 @@ body .addthis-smartlayers {
     #masthead #header h1 {
         font-size: 25px;
         padding-left: 5px;
+        margin-top:0;
     }
     
     #masthead .navbar-inner .btn-navbar {
@@ -1116,7 +1117,7 @@ body .addthis-smartlayers {
     }
     
     #content-wrapper {
-        padding-top: 50px;
+        padding-top: 50px !important;
     }
     
     /***********************/

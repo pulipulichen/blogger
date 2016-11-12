@@ -407,3 +407,9 @@ body .addthis-smartlayers {
 .entry-content .puli-toc a {
     color: white !important;
 }
+
+@media (max-width: 460px) {
+    #masthead #header {
+        max-width: calc(100% - 130px);
+    }
+}

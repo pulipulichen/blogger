@@ -1099,6 +1099,7 @@ body .addthis-smartlayers {
     
     #masthead .navbar-inner .btn-navbar {
         margin:0;
+        margin-top: 6px;
     }
     
     #masthead #header-inner {
@@ -1106,11 +1107,17 @@ body .addthis-smartlayers {
         margin-bottom: 0;
     }
     #masthead #header-inner .title {
-        line-height: 44px;
+        /*line-height: 44px;*/
         
     }
-}
     
+    #masthead .navbar-inner .btn-navbar {
+        margin-top:0;
+    }
+    
+    #content-wrapper {
+        padding-top: 50px;
+    }
     
     /***********************/
     

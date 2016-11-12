@@ -1752,3 +1752,11 @@ ul#random_posts {
 #main .entry-container .entry-content .foundation .meta {
     line-height: 100%;
 }
+
+#main .entry-container .entry-content > a:last-of-type {
+    display: none;
+}
+
+#main .entry-container .entry-content {
+    padding-bottom: 1px;
+}

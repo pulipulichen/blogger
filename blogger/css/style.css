@@ -308,6 +308,10 @@ div.post-avatar {
     padding-bottom: 0;
 }
 
+#masthead.fixed-nav .descriptionwrapper {
+    display: none;
+}
+
 .gsc-results-wrapper-overlay .gsc-wrapper img.gs-image {
     width: 100% !important;
     height: auto !important;

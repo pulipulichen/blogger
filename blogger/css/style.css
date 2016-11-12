@@ -1113,7 +1113,8 @@ body .addthis-smartlayers {
     }
     
     #masthead.fixed-nav.affix #header-inner {
-        margin-top:0;
+        margin-top:0 !important;
+        line-height: 55px;
     }
     
     #content-wrapper {

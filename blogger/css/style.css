@@ -36,9 +36,23 @@
     border-bottom: 0px solid #BD8A39;
 }
 
-.entry-content ul,
+.entry-content ul {
+    margin-left: 0em !important;
+}
+
 .entry-content li {
     margin-left: 2em !important;
+}
+
+@media (max-width:460px) {
+    .entry-content li {
+        margin-left: 1em !important;
+    }
+}
+
+.entry-content ul,
+.entry-content li {
+    /*margin-left: 2em !important;*/
     margin-top:0.5em !important;
     margin-bottom:0.5em !important;
 }

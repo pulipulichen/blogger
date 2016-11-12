@@ -253,6 +253,11 @@ body .addthis-smartlayers {
         text-indent: 1em;
     }
     
+    .entry-content > article > p > a.lightbox-group {
+        display: inline-block;
+        text-indent: -1em;
+    }
+    
     /*#main .entry-content > article > p > a[href$=".png"]:first-of-type img {
         max-height: 300px;
     }*/

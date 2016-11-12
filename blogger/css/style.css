@@ -1100,7 +1100,7 @@ body .addthis-smartlayers {
     
     #masthead .navbar-inner .btn-navbar {
         margin:0;
-        margin-top: 3px;
+        margin-top: 3px !important;
     }
     
     #masthead #header-inner {
@@ -1121,9 +1121,22 @@ body .addthis-smartlayers {
         padding-top: 50px !important;
     }
     
-    #masthead.fixed-nav.affix #header-inner .descriptionwrapper {
+    #masthead.fixed-nav.affix #header h1 {
+        line-height: 55px;
+    }
+    
+    #masthead #header-inner .descriptionwrapper {
         display: none;
     }
+    
+    header > .back-button {
+        margin-right: -10px;
+    }
+    
+    #masthead.fixed-nav.affix #header > .back-button {
+        margin-right: 0;
+    }
+    
     
     /***********************/
     

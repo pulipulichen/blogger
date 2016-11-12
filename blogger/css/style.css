@@ -1668,6 +1668,11 @@ header > .back-button {
     margin-right: 10px;
 }
 
+#main .meta > p > small > span,
+#main .meta > p > small > a {
+    white-space: nowrap;
+}
+
 /*************************************/
 /* 20160625 小視窗的時候，主要文章的左右兩側，不要加入側邊欄 */
 

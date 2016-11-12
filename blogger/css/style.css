@@ -1112,8 +1112,15 @@ body .addthis-smartlayers {
         
     }
     
+    #masthead.fixed-nav.affix #header-inner {
+        margin-top:0;
+    }
+    
     #content-wrapper {
         padding-top: 50px !important;
+    }
+    #masthead.fixed-nav.affix #header-inner {
+        display: none;
     }
     
     /***********************/

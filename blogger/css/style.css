@@ -1100,7 +1100,7 @@ body .addthis-smartlayers {
     
     #masthead .navbar-inner .btn-navbar {
         margin:0;
-        margin-top: 6px;
+        margin-top: 3px;
     }
     
     #masthead #header-inner {
@@ -1110,10 +1110,6 @@ body .addthis-smartlayers {
     #masthead #header-inner .title {
         /*line-height: 44px;*/
         
-    }
-    
-    #masthead .navbar-inner .btn-navbar {
-        margin-top:0;
     }
     
     #content-wrapper {
@@ -1262,7 +1258,7 @@ header > .back-button {
 @media (max-width: 460px) {
     header > .back-button {
         font-size: 25px;
-        line-height: 80px;
+        line-height: 55px;
     }
     
     .fixed-nav header > .back-button {

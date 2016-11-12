@@ -264,6 +264,11 @@ body .addthis-smartlayers {
         max-height: 300px;
     }*/
     
+    .entry-content ul, .entry-content li {
+        margin-top: 0em !important; 
+        margin-bottom: 0em !important; 
+    }
+    
 }
 /**************************/
 @media (max-width: 767px) {
@@ -387,4 +392,17 @@ body .addthis-smartlayers {
 #main .entry-content > article code {
     font-size: 0.8em;
     line-height: 1.15em;
+}
+
+/************************************/
+/* 20161113 puli toc */
+.entry-content .puli-toc {
+    /*border: 3px solid #CE8A42;*/
+    padding: 0.5em;
+    background-color: #CE8A42;
+    color: white !important;
+}
+
+.entry-content .puli-toc a {
+    color: white !important;
 }

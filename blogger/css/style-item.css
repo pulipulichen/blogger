@@ -256,6 +256,8 @@ body .addthis-smartlayers {
     .entry-content > article > p > a.lightbox-group {
         display: inline-block;
         text-indent: -1em;
+        text-align: center;
+        width: 100%;
     }
     
     /*#main .entry-content > article > p > a[href$=".png"]:first-of-type img {

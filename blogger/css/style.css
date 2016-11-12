@@ -1121,9 +1121,26 @@ body .addthis-smartlayers {
         padding-right: 0;
     }
     
+    #main .entry-meta .pull-left {
+        width: 100%;
+    }
+    
+    #main .post > .entry-meta.clearfix > aside > .pull-left > .item-control.blog-admin a {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+    }
+    
     #main .entry-meta {
         border-top-width: 0;
         padding-top: 0;
+    }
+    
+    #main .entry-content > p {
+        text-indent: 1em;
     }
 }
 
@@ -1730,4 +1747,8 @@ ul#random_posts {
     margin-top: 13px;
     margin-bottom: 12px;
     margin-left: 1em;
+}
+
+#main .entry-container .entry-content .foundation .meta {
+    line-height: 100%;
 }

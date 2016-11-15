@@ -64,7 +64,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                     if (hr.length > 0) {
                         hr.remove();
                     }
-                    if (p.html() === "") {
+                    if ($.trim(p.html()) === "") {
                         p.remove();
                         //console.log('移除囉');
                     }

@@ -68,7 +68,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                         console.log("有 p > hr");
                     }
                     else {
-                        console.log("p裡面找不到");
+                        console.log(["p裡面找不到", p.length, p.html() ]);
                     }
                     if ($.trim(p.html()) === "") {
                         p.remove();

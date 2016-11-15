@@ -414,12 +414,13 @@ body .addthis-smartlayers {
     color: white !important;
 }
 
+/* ******************************* */
+/* 2016/11/15 */
 @media (max-width: 460px) {
     #masthead #header {
         max-width: calc(100% - 130px);
     }
     
-    /* 2016/11/15 */
     #main .entry-content a[href$=".png"]:first-of-type img,
     #main .entry-content a[href$=".jpg"]:first-of-type img,
     #main .entry-content a[href$=".gif"]:first-of-type img{

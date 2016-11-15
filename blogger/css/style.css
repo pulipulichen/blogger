@@ -1813,3 +1813,8 @@ ul#random_posts {
 #masthead.fixed-nav > .container {
     box-shadow: 2px 2px 3px rgba(20%,20%,40%,0.5);
 }
+
+.entry-content p, 
+.entry-content li {
+    color: black;
+}

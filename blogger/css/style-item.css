@@ -435,7 +435,8 @@ body .addthis-smartlayers {
         text-indent: -0.5em;
     }
     
-    .entry-content {
+    .entry-content,
+    .entry-content li {
         line-height: 150%;
     }
     

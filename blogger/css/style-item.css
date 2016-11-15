@@ -432,6 +432,7 @@ body .addthis-smartlayers {
     #main .entry-content > article > p > a[href$=".jpg"]:first-of-type,
     #main .entry-content > article > p > a[href$=".gif"]:first-of-type{
         margin-left: 0em;
+        text-indent: -0.5em;
     }
     
     .entry-content {

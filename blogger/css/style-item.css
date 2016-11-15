@@ -427,6 +427,12 @@ body .addthis-smartlayers {
         /*max-height: 500px;*/
     }
     
+    #main .entry-content > article > p > a[href$=".png"]:first-of-type,
+    #main .entry-content > article > p > a[href$=".jpg"]:first-of-type,
+    #main .entry-content > article > p > a[href$=".gif"]:first-of-type{
+        margin-left: 0em;
+    }
+    
     .entry-content {
         line-height: 150%;
     }

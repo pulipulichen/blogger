@@ -62,13 +62,13 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                 else {
                     var p = firstHeading.prevAll("p:first");
                     //console.log([p.length, p.html()]);
-                    hr = p.children(':last').filter('hr');
+                    hr = p.children().filter('hr');
                     if (hr.length > 0) {
                         hr.remove();
                         console.log("有 p > hr");
                     }
                     else {
-                        console.log(["p裡面找不到", p.length, p.html() ]);
+                        console.log(["p裡面找不到", p.length, p.children().length, p.html() ]);
                     }
                     if ($.trim(p.html()) === "") {
                         p.remove();

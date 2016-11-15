@@ -61,7 +61,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                 }
                 else {
                     var p = firstHeading.prevAll("p:first");
-                    p.css("border", "1px solid red");
+                    //p.css("border", "1px solid red");
                     //console.log([p.length, p.html()]);
                     hr = p.children().filter('hr');
                     if (hr.length > 0) {
@@ -76,7 +76,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                         console.log(["p裡面找不到", p.length, p.children().length, p.html() ]);
                     }
                     if ($.trim(p.html()) === "") {
-                        //p.remove();
+                        p.remove();
                         console.log('p 也移除囉');
                     }
                 }

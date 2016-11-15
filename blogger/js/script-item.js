@@ -50,12 +50,14 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
             var hr = firstHeading.prev().filter('hr');
             if (hr.length > 0) {
                 hr.remove();
+                console.log("有<hr />");
             }
             else {
                 var div = firstHeading.prevAll("div:first");
                 hr = div.children(':last').filter('hr');
                 if (hr.length > 0) {
                     hr.remove();
+                    console.log("有 div > hr");
                 }
                 else {
                     var p = firstHeading.prevAll("p:first");
@@ -63,10 +65,14 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                     hr = p.children(':last').filter('hr');
                     if (hr.length > 0) {
                         hr.remove();
+                        console.log("有 p > hr");
+                    }
+                    else {
+                        console.log("p裡面找不到");
                     }
                     if ($.trim(p.html()) === "") {
                         p.remove();
-                        //console.log('移除囉');
+                        console.log('p 也移除囉');
                     }
                 }
             }

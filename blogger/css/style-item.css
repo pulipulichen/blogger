@@ -443,4 +443,22 @@ body .addthis-smartlayers {
     .entry-content article h1 div.meta1 p small span {
         white-space: nowrap;
     }
+    
+    #comment-holder li.comment div.avatar-image-container {
+        position: relative;
+        z-index: 1;
+        margin: 10px;
+    }
+    
+    #comment-holder li.comment div.comment-block {
+        margin-left: 0;
+    }
+    
+    #comment-holder li.comment div.comment-block > * {
+        margin-left: 60px;
+    }
+    
+    #comment-holder li.comment div.comment-replies {
+        margin-left: 0;
+    }
 }

@@ -426,4 +426,12 @@ body .addthis-smartlayers {
         width: 100%;
         /*max-height: 500px;*/
     }
+    
+    .entry-content {
+        line-height: 150%;
+    }
+    
+    .entry-content article h1 div.meta1 p small span {
+        white-space: nowrap;
+    }
 }

@@ -391,9 +391,9 @@ div.post-avatar {
     }
 
 
-    #header h1{
-        line-height:55px;
-        margin-top: 0;
+    #masthead #header h1 {
+        line-height:50px;
+        margin-top: 2px;
     }
 }
 
@@ -1224,7 +1224,7 @@ body > div.sumome-share-client-counts div.sumome-share-client-animated {
 }
 
 #footer .go-top a {
-    background-color: #B58231;
+    background-color: #AD7518;
     -moz-box-shadow: 2px 2px 3px rgba(20%,20%,40%,0.5);
     -webkit-box-shadow:2px 2px 3px rgba(20%,20%,40%,0.5);
     box-shadow:2px 2px 3px rgba(20%,20%,40%,0.5);

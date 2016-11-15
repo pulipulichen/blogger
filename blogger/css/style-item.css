@@ -462,3 +462,8 @@ body .addthis-smartlayers {
         margin-left: 0;
     }
 }
+
+#comment-holder li.comment div.avatar-image-container img[src="//img1.blogblog.com/img/blank.gif"] {
+    /*Gender_Neutral_User-48*/
+    
+}

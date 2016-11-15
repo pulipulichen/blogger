@@ -1807,3 +1807,9 @@ ul#random_posts {
 #main .entry-container .entry-content {
     padding-bottom: 1px;
 }
+
+/*****************************/
+/* 20161116 */
+#masthead.fixed-nav > .container {
+    box-shadow: 2px 2px 3px rgba(20%,20%,40%,0.5);
+}

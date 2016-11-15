@@ -410,6 +410,7 @@ body .addthis-smartlayers {
     display: inline-block;
 }
 
+.entry-content .puli-toc li,
 .entry-content .puli-toc a {
     color: white !important;
 }

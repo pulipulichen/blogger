@@ -1285,7 +1285,8 @@ header > .back-button {
     
     .fixed-nav header > .back-button {
         font-size: 25px;
-        line-height: 55px;
+        line-height: 50px;
+        margin-top: 2px;
     }
 }
 

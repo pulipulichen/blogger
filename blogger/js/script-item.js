@@ -60,7 +60,7 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                     console.log("有 div > hr");
                 }
                 else {
-                    var p = firstHeading.prevAll("p:first");
+                    var p = firstHeading.prevAll("p");
                     //console.log([p.length, p.html()]);
                     hr = p.children().filter('hr');
                     if (hr.length > 0) {

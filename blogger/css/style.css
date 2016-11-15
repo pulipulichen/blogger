@@ -1810,7 +1810,7 @@ ul#random_posts {
 
 /*****************************/
 /* 20161116 */
-@media (max-width: 460px) {
+@media (max-width: 979px) {
     #masthead.fixed-nav > .container {
         box-shadow: 2px 2px 3px rgba(20%,20%,40%,0.5);
     }

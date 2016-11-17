@@ -625,6 +625,12 @@
         </choose>
       </else>
     </choose>
+
+    <choose>
+      <if type="book chapter" match="none">
+        <text variable="note" prefix=" (" suffix=")"/>
+      </if>
+    </choose>
   </macro>
   
   <macro name="access-zh">
@@ -696,7 +702,12 @@
       </else>
     </choose>
     <text variable="ISBN" prefix="（ISBN：" suffix="）"/>
-    <text variable="note" prefix="（" suffix="）"/>
+    <choose>
+      <if type="book chapter" match="none">
+        <text variable="note" prefix="（" suffix="）"/>
+      </if>
+    </choose>
+    
   </macro>
 
   

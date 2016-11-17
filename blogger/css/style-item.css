@@ -462,6 +462,11 @@ body .addthis-smartlayers {
     #comment-holder li.comment div.comment-replies {
         margin-left: 0;
     }
+    
+    /* 20161117 */
+    #main .post h1 .meta1 {
+        line-height: 1rem;
+    }
 }
 
 #comment-holder li.comment div.avatar-image-container img[src="//img1.blogblog.com/img/blank.gif"] {

@@ -20,7 +20,7 @@
              setTimeout(_check_ga_search_ready, 1000);
          }
          else {
-             $(".gsc-search-button").click(function () {
+             $(".gsc-search-button:first").click(function () {
                  ga("send", "event", "search", $("input.gsc-input:first").val(), 1);
                  console.log("送出GA event search");
              });

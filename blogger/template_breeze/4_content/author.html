@@ -1,25 +1,30 @@
 <div class='pull-left author-meta'>
     <script expr:src='&quot;/feeds/posts/default/&quot; + data:post.id + &quot;?alt=json-in-script&amp;amp;callback=av&quot;'/>
-    <h4 class='bl_popover' data-content='這個布丁是在無聊的世界中找尋樂趣的一種不能吃的食物，喜愛動漫畫、遊戲、程式，以及跟世間脫節的生活步調。' data-placement='top' data-title='Admin' data-trigger='hover'>
+    <h4>
         <b:if cond='data:top.showAuthor'>
             <a href="/p/about.html">
                 <!--
                 <data:post.author/>
                 -->
                 布丁布丁吃布丁
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
             </a>
         </b:if>
     </h4>
-    <div class="creative-commons">
+    <div class="introduction">
+        這個布丁是在無聊的世界中找尋樂趣的一種不能吃的食物，喜愛動漫畫、遊戲、程式，以及跟世間脫節的生活步調。
+    </div>
+    <div class="creative-commons bl_popover" data-placement='top' data-title='Admin' data-trigger='hover'>
         <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/tw/" class="img">
             <img alt="創用 CC 授權條款" src="https://i.creativecommons.org/l/by-nc-sa/3.0/tw/80x15.png" />
         </a>
+        <i class="fa fa-info-circle" aria-hidden="true"></i>
+        <span style="display: none">
         <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type" class="title">
             <data:post.title/>
         </span>
         是由
         <a xmlns:cc="http://creativecommons.org/ns#" expr:href='data:post.link' property="cc:attributionName" rel="cc:attributionURL" class="author">布丁布丁吃布丁</a>
         製作，以<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/tw/">創用CC 姓名標示-非商業性-相同方式分享 3.0 台灣 授權條款</a>釋出。
+        </span>
     </div>
 </div>

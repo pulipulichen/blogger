@@ -214,7 +214,8 @@ body .addthis-smartlayers {
     
 }
 
-#main .entry-meta .creative-commons {
+#main .entry-meta .creative-commons,
+#main .entry-meta .introduction {
     font-size: 0.8em;
     line-height: 1.5em;
     margin-left: 74px;

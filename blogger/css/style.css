@@ -707,14 +707,10 @@ body .addthis-smartlayers {
 }
 
 /* 20161118 */
-.social-button.line,
-.share-story-container li.line {
-    display: none;
-}
-@media (max-width: 979px) {
+@media (min-width: 980px) {
     .social-button.line,
     .share-story-container li.line {
-        display: inline-block;
+        display: none;
     }
 }
 

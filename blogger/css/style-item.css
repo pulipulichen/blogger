@@ -489,3 +489,14 @@ body .addthis-smartlayers {
     background-image: url(http://pulipulichen.github.io/blogger/blogger/img/no-such-user.png);
     background-size: cover;
 }
+
+/****************************/
+/* 20161118 */
+.entry-meta.clearfix .share-story-container .about a.read-more {
+    padding: 3px 10px;
+    margin-right: 3px;
+}
+
+.share-story-container ul {
+    text-align: right;
+}

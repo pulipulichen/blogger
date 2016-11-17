@@ -737,43 +737,7 @@
     <?php echo file_get_contents("4_content/author.html") ?>
 </b:if>
 
-<div class='pull-right share-story-container'>
-
-<ul class='share-story'>
-    <li><a class='tips social-button facebook' data-title='Facebook' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=facebook&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <i class="fa fa-facebook"></i>
-    </a></li>
-    <li class="line"><a class='tips social-button line' data-title='LINE' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=lineme&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <strong>L</strong>
-    </a></li>
-    <li><a class='tips social-button plurk' data-title='Plurk' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=plurk&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <strong>P</strong>
-    </a></li>
-    <!--
-    <li><a class='tips social-button twitter' data-title='Twitter' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=twitter&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <i class="fa fa-twitter"></i>
-    </a></li>
-    -->
-    <li><a class='tips social-button google-plus' data-title='Google Plus' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=google_plusone_share&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <i class="fa fa-google-plus"></i>
-    </a></li>
-    <li><a class='tips social-button email' data-title='Email' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=email&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <i class="fa fa-envelope"></i>
-    </a></li>
-
-    <li><a class='tips social-button addthis' data-title='More Share' target='_blank'
-        expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
-        <i class="fa fa-plus"></i>
-    </a></li>
-</ul>
-    
-</div>  
+<?php echo file_get_contents("4_content/share.html") ?>
 
 <div class='clear'/>
 

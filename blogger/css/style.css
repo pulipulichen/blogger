@@ -381,7 +381,7 @@ div.post-avatar {
         /*margin-top: 15px;*/
         margin-right:0 ;
         max-width: calc(100% - 101px);
-        margin-left: 5px;
+        /*margin-left: 5px;*/
         overflow-x: hidden;
         white-space: nowrap;
     }
@@ -458,8 +458,8 @@ div.post-avatar {
 
 @media (max-width: 979px) {
     #header #header-inner{
-        margin-left: 10px !important;
-        margin-top: 15px;
+        /*margin-left: 10px !important;*/
+        /*margin-top: 15px;*/
     }
 }
 
@@ -504,12 +504,12 @@ div.post-avatar {
     }
 
     #masthead.fixed-nav.affix #header h1 {
-        line-height: 40px;
+        line-height: 55px;
         margin-top: 0 !important;
     }
 
     #masthead.fixed-nav.affix #header-inner {
-        margin-top: 10px !important;
+        margin-top: 0px;
     }
 
     #masthead.fixed-nav.affix .navbar .nav .dropdown-menu li a {

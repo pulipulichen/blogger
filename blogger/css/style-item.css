@@ -220,6 +220,9 @@ body .addthis-smartlayers {
     line-height: 1.5em;
     margin-left: 74px;
 }
+#main .entry-meta .bl_popover {
+    display: inline-block;
+}
 
 #main .entry-meta .creative-commons img {
     border-width: 0;

@@ -222,6 +222,7 @@ body .addthis-smartlayers {
 }
 #main .entry-meta .bl_popover {
     display: inline-block;
+    margin-left: 1em;
 }
 
 #main .entry-meta .creative-commons img {
@@ -233,6 +234,7 @@ body .addthis-smartlayers {
 
 #main .entry-meta img.avatar-author {
     float:left;
+    margin-top: 8px;
 }
 
 #main .entry-meta h4 {
@@ -519,6 +521,10 @@ body .addthis-smartlayers {
 }
 
 @media (min-width: 768px) {
+    .pull-right.share-story-container {
+        margin-top: 0;
+    }
+    
     .entry-meta.clearfix .share-story-container .share-story.about li {
         width: auto;
     }

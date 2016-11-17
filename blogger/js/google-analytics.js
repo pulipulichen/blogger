@@ -5,3 +5,23 @@
 
   ga('create', 'UA-37178375-1', 'auto');
   ga('send', 'pageview');
+  
+  // ----------------------------------------
+  /**
+   * 20161118 加入事件設定
+   */
+  
+ $(function () {
+     var _check_ga_search_ready = function () {
+         if ($("input.gsc-input").length === 0) {
+             setTimeout(_check_ga_search_ready, 1000);
+         }
+         else {
+             $("form.gsc-search-box-tools").submit(function () {
+                 ga("send", "event", "search", $("input.gsc-input").val(), 1);
+                 console.log("送出GA event");
+             });
+         }
+     };
+     _check_ga_search_ready();
+ });

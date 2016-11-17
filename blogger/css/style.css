@@ -715,7 +715,9 @@ body .addthis-smartlayers {
 }
 
 @media (max-width: 767px) {
-    
+    ul.share-story li span.caption {
+        display: inline;
+    }
 }
 
 .entry-meta.clearfix .share-story-container .about {
@@ -724,6 +726,10 @@ body .addthis-smartlayers {
 
 .share-story-container ul {
     text-align: right;
+}
+
+ul.share-story li span.caption {
+    display: none;
 }
 
 /***********************/

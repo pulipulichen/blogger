@@ -706,6 +706,18 @@ body .addthis-smartlayers {
     background-color: #FF5D39;
 }
 
+/* 20161118 */
+.social-button.line,
+.share-story-container li.line {
+    display: none;
+}
+@media (max-width: 979) {
+    .social-button.line,
+    .share-story-container li.line {
+        display: inline-block;
+    }
+}
+
 /***********************/
 .pager .previous.hidden {
     visibility: hidden;

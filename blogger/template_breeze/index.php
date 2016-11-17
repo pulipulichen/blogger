@@ -744,7 +744,7 @@
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=facebook&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <i class="fa fa-facebook"></i>
     </a></li>
-    <li><a class='tips social-button line' data-title='LINE' target='_blank'
+    <li class="line"><a class='tips social-button line' data-title='LINE' target='_blank'
         expr:href='&quot;http://www.addthis.com/bookmark.php?v=300&amp;winname=addthis&amp;pub=pulipuli&amp;s=lineme&amp;source=msd-1.0&amp;url=&quot; + data:post.url + &quot;&amp;title=&quot; + data:post.title + &quot;&amp;ate=AT-pulipuli/-/per-13/-/4&amp;frommenu=1&amp;ips=1&amp;uud=1&amp;ct=1&amp;pre=http%3A%2F%2Fblog.pulipuli.info%2F&amp;tt=0&amp;captcha_provider=nucaptcha&amp;pro=1&quot;'>
         <strong>L</strong>
     </a></li>

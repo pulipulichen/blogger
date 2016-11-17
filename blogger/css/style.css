@@ -711,7 +711,7 @@ body .addthis-smartlayers {
 .share-story-container li.line {
     display: none;
 }
-@media (max-width: 979) {
+@media (max-width: 979px) {
     .social-button.line,
     .share-story-container li.line {
         display: inline-block;

@@ -327,6 +327,11 @@ body .addthis-smartlayers {
         display: none;
     }
     
+    #main .entry-meta .avatar-author {
+        display: block;
+        margin-top: 10px;
+    }
+    
     #main .entry-meta .creative-commons {
         margin-left: 0 !important;
         line-height: 1.5em !important;
@@ -366,6 +371,11 @@ body .addthis-smartlayers {
     
     #side-bar {
         margin-left:0;
+    }
+    
+    /* 20161118 */
+    #main .entry-meta .avatar-author {
+        margin-bottom: 0;
     }
 }
 
@@ -492,6 +502,10 @@ body .addthis-smartlayers {
 
 /****************************/
 /* 20161118 */
+.entry-meta.clearfix .share-story-container .share-story.about {
+    display: block;
+}
+
 .entry-meta.clearfix .share-story-container .share-story.about li a  {
     display: block;
 }

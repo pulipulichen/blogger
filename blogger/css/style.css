@@ -755,8 +755,9 @@ body .addthis-smartlayers {
 
 .gsc-input-box input.gsc-input {
     opacity: 1 !important;
-    border-width: 0;
+    /*border-width: 0;*/
     background-image: none !important;
+    box-shadow: inset 0px 0px 0px 0px red;
 }
 
 .navbar .nav {

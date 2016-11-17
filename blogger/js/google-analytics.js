@@ -12,6 +12,9 @@
    */
   
  $(function () {
+     
+     // ------------------------
+     // 搜尋
      var _check_ga_search_ready = function () {
          if ($("input.gsc-input").length === 0) {
              setTimeout(_check_ga_search_ready, 1000);
@@ -19,9 +22,18 @@
          else {
              $("form.gsc-search-box-tools").submit(function () {
                  ga("send", "event", "search", $("input.gsc-input").val(), 1);
-                 console.log("送出GA event");
+                 console.log("送出GA event search");
              });
          }
      };
      _check_ga_search_ready();
+     
+     // ----------------------------
+     // 分享
+     $(".social-button").click(function () {
+         //var _btn = $(this);
+         //var _link = _btn.parent("aside:first");
+         ga("send", "event", "share", $(this).attr("data-title"), 1);
+        console.log("送出GA event search");
+     });
  });

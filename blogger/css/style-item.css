@@ -374,8 +374,8 @@ body .addthis-smartlayers {
     }
     
     /* 20161118 */
-    #main .entry-meta .avatar-author {
-        margin-bottom: 0;
+    .entry-meta .author-meta {
+        margin-bottom: 5px;
     }
 }
 

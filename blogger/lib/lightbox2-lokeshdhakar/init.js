@@ -3,6 +3,10 @@
  * @author http://lokeshdhakar.com/projects/lightbox2/#getting-started 20160928
  */
 $(function(){
+    if (document.body.clientWidth < 460) {
+        return;
+    }
+    
     $.each($("article a:has(img)"), function(_i){
         var _title = "image";
         if ($(this).attr("title") !== undefined) {

@@ -73,11 +73,11 @@ PULI_UTILS.post.toc = function (cata_container, heading) {
                         if (hr.length > 0) {
                             hr.remove();
                         }
-                        console.log(["p裡面找不到", p.length, p.children().length, p.html() ]);
+                        //console.log(["p裡面找不到", p.length, p.children().length, p.html() ]);
                     }
                     if ($.trim(p.html()) === "") {
                         p.remove();
-                        console.log('p 也移除囉');
+                        //console.log('p 也移除囉');
                     }
                 }
             }

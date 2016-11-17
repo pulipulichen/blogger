@@ -1092,10 +1092,12 @@ body .addthis-smartlayers {
         margin-left: 0 !important;
     }
     
-    #masthead #header h1 {
-        font-size: 25px;
-        padding-left: 5px;
-        margin-top:0;
+    #masthead #header h1,
+    #masthead.fixed-nav.affix #header h1 {
+        font-size: 20px;
+        /*padding-left: 5px;*/
+        /*margin-top: 2px !important;*/
+        line-height: 50px;
     }
     
     #masthead .navbar-inner .btn-navbar {
@@ -1122,7 +1124,7 @@ body .addthis-smartlayers {
     }
     
     #masthead.fixed-nav.affix #header h1 {
-        line-height: 55px;
+        /*line-height: 55px;*/
     }
     
     #masthead #header-inner .descriptionwrapper {
@@ -1284,9 +1286,9 @@ header > .back-button {
     }
     
     .fixed-nav header > .back-button {
-        font-size: 25px;
+        font-size: 20px;
         line-height: 50px;
-        margin-top: 2px;
+        margin-top: 0px;
     }
 }
 

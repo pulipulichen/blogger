@@ -7,6 +7,15 @@
     text-align:center;
 }
 
+@media (min-width: 768px) {
+    #main .entry-content > article > p:first-of-type > a[href$=".png"]:first-of-type,
+    #main .entry-content > article > p:first-of-type > a[href$=".jpg"]:first-of-type,
+    #main .entry-content > article > p:first-of-type > a[href$=".gif"]:first-of-type{
+        margin-left: -2em;
+        margin-right: 2em;
+    }
+}
+
 #main .entry-content, 
 #main .entry-content li {
     word-wrap: break-word;

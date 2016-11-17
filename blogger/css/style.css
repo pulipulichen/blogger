@@ -715,8 +715,8 @@ body .addthis-smartlayers {
 }
 
 @media (max-width: 767px) {
-    ul.share-story li span.caption {
-        display: inline;
+    div.share-story-container ul {
+        margin: 0;
     }
 }
 
@@ -726,10 +726,6 @@ body .addthis-smartlayers {
 
 .share-story-container ul {
     text-align: right;
-}
-
-ul.share-story li span.caption {
-    display: none;
 }
 
 /***********************/

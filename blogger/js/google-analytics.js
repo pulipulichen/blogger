@@ -21,8 +21,15 @@
          }
          else {
              $(".gsc-search-button").click(function () {
-                 ga("send", "event", "search", $("input.gsc-input").val(), 1);
+                 ga("send", "event", "search", $("input.gsc-input:first").val(), 1);
                  console.log("送出GA event search");
+             });
+             
+             $("input.gsc-input:first").keypress(function (_e) {
+                 if (_e.keyCode === 13) {
+                    ga("send", "event", "search", $("input.gsc-input:first").val(), 1);
+                    console.log("送出GA event search");
+                 }
              });
          }
      };

@@ -13,6 +13,21 @@
   
  $(function () {
      
+     // ------------------------
+     // 搜尋
+     var _check_ga_search_ready = function () {
+         if ($(".gsc-search-button").length === 0) {
+             setTimeout(_check_ga_search_ready, 1000);
+         }
+         else {
+             $(".gsc-search-button").click(function () {
+                 ga("send", "event", "search", $("input.gsc-input:first").val(), 1);
+                 console.log("送出GA event search");
+             });
+         }
+     };
+     _check_ga_search_ready();
+     
      // ----------------------------
      // 分享
      $(".social-button").click(function () {

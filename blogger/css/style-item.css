@@ -226,7 +226,9 @@ body .addthis-smartlayers {
 
 #main .entry-meta .creative-commons img {
     border-width: 0;
-    float:left;
+    /*float:left;*/
+    margin-right: 0;
+    padding-top: 0;
 }
 
 #main .entry-meta img.avatar-author {

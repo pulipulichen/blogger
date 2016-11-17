@@ -521,6 +521,9 @@ body .addthis-smartlayers {
 @media (min-width: 768px) {
     .entry-meta.clearfix .share-story-container .share-story.about li {
         width: auto;
+    }
+    
+    .entry-meta.clearfix .share-story-container .share-story.about li a {
         background-color: #D6D7D6;
         border-radius: 6px;
         line-height: 32px;
@@ -528,6 +531,7 @@ body .addthis-smartlayers {
         margin-top: 5px;
         font-size: 0.8em;
     }
+    
     .entry-meta.clearfix .share-story-container .share-story.about li a:hover {
         color:white;
         background-color: #333;

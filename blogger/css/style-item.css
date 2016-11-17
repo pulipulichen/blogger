@@ -378,7 +378,7 @@ body .addthis-smartlayers {
 /*************************************/
 /* 20160528 最矮留言高度 */
 #main div.comments#disqus_thread {
-    min-height: 507px;
+    min-height: 380px;
 }
 
 #main div.comments#comments {

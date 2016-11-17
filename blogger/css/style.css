@@ -459,7 +459,7 @@ div.post-avatar {
 @media (max-width: 979px) {
     #header #header-inner{
         /*margin-left: 10px !important;*/
-        /*margin-top: 15px;*/
+        margin-top: 15px;
     }
 }
 

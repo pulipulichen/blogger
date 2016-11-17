@@ -390,11 +390,12 @@ div.post-avatar {
         height: auto;
     }
 
-
+    /*
     #masthead #header h1 {
         line-height:50px;
         margin-top: 2px;
     }
+    */
 }
 
 @media (max-width: 680px) {
@@ -1096,8 +1097,8 @@ body .addthis-smartlayers {
     #masthead.fixed-nav.affix #header h1 {
         font-size: 20px;
         /*padding-left: 5px;*/
-        /*margin-top: 2px !important;*/
-        line-height: 50px;
+        margin-top: 0px;
+        line-height: 55px;
     }
     
     #masthead .navbar-inner .btn-navbar {
@@ -1280,16 +1281,19 @@ header > .back-button {
 }
 
 @media (max-width: 460px) {
+    .fixed-nav header > .back-button,
     header > .back-button {
-        font-size: 25px;
-        line-height: 55px;
-    }
-    
-    .fixed-nav header > .back-button {
         font-size: 20px;
-        line-height: 50px;
+        line-height: 55px;
         margin-top: 0px;
     }
+    /*
+    .fixed-nav header > .back-button {
+        font-size: 20px;
+        line-height: 55px;
+        margin-top: 0px;
+    }
+    */
 }
 
 /*********************************/

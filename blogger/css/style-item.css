@@ -537,3 +537,9 @@ body .addthis-smartlayers {
         background-color: #333;
     }
 }
+
+
+.author-meta .popover {
+    font-weight: normal;
+    font-size: 0.8rem;
+}

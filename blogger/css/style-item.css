@@ -492,11 +492,11 @@ body .addthis-smartlayers {
 
 /****************************/
 /* 20161118 */
+.entry-meta.clearfix .share-story-container .about {
+    display: block;
+}
+
 .entry-meta.clearfix .share-story-container .about a.read-more {
     padding: 3px 10px;
     margin-right: 3px;
-}
-
-.share-story-container ul {
-    text-align: right;
 }

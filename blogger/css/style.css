@@ -714,6 +714,18 @@ body .addthis-smartlayers {
     }
 }
 
+@media (max-width: 767px) {
+    
+}
+
+.entry-meta.clearfix .share-story-container .about {
+    display: none;
+}
+
+.share-story-container ul {
+    text-align: right;
+}
+
 /***********************/
 .pager .previous.hidden {
     visibility: hidden;

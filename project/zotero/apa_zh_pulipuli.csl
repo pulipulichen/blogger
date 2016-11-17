@@ -53,10 +53,18 @@
   </locale>
   <locale xml:lang="zh">
 <terms>
+    <!-- 自訂部分 -->
     <term name="author" form="short">
       <single></single>
       <multiple></multiple>
     </term>
+    <date form="text">
+      <date-part name="month" suffix=" "/>
+      <date-part name="day" suffix=", "/>
+      <date-part name="year" suffix=""/>
+    </date>
+
+    <!-- 以下是 https://github.com/citation-style-language/locales/blob/master/locales-en-US.xml -->
     <term name="accessed">accessed</term>
     <term name="and">and</term>
     <term name="and others">and others</term>

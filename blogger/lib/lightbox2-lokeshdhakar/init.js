@@ -4,6 +4,9 @@
  */
 $(function(){
     if (document.body.clientWidth < 460) {
+        $.each($("article a:has(img)"), function(_i){
+            $(this).attr("target", "_blank");
+        });
         return;
     }
     

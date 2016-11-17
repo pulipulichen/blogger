@@ -467,4 +467,5 @@ body .addthis-smartlayers {
 #comment-holder li.comment div.avatar-image-container img[src="//img1.blogblog.com/img/blank.gif"] {
     /*Gender_Neutral_User-48*/
     background-image: url(http://pulipulichen.github.io/blogger/blogger/img/no-such-user.png);
+    background-size: cover;
 }

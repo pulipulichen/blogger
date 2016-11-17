@@ -492,8 +492,16 @@ body .addthis-smartlayers {
 
 /****************************/
 /* 20161118 */
-.entry-meta.clearfix .share-story-container .about {
+.entry-meta.clearfix .share-story-container .share-story.about li a  {
     display: block;
+}
+
+@media (max-width: 767px) {
+    .entry-meta.clearfix .share-story-container .share-story.about li a  {
+        line-height: 50px;
+        padding: 0;
+        margin-bottom: 10px;
+    }
 }
 
 .entry-meta.clearfix .share-story-container .about a.read-more {

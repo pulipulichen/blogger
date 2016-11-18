@@ -3,13 +3,14 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-37178375-1', 'auto');
-  ga('send', 'pageview');
-  
-  // ----------------------------------------
-  /**
-   * 20161118 加入事件設定
-   */
+//ga('create', 'UA-37178375-1', 'auto');    // 原始的呼叫方法
+ga('create', 'UA-37178375-1', {'userId': 'pudding'});   // 20161118 嘗試加入userId看看
+ga('send', 'pageview');
+
+// ----------------------------------------
+/**
+ * 20161118 加入事件設定
+ */
   
  $(function () {
      

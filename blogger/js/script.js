@@ -20,7 +20,7 @@ $(function () {
 var menu_search_submit = function (_form) {
     var _query = _form.q.value;
     ga("send", "event", "search", _query, 1);
-    console.log("送出GA事件 search");
+    //console.log("送出GA事件 search");
     
     $("#masthead input.gsc-input").val(_query);
     $("#masthead input.gsc-search-button").click();

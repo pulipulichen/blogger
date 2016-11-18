@@ -22,7 +22,7 @@
          else {
              $(".gsc-search-button:first").click(function () {
                  ga("send", "event", "search", $("input.gsc-input:first").val(), 1);
-                 console.log("送出GA event search");
+                 //console.log("送出GA event search");
              });
          }
      };
@@ -34,6 +34,6 @@
          //var _btn = $(this);
          //var _link = _btn.parent("aside:first");
          ga("send", "event", "share", $(this).attr("data-title"), 1);
-        console.log("送出GA event search");
+        //console.log("送出GA event search");
      });
  });

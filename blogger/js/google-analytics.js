@@ -5,10 +5,23 @@
 
 //ga('create', 'UA-37178375-1', 'auto');    // 原始的呼叫方法
 
-var _user_id = "pudding";
-ga('create', 'UA-37178375-1', {'userId': _user_id});   // 20161118 嘗試加入userId看看
+// IMPORTANT: This is just example data for demonstration purposes to send *something* to GA. Populate your `customUserId` some other way. DO NOT COPY THIS.
+  var prefix = ['abc', 'def', 'ghi'],
+      middle = ['123', '456', '789'],
+      suffix = ['rst', 'uvw', 'xyz'],
+      random = function() {
+          return Math.floor(Math.random() * 3);
+      };
+ 
+  // IMPORTANT: POPULATE YOUR OWN `customUserId` HERE...
+  // Simple pseudo-random user id - 27 possible values
+  // This is *just* some "random" text that we're using as userIds. DO NOT COPY THIS.
+  // You'll need to implement something here linked to your customer database, CRM system, mailing list or whatever you're using
+  var customUserId = prefix[random()] + '-' + middle[random()] + '-' + suffix[random()]; // e.g. abc-123-rst
+ 
+ga('create', 'UA-37178375-1', {'userId': customUserId});   // 20161118 嘗試加入userId看看
 ga('require', 'displayfeatures');
-ga('set', 'dimension1', _user_id);
+ga('set', 'dimension1', customUserId);
 
 ga('send', 'pageview');
 

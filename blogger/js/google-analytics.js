@@ -4,7 +4,12 @@
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 //ga('create', 'UA-37178375-1', 'auto');    // 原始的呼叫方法
-ga('create', 'UA-37178375-1', {'userId': 'pudding'});   // 20161118 嘗試加入userId看看
+
+var _user_id = "pudding";
+ga('create', 'UA-37178375-1', {'userId': _user_id});   // 20161118 嘗試加入userId看看
+ga('require', 'displayfeatures');
+ga('set', 'dimension1', _user_id);
+
 ga('send', 'pageview');
 
 // ----------------------------------------

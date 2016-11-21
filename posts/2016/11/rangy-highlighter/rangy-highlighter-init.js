@@ -46,10 +46,22 @@ var _load_libraries = function () {
         $("head").append('<link rel="stylesheet" href="' + _lib_styles[_i] + '">');
     }
 
-    for (var _i in _lib_scripts) {
+    //for (var _i in _lib_scripts) {
+    //   var _script_url = _lib_scripts[_i];
+    //    $("head").append('<script type="text/javascript" src="' + _script_url + '"></script>');
+    //}
+    var _load_script = function (_i) {
+        if (_i === _lib_scripts.length) {
+            _check_rangy();
+            return;
+        }
+        
         var _script_url = _lib_scripts[_i];
-        $("head").append('<script type="text/javascript" src="' + _script_url + '"></script>');
-    }
+        $.getScript(_script_url, function () {
+            _i++;
+            _load_script(_i);
+        });
+    };
 
     var _check_rangy = function () {
         if (typeof(rangy) !== "object") {
@@ -59,7 +71,9 @@ var _load_libraries = function () {
             _setup_panel();
         }
     };
-    _check_rangy();
+    //_check_rangy();
+    
+    _load_script();
 };
 
     

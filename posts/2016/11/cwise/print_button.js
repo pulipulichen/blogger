@@ -2,7 +2,7 @@
  * //pulipulichen.github.io/blogger/posts/2016/11/cwise/print_button.js
  * <script type="text/javascript" src="//pulipulichen.github.io/blogger/posts/2016/11/cwise/print_button.js"></script>
  */
-var _load_jquery = function () {
+var _load_jquery_print_button = function () {
     if (typeof($) !== "function") {
         var s = document.createElement("script");
         s.type = "text/javascript";
@@ -32,5 +32,5 @@ var _setup_print_button = function () {
     });
 };
 
-_load_jquery();
+_load_jquery_print_button();
 

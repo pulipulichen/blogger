@@ -180,7 +180,7 @@ $(function () {
         }, 3000);
     };
 
-    _annotate_area.mouseup(function (e) {
+    $(_annotate_area).mouseup(function (e) {
         var sel = rangy.getSelection();
         //console.log(sel.saveRanges());
         var intersectingHighlights = highlighter.getIntersectingHighlights( sel.getAllRanges() );

@@ -99,7 +99,7 @@ var _get_cookie_key = function () {
 var serializedHighlights = $.cookie(_get_cookie_key());
 
 
-var initialDoc;
+//var initialDoc;
 
 
 $(function() {
@@ -172,7 +172,7 @@ $(function () {
     };
 
     var _hide_annotate_panel = function () {
-        return;
+        //return;
         _annotate_panel_timer = setTimeout(function () {
             _hide_annotate_panel_now();
         }, 3000);

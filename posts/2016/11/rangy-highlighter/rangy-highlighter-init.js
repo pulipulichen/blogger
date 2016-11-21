@@ -11,6 +11,8 @@ var _lib_styles = [
 
 var _lib_annotate_panel = "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/annotate-panel.html";
 
+var _annotate_area = "div.article";
+
 // ----------------------------------
 // Load jQuery
 
@@ -178,7 +180,7 @@ $(function () {
         }, 3000);
     };
 
-    $("article").mouseup(function (e) {
+    _annotate_area.mouseup(function (e) {
         var sel = rangy.getSelection();
         //console.log(sel.saveRanges());
         var intersectingHighlights = highlighter.getIntersectingHighlights( sel.getAllRanges() );

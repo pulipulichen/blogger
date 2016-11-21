@@ -93,6 +93,11 @@ var _setup_panel = function () {
 var highlighter;
 
 var _init_highlighter = function () {
+    
+    if (typeof($.cookie) !== "function") {
+        _load_libraries();
+        return;
+    }
 
 var _get_cookie_key = function () {
     return "highlight" + location.href;

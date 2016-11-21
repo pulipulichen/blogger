@@ -67,7 +67,7 @@ var _load_libraries = function () {
     };
 
     var _check_rangy = function () {
-        if (typeof(rangy) !== "object") {
+        if (typeof(rangy) !== "object" || typeof($.cookie) !== "function") {
             setTimeout(_check_rangy, 1000);
         }
         else {

@@ -1,8 +1,8 @@
 var _lib_scripts = [
-    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-master/lib/jquery.cookie.js",
-    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-master/lib/rangy-core.js",
-    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-master/lib/rangy-classapplier.js",
-    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-master/lib/rangy-highlighter.js"
+    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/jquery.cookie.js",
+    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-core.js",
+    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-classapplier.js",
+    "//pulipulichen.github.io/blogger/posts/2016/11/rangy-highlighter/rangy-highlighter.js"
 ];
 
 var _lib_styles = [

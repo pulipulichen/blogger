@@ -57,7 +57,7 @@ var _load_libraries = function () {
         }
         
         var _script_url = _lib_scripts[_i];
-        console.log(_script_url);
+        //console.log(_script_url);
         $.getScript(_script_url, function () {
             _i++;
             _load_script(_i);

@@ -30,6 +30,12 @@ var _setup_print_button = function () {
         //$("body").append('');
         $("head").append('<link rel="stylesheet" href="//pulipulichen.github.io/blogger/posts/2016/11/cwise/print_button.css">');
         $("body").append('<div class="print-button-container" style="text-align: center;position: fixed;bottom: 0;width: 100%;background-color: white;padding-bottom: 5px;"><hr /><button style="box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset; background-color: #975b33; color: #fff; text-shadow: none; background-image: none; font-size: 1rem !important; padding: .78571429em 1.5em; min-height: 1em; height: auto; border-radius: .28571429rem; display: inline-block;" onclick="window.print();" type="button">列印</button></div>');
+        
+        $(".print-button-container .button").click(function () {
+            if (typeof(ga) === "function") {
+                ga('send', 'event', 'vle_step', 'author_step', "print_button", 1);
+            }
+        });
     });
 };
 

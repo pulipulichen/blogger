@@ -33,11 +33,11 @@ http://pulipulichen.github.io/blogger/posts/2016/11/chrome_app.html
 <script>
 $(function () {
   $(".input").keyup(function () {
-    var _chrome = $(".chrome").val();
+    var _chrome = $.trim($(".chrome").val());
     if (_chrome.substr(0,1) !== '"') {
       _chrome = '"' + _chrome + '"';
     }
-    var _app = $(".app").val();
+    var _app = $.trim($(".app").val());
     $(".cmd").val(_chrome + " --app=" + _app);
   });
 });

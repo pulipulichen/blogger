@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Chrome Wee APP Command Creator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+<label style="display: block; margin-bottom: 0.5em;">
+  Google Chrome位置:
+  <input type="text" class="input chrome" value='C:\Program Files (x86)\Google\Chrome\Application\chrome.exe' style="font-size: 1.5em;width: 50%;" onfocus="this.select()" />
+ </label>
+
+<label style="display: block;margin-bottom: 0.5em;">
+  網頁應用程式網址:
+  <input type="text" class="input app" value='http://blog.pulipuli.info' style="font-size: 1.5em;width: 50%;" onfocus="this.select()" />
+ </label>
+<hr />
+<label style="display: block; margin-bottom: 0.5em;">
+  網頁應用程式指令: <br />
+  <input type="text" class="cmd" value='"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --app=http://blog.pulipuli.info'  style="font-size: 1.5em;width: 100%;" onfocus="this.select()" />
+ </label>
+
+<script>
+$(function () {
+  $(".input").keyup(function () {
+    var _chrome = $(".chrome").val();
+    if (_chrome.substr(0,1) !== '"') {
+      _chrome = '"' + _chrome + '"';
+    }
+    var _app = $(".app").val();
+    $(".cmd").val(_chrome + " --app=" + _app);
+  });
+});
+    
+</script>
+    </body>
+</html>

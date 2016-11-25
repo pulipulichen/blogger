@@ -15,6 +15,7 @@
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-37178375-6', 'auto');
+  ga('require', 'displayfeatures'); // 為了記錄USER-ID
   ga('send', 'pageview');
 
 </script>
@@ -35,7 +36,8 @@ $(function () {
         ga("send", "event", this.tagName, this.innerHTML);
     });
 });
-
+</script>
+<script type="text/javascript">
 // 設定使用者ID
 $(function () {
     var _name_array = ["Jaime Stokes", "Tami Ballard", "Leslie Thornton", "Daisy Bryant", "Gene Tyler", "Warren Hammond", "Woodrow Lawson", "Eva Fleming", "April Lambert", "Ruth Marsh"];

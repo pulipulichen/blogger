@@ -22,6 +22,7 @@
 <label>
     使用者ID: <input type="text" name="user_id" value="" />
 </label>
+<br />
 
 <button type="button">這是一個按鈕</button>
 
@@ -38,10 +39,11 @@ $(function () {
 // 設定使用者ID
 $(function () {
     var _name_array = ["Jaime Stokes", "Tami Ballard", "Leslie Thornton", "Daisy Bryant", "Gene Tyler", "Warren Hammond", "Woodrow Lawson", "Eva Fleming", "April Lambert", "Ruth Marsh"];
-    var _i = Math.random() * _name_array.length;
+    var _i = Math.floor(Math.random() * (_name_array.length - 0 + 1)) + 0;
     var _name = _name_array[_i];
     
-    $('[name="user_id"]').val(_name);
+    
+    $('input[name="user_id"]').val(_name);
     ga('set', 'userId', _name); // 使用已登入的 user_id 設定 User-ID。
     ga('set', 'dimension1', _name); // 自訂維度
 });

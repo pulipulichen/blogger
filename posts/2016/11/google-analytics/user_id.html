@@ -14,7 +14,9 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  
+  ga('create', 'UA-37178375-6', 'auto');
+  ga('require', 'displayfeatures'); // 為了記錄USER-ID
+  ga('send', 'pageview');
 
 </script>
 
@@ -42,14 +44,9 @@ $(function () {
     var _i = Math.floor(Math.random() * (_name_array.length - 0 + 1)) + 0;
     var _name = _name_array[_i];
     
-    ga('create', 'UA-37178375-6', {'userId': _name});
-    ga('require', 'displayfeatures'); // 為了記錄USER-ID
-    ga('send', 'pageview');
-    
+    $('input[name="user_id"]').val(_name);
     ga('set', 'userId', _name); // 使用已登入的 user_id 設定 User-ID。
     ga('set', 'dimension1', _name); // 自訂維度
-    
-    $('input[name="user_id"]').val(_name);
 });
 </script>
 

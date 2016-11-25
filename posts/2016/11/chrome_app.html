@@ -20,10 +20,8 @@ http://pulipulichen.github.io/blogger/posts/2016/11/chrome_app.html
  </label>
 
 <label style="display: block;margin-bottom: 0.5em;">
-  網頁應用程式網址: <br />
-  <textarea class="input app" style="font-size: 1.7em;width: calc(100%);" onfocus="this.select()">
-      http://blog.pulipuli.info
-  </textarea>
+    網頁應用程式網址: <button type="button" onclick="window.open($('.input.app').val(), '_blank');">開啟網址</button> <br />
+  <textarea class="input app" style="font-size: 1.7em;width: calc(100%);" onfocus="this.select()">http://blog.pulipuli.info</textarea>
  </label>
 <hr />
 <label style="display: block; margin-bottom: 0.5em;">

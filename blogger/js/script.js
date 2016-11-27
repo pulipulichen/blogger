@@ -562,7 +562,10 @@ var _load_random_posts = function () {
     var _icon = _getQueryVariable("icon");
     console.log(_icon);
     if (_icon !== undefined) {
-            $("head link[rel='icon']").remove();
+        $(function () {
+            //$("head link[rel='icon']").remove();
             $("head").append('<link rel="icon" href="'+_icon+'" type="image/' + _icon.substr(_icon.lastIndexOf('.')+1) + '" size="192x192" />');
+        });
+           
     }
 //})();

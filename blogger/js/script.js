@@ -547,7 +547,7 @@ var _load_random_posts = function () {
     });
 };
 
-(function () {
+//(function () {
     var _getQueryVariable = function (variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -564,4 +564,4 @@ var _load_random_posts = function () {
     if (_icon !== undefined) {
         $("head").append('<link rel="icon" href="'+_icon+'" type="image/' + _icon.substr(_icon.lastIndexOf('.')+1) + '" size="192x192" />');
     }
-})();
+//})();

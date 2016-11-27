@@ -1,0 +1,2 @@
+ICON="http://pulipulichen.github.io/blogger/images/icon/google_chrome_app_builder.png";
+$.getScript("http://pulipulichen.github.io/blogger/posts/2016/11/icon.js");

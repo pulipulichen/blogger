@@ -492,7 +492,7 @@ var _load_random_posts = function () {
                     if ('media$thumbnail' in entry) {
                         var randompoststhumb = entry.media$thumbnail.url;
                     } else {
-                        randompoststhumb = "http://3.bp.blogspot.com/-5SoVe1K6JSk/Utl0OOmucAI/AAAAAAAAF6E/hQghgD_EJdQ/s1600/no_thumb.png"
+                        randompoststhumb = "http://3.bp.blogspot.com/-5SoVe1K6JSk/Utl0OOmucAI/AAAAAAAAF6E/hQghgD_EJdQ/s1600/no_thumb.png";
                     }
                 }
             };
@@ -546,4 +546,21 @@ var _load_random_posts = function () {
         _loop();
     });
 };
+
+(function () {
+    var _getQueryVariable = function (variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+          if (pair[0] === variable) {
+            return pair[1];
+          }
+        }
+    };
     
+    var _icon = _getQueryVariable("icon");
+    if (_icon !== undefined) {
+        $("head").append('<link rel="icon" href="'+_icon+'" type="image/' + _icon.substr(_icon.lastIndexOf('.')+1) + '" size="192x192" />');
+    }
+})();

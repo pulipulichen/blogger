@@ -37,7 +37,7 @@ $(function () {
       _chrome = '"' + _chrome + '"';
     }
     var _app = $.trim($(".app").val());
-    $(".cmd").val(_chrome + " --app=" + _app);
+    $(".cmd").val(_chrome + " --app=" + _app + " --ignore-certificate-errors");
   });
 });
     

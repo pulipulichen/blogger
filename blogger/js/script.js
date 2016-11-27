@@ -547,7 +547,7 @@ var _load_random_posts = function () {
     });
 };
 
-//(function () {
+(function () {
     var _getQueryVariable = function (variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -560,14 +560,10 @@ var _load_random_posts = function () {
     };
     
     var _icon = _getQueryVariable("icon");
-    console.log(_icon);
     if (_icon !== undefined) {
-        //$(function () {
-            $("head link[rel='icon']").remove();
-            $("head link[rel='shortcut icon']").remove();
-            $("head link[rel='apple-touch-icon']").remove();
-            $("head").append('<link rel="shortcut icon" href="'+_icon+'" type="image/' + _icon.substr(_icon.lastIndexOf('.')+1) + '" size="192x192" />');
-        //});
-           
+        $("head link[rel='icon']").remove();
+        $("head link[rel='shortcut icon']").remove();
+        $("head link[rel='apple-touch-icon']").remove();
+        $("head").append('<link rel="shortcut icon" href="'+_icon+'" type="image/' + _icon.substr(_icon.lastIndexOf('.')+1) + '" size="192x192" />');
     }
-//})();
+})();

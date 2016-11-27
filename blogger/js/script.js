@@ -565,6 +565,7 @@ var _load_random_posts = function () {
         //$(function () {
             $("head link[rel='icon']").remove();
             $("head link[rel='shortcut icon']").remove();
+            $("head link[rel='apple-touch-icon']").remove();
             $("head").append('<link rel="shortcut icon" href="'+_icon+'" type="image/' + _icon.substr(_icon.lastIndexOf('.')+1) + '" size="192x192" />');
         //});
            

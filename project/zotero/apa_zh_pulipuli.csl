@@ -421,12 +421,21 @@
   <macro name="container-contributors-zh">
     <choose>
       <if type="chapter" match="any">
-        <group delimiter="，" prefix="。在" >
+        <group prefix="。在" >
           <choose>
             <if type="paper-conference">
               <names variable="editor" suffix="編">
                 <name initialize-with="。" delimiter="、" />
               </names>
+            </if>
+            <if type="chapter">
+              <group delimiter="，">
+                  <names variable="editor" suffix="編">
+                    <name initialize-with="。" delimiter="、" />
+                  </names>
+                  <text macro="chinese-container-title" font-style="italic"/>
+              </group>
+              <text variable="page" prefix="（頁" suffix="）" />
             </if>
             <else>
               <!--<text variable="container-title" font-style="italic" />-->

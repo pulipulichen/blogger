@@ -30,7 +30,7 @@ if(require("arulesSequences")){
 library(Matrix)
 library(arules)
 library(arulesSequences)
-x <- read_baskets(con = system.file("misc", "arulesSequencesData.txt", package = "arulesSequences"), info = c("sequenceID","eventID","SIZE"))
+x <- read_baskets(con = system.file("misc", "zaki.txt", package = "arulesSequences"), info = c("sequenceID","eventID","SIZE"))
 s1 <- cspade(x, parameter = list(support = minSupport), control = list(verbose = TRUE))
 summary(s1)
 as(s1, "data.frame")

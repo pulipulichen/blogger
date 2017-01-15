@@ -1366,6 +1366,9 @@ header > .back-button {
     .sumome-share-client-wrapper.sumome-share-client-wrapper-left-page {
         z-index: auto !important;
     }
+    .addthis-smartlayers-mobile {
+        display: none !important;
+    }
 }
 
 .addthis-smartlayers .at-custom-sidebar-counter {

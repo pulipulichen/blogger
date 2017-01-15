@@ -1364,6 +1364,10 @@ header > .back-button {
     }
 }
 
+.addthis-smartlayers .at-custom-sidebar-counter {
+    background-color: white;
+}
+
 /*
 @media (max-width: 979px) {
     .nav-collapse:not(.in) {

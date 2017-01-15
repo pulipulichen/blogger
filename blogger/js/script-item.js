@@ -365,10 +365,10 @@ $(function() {
 
 // ------------------------------------
 // 20170115 如果網址最後有#more，則移除
-(function () {
+$(function () {
     var _needle = "#more";
     var _url = location.href;
     if (_url.substring(_url.length-_needle.length, _url.length) === _needle) {
-        location.href = _url.substring(0, _url.length - _needle.length);
+        location.href = _url.substring(0, _url.length - _needle.length+1);
     }
-})();
+});

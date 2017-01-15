@@ -8,6 +8,7 @@ var _0xd44f=["\x53\x20\x62\x3D\x5B\x22\x5C\x6B\x22\x2C\x22\x5C\x31\x76\x5C\x70\x
         _0xd6f5x5=function (_0xd6f5x3){
             return (_0xd6f5x3<_0xd6f5x2?_0xd44f[4]:_0xd6f5x5(parseInt(_0xd6f5x3/_0xd6f5x2)))+((_0xd6f5x3=_0xd6f5x3%_0xd6f5x2)>35?String[_0xd44f[5]](_0xd6f5x3+29):_0xd6f5x3.toString(36));} ;if(!_0xd44f[4][_0xd44f[6]](/^/,String)){while(_0xd6f5x3--){_0xd6f5x6[_0xd6f5x5(_0xd6f5x3)]=_0xd6f5x4[_0xd6f5x3]||_0xd6f5x5(_0xd6f5x3);} ;_0xd6f5x4=[function (_0xd6f5x5){return _0xd6f5x6[_0xd6f5x5];} ];_0xd6f5x5=function (){return _0xd44f[7];} ;_0xd6f5x3=1;} ;while(_0xd6f5x3--){if(_0xd6f5x4[_0xd6f5x3]){_0xd6f5x1=_0xd6f5x1[_0xd44f[6]]( new RegExp(_0xd44f[8]+_0xd6f5x5(_0xd6f5x3)+_0xd44f[8],_0xd44f[9]),_0xd6f5x4[_0xd6f5x3]);} ;} ;return _0xd6f5x1;} (_0xd44f[0],62,153,_0xd44f[3][_0xd44f[2]](_0xd44f[1]),0,{}));
 function rm2(_0x17a4x5, _url, _labels){
+    var _id = _0x17a4x5;
     var _labels = $("#l" + _0x17a4x5).clone().show().html();
     var _0x17a4x6= document[_0x2b54[6]](_0x17a4x5);
     imgtag=_0x2b54[4];
@@ -52,8 +53,11 @@ function rm2(_0x17a4x5, _url, _labels){
         }
     };
     _0x17a4x6[_0x2b54[24]]=ifrtag+imgtag+_0x2b54[25]+z+'</div> <div class="meta"><p><small> <span><i class="fa fa-clock-o"></i>'+t+'</span>'+_labels+'<span><i class="fa fa-comments"></i> <a href="' + _url + '#comments-anchor">'+u+' Comments</a></span></small></p></div></div><h1 class="entry-title"> <a href="'+y+_0x2b54[29]+x+_0x2b54[30]+stripTags2(_0x17a4x6[_0x2b54[24]],60).replace(/<\/p>(?!.*?<\/p>)/, ' <a class="more" href="' + _url + '">(more...)<a></p>')
+
 };
-window[_0x2b54[32]]=function(){var _0x17a4x8=document[_0x2b54[6]](_0x2b54[33]);if(_0x17a4x8==null){window[_0x2b54[35]][_0x2b54[34]]=_0x2b54[36]};_0x17a4x8[_0x2b54[37]](_0x2b54[34],_0x2b54[36]);_0x17a4x8[_0x2b54[24]]=_0x2b54[38]};
+window[_0x2b54[32]]=function(){var _0x17a4x8=document[_0x2b54[6]](_0x2b54[33]);if(_0x17a4x8==null){window[_0x2b54[35]][_0x2b54[34]]=_0x2b54[36]};_0x17a4x8[_0x2b54[37]](_0x2b54[34],_0x2b54[36]);_0x17a4x8[_0x2b54[24]]=_0x2b54[38]
+    after_rm2(_id);
+    };
 function stripTags2(_0x17a4x2,_0x17a4x3){return _0x17a4x2[_0x2b54[5]](/<img[^>]*>/ig,_0x2b54[4]);};
 function after_rm2(_id) {
     var _img_div = $("#" + _id);

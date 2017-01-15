@@ -664,7 +664,6 @@
         ,t=&quot;<data:post.timestamp/>&quot;
         ,u=&quot;<data:post.numComments/>&quot;;
         rm2(&quot;p<data:post.id/>&quot;,&quot;<data:post.url/>&quot;);
-        after_rm2(&quot;p<data:post.id/>&quot;);
     </script>
     
 <b:else/>

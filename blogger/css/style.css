@@ -562,9 +562,11 @@ div.post-avatar {
 }
 
 /**********************************/
+/*
 body .addthis-smartlayers {
     display: none !important;
 }
+*/
 
 @media (min-width: 460px) and (max-width: 767px) {
     .entry-container .entry-content {
@@ -1366,6 +1368,7 @@ header > .back-button {
 
 .addthis-smartlayers .at-custom-sidebar-counter {
     background-color: white;
+    min-height: 31px;
 }
 
 /*

@@ -119,14 +119,15 @@
 }
 
 #main .post .entry-image .thumb {
-    width: 102%;
-    max-width: 102%;
+    width: 95%;
+    max-width: 95%;
 }
 
 #main .post .entry-image {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    width: calc(100% + 10px);
 }
 
 #main .post .entry-image > a[href] > img.thumb:first-of-type {

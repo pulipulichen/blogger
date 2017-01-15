@@ -659,7 +659,7 @@
     <span expr:id='&quot;p&quot; + data:post.id'><data:post.body/></span>
     <script type='text/javascript'>
         var x=&quot;<data:post.title/>&quot;
-        ,y=&quot;<data:post.url/>#more&quot;
+        ,y=&quot;<data:post.url/>&quot;
         ,z=&quot;<data:post.author/>&quot;
         ,t=&quot;<data:post.timestamp/>&quot;
         ,u=&quot;<data:post.numComments/>&quot;;
@@ -671,7 +671,7 @@
     <div class='entry-content'><article>
     <h1>
 <b:if cond='data:post.link'>
-    <a expr:href='data:post.link + &quot;#more&quot;' expr:title='data:post.title'><data:post.title/></a>
+    <a expr:href='data:post.link + &quot;&quot;' expr:title='data:post.title'><data:post.title/></a>
 <b:else/>
 
 <data:post.title/>
@@ -727,7 +727,7 @@
 <aside>
 <b:if cond='data:blog.pageType == &quot;index&quot;'>
     <div class='pull-left'>
-        <a class='read-more' expr:href='data:post.url + &quot;#more&quot;'>Read More</a>
+        <a class='read-more' expr:href='data:post.url + &quot;&quot;'>Read More</a>
         <b:include data='post' name='postQuickEdit'/>
     </div>
 </b:if>

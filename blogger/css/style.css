@@ -126,6 +126,7 @@
 #main .post .entry-image {
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #main .post .entry-image > a[href] > img.thumb:first-of-type {

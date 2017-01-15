@@ -934,7 +934,7 @@
 </div>
 
 <!-- JAVASCRIPT -->
-<script src="//load.sumome.com/" data-sumo-site-id="91b6a5a67cc23845f0765da427a8ac1c0b918c4e9226f12ea32abf1e8110df0c" async="async"></script>
+<!-- <script src="//load.sumome.com/" data-sumo-site-id="91b6a5a67cc23845f0765da427a8ac1c0b918c4e9226f12ea32abf1e8110df0c" async="async"></script> -->
 <script type="text/javascript" src="//pulipulichen.github.io/blogger/blogger/js/google-analytics.js"></script>
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>

@@ -52,15 +52,15 @@ function rm2(_0x17a4x5, _url, _labels){
             imgtag=_0x2b54[22]+y+_0x2b54[23]
         }
     };
-    _0x17a4x6[_0x2b54[24]]=ifrtag+imgtag+_0x2b54[25]+z+'</div> <div class="meta"><p><small> <span><i class="fa fa-clock-o"></i>'+t+'</span>'+_labels+'<span><i class="fa fa-comments"></i> <a href="' + _url + '#comments-anchor">'+u+' Comments</a></span></small></p></div></div><h1 class="entry-title"> <a href="'+y+_0x2b54[29]+x+_0x2b54[30]+stripTags2(_0x17a4x6[_0x2b54[24]],60).replace(/<\/p>(?!.*?<\/p>)/, ' <a class="more" href="' + _url + '">(more...)<a></p>')
-
+    _0x17a4x6[_0x2b54[24]]=ifrtag+imgtag+_0x2b54[25]+z+'</div> <div class="meta"><p><small> <span><i class="fa fa-clock-o"></i>'+t+'</span>'+_labels+'<span><i class="fa fa-comments"></i> <a href="' + _url + '#comments-anchor">'+u+' Comments</a></span></small></p></div></div><h1 class="entry-title"> <a href="'+y+_0x2b54[29]+x+_0x2b54[30]+stripTags2(_0x17a4x6[_0x2b54[24]],60).replace(/<\/p>(?!.*?<\/p>)/, ' <a class="more" href="' + _url + '">(more...)<a></p>');
+    after_rm2(_id);
 };
 window[_0x2b54[32]]=function(){var _0x17a4x8=document[_0x2b54[6]](_0x2b54[33]);if(_0x17a4x8==null){window[_0x2b54[35]][_0x2b54[34]]=_0x2b54[36]};_0x17a4x8[_0x2b54[37]](_0x2b54[34],_0x2b54[36]);_0x17a4x8[_0x2b54[24]]=_0x2b54[38]
-    after_rm2(_id);
     };
 function stripTags2(_0x17a4x2,_0x17a4x3){return _0x17a4x2[_0x2b54[5]](/<img[^>]*>/ig,_0x2b54[4]);};
 function after_rm2(_id) {
     var _img_div = $("#" + _id);
+    consolog(_img_div.length);
     var _img_src = _img_div.find("a[href]:first").attr("src");
     _img_div.css("background-image", "url(" + _img_src + ")");
 }

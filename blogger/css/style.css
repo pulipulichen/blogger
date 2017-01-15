@@ -1371,6 +1371,7 @@ header > .back-button {
 .addthis-smartlayers .at-custom-sidebar-counter {
     background-color: white;
     min-height: 31px;
+    cursor: default;
 }
 
 /*

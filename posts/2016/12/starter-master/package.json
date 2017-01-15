@@ -1,0 +1,67 @@
+{
+  "name": "aleutcss-starter",
+  "version": "1.0.0",
+  "description": "A Aleut.css starter project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node-sass style.scss ./css/style.css",
+    "prestart": "npm run build",
+    "start": "node-sass style.scss ./css/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleutcss/starter.git"
+  },
+  "keywords": [
+    "aleutcss",
+    "css",
+    "sass",
+    "bem",
+    "itcss",
+    "inuit"
+  ],
+  "author": "Marius Hauken, Knut Melvær, Robin Sandborg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleutcss/starter/issues"
+  },
+  "homepage": "https://github.com/aleutcss/starter#readme",
+  "devDependencies": {
+    "aleut.base.images": "^1.0.1",
+    "aleut.base.lists": "^1.0.1",
+    "aleut.base.page": "^1.0.1",
+    "aleut.generic.box-sizing": "^1.0.1",
+    "aleut.generic.normalize": "^1.0.1",
+    "aleut.generic.reset": "^1.0.1",
+    "aleut.generic.shared": "^1.0.1",
+    "aleut.objects.block": "^1.0.1",
+    "aleut.objects.box": "^1.0.1",
+    "aleut.objects.buttons": "^1.0.1",
+    "aleut.objects.flag": "^1.0.1",
+    "aleut.objects.layout": "^1.0.1",
+    "aleut.objects.list-bare": "^1.0.1",
+    "aleut.objects.list-block": "^1.0.1",
+    "aleut.objects.list-inline": "^1.0.1",
+    "aleut.objects.list-ui": "^1.0.1",
+    "aleut.objects.media": "^1.0.1",
+    "aleut.objects.pack": "^1.0.1",
+    "aleut.objects.tables": "^1.0.1",
+    "aleut.objects.tabs": "^1.0.1",
+    "aleut.settings.defaults": "^1.0.1",
+    "aleut.settings.responsive": "^1.0.1",
+    "aleut.tools.clearfix": "^1.0.1",
+    "aleut.tools.functions": "^1.0.1",
+    "aleut.tools.mixins": "^1.0.2",
+    "aleut.tools.responsive": "^1.0.1",
+    "aleut.tools.widths": "^1.0.1",
+    "aleut.utilities.clearfix": "^1.0.1",
+    "aleut.utilities.headings": "^1.0.1",
+    "aleut.utilities.print": "^1.0.1",
+    "aleut.utilities.spacing-responsive": "^1.0.1",
+    "aleut.utilities.widths-responsive": "^1.0.1",
+    "aleut.utilities.spacing": "^1.0.1",
+    "aleut.utilities.widths": "^1.0.1",
+    "node-sass": "^3.4.2"
+  }
+}

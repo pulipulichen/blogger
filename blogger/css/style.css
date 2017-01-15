@@ -123,6 +123,11 @@
     max-width: 102%;
 }
 
+#main .post .entry-image {
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 /* ************************ */
 
 #disqus_thread {

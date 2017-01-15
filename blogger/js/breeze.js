@@ -59,8 +59,8 @@ window[_0x2b54[32]]=function(){var _0x17a4x8=document[_0x2b54[6]](_0x2b54[33]);i
     };
 function stripTags2(_0x17a4x2,_0x17a4x3){return _0x17a4x2[_0x2b54[5]](/<img[^>]*>/ig,_0x2b54[4]);};
 function after_rm2(_id) {
-    var _img_div = $("#" + _id);
-    console.log(_img_div.length);
-    var _img_src = _img_div.find("a[href]:first").attr("src");
+    var _img_div = $("#" + _id + " div.entry-image:first");
+    //console.log(_img_div.length);
+    var _img_src = _img_div.find("img.thumb:first").attr("src");
     _img_div.css("background-image", "url(" + _img_src + ")");
 }

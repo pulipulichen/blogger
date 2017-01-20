@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+<!-- <link rel="icon" href="icon.png" type="image/png"> -->
+<title>
+臺北101互動煙火
+</title>
+</head>
+
+<body title="點選畫面放煙火！">
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+
+<link rel="stylesheet" href="http://pulipulichen.github.io/blogger/posts/2016/12/semantic/semantic.min.css">
+<script src="http://pulipulichen.github.io/blogger/posts/2016/12/semantic/semantic.min.js"></script>
+
+<div class="ui form">
+  <div class="field">
+  <label for="firework_url">煙火網頁的網址</label>
+    <input type="text" value="http://s.codepen.io/pulipuli/full/mOYRdg/vWMRwWzPPbgr" id="firework_url" disabled="disabled" />
+  </div>
+  <div class="field">
+  <label for="img_url">自訂圖片的網址</label>
+    <input type="text" value="" id="img_url" placeholder="可省略" />
+  </div>
+  <iframe src="http://s.codepen.io/pulipuli/full/mOYRdg/vWMRwWzPPbgr" width="100%" height="600"></iframe>
+</div>
+
+<script type="text/javascript">
+var _change_img = function () {
+  var img = this.value;
+  var url = "http://s.codepen.io/pulipuli/full/mOYRdg/vWMRwWzPPbgr?img=" + img;
+  //console.log(img);
+  //alert(img);
+  $("#firework_url").val(url);
+  $("iframe").attr("src", url);
+};
+
+//$(function() {
+  //console.log(111);
+  //alert(1212);
+  $("#img_url").keyup(_change_img).change(_change_img);
+  //alert($("#img_url").length);
+//});
+</script>
+</body>
+</html>

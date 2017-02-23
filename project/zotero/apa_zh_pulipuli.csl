@@ -466,26 +466,22 @@
         </names>
       </if>
     </choose>
+
   </macro>
   
   <macro name="secondary-contributors-zh">
+    <group prefix="（" suffix="）" delimiter="，">
     <choose>
       <if type="chapter" match="none">
-        <group prefix="（" suffix="）" delimiter="，">
           <names variable="editor" suffix="編">
             <name initialize-with="。" delimiter="、" />
           </names>
-          <choose>
-            <if type="book" match="none">
-              <names variable="translator" suffix="譯">
-                <name initialize-with="。" delimiter="、" />
-              </names>
-            </if>
-          </choose>
-          
-        </group>
       </if>
     </choose>
+      <names variable="translator" suffix="譯">
+        <name initialize-with="。" delimiter="、" />
+      </names>
+    </group>
   </macro>
   
   <!---->

@@ -369,7 +369,7 @@ $(function() {
 $(function () {
     var _setup_iframe_anchor = function () {
         var _len1 = $("#comment-holder iframe:last").length;
-        var _len2 = $("iframe.blogger-comment-from-post:last").length;
+        var _len2 = $(".comment-form > iframe:last").length;
         if (_len1 === 0 && _len2) {
             console.log("iframe not found");
             setTimeout(_setup_iframe_anchor, 1000);
@@ -377,7 +377,7 @@ $(function () {
         else {
             var _iframe = $("#comment-holder iframe:last");
             if (_len1 === 0 && _len2 > 0) {
-                _iframe = $("iframe.blogger-comment-from-post:last");
+                _iframe = $(".comment-form > iframe:last");
             }
             console.log([_len1, _len2]);
             _iframe.before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');

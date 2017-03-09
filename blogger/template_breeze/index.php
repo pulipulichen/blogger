@@ -273,13 +273,14 @@
       <data:blogTeamBlogMessage/>
       <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
       <a expr:href='data:post.commentFormIframeSrc' id='c' name="c"/>
+      <?php echo file_get_contents("4_content/comment_form_tool.html"); ?>
       <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='210' id='comment-editor' name='comment-editor' src='' style='display: none' width='100%'/>
     <b:else/>
       <p><data:blogCommentMessage/></p>
       <data:blogTeamBlogMessage/>
       <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
       <a expr:href='data:post.commentFormIframeSrc' id='c' name="c"/>
-      
+      <?php echo file_get_contents("4_content/comment_form_tool.html"); ?>
       <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='210' id='comment-editor' name='comment-editor' src='' width='100%'/>
     </b:if>
     <data:post.friendConnectJs/>
@@ -287,10 +288,6 @@
     <script type='text/javascript'>
       BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;, &#39;<data:post.communityId/>&#39;);
     </script>
-    <a href="http://imgur.com/upload" target="imgur" style="color: black; font-size: 1.5em; line-height: 1.5em; padding: 0 0.5em; text-decoration: none;">
-        上傳圖片:imgur
-        <i aria-hidden="true" class="fa fa-picture-o"></i>
-    </a>
   </div>
 </b:includable>
     <b:includable id='commentDeleteIcon' var='comment'>
@@ -809,12 +806,14 @@
       <data:blogTeamBlogMessage/>
       <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
       <a expr:href='data:post.commentFormIframeSrc' id='c' name="c"/>
+      <?php echo file_get_contents("4_content/comment_form_tool.html"); ?>
       <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='210' id='comment-editor' name='comment-editor' src='' style='display: none' width='100%'/>
     <b:else/>
       <p><data:blogCommentMessage/></p>
       <data:blogTeamBlogMessage/>
       <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
       <a expr:href='data:post.commentFormIframeSrc' id='c' name="c"/>
+      <?php echo file_get_contents("4_content/comment_form_tool.html"); ?>
       <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='210' id='comment-editor' name='comment-editor' src='' width='100%'/>
     </b:if>
     <data:post.friendConnectJs/>

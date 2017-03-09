@@ -368,12 +368,17 @@ $(function() {
 // 20170309 我要發問
 $(function () {
     var _setup_iframe_anchor = function () {
-        var _len = $("#comment-holder iframe:last").length;
-        if (_len === 0) {
+        var _len1 = $("#comment-holder iframe:last").length;
+        var _len2 = $("iframe.blogger-comment-from-post:last").length;
+        if (_len1 === 0 && _len2) {
             setTimeout(_setup_iframe_anchor, 1000);
         }
         else {
-            $("#comment-holder iframe:last").before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
+            var _iframe = $("#comment-holder iframe:last");
+            if (_len1 === 0 && _len2 > 0) {
+                _iframe = $("iframe.blogger-comment-from-post:last");
+            }
+            _iframe.before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
             var _needle = "#comment-form-iframe";
             var _href = location.href;
             if (_href.substr(_href.length-_needle.length) === _needle) {

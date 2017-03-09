@@ -370,7 +370,7 @@ $(function () {
     var _setup_iframe_anchor = function () {
         var _len1 = $("#comment-holder iframe:last").length;
         var _len2 = $(".comment-form > iframe:last").length;
-        if (_len1 === 0 && _len2) {
+        if (_len1 === 0 && _len2 === 0) {
             console.log("iframe not found");
             setTimeout(_setup_iframe_anchor, 1000);
         }

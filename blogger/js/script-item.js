@@ -367,8 +367,13 @@ $(function() {
 // -----------------------------
 // 20170309 我要發問
 $(function () {
+   $("#comment-holder iframe:last").insertBefore('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
+   /*
    $(".comment-form-iframe").click(function () {
-       var _top = $("#comment-holder iframe:last").offset.top;
+       var _top = $("#comment-holder iframe:last").offset().top;
+       //console.log(_top);
+       _top = _top - 10;
        $(window).scrollTop(_top);
    });
+   */
 });

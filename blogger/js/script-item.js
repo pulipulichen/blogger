@@ -371,6 +371,7 @@ $(function () {
         var _len1 = $("#comment-holder iframe:last").length;
         var _len2 = $("iframe.blogger-comment-from-post:last").length;
         if (_len1 === 0 && _len2) {
+            console.log("iframe not found");
             setTimeout(_setup_iframe_anchor, 1000);
         }
         else {
@@ -378,11 +379,13 @@ $(function () {
             if (_len1 === 0 && _len2 > 0) {
                 _iframe = $("iframe.blogger-comment-from-post:last");
             }
+            console.log([_len1, _len2]);
             _iframe.before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
+            
             var _needle = "#comment-form-iframe";
             var _href = location.href;
             if (_href.substr(_href.length-_needle.length) === _needle) {
-                var _top = $("#comment-holder iframe:last").offset().top - 50;
+                var _top = _iframe.offset().top - 50;
                 $(window).scrollTop(_top);
             }
         }

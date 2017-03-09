@@ -369,8 +369,6 @@ $(function() {
 $(function () {
    $(".comment-form-iframe").click(function () {
        var _top = $("#comment-holder iframe:last").offset.top;
-       $('html, body').animate({
-            scrollTop: _top + 'px'
-        }, 'fast');
+       $(window).scrollTop(_top);
    });
 });

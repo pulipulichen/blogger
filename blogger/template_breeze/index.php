@@ -844,7 +844,7 @@
     
   <div class='comments' id='comments'>
     <a name='comments-anchor' id='comments-anchor'  />
-    <h4>總共<data:post.commentLabelFull/>, <a class="comment-form-iframe">(我要發問)</a></h4>
+    <h4>總共<data:post.commentLabelFull/>, <a href="#comment-form-iframe" class="comment-form-iframe">(我要發問)</a></h4>
 
     <div class='comments-content'>
       <b:if cond='data:post.embedCommentForm'>

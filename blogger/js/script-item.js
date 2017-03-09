@@ -374,6 +374,12 @@ $(function () {
         }
         else {
             $("#comment-holder iframe:last").before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
+            var _needle = "#comment-form-iframe";
+            var _href = location.href;
+            if (_href.substr(_href.length-_needle.length) === _needle) {
+                var _top = $("#comment-holder iframe:last").offset().top;
+                $(window).scrollTop(_top);
+            }
         }
     };
     _setup_iframe_anchor();

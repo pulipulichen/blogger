@@ -362,3 +362,15 @@ $(function() {
     itemsMobile : [480,1]
   });
 });
+
+
+// -----------------------------
+// 20170309 我要發問
+$(function () {
+   $(".comment-form-iframe").click(function () {
+       var _top = $("#comment-holder iframe:last").offset.top;
+       $('html, body').animate({
+            scrollTop: _top + 'px'
+        }, 'fast');
+   });
+});

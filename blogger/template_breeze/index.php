@@ -279,6 +279,7 @@
       <data:blogTeamBlogMessage/>
       <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
       <a expr:href='data:post.commentFormIframeSrc' id='c' name="c"/>
+      
       <iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='210' id='comment-editor' name='comment-editor' src='' width='100%'/>
     </b:if>
     <data:post.friendConnectJs/>
@@ -286,6 +287,10 @@
     <script type='text/javascript'>
       BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;, &#39;<data:post.communityId/>&#39;);
     </script>
+    <a href="http://imgur.com/upload" target="imgur" style="color: black; font-size: 1.5em; line-height: 1.5em; padding: 0 0.5em; text-decoration: none;">
+        上傳圖片:imgur
+        <i aria-hidden="true" class="fa fa-picture-o"></i>
+    </a>
   </div>
 </b:includable>
     <b:includable id='commentDeleteIcon' var='comment'>
@@ -839,7 +844,7 @@
     
   <div class='comments' id='comments'>
     <a name='comments-anchor' id='comments-anchor'  />
-    <h4><data:post.commentLabelFull/>:</h4>
+    <h4>總共<data:post.commentLabelFull/>, <a class="comment-form-iframe">(我要發問)</a></h4>
 
     <div class='comments-content'>
       <b:if cond='data:post.embedCommentForm'>
@@ -849,7 +854,6 @@
          <data:post.commentHtml/>
       </div>
     </div>
-
     <p class='comment-footer'>
       <b:if cond='data:post.allowNewComments'>
         <b:include data='post' name='threaded-comment-form'/>

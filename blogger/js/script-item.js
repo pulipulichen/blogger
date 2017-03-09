@@ -376,4 +376,5 @@ $(function () {
             $("#comment-holder iframe:last").before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
         }
     };
+    _setup_iframe_anchor();
 });

@@ -914,6 +914,7 @@
                  
                 <div class='go-top'>
                     <a href='#'><i class='fa fa-angle-up'/></a>
+                    <a href='#comment-form-iframe'><i class="fa fa-commenting" aria-hidden="true"></i></a>
                 </div>
             
             

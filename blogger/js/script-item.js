@@ -377,7 +377,7 @@ $(function () {
             var _needle = "#comment-form-iframe";
             var _href = location.href;
             if (_href.substr(_href.length-_needle.length) === _needle) {
-                var _top = $("#comment-holder iframe:last").offset().top;
+                var _top = $("#comment-holder iframe:last").offset().top - 50;
                 $(window).scrollTop(_top);
             }
         }

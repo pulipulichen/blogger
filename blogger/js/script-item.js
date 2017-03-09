@@ -367,13 +367,13 @@ $(function() {
 // -----------------------------
 // 20170309 我要發問
 $(function () {
-   $("#comment-holder iframe:last").insertBefore('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
-   /*
-   $(".comment-form-iframe").click(function () {
-       var _top = $("#comment-holder iframe:last").offset().top;
-       //console.log(_top);
-       _top = _top - 10;
-       $(window).scrollTop(_top);
-   });
-   */
+    var _setup_iframe_anchor = function () {
+        var _len = $("#comment-holder iframe:last").length;
+        if (_len === 0) {
+            setTimeout(_setup_iframe_anchor, 1000);
+        }
+        else {
+            $("#comment-holder iframe:last").before('<a name="comment-form-iframe" id="comment-form-iframe"></a>');
+        }
+    };
 });

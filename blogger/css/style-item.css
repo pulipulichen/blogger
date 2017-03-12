@@ -581,6 +581,7 @@ body .addthis-smartlayers {
 
 /*****************************/
 /* 20170312 GO to comment */
-.go-top .goto-comment {
+#footer .go-top .goto-comment {
     display: block !important;
+    margin-top: 0.5em;
 }

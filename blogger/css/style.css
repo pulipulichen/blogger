@@ -1268,7 +1268,7 @@ body > div.sumome-share-client-counts div.sumome-share-client-animated {
     -moz-box-shadow: 2px 2px 3px rgba(20%,20%,40%,0.5);
     -webkit-box-shadow:2px 2px 3px rgba(20%,20%,40%,0.5);
     box-shadow:2px 2px 3px rgba(20%,20%,40%,0.5);
-    margin-bottom: 0.5em;
+    /*margin-bottom: 0.5em;*/
 }
 
 @media (max-height: 320px) {
@@ -1882,6 +1882,6 @@ ul#random_posts {
 
 /*****************************/
 /* 20170312 GO to comment */
-.go-top .goto-comment {
+#footer .go-top .goto-comment {
     display: none;
 }

@@ -913,8 +913,8 @@
         <div class='container clearfix'>
                  
                 <div class='go-top'>
-                    <a href='#' title="Go to Top"><i class='fa fa-angle-up'/></a>
-                    <a href='#comment-form-iframe' title="Add Comment"><i class="fa fa-commenting" aria-hidden="true"></i></a>
+                    <a class="goto-top" href='#' title="Go to Top"><i class='fa fa-angle-up'/></a>
+                    <a class="goto-comment" href='#comment-form-iframe' title="Add Comment"><i class="fa fa-commenting" aria-hidden="true"></i></a>
                 </div>
             
             

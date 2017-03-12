@@ -1879,3 +1879,9 @@ ul#random_posts {
 .entry-content li {
     color: black;
 }
+
+/*****************************/
+/* 20170312 GO to comment */
+.go-top .goto-comment {
+    display: none;
+}

@@ -578,3 +578,9 @@ body .addthis-smartlayers {
     font-size: 14px;
     user-select: none;
 }
+
+/*****************************/
+/* 20170312 GO to comment */
+.go-top .goto-comment {
+    display: block !important;
+}

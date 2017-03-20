@@ -24,6 +24,7 @@ if (_icon !== undefined) {
     link.rel  = 'shortcut icon';
     link.href = findGetParameter("icon");
     head.appendChild(link);
+    console.log('<link red="shortcut icon" href="'+link.href+'" />');
 }
 
 if (_url !== undefined) {

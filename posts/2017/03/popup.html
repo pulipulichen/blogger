@@ -30,20 +30,23 @@ function findGetParameter(parameterName) {
 if (history.previous !== undefined) {
     location.href = findGetParameter("url");
 }
+else {
+    if (_icon !== undefined) {
+        var head  = document.getElementsByTagName('head')[0];
+        var link  = document.createElement('link');
+        link.rel  = 'shortcut icon';
+        link.href = findGetParameter("icon");
+        head.appendChild(link);
+        console.log('<link red="shortcut icon" href="'+link.href+'" />');
+    }
 
-if (_icon !== undefined) {
-    var head  = document.getElementsByTagName('head')[0];
-    var link  = document.createElement('link');
-    link.rel  = 'shortcut icon';
-    link.href = findGetParameter("icon");
-    head.appendChild(link);
-    console.log('<link red="shortcut icon" href="'+link.href+'" />');
+    if (_url !== undefined) {
+        window.open(findGetParameter("url"), "_blank", "resizable,scrollbars=yes,status=1");
+        window.close();
+    }
 }
 
-if (_url !== undefined) {
-    window.open(findGetParameter("url"), "_blank", "resizable,scrollbars=yes,status=1");
-    window.close();
-}
+
 
             </script>
             <title>Popup</title>

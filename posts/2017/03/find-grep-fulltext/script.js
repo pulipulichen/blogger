@@ -32,8 +32,10 @@ var _combine_input = function () {
         
         // find  /var/www/owncloud -name "*.php" -exec grep -H "date(" {} \;
         _result = "find " + _find_path 
-                + " -name " + _find_filename 
-                + " -exec grep -H " + _find_search + " {} \\";
+                + " -name " + _find_filename; 
+        if (_find_search !== '""') {
+            _result = _result + " -exec grep -H " + _find_search + " {} \\";
+        }
         
         // ------------------------------------------
 	// 結束設定

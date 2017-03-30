@@ -34,7 +34,7 @@ var _combine_input = function () {
         _result = "find " + _find_path 
                 + " -name " + _find_filename; 
         if (_find_search !== '""') {
-            _result = _result + " -exec grep -H " + _find_search + " {} \\";
+            _result = _result + " -exec grep -H " + _find_search + " {} \\;";
         }
         
         // ------------------------------------------

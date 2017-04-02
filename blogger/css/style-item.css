@@ -214,6 +214,10 @@ body .addthis-smartlayers {
     
 }
 
+#main .post-iframe {
+    height: 90vh;
+}
+
 #main .entry-meta .creative-commons,
 #main .entry-meta .introduction {
     font-size: 0.8em;

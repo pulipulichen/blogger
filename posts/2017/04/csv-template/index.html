@@ -40,7 +40,7 @@ and open the template in the editor.
 <div class="ui bottom attached active tab segment" data-tab="textarea">
 
 <div class="field">
-    <label for="input_csv">Paste CSV here: </label>
+    <label for="input_csv">CSV: </label>
     <textarea class="input-mode textarea" id="input_csv" onfocus="this.select()"
                style='min-height: 6em;height: 6em;' 
               >id,stopword
@@ -56,23 +56,26 @@ and open the template in the editor.
 10,按照</textarea>
 </div>
     
-<div class="fields">
-    <div class="eight wide inline field">
+<div class="inline fields">
+    <div class="inline field">
+        <label>Delimiter: </label>
+    </div>
+    <div class="inline field">
         <input type="radio" value="auto" name="csv_seperator" id="csv_seperator_auto" checked="checked" />
         <label for="csv_seperator_auto" >Auto</label>
     </div>
-    <div class="eight wide inline field">
+    <div class="inline field">
         <input type="radio" value="comma" name="csv_seperator" id="csv_seperator_comma" />
         <label for="csv_seperator_comma" >Comma</label>
     </div>
-    <div class="eight wide inline field">    
+    <div class="inline field">    
         <input type="radio" value="tab" name="csv_seperator" id="csv_seperator_tab" />
         <label for="csv_seperator_tab" >Tab</label>
     </div>
 </div> <!-- <div class="inline fields"> -->
     
 <div class="field">
-    <label for="input_template">Paste Template here: </label>
+    <label for="input_template">Template: </label>
     <textarea class="input-mode textarea" id="input_template" onfocus="this.select()"
                style='min-height: 6em;height: 6em;' 
               >INSERT INTO stopwords ("id", "stopword") VALUES ([id], '[stopword]');</textarea>

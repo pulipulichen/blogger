@@ -1,0 +1,50 @@
+body {
+  padding: 1em !important; 
+}
+.file-process-framework .loading.hide {
+  display:none;
+}
+
+.file-process-framework label,
+.file-process-framework .download-file {
+  display: block;
+}
+
+.file-process-framework .input-mode label {
+  display: inline;
+}
+
+/*
+.file-process-framework .download-file {
+  font-size: 2em;
+  width: 90%;
+}
+*/
+
+.file-process-framework textarea.preview {
+  display: block;
+  width: 90%;
+  /* height: calc(100vh - 200px); */
+  height: 1em !important;
+}
+
+
+.file-process-framework #preview_html {
+  max-height: calc(100vh - 141px); 
+  overflow-y: auto;
+}
+
+.input-field-container {
+  max-height: calc(100vh - 120px); 
+  overflow-y: auto;
+}
+
+
+table {
+    border-collapse: initial !important;
+    border-spacing: 3px !important;
+}
+
+table td {
+      vertical-align: top;
+}

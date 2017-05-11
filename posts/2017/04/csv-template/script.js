@@ -50,7 +50,7 @@ var _process_file = function(_input, _callback) {
             var _d = _data[_i][_attr];
             
             //console.log(['/\\[' + _attr + '\\]/g', _d]);
-            _t = _t.replace('[' + _attr + ']', _d);
+            _t = _t.split("["+_attr+"]").join(_d);
         }
         
         _result.push(_t);
@@ -66,6 +66,11 @@ var _process_file = function(_input, _callback) {
     }
     //}, 1000);
         
+};
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
 };
 
 var _output_filename_surffix="_output";

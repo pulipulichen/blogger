@@ -2,7 +2,7 @@
 #main .entry-content > article > p:first-of-type > a[href$=".png"]:first-of-type,
 #main .entry-content > article > p:first-of-type > a[href$=".jpg"]:first-of-type,
 #main .entry-content > article > p:first-of-type > a[href$=".gif"]:first-of-type,
-#main .entry-content > article > p:first-of-type > a[href|="href="https://lh3.googleusercontent.com/"]:first-of-type {
+#main .entry-content > article > p:first-of-type > a[href|="https://lh3.googleusercontent.com/"]:first-of-type {
     margin-left: -2em;
     display: block;
     text-align:center;
@@ -12,7 +12,7 @@
     #main .entry-content > article > p:first-of-type > a[href$=".png"]:first-of-type,
     #main .entry-content > article > p:first-of-type > a[href$=".jpg"]:first-of-type,
     #main .entry-content > article > p:first-of-type > a[href$=".gif"]:first-of-type,
-    #main .entry-content > article > p:first-of-type > a[href|="href="https://lh3.googleusercontent.com/"]:first-of-type {
+    #main .entry-content > article > p:first-of-type > a[href|="https://lh3.googleusercontent.com/"]:first-of-type {
         margin-left: -2em;
         margin-right: 2em;
     }

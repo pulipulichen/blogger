@@ -1914,3 +1914,7 @@ iframe#comment-editor {
     width: 100% !important;
     height: 250px;
 }
+
+#footer .go-top {
+    border-left-width: 0;
+}

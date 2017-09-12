@@ -1909,3 +1909,8 @@ ul#random_posts {
         margin-top: -5px;
     }
 }
+
+iframe#comment-editor {
+    width: 100% !important;
+    height: 250px;
+}

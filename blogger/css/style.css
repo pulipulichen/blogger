@@ -251,6 +251,11 @@
 
 }
 
+#menu-primary ul > li > a {
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
 .widget-content.popular-posts dd {
     margin-bottom: 0.5em;
     clear: both;
@@ -1464,7 +1469,7 @@ header > .back-button {
 }
 @media (min-width: 979px) and (max-width: 1200px) {
     #menu-primary > li.home {
-        width: 75px;
+        width: 80px;
     }
     
     #masthead .gsc-control-wrapper-cse {

@@ -798,6 +798,7 @@ body .addthis-smartlayers {
     /*border-width: 0;*/
     background-image: none !important;
     box-shadow: inset 0px 0px 0px 0px red;
+    text-indent: 0 !important;
 }
 
 .navbar .nav {
@@ -1469,7 +1470,7 @@ header > .back-button {
 }
 @media (min-width: 979px) and (max-width: 1200px) {
     #menu-primary > li.home {
-        width: 80px;
+        width: 90px;
     }
     
     #masthead .gsc-control-wrapper-cse {
@@ -1889,4 +1890,22 @@ ul#random_posts {
 /* 20170312 GO to comment */
 #footer .go-top .goto-comment {
     display: none;
+}
+
+/******************************/
+/* 20170912 navbar */
+@media (max-width: 979px) {
+    .navbar .btn-navbar {
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    #header-inner {
+        min-height: 40px;
+    }
+}
+
+@media (min-width: 979px) {
+    #header {
+        margin-top: -5px;
+    }
 }

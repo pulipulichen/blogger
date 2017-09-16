@@ -591,3 +591,12 @@ body .addthis-smartlayers {
     display: block !important;
     margin-top: 0.5em;
 }
+
+/*****************************/
+/* 20170916 修正Google投影片iframe的問題 */
+@media (max-width: 979px) {
+    iframe[src|="https://docs.google.com/presentation/d/e/"] {
+        width: 100%;
+        height: calc(100vw * 0.7);
+    }
+}   /* @media (max-width: 979px) { */

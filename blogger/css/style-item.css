@@ -594,9 +594,16 @@ body .addthis-smartlayers {
 
 /*****************************/
 /* 20170916 修正Google投影片iframe的問題 */
-@media (max-width: 979px) {
-    iframe[src|="https://docs.google.com/presentation/d/e/"] {
+@media (max-width: 1200px) {
+    iframe[src^="https://docs.google.com/presentation/d/e/"] {
+        /* https://docs.google.com/presentation/d/e/2PACX-1vQmg24W4Vqv_NCw2Q2Ke34RVL6uIOKcyJ_DZYjA1Yih05ZWArEctxd3AzteV1tvHQiRyZ-JhADzH3aW/embed?start=false&loop=false&delayms=3000  */
         width: 100%;
         height: calc(100vw * 0.7);
     }
-}   /* @media (max-width: 979px) { */
+}   /* @media (max-widt@media (max-width: 1200px) {
+    iframe[src^="https://docs.google.com/presentation/d/e/"] {
+        /* https://docs.google.com/presentation/d/e/2PACX-1vQmg24W4Vqv_NCw2Q2Ke34RVL6uIOKcyJ_DZYjA1Yih05ZWArEctxd3AzteV1tvHQiRyZ-JhADzH3aW/embed?start=false&loop=false&delayms=3000  */
+        width: 100%;
+        height: calc(100vw * 0.7);
+    }
+}   /* @media (max-width: 979px) { */h: 979px) { */

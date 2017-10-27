@@ -36,6 +36,7 @@
 
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/style-item.css"/>
+    <link rel="stylesheet" type="text/css" href="//pulipulichen.github.io/blogger/blogger/css/gutenberg.min.css"/>
 </b:if>
 
 <?php 

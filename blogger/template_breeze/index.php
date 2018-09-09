@@ -74,7 +74,7 @@
     
 <body>
 
-<script src='https://connect.facebook.net/en_US/all.js#xfbml=1'/>
+<script src='//connect.facebook.net/en_US/all.js#xfbml=1'/>
 
 <div class='firstload-background'></div>
 
@@ -563,7 +563,7 @@
   </div>
 </b:includable>
     <b:includable id='nextprev'>
-        <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
+        <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html" and data:blog.url != "https://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
   <div class='blog-pager' id='blog-pager'>
     <nav>
         <ul class="pager">
@@ -724,7 +724,7 @@
 
 <div class='clear'/>
 
-<b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
+<b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html" and data:blog.url != "https://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
 <div class='entry-meta clearfix'>
 <div class='up_arrow'/>
 
@@ -750,7 +750,7 @@
 </b:if> <?php /* <b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'> */ ?>
 
 <?php /* Related Posts */ ?>   
-<b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
+<b:if cond='data:blog.url != "http://blog.pulipuli.info/2005/12/blogger_113544406852218769.html" and data:blog.url != "https://blog.pulipuli.info/2005/12/blogger_113544406852218769.html"'>
     <div class='related_posts'>
         <script type='text/javascript'>
           var maxresults=10;

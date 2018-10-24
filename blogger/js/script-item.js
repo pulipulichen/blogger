@@ -428,12 +428,16 @@ $(function () {
              let url = aNode.href
              
              if (url.indexOf('://imgur.com/') > 0) {
-               if (url !== 'http://imgur.com/'
-                     || url !== 'https://imgur.com/') {
+               if (url === 'http://imgur.com/'
+                     || url === 'https://imgur.com/') {
                 return
                }
                if (url.indexOf(',') > 0) {
                  url = url.slice(0, url.indexOf(','))
+               }
+               
+               if (url.indexOf('//imgur.com/a/') > 0) {
+                 url = url.split('//imgur.com/a/').join('//imgur.com/')
                }
                
                url = url + '.jpg'
@@ -441,6 +445,24 @@ $(function () {
      
              //console.log(url)
              $(aNode).html('<img src="' + url + '" border="0" class="comment-image" />')
+           })
+           
+           $('#comment-holder .comment-content a[href^="https://www.youtube.com/watch?v="],'
+            + '#comment-holder .comment-content a[href^="http://www.youtube.com/watch?v="],'
+            + '#comment-holder .comment-content a[href^="https://youtu.be/"],'
+            + '#comment-holder .comment-content a[href^="http://youtu.be/"]').each(function(i, aNode) {
+             let url = aNode.href
+             
+             // 取得id
+             if (url.indexOf('//www.youtube.com/watch?v=') > 0) {
+               url = url.slice(url.indexOf('?v=') + 3)
+             }
+             else if (url.indexOf('//youtu.be/') > 0) {
+               url = url.slice(url.indexOf('.be/') + 4)
+             }
+     
+             //console.log(url)
+             $(aNode).before('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + url + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen class="youtube-embed"></iframe>')
            })
            
            // http://imgur.com/GX5p4sk,gcsV3HI,UyWWPGZ#2

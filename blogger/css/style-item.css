@@ -529,6 +529,12 @@ body .addthis-smartlayers {
 /*****************************/
 /* 20181021 留言裡面的圖片 */
 /* https://blog.pulipuli.info/2017/10/k-determin-optimal-number-of-clusters.html */
-#comment-holder .comment-content .comment-image {
+#comment-holder .comment-content img.comment-image {
   display: block;
 }
+
+#comment-holder .comment-content iframe.youtube-embed {
+  max-width: 100%;
+  display: block;
+}
+

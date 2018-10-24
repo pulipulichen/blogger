@@ -437,7 +437,12 @@ $(function () {
                }
                
                if (url.indexOf('//imgur.com/a/') > 0) {
-                 url = url.split('//imgur.com/a/').join('//imgur.com/')
+                 //url = url.split('//imgur.com/a/').join('//imgur.com/')
+                 url = url.slice(url.indexOf('/a/') + 3)
+                 $(aNode).html('<blockquote class="imgur-embed-pub" lang="en" data-id="a/' + url + '">'
+                  + '<a href="//imgur.com/' + url + '"></a>'
+                  + '</blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>')
+                 return
                }
                
                url = url + '.jpg'

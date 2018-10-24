@@ -525,3 +525,9 @@ body .addthis-smartlayers {
         height: calc(100vw * 0.7);
     }
 }   /* @media (max-widt@media (max-width: 1200px) {*/
+
+/*****************************/
+/* 20181021 留言裡面的圖片 */
+#comment-holder .comment-content .comment-image {
+  display: block;
+}

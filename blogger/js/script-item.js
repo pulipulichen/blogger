@@ -420,11 +420,29 @@ $(function () {
                 return replacedText;
            });
            
-           $('#comment-holder .comment-content a[href$=".png"],#comment-holder .comment-content a[href$=".gif"],#comment-holder .comment-content a[href$=".jpg"]').each(function(i, aNode) {
+           $('#comment-holder .comment-content a[href$=".png"],'
+            + '#comment-holder .comment-content a[href$=".gif"],'
+            + '#comment-holder .comment-content a[href$=".jpg"],'
+            + '#comment-holder .comment-content a[href^="http://imgur.com/"]').each(function(i, aNode) {
              let url = aNode.href
-             console.log(url)
+             
+             if (url.indexOf('://imgur.com/') > 0) {
+               if (url !== 'http://imgur.com/'
+                     || url !== 'https://imgur.com/') {
+                return
+               }
+               if (url.indexOf(',') > 0) {
+                 url = url.slice(0, url.indexOf(','))
+               }
+               
+               url = url + '.jpg'
+             }
+     
+             //console.log(url)
              $(aNode).html('<img src="' + url + '" border="0" class="comment-image" />')
            })
+           
+           // http://imgur.com/GX5p4sk,gcsV3HI,UyWWPGZ#2
         }
     };
     _setup_comment_to_link();

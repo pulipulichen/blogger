@@ -402,7 +402,7 @@ $(function () {
             setTimeout(_setup_comment_to_link, 1000);
         }
         else {
-            $("#comment-holder .comment-content").html(function(i, inputText) {
+            $('#comment-holder .comment-content').html(function(i, inputText) {
                 var replacedText, replacePattern1, replacePattern2, replacePattern3;
 
                 //URLs starting with http://, https://, or ftp://
@@ -419,6 +419,11 @@ $(function () {
 
                 return replacedText;
            });
+           
+           $('#comment-holder .comment-content a[href~=".png"],#comment-holder .comment-content a[href~=".gif"],#comment-holder .comment-content a[href~=".jpg"]').each(function(i, aNode) {
+             let url = aNode.href
+             $(aNode).html('<img src="' + url + '" border="0" />')
+           })
         }
     };
     _setup_comment_to_link();

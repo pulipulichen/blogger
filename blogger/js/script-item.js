@@ -422,7 +422,7 @@ $(function () {
            
            $('#comment-holder .comment-content a[href~=".png"],#comment-holder .comment-content a[href~=".gif"],#comment-holder .comment-content a[href~=".jpg"]').each(function(i, aNode) {
              let url = aNode.href
-             $(aNode).html('<img src="' + url + '" border="0" />')
+             $(aNode).html('<img src="' + url + '" border="0" class="comment-image" />')
            })
         }
     };

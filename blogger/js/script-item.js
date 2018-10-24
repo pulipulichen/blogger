@@ -423,7 +423,8 @@ $(function () {
            $('#comment-holder .comment-content a[href$=".png"],'
             + '#comment-holder .comment-content a[href$=".gif"],'
             + '#comment-holder .comment-content a[href$=".jpg"],'
-            + '#comment-holder .comment-content a[href^="http://imgur.com/"]').each(function(i, aNode) {
+            + '#comment-holder .comment-content a[href^="http://imgur.com/"],'
+            + '#comment-holder .comment-content a[href^="https://imgur.com/"]').each(function(i, aNode) {
              let url = aNode.href
              
              if (url.indexOf('://imgur.com/') > 0) {

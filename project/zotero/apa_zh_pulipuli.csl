@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" 
+  class="in-text" version="1.0" 
+  demote-non-dropping-particle="never"
+  initialize-with-hyphen="false">
   <!-- This style was edited with the Visual CSL Editor (http://steveridout.com/csl/visualEditor/) -->
+  <!-- 
+  Reference
+  CSL 1.0.1 Specification:  http://docs.citationstyles.org/en/stable/specification.html#appendix-iv-variables
+  -->
   <info>
     <title>Chinese American Psychological Association 6th edition</title>
     <title-short>APA Pulipuli</title-short>
@@ -399,7 +406,12 @@
   
   <locale xml:lang="zh-tw">
     <terms>
-      <term name="et-al">等人</term>
+      <term name="et-al">等</term>
+    </terms>
+  </locale>
+  <locale xml:lang="zh-cn">
+    <terms>
+      <term name="et-al">等</term>
     </terms>
   </locale>
   
@@ -488,21 +500,29 @@
   
   <macro name="author">
     <names variable="author">
-      <name name-as-sort-order="all" and="symbol" sort-separator=", " initialize-with=". " delimiter=", " delimiter-precedes-last="always"/>
-      <label form="short" prefix=" (" suffix=")" text-case="capitalize-first"/>
-      <substitute>
-        <names variable="editor"/>
-        <names variable="translator"/>
-        <choose>
-          <if type="report">
-            <text variable="publisher"/>
-            <text macro="title"/>
-          </if>
-          <else>
-            <text macro="title"/>
-          </else>
-        </choose>
-      </substitute>
+    <name name-as-sort-order="all" 
+    et-al="text"
+    and="symbol" 
+    sort-separator=", " 
+    initialize-with=". "
+    et-al-use-last="false"    
+    delimiter=", " 
+    et-al-min="6"
+    delimiter-precedes-last="always" />
+    <label form="short" prefix=" (" suffix=")" text-case="capitalize-first"/>
+    <substitute>
+    <names variable="editor"/>
+    <names variable="translator"/>
+    <choose>
+      <if type="report">
+      <text variable="publisher"/>
+      <text macro="title"/>
+      </if>
+      <else>
+      <text macro="title"/>
+      </else>
+    </choose>
+    </substitute>
     </names>
   </macro>
   
@@ -511,9 +531,15 @@
     <option name="et-al-min" value="6"/>
     <option name="et-al-use-first" value="6"/>
     -->
-    <names variable="author" >
-      <name name-as-sort-order="all" sort-separator=", " 
-        initialize-with="." delimiter="、" delimiter-precedes-last="never"/>
+    <names variable="author">
+    <name name-as-sort-order="all" 
+    et-al="text"
+    sort-separator=", " 
+    initialize-with="."
+    et-al-use-last="false"
+    delimiter="、" 
+    delimiter-precedes-last="always" />
+    
       <substitute>
         <names variable="editor" >
           <name delimiter="、" suffix="編" />
@@ -631,11 +657,14 @@
       </else>
     </choose>
 
+  <!-- 20181207 不使用(SSCI) -->
+  <!--
     <choose>
       <if type="book chapter" match="none">
         <text variable="note" prefix=" (" suffix=")"/>
       </if>
     </choose>
+  -->
   </macro>
   
   <macro name="access-zh">
@@ -706,13 +735,14 @@
         </choose>
       </else>
     </choose>
-    <text variable="ISBN" prefix="（ISBN：" suffix="）"/>
+    <!-- <text variable="ISBN" prefix="（ISBN：" suffix="）"/> -->
     <choose>
       <if type="book chapter" match="none">
         <text variable="note" prefix="（" suffix="）"/>
       </if>
     </choose>
     
+     
   </macro>
 
   
@@ -794,12 +824,37 @@
     <text macro="container-contributors-zh"/>
     <text macro="secondary-contributors-zh"/>          
     <text macro="locators-books-zh" />
+  <choose>
+      <if type="code" match="any">
+    <text value="。"/>
+    </if>
+    </choose>
+    
   </macro>
 
   <!---->
 
   <macro name="title-zh-italic">
     <text variable="title" font-style="italic"/>
+  <choose>
+    <if type="book graphic motion_picture report song chapter paper-conference" match="any">
+        <group prefix="（" suffix="）" delimiter="、">
+          <text macro="edition-zh"/>
+          <group>
+            <text term="volume" form="short" plural="true" text-case="capitalize-first" suffix=" "/>
+            <number variable="number-of-volumes" form="numeric" prefix="1-"/>
+          </group>
+          <group>
+            <text term="volume" form="short" text-case="capitalize-first" suffix=" "/>
+            <number variable="volume" form="numeric"/>
+          </group>
+          <group>
+            <label variable="page" form="short" suffix=" "/>
+            <text variable="page"/>
+          </group>
+        </group>
+    </if>
+  </choose>
   </macro>
 
     
@@ -1176,6 +1231,17 @@
           <text variable="page" prefix="第 " suffix=" 版" />
          </group>
       </if>
+      <else-if type="legal_case">
+        <group prefix="（" suffix="）" delimiter=" ">
+          <text variable="authority"/>
+          <date variable="issued" form="text"/>
+        </group>
+      </else-if>
+      <else-if type="bill legislation" match="any">
+        <date variable="issued" prefix="（" suffix="）">
+          <date-part name="year"/>
+        </date>
+      </else-if>
     </choose>
   
   
@@ -1287,12 +1353,12 @@
                 <text variable="collection-title"/>
               </group>
             </if>
-            <if type="paper-conference" match="any">
+            <else-if type="paper-conference" match="any">
               <text macro="chinese-container-title" font-style="italic"/>
-            </if>
+            </else-if>
+      
           </choose>
-            
-            <text macro="locators-zh"/>
+      <text macro="locators-zh"/>
           </group>
         <text macro="publisher-zh"/>
       </group>
@@ -1308,9 +1374,9 @@
 
   <macro name="chinese-sort">
     <choose>
-      <else-if locale="en-us en English english Anglais" match="any">
+      <if locale="en-us en English english Anglais" match="any">
         <text value="2"/>
-      </else-if>
+      </if>
       <else-if locale="zh-tw zh-cn Chinese chi chinese zh-Hant zh_TW 中文 繁體中文 簡體中文" match="any">
         <text value="1"/>
       </else-if>
@@ -1319,6 +1385,25 @@
       </else-if>
       <else>
         <text value="2"/>
+      </else>
+    </choose>
+
+    <!-- <text value=" | "/> -->
+  </macro>
+  
+  <macro name="author-sort">
+    <choose>
+      <if locale="en-us en English english Anglais" match="any">
+        <text marco="author"/>
+      </if>
+      <else-if locale="zh-tw zh-cn Chinese chi chinese zh-Hant zh_TW 中文 繁體中文 簡體中文" match="any">
+        <text marco="author-zh"/>
+      </else-if>
+      <else-if variable="language" match="none">
+        <text marco="author"/>
+      </else-if>
+      <else>
+        <text marco="author"/>
       </else>
     </choose>
 
@@ -1398,7 +1483,17 @@
                 line-spacing="1.5">
     <sort>
       <key macro="chinese-sort" sort="ascending"/>
+    <key macro="author" sort="ascending"/>
+    <!-- <key macro="author-sort" sort="ascending"/> -->
       <!-- <key variable="language" sort="descending"/> -->
+      
+      <key macro="issued-sort" sort="ascending"/>
+      <key macro="title"/>
+    </sort>
+  
+  <sort>
+    <key macro="chinese-sort" sort="ascending"/>
+    <key macro="author" sort="ascending"/>
       <key macro="author"/>
       <key macro="issued-sort" sort="ascending"/>
       <key macro="title"/>

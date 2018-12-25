@@ -89,6 +89,11 @@
         clear: none;
     }
     
+    #sidebar > div.widget.random {
+        margin-right: 0;
+        clear: none;
+    }
+    
     #sidebar > div.widget:nth-of-type(1), 
     #sidebar > div.widget:nth-of-type(4) {
         clear: both;

@@ -201,6 +201,10 @@
     margin: 0 1em;
 }
 
+.fb-fan-page .widget-content {
+  text-align: center;
+}
+
 .about-me .email-subscribe td:first-of-type {
     text-align: left;
     padding-top: 0.7em;

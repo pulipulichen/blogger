@@ -56,6 +56,11 @@
         margin-right: 0;
     }
     
+    #sidebar > div.widget.random {
+        margin-right: 0 !important;
+        clear: none;
+    }
+    
     #sidebar > .comments,
     #sidebar > .guestbook,
     #sidebar > .new {
@@ -90,7 +95,7 @@
     }
     
     #sidebar > div.widget.random {
-        margin-right: 0;
+        margin-right: 0 !important;
         clear: none;
     }
     

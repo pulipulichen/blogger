@@ -40,7 +40,7 @@
     <category citation-format="author-date"/>
     <category field="psychology"/>
     <category field="generic-base"/>
-    <updated>2016-11-17T18:17:09+00:00</updated>
+    <updated>2018-12-17T18:17:09+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   
@@ -736,12 +736,13 @@
       </else>
     </choose>
     <!-- <text variable="ISBN" prefix="（ISBN：" suffix="）"/> -->
+  <!-- 
     <choose>
       <if type="book chapter" match="none">
         <text variable="note" prefix="（" suffix="）"/>
       </if>
     </choose>
-    
+     -->
      
   </macro>
 
@@ -1483,22 +1484,14 @@
                 line-spacing="1.5">
     <sort>
       <key macro="chinese-sort" sort="ascending"/>
-    <key macro="author" sort="ascending"/>
-    <!-- <key macro="author-sort" sort="ascending"/> -->
+	  <key macro="author" sort="ascending"/>
+      <!-- <key macro="author-sort" sort="ascending"/> -->
       <!-- <key variable="language" sort="descending"/> -->
       
       <key macro="issued-sort" sort="ascending"/>
       <key macro="title"/>
     </sort>
   
-  <sort>
-    <key macro="chinese-sort" sort="ascending"/>
-    <key macro="author" sort="ascending"/>
-      <key macro="author"/>
-      <key macro="issued-sort" sort="ascending"/>
-      <key macro="title"/>
-    </sort>
-    
     <!-- 中文的格式 -->
     <layout locale="zh-tw">
       <text macro="chinese-bibliography"/>

@@ -2,7 +2,8 @@
 #main .entry-content > article > p:first-of-type > a[href$=".png"]:first-of-type,
 #main .entry-content > article > p:first-of-type > a[href$=".jpg"]:first-of-type,
 #main .entry-content > article > p:first-of-type > a[href$=".gif"]:first-of-type,
-#main .entry-content > article > p:first-of-type > a[href|="https://lh3.googleusercontent.com/"]:first-of-type {
+#main .entry-content > article > p:first-of-type > a[href|="https://lh3.googleusercontent.com/"]:first-of-type
+#main .entry-content > article > p:first-of-type > a[href$="-no"]:first-of-type, {
     margin-left: -2em;
     display: block;
     text-align:center;
@@ -12,7 +13,8 @@
     #main .entry-content > article > p:first-of-type > a[href$=".png"]:first-of-type,
     #main .entry-content > article > p:first-of-type > a[href$=".jpg"]:first-of-type,
     #main .entry-content > article > p:first-of-type > a[href$=".gif"]:first-of-type,
-    #main .entry-content > article > p:first-of-type > a[href|="https://lh3.googleusercontent.com/"]:first-of-type {
+    #main .entry-content > article > p:first-of-type > a[href|="https://lh3.googleusercontent.com/"]:first-of-type
+    #main .entry-content > article > p:first-of-type > a[href$="-no"]:first-of-type {
         margin-left: -2em;
         margin-right: 2em;
     }
@@ -243,7 +245,8 @@ body .addthis-smartlayers {
     
     #main .entry-content > article > p > a[href$=".png"]:first-of-type,
     #main .entry-content > article > p > a[href$=".jpg"]:first-of-type,
-    #main .entry-content > article > p > a[href$=".gif"]:first-of-type{
+    #main .entry-content > article > p > a[href$=".gif"]:first-of-type,
+    #main .entry-content > article > p > a[href$="-no"]:first-of-type{
         margin-left: -2em;
         /*width: 100%;
         height: auto;*/
@@ -254,7 +257,8 @@ body .addthis-smartlayers {
     
     #main .entry-content a[href$=".png"]:first-of-type img,
     #main .entry-content a[href$=".jpg"]:first-of-type img,
-    #main .entry-content a[href$=".gif"]:first-of-type img{
+    #main .entry-content a[href$=".gif"]:first-of-type img,
+    #main .entry-content a[href$="-no"]:first-of-type img{
         width: 80%;
         height: auto;
         /*max-height: 500px;*/
@@ -392,14 +396,16 @@ body .addthis-smartlayers {
     
     #main .entry-content a[href$=".png"]:first-of-type img,
     #main .entry-content a[href$=".jpg"]:first-of-type img,
-    #main .entry-content a[href$=".gif"]:first-of-type img{
+    #main .entry-content a[href$=".gif"]:first-of-type img,
+    #main .entry-content a[href$="-no"]:first-of-type img{
         width: 100%;
         /*max-height: 500px;*/
     }
     
     #main .entry-content > article > p > a[href$=".png"]:first-of-type,
     #main .entry-content > article > p > a[href$=".jpg"]:first-of-type,
-    #main .entry-content > article > p > a[href$=".gif"]:first-of-type{
+    #main .entry-content > article > p > a[href$=".gif"]:first-of-type,
+    #main .entry-content > article > p > a[href$="-no"]:first-of-type{
         margin-left: 0em;
         text-indent: -0.5em;
     }
@@ -549,3 +555,15 @@ body .addthis-smartlayers {
   display: block;
 }
 
+#main .entry-content a[href$="-no"] img {
+    box-shadow: 4px 4px 2px grey;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+#main .entry-content p:first-of-type a[href$="-no"] img:first-of-type {
+    box-shadow: 0px 0px 0px grey;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: -1rem;
+}

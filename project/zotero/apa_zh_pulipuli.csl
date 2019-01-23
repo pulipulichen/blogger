@@ -1343,32 +1343,37 @@
     <!-- <text macro="chinese-sort" /> -->
 
     <text macro="author-zh" suffix=""/>
-      <text macro="issued-zh" suffix=""/>
-      <group delimiter="。">
-          <text macro="title-zh"/>
-          <group delimiter="，">
-          <choose>
-            <if type="book chapter" match="none">
-              <text macro="chinese-container-title" font-style="italic"/>
-              <group>
-                <text variable="collection-title"/>
-              </group>
+    <text macro="issued-zh" suffix=""/>
+    <group delimiter="。">
+        <text macro="title-zh"/>
+        <group delimiter="，">
+        <choose>
+			<if type="book chapter" match="none">
+				<text macro="chinese-container-title"/>
+				<group>
+					<text variable="collection-title"/>
+				</group>
             </if>
             <else-if type="paper-conference" match="any">
-              <text macro="chinese-container-title" font-style="italic"/>
+				<text macro="chinese-container-title"/>
             </else-if>
-      
           </choose>
-      <text macro="locators-zh"/>
+		  
+		  <text macro="locators-zh"/>
           </group>
         <text macro="publisher-zh"/>
-      </group>
-      <text macro="access-zh"/>
-
+    </group>
+    <text macro="access-zh"/>  
   </macro>
 
   <macro name="chinese-container-title">
-      <text variable="container-title" font-style="italic" />
+		<text variable="container-title" font-style="italic" />
+		<choose>
+			<if type="paper-conference" match="any">
+				<text variable="page" prefix="（頁" suffix="）"/>
+			</if>
+		</choose>
+	  
   </macro>
 
   <!---->

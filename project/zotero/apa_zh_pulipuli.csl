@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" 
   class="in-text" version="1.0" 
+  default-locale-sort="zh-Hant"
+  default-locale="zh-Hant"
   demote-non-dropping-particle="never"
   initialize-with-hyphen="false">
   <!-- This style was edited with the Visual CSL Editor (http://steveridout.com/csl/visualEditor/) -->
@@ -1348,18 +1350,18 @@
         <text macro="title-zh"/>
         <group delimiter="，">
         <choose>
-			<if type="book chapter" match="none">
-				<text macro="chinese-container-title"/>
-				<group>
-					<text variable="collection-title"/>
-				</group>
+      <if type="book chapter" match="none">
+        <text macro="chinese-container-title"/>
+        <group>
+          <text variable="collection-title"/>
+        </group>
             </if>
             <else-if type="paper-conference" match="any">
-				<text macro="chinese-container-title"/>
+        <text macro="chinese-container-title"/>
             </else-if>
           </choose>
-		  
-		  <text macro="locators-zh"/>
+      
+      <text macro="locators-zh"/>
           </group>
         <text macro="publisher-zh"/>
     </group>
@@ -1367,13 +1369,13 @@
   </macro>
 
   <macro name="chinese-container-title">
-		<text variable="container-title" font-style="italic" />
-		<choose>
-			<if type="paper-conference" match="any">
-				<text variable="page" prefix="（頁" suffix="）"/>
-			</if>
-		</choose>
-	  
+    <text variable="container-title" font-style="italic" />
+    <choose>
+      <if type="paper-conference" match="any">
+        <text variable="page" prefix="（頁" suffix="）"/>
+      </if>
+    </choose>
+    
   </macro>
 
   <!---->
@@ -1489,7 +1491,7 @@
                 line-spacing="1.5">
     <sort>
       <key macro="chinese-sort" sort="ascending"/>
-	  <key macro="author" sort="ascending"/>
+    <key macro="author" sort="ascending"/>
       <!-- <key macro="author-sort" sort="ascending"/> -->
       <!-- <key variable="language" sort="descending"/> -->
       

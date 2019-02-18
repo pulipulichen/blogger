@@ -2,7 +2,7 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" 
   class="in-text" version="1.0" 
   default-locale-sort="zh-Hant"
-  default-locale="zh-Hant"
+  default-locale="en-US"
   demote-non-dropping-particle="never"
   initialize-with-hyphen="false">
   <!-- This style was edited with the Visual CSL Editor (http://steveridout.com/csl/visualEditor/) -->
@@ -412,6 +412,11 @@
     </terms>
   </locale>
   <locale xml:lang="zh-cn">
+    <terms>
+      <term name="et-al">等</term>
+    </terms>
+  </locale>
+  <locale xml:lang="zh-Hant">
     <terms>
       <term name="et-al">等</term>
     </terms>

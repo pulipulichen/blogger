@@ -1112,6 +1112,7 @@
   </macro>
   
   <macro name="issued-year-zh">
+	<!--
     <choose>
       <if variable="issued">
         <date variable="issued">
@@ -1120,6 +1121,58 @@
       </if>
       <else>
         <text value="無年代"/>
+      </else>
+    </choose>
+	-->
+	
+	<choose>
+      <if variable="issued">
+        <group delimiter="/">
+          <choose>
+            <if is-uncertain-date="original-date">
+              <group prefix="[" suffix="]" delimiter=" ">
+                <text term="circa" form="short"/>
+                <date variable="original-date">
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </if>
+            <else>
+              <date variable="original-date">
+                <date-part name="year"/>
+              </date>
+            </else>
+          </choose>
+          <choose>
+            <if is-uncertain-date="issued">
+              <group prefix="[" suffix="]" delimiter=" ">
+                <text term="circa" form="short"/>
+                <group>
+                  <date variable="issued">
+                    <date-part name="year"/>
+                  </date>
+                  <text variable="year-suffix"/>
+                </group>
+              </group>
+            </if>
+            <else>
+              <group>
+                <date variable="issued">
+                  <date-part name="year"/>
+                </date>
+                <text variable="year-suffix"/>
+              </group>
+            </else>
+          </choose>
+        </group>
+      </if>
+      <else-if variable="status">
+        <text variable="status" text-case="lowercase"/>
+        <text variable="year-suffix" prefix="-"/>
+      </else-if>
+      <else>
+        <text value="無年代"/>
+        <text variable="year-suffix" prefix="-"/>
       </else>
     </choose>
   </macro>

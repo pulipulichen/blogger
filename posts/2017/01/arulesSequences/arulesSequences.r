@@ -27,9 +27,36 @@ if(require("arulesSequences")){
     }
 }
 
-library(Matrix)
-library(arules)
+if(require("Matrix")){
+  print("Matrix is loaded correctly")
+} else {
+  print("trying to install Matrix")
+  install.packages("Matrix")
+  if(require(Matrix)){
+    print("Matrix installed and loaded")
+  } else {
+    stop("could not install Matrix")
+  }
+}
+
+
+if(require("stringr")){
+  print("stringr is loaded correctly")
+} else {
+  print("trying to install stringr")
+  install.packages("stringr")
+  if(require(stringr)){
+    print("stringr installed and loaded")
+  } else {
+    stop("could not install stringr")
+  }
+}
+
+
 library(arulesSequences)
+library(arules)
+
+library(Matrix)
 library(stringr)
 
 # --------------------------

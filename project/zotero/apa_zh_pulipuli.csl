@@ -444,13 +444,13 @@
           <choose>
             <if type="paper-conference">
               <names variable="editor" suffix="編">
-                <name initialize-with="。" delimiter="、" />
+                <name initialize-with=". " delimiter="、" />
               </names>
             </if>
             <if type="chapter">
               <group delimiter="，">
                   <names variable="editor" suffix="編">
-                    <name initialize-with="。" delimiter="、" />
+                    <name initialize-with=". " delimiter="、" />
                   </names>
                   <text macro="chinese-container-title" font-style="italic"/>
               </group>
@@ -464,10 +464,10 @@
           
           <!--
           <names variable="editor" suffix="編">
-            <name initialize-with="。" delimiter="、" />
+            <name initialize-with=". " delimiter="、" />
           </names>
           <names variable="translator" suffix="譯">
-            <name initialize-with="。" delimiter="、" />
+            <name initialize-with=". " delimiter="、" />
           </names>
           -->
         </group>
@@ -493,12 +493,12 @@
     <choose>
       <if type="chapter" match="none">
           <names variable="editor" suffix="編">
-            <name initialize-with="。" delimiter="、" />
+            <name initialize-with=". " delimiter="、" />
           </names>
       </if>
     </choose>
       <names variable="translator" suffix="譯">
-        <name initialize-with="。" delimiter="、" />
+        <name initialize-with=". " delimiter="、" />
       </names>
     </group>
   </macro>
@@ -595,7 +595,7 @@
     <names variable="author">
       <!-- TODO: 不知道該如何縮寫 -->
       <name form="short" delimiter="、" include-period="true" 
-        initialize-with="。" delimiter-precedes-last="never"/>
+        initialize-with=". " delimiter-precedes-last="never"/>
       <substitute>
         <names form="short" variable="editor"/>
         <names form="short" variable="translator"/>

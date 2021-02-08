@@ -1393,7 +1393,7 @@
   <!---->
   
   <macro name="container">
-    <group>
+    <group delimiter=" ">
       <choose>
         <if type="chapter paper-conference entry-encyclopedia" match="any">
           <text term="in" text-case="capitalize-first" suffix=" "/>
@@ -1496,7 +1496,7 @@
       <if locale="en-us en English english Anglais" match="any">
         <text value="2"/>
       </if>
-      <else-if locale="zh-tw zh-cn Chinese chi chinese zh-Hant zh_TW 中文 繁體中文 簡體中文" match="any">
+      <else-if locale="zh-tw zh-cn Chinese chi chinese zh-Hant zh_TW jp 中文 繁體中文 簡體中文" match="any">
         <text value="1"/>
       </else-if>
       <else-if variable="language" match="none">
@@ -1580,6 +1580,13 @@
           <text macro="citation-locator-zh"/>
         </group>
     </layout>
+	<layout locale="jp" prefix="（" suffix="）" delimiter="；">
+        <group delimiter="，">
+          <text macro="author-short-zh"/>
+          <text macro="issued-year-zh"/>
+          <text macro="citation-locator-zh"/>
+        </group>
+    </layout>
 
     <!---->
 
@@ -1624,6 +1631,9 @@
       <text macro="chinese-bibliography"/>
     </layout>
     <layout locale="chi">
+      <text macro="chinese-bibliography"/>
+    </layout>
+	<layout locale="jp">
       <text macro="chinese-bibliography"/>
     </layout>
 

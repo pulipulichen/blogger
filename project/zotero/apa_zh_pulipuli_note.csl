@@ -830,10 +830,14 @@
   <macro name="container-title">
     <choose>
       <if type="article article-journal article-magazine article-newspaper" match="any">
-        <text variable="container-title" font-style="italic" text-case="title"/>
+        <group font-style="italic">
+          <text variable="container-title" text-case="title"/>
+	</group>
       </if>
       <else-if type="bill legal_case legislation" match="none">
-        <text variable="container-title" font-style="italic"/>
+	<group font-style="italic">
+          <text variable="container-title" font-style="italic"/>
+	</group>
       </else-if>
       <else>
         <group delimiter=" " prefix=", ">
@@ -882,14 +886,18 @@
           <group font-style="italic">
             <choose>
               <if type="book chapter" match="none">
-                <text variable="container-title" font-style="italic"/>
+		<group font-style="italic">
+                   <text variable="container-title" />
+		</group>
                 <group>
                   <text variable="collection-number" suffix="，" font-style="italic"/>
                   <text variable="collection-title" font-style="italic"/>
                 </group>
               </if>
               <if type="paper-conference" match="any">
-                <text variable="container-title" font-style="italic"/>
+		<group font-style="italic">
+                  <text variable="container-title" />
+	        </group>
               </if>
             </choose>
             

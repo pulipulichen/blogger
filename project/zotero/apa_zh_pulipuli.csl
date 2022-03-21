@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" 
-  class="in-text" version="1.0" 
+<style xmlns="http://purl.org/net/xbiblio/csl"
+  class="in-text" version="1.0"
   default-locale-sort="zh-Hant"
   default-locale="en-US"
   demote-non-dropping-particle="never"
   initialize-with-hyphen="false">
   <!-- This style was edited with the Visual CSL Editor (http://steveridout.com/csl/visualEditor/) -->
-  <!-- 
+  <!--
   Reference
   CSL 1.0.1 Specification:  http://docs.citationstyles.org/en/stable/specification.html#appendix-iv-variables
   -->
@@ -45,7 +45,7 @@
     <updated>2018-12-17T18:17:09+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-  
+
   <!-- 語系設定 -->
   <locale xml:lang="en">
     <terms>
@@ -403,9 +403,9 @@
     <term name="season-03">Autumn</term>
     <term name="season-04">Winter</term>
   </terms>  </locale>
-  
+
   <!-- 中文 -->
-  
+
   <locale xml:lang="zh-tw">
     <terms>
       <term name="et-al">等</term>
@@ -421,11 +421,11 @@
       <term name="et-al">等</term>
     </terms>
   </locale>
-  
+
   <!-- /語系設定 -->
-  
+
   <!---->
-  
+
   <macro name="container-contributors">
     <choose>
       <if type="chapter paper-conference" match="any">
@@ -436,7 +436,7 @@
       </if>
     </choose>
   </macro>
-  
+
   <macro name="container-contributors-zh">
     <choose>
       <if type="chapter" match="any">
@@ -458,10 +458,12 @@
             </if>
             <else>
               <!--<text variable="container-title" font-style="italic" />-->
-              <text macro="chinese-container-title" font-style="italic"/>
+              <group font-style="italic">
+                <text macro="chinese-container-title" font-style="italic"/>
+              </group>
             </else>
           </choose>
-          
+
           <!--
           <names variable="editor" suffix="編">
             <name initialize-with=". " delimiter="、" />
@@ -474,8 +476,8 @@
       </if>
     </choose>
   </macro>
-  
-  <!---->  
+
+  <!---->
   <macro name="secondary-contributors">
     <choose>
       <if type="article-journal chapter paper-conference" match="none">
@@ -487,7 +489,7 @@
     </choose>
 
   </macro>
-  
+
   <macro name="secondary-contributors-zh">
     <group prefix="（" suffix="）" delimiter="，">
     <choose>
@@ -502,18 +504,18 @@
       </names>
     </group>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="author">
     <names variable="author">
-    <name name-as-sort-order="all" 
+    <name name-as-sort-order="all"
     et-al="text"
-    and="symbol" 
-    sort-separator=", " 
+    and="symbol"
+    sort-separator=", "
     initialize-with=". "
-    et-al-use-last="false"    
-    delimiter=", " 
+    et-al-use-last="false"
+    delimiter=", "
     et-al-min="6"
     delimiter-precedes-last="always" />
     <label form="short" prefix=" (" suffix=")" text-case="capitalize-first"/>
@@ -532,21 +534,21 @@
     </substitute>
     </names>
   </macro>
-  
+
   <macro name="author-zh">
     <!--
     <option name="et-al-min" value="6"/>
     <option name="et-al-use-first" value="6"/>
     -->
     <names variable="author">
-    <name name-as-sort-order="all" 
+    <name name-as-sort-order="all"
     et-al="text"
-    sort-separator=", " 
+    sort-separator=", "
     initialize-with="."
     et-al-use-last="false"
-    delimiter="、" 
+    delimiter="、"
     delimiter-precedes-last="always" />
-    
+
       <substitute>
         <names variable="editor" >
           <name delimiter="、" suffix="編" />
@@ -558,9 +560,9 @@
       </substitute>
     </names>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="author-short">
     <names variable="author">
       <name form="short" and="symbol" delimiter=", " initialize-with=". "/>
@@ -582,7 +584,7 @@
       </substitute>
     </names>
   </macro>
-  
+
   <macro name="author-short-zh">
     <!-- 判斷首次引用的寫法 -->
     <!--
@@ -594,7 +596,7 @@
     -->
     <names variable="author">
       <!-- TODO: 不知道該如何縮寫 -->
-      <name form="short" delimiter="、" include-period="true" 
+      <name form="short" delimiter="、" include-period="true"
         initialize-with=". " delimiter-precedes-last="never"/>
       <substitute>
         <names form="short" variable="editor"/>
@@ -610,9 +612,9 @@
       </substitute>
     </names>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="access">
     <choose>
       <if type="thesis">
@@ -673,7 +675,7 @@
     </choose>
   -->
   </macro>
-  
+
   <macro name="access-zh">
     <choose>
       <if variable="DOI">
@@ -721,7 +723,7 @@
           </choose>
         </group>
       </else-if>
-      
+
       <else>
         <choose>
           <if variable="archive">
@@ -743,19 +745,19 @@
       </else>
     </choose>
     <!-- <text variable="ISBN" prefix="（ISBN：" suffix="）"/> -->
-  <!-- 
+  <!--
     <choose>
       <if type="book chapter" match="none">
         <text variable="note" prefix="（" suffix="）"/>
       </if>
     </choose>
      -->
-     
+
   </macro>
 
-  
+
   <!---->
-  
+
   <macro name="title">
     <choose>
       <if type="report thesis" match="any">
@@ -787,7 +789,7 @@
       </else>
     </choose>
   </macro>
-  
+
   <macro name="title-zh">
     <choose>
       <if type="thesis" match="any">
@@ -830,14 +832,14 @@
       </else>
     </choose>
     <text macro="container-contributors-zh"/>
-    <text macro="secondary-contributors-zh"/>          
+    <text macro="secondary-contributors-zh"/>
     <text macro="locators-books-zh" />
   <choose>
       <if type="code" match="any">
     <text value="。"/>
     </if>
     </choose>
-    
+
   </macro>
 
   <!---->
@@ -865,10 +867,10 @@
   </choose>
   </macro>
 
-    
-  
+
+
   <!---->
-  
+
   <macro name="publisher">
     <choose>
       <if type="report" match="any">
@@ -902,13 +904,13 @@
       </else>
     </choose>
   </macro>
-  
+
   <macro name="publisher-zh">
 
   </macro>
 
   <!---->
-  
+
   <macro name="event">
     <choose>
       <if variable="container-title" match="none">
@@ -932,7 +934,7 @@
       </if>
     </choose>
   </macro>
-  
+
   <macro name="event-zh">
     <choose>
       <if variable="container-title" match="none">
@@ -956,9 +958,9 @@
       </if>
     </choose>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="issued">
     <choose>
       <if type="bill legal_case legislation" match="none">
@@ -989,7 +991,7 @@
       </if>
     </choose>
   </macro>
-  
+
   <macro name="issued-zh">
     <choose>
       <if variable="issued">
@@ -1023,9 +1025,9 @@
       </else>
     </choose>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="issued-sort">
     <choose>
       <if type="article-journal bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="none">
@@ -1042,7 +1044,7 @@
       </else>
     </choose>
   </macro>
-  
+
   <macro name="issued-sort-zh">
     <choose>
       <if type="article-journal bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="none">
@@ -1059,9 +1061,9 @@
       </else>
     </choose>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="issued-year">
 	<!--
     <choose>
@@ -1077,7 +1079,7 @@
       </else>
     </choose>
 	-->
-	
+
 	<choose>
       <if variable="issued">
         <group delimiter="/">
@@ -1129,7 +1131,7 @@
       </else>
     </choose>
   </macro>
-  
+
   <macro name="issued-year-zh">
 	<!--
     <choose>
@@ -1143,7 +1145,7 @@
       </else>
     </choose>
 	-->
-	
+
 	<choose>
       <if variable="issued">
         <group delimiter="/">
@@ -1195,9 +1197,9 @@
       </else>
     </choose>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="edition">
     <choose>
       <if is-numeric="edition">
@@ -1211,7 +1213,7 @@
       </else>
     </choose>
   </macro>
-  
+
   <macro name="edition-zh">
     <choose>
       <if type="book chapter" match="any">
@@ -1233,9 +1235,9 @@
       </if>
     </choose>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="locators">
     <choose>
       <if type="article-journal article-magazine" match="any">
@@ -1283,7 +1285,7 @@
       </else-if>
     </choose>
   </macro>
-  
+
   <macro name="locators-zh">
     <choose>
       <if type="article-journal article-magazine" match="any">
@@ -1323,12 +1325,12 @@
         </date>
       </else-if>
     </choose>
-  
-  
+
+
   </macro>
 
   <!---->
-  
+
   <macro name="citation-locator">
     <group>
       <choose>
@@ -1342,10 +1344,10 @@
       <text variable="locator" prefix=" "/>
     </group>
   </macro>
-  
+
   <macro name="citation-locator-zh">
     <group>
-      <!-- 
+      <!--
       <label variable="locator" include-period="true" form="short"/>
       <text variable="locator" prefix=" "/>
       -->
@@ -1354,10 +1356,10 @@
   </macro>
 
 
-  
+
 
   <!---->
-  
+
   <macro name="container">
     <group delimiter=" ">
       <choose>
@@ -1370,23 +1372,29 @@
       <text macro="container-title" font-style="italic"/>
     </group>
   </macro>
-  
+
   <!---->
-  
+
   <macro name="container-title">
     <choose>
       <if type="article article-journal article-magazine article-newspaper" match="any">
-        <text variable="container-title" font-style="italic" text-case="title"/>
+        <group font-style="italic">
+          <text variable="container-title" text-case="title"/>
+        </group>
       </if>
       <else-if type="bill legal_case legislation" match="none">
-        <text variable="container-title" font-style="italic"/>
+        <group font-style="italic">
+          <text variable="container-title"/>
+        </group>
       </else-if>
       <else>
         <group delimiter=" " prefix=", ">
           <choose>
             <if variable="container-title">
               <text variable="volume"/>
-              <text variable="container-title" font-style="italic"/>
+              <group font-style="italic">
+                <text variable="container-title"/>
+              </group>
               <group delimiter=" ">
                 <!--change to label variable="section" as that becomes available -->
                 <text term="section" form="symbol"/>
@@ -1418,7 +1426,7 @@
   <!---->
 
   <macro name="chinese-bibliography">
-    
+
     <!-- <text macro="chinese-sort" /> -->
 
     <text macro="author-zh" suffix=""/>
@@ -1437,12 +1445,12 @@
         <text macro="chinese-container-title"/>
             </else-if>
           </choose>
-      
+
       <text macro="locators-zh"/>
           </group>
         <text macro="publisher-zh"/>
     </group>
-    <text macro="access-zh"/>  
+    <text macro="access-zh"/>
   </macro>
 
   <macro name="chinese-container-title">
@@ -1454,7 +1462,7 @@
         <text variable="page" prefix="（頁" suffix="）"/>
       </if>
     </choose>
-    
+
   </macro>
 
   <!---->
@@ -1477,7 +1485,7 @@
 
     <!-- <text value=" | "/> -->
   </macro>
-  
+
   <macro name="author-sort">
     <choose>
       <if locale="en-us en English english Anglais" match="any">
@@ -1498,21 +1506,21 @@
   </macro>
 
   <!---->
-  
-  <citation et-al-min="6" 
-            et-al-use-first="1" 
-            et-al-subsequent-min="3" 
-            et-al-subsequent-use-first="1" 
-            disambiguate-add-year-suffix="true" disambiguate-add-names="true" 
-            disambiguate-add-givenname="true" collapse="year" 
+
+  <citation et-al-min="6"
+            et-al-use-first="1"
+            et-al-subsequent-min="3"
+            et-al-subsequent-use-first="1"
+            disambiguate-add-year-suffix="true" disambiguate-add-names="true"
+            disambiguate-add-givenname="true" collapse="year"
             givenname-disambiguation-rule="primary-name">
-      
+
     <sort>
       <key macro="chinese-sort" sort="ascending"/>
       <key macro="author"/>
       <key macro="issued-sort"/>
     </sort>
-    
+
     <layout locale="zh-tw" prefix="（" suffix="）" delimiter="；">
         <group delimiter="，">
           <text macro="author-short-zh"/>
@@ -1568,23 +1576,23 @@
   </citation>
 
   <!---->
-  
-  <bibliography hanging-indent="true" 
-                et-al-min="8" 
-                et-al-use-first="6" 
-                et-al-use-last="true" 
-                entry-spacing="0" 
+
+  <bibliography hanging-indent="true"
+                et-al-min="8"
+                et-al-use-first="6"
+                et-al-use-last="true"
+                entry-spacing="0"
                 line-spacing="1.5">
     <sort>
       <key macro="chinese-sort" sort="ascending"/>
     <key macro="author" sort="ascending"/>
       <!-- <key macro="author-sort" sort="ascending"/> -->
       <!-- <key variable="language" sort="descending"/> -->
-      
+
       <key macro="issued-sort" sort="ascending"/>
       <key macro="title"/>
     </sort>
-  
+
     <!-- 中文的格式 -->
     <layout locale="zh-tw">
       <text macro="chinese-bibliography"/>
@@ -1623,7 +1631,7 @@
       <text macro="access" prefix=" "/>
     </layout>
   </bibliography>
-  
+
   <!-- 完成 -->
-  
-</style> 
+
+</style>

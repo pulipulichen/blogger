@@ -904,41 +904,7 @@
   </macro>
   
   <macro name="publisher-zh">
-    <choose>
-      <if type="book motion_picture report song manuscript speech" match="any">
-        <group delimiter="，">
-          <text variable="event"/>
-          <group delimiter="：">
-            <text variable="publisher-place"/>
-            <text variable="publisher"/>
-          </group>
-        </group>
-      </if>
-      <if type="thesis" match="any">
-        <group delimiter="，">
-          <group delimiter="，">
-            <text variable="publisher"/>
-            <text variable="publisher-place"/>
-          </group>
-        </group>
-      </if>
-      <else-if type="report thesis" match="none">
-        <group delimiter="，">
-          <text variable="event"/>
 
-          <choose>
-            <if type="report thesis" match="any">
-              <text type="report thesis" variable="genre"/>
-            </if>
-          </choose>
-          
-          <group delimiter="：">
-            <text variable="publisher-place"/>
-            <text variable="publisher"/>
-          </group>
-        </group>
-      </else-if>
-    </choose>
   </macro>
 
   <!---->
@@ -1480,7 +1446,9 @@
   </macro>
 
   <macro name="chinese-container-title">
-    <text variable="container-title" font-style="italic" />
+    <group font-style="italic">
+      <text variable="container-title"  />
+    </group>
     <choose>
       <if type="paper-conference" match="any">
         <text variable="page" prefix="（頁" suffix="）"/>

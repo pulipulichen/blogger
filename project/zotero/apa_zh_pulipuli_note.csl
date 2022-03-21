@@ -180,10 +180,14 @@
         <choose>
           <if type="report">
             <text variable="publisher"/>
-            <text variable="title" form="short" font-style="italic"/>
+            <group font-style="italic">
+              <text variable="title" form="short"/>
+            </group>
           </if>
           <else-if type="bill book graphic legal_case legislation motion_picture song" match="any">
-            <text variable="title" form="short" font-style="italic"/>
+            <group font-style="italic">
+              <text variable="title" form="short"/>
+            </group>
           </else-if>
           <else>
             <text variable="title" form="short" quotes="true"/>
@@ -211,7 +215,9 @@
         <names form="short" variable="translator"/>
         <choose>
           <if type="book">
-            <text variable="title" form="short" font-style="italic"/>
+            <group font-style="italic">
+              <text variable="title" form="short"/>
+            </group>
           </if>
           <else>
             <text variable="title" form="short" prefix="「" suffix="」"/>
@@ -351,7 +357,9 @@
   <macro name="title">
     <choose>
       <if type="report thesis" match="any">
-        <text variable="title" font-style="italic"/>
+        <group font-style="italic">
+          <text variable="title"/>
+        </group>
         <group prefix=" (" suffix=")" delimiter=" ">
           <text variable="genre"/>
           <text variable="number" prefix="No. "/>
@@ -370,7 +378,9 @@
             </group>
           </if>
           <else>
-            <text variable="title" font-style="italic"/>
+            <group font-style="italic">
+              <text variable="title"/>
+            </group>
           </else>
         </choose>
       </else-if>
@@ -383,7 +393,9 @@
   <macro name="title-zh">
     <choose>
       <if type="report thesis" match="any">
-        <text variable="title" font-style="italic"/>
+        <group font-style="italic">
+          <text variable="title"/>
+        </group>
         <group prefix="（" suffix="）" delimiter="">
           <choose>
             <if variable="number">
@@ -401,7 +413,9 @@
         <text type="report thesis" variable="genre" prefix="[" suffix="]"/>
       </else-if>
       <else-if type="book thesis motion_picture report song manuscript speech" match="any">
-        <text variable="title" font-style="italic"/>
+        <group font-style="italic">
+          <text variable="title"/>
+        </group>
       </else-if>
       <else>
         <text variable="title"/>
@@ -712,7 +726,9 @@
       <if type="article-journal article-magazine" match="any">
         <group delimiter=", ">
           <group>
-            <text variable="volume" font-style="italic"/>
+            <group font-style="italic">
+              <text variable="volume"/>
+            </group>
             <text variable="issue" prefix="(" suffix=")"/>
           </group>
           <text variable="page"/>
@@ -762,11 +778,15 @@
           <group>
             <choose>
               <if variable="volume">
-                <text variable="volume" font-style="italic"/>
+                <group font-style="italic">
+                  <text variable="volume"/>
+                </group>
                 <text variable="issue" prefix="（" suffix="）"/>
               </if>
               <else>
-                <text variable="issue" font-style="italic"/>
+                <group font-style="italic">
+                  <text variable="issue"/>
+                </group>
               </else>
             </choose>
           </group>
@@ -776,7 +796,9 @@
       <if type="article-newspaper" match="any">
         <group delimiter="，" suffix="">
           <group>
-            <text variable="volume" font-style="italic"/>
+            <group font-style="italic">
+              <text variable="volume"/>
+            </group>
             <text variable="issue" prefix="（" suffix="）"/>
           </group>
           <text variable="page" prefix="第 " suffix=" 版" />
@@ -836,7 +858,7 @@
       </if>
       <else-if type="bill legal_case legislation" match="none">
 	<group font-style="italic">
-          <text variable="container-title" font-style="italic"/>
+          <text variable="container-title"/>
 	</group>
       </else-if>
       <else>
@@ -889,9 +911,9 @@
 		<group font-style="italic">
                    <text variable="container-title" />
 		</group>
-                <group>
-                  <text variable="collection-number" suffix="，" font-style="italic"/>
-                  <text variable="collection-title" font-style="italic"/>
+                <group font-style="italic">
+                  <text variable="collection-number" suffix="，"/>
+                  <text variable="collection-title"/>
                 </group>
               </if>
               <if type="paper-conference" match="any">
@@ -912,7 +934,9 @@
   <!---->
   
   <macro name="note">
-      <text value="Note." font-style="italic" suffix=" " />
+    <group font-style="italic">
+      <text value="Note." suffix=" " />
+    </group>
   </macro>
   <macro name="from">
       <text value="From" suffix=" "/>

@@ -922,7 +922,41 @@
   </macro>
 
   <macro name="publisher-zh">
+    <choose>
+      <if type="book motion_picture report song manuscript speech" match="any">
+        <group delimiter="，">
+          <text variable="event"/>
+          <group delimiter="：">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+        </group>
+      </if>
+      <if type="thesis" match="any">
+        <group delimiter="，">
+          <group delimiter="，">
+            <text variable="publisher"/>
+            <text variable="publisher-place"/>
+          </group>
+        </group>
+      </if>
+      <else-if type="report thesis" match="none">
+        <group delimiter="，">
+          <text variable="event"/>
 
+          <choose>
+            <if type="report thesis" match="any">
+              <text type="report thesis" variable="genre"/>
+            </if>
+          </choose>
+
+          <group delimiter="：">
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+          </group>
+        </group>
+      </else-if>
+    </choose>
   </macro>
 
   <!---->
@@ -1259,7 +1293,7 @@
       <if type="article-journal article-magazine" match="any">
         <group prefix=", " delimiter=", ">
           <group>
-            <group font-style="italic">
+            <group>
               <text variable="volume"/>
             </group>
             <text variable="issue" prefix="(" suffix=")"/>
@@ -1348,6 +1382,7 @@
           <date-part name="year"/>
         </date>
       </else-if>
+      
     </choose>
 
 
@@ -1456,23 +1491,22 @@
     <text macro="author-zh" suffix=""/>
     <text macro="issued-zh" suffix=""/>
     <group delimiter="。">
-        <text macro="title-zh"/>
-        <group delimiter="，">
+      <text macro="title-zh"/>
+      <group delimiter="，">
         <choose>
-      <if type="book chapter" match="none">
-        <text macro="chinese-container-title"/>
-        <group>
-          <text variable="collection-title"/>
-        </group>
-            </if>
-            <else-if type="paper-conference" match="any">
-        <text macro="chinese-container-title"/>
-            </else-if>
-          </choose>
-
-      <text macro="locators-zh"/>
-          </group>
-        <text macro="publisher-zh"/>
+          <if type="book chapter" match="none">
+            <text macro="chinese-container-title"/>
+            <group>
+              <text variable="collection-title"/>
+            </group>
+          </if>
+          <else-if type="paper-conference" match="any">
+            <text macro="chinese-container-title"/>
+          </else-if>
+        </choose>
+        <text macro="locators-zh"/>
+      </group>
+      <text macro="publisher-zh"/>
     </group>
     <text macro="access-zh"/>
   </macro>
